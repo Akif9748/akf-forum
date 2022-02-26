@@ -24,6 +24,7 @@ A Node.js based forum software.
   - [x] Register
   - [ ] Logout
   - [ ] Admin
+  - [ ] More information. Message count, about etc...
 - [ ] Messages
   - [x] Send message
   - [ ] Delete message
@@ -40,6 +41,7 @@ A Node.js based forum software.
   - [ ] Other client for forum via API
   - [ ] Footer...
   - [ ] Search
+  - [ ] New Thread theme, better render for messages
 
 ## Image:
 ![image](https://user-images.githubusercontent.com/70021050/155854448-76d3e030-3840-43e7-aa3a-80946a0a4ab5.png)
