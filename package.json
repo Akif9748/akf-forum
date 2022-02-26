@@ -1,0 +1,27 @@
+{
+  "name": "akf-forum",
+  "version": "2.0.0",
+  "description": "A Node.js based forum software",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "restart": "node reset.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Akif9748/akf-forum.git"
+  },
+  "author": "Akif9748",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/Akif9748/akf-forum/issues"
+  },
+  "homepage": "https://github.com/Akif9748/akf-forum#readme",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "quick.db": "^7.1.3"
+  }
+}

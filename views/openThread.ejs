@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Open Thread</title>
+    <meta name="description" content="Akf-forum!">
+    <meta name="author" content="Akif9748">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.jpg">
+
+</head>
+
+
+<body>
+    <!-- Navbar: -->
+    <a href="/"><img class="logo" src="/images/logo.jpg" alt="AKF-FORUM"></a>
+    <br>    <button class="buyuk" onclick="window.location.href = '/threads'">THREADS</button>
+
+    <button class="buyuk" onclick="window.location.href = '/search'">SEARCH</button>
+    <button class="buyuk" onclick="window.location.href = '/users'">USERS</button>
+    <h1 style="display:inline; float:right;"><a href=<%=user.getLink() %>> <%= user.name %></a>
+        <img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>>
+    </h1>
+    <hr>
+
+    <!-- Navbar end -->
+
+
+
+    <form action="/createThread/" method="POST">
+        <h2>Title:</h2> 
+        <input name="title"></input>
+
+        <hr>
+        <h2>Content:</h2> 
+        <textarea rows="4" cols="50" name="content"></textarea>
+   
+        <hr>
+        <button class = "buyuk" type="submit">Open Thread!</button>
+    </form>
+
+
+</body>
+
+</html>

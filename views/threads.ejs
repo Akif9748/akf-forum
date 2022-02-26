@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Main page!</title>
+    <meta name="description" content="Akf-forum!">
+    <meta name="author" content="Akif9748">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.jpg">
+
+</head>
+
+
+<body>
+    <!-- Navbar: -->
+    <a href="/"><img class="logo" src="/images/logo.jpg" alt="AKF-FORUM"></a>
+    <br>   
+    <button class="buyuk" onclick="window.location.href = '/search'">SEARCH</button>
+    <button class="buyuk" onclick="window.location.href = '/users'">USERS</button>
+    <button class="buyuk" onclick="window.location.href = '/createThread/'">OPEN THREAD</button>
+    <h1 style="display:inline; float:right;"><a href=<%=user.getLink() %>> <%= user.name %></a>
+        <img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>>
+    </h1>
+    <hr>
+
+    <!-- Navbar end -->
+
+
+    <h1>Threads:</h1>
+    <ul>
+        <% threads.forEach(thread=>{ %>
+            <li>
+                <h1><a href=<%=links[threads.indexOf(thread)] %> > <%= thread.title %> by <%= thread.author.name %></a>
+                </h1>
+            </li>
+            <% }); %>
+    </ul>
+
+
+</body>
+
+</html>

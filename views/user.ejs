@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= member.name %>
+  </title>
+  <meta name="description" content="Akf-forum user page!">
+  <meta name="author" content="Akif9748">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.jpg">
+
+</head>
+
+
+<body>
+  <!-- Navbar: -->
+  <a href="/"><img class="logo" src="/images/logo.jpg" alt="AKF-FORUM"></a>
+  <br>
+  <button class="buyuk" onclick="window.location.href = '/threads'">THREADS</button>
+  <button class="buyuk" onclick="window.location.href = '/search'">SEARCH</button>
+  <button class="buyuk" onclick="window.location.href = '/users'">USERS</button>
+  <button class="buyuk" onclick="window.location.href = '/createThread/'">OPEN THREAD</button>
+  <h1 style="display:inline; float:right;"><a href=<%=user.getLink() %>> <%= user.name %></a>
+    <img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>>
+  </h1>
+  <hr>
+
+  <!-- Navbar end -->
+
+  <h1>Avatar:</h1>
+  <img style="width:256px;height:256px;" src=<%=member.avatar %> alt=<%= member.name %>>
+
+    <hr>
+    <h1>Name:</h1>
+    <p>
+
+
+      <%= member.name %>
+
+    </p>
+
+
+    <hr>
+    <h1>Created at:</h1>
+    <p>
+
+
+      <%= new Date(member.time).toLocaleString() %>
+
+    </p>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

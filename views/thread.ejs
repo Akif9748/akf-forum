@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= thread.title %>
+  </title>
+  <meta name="description" content="Akf-forum!">
+  <meta name="author" content="Akif9748">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.jpg">
+
+</head>
+
+
+<body>
+  <!-- Navbar: -->
+  <a href="/"><img class="logo" src="/images/logo.jpg" alt="AKF-FORUM"></a>
+  <br>    <button class="buyuk" onclick="window.location.href = '/threads'">THREADS</button>
+
+  <button class="buyuk" onclick="window.location.href = '/search'">SEARCH</button>
+  <button class="buyuk" onclick="window.location.href = '/users'">USERS</button>
+  <button class="buyuk" onclick="window.location.href = '/createThread/'">OPEN THREAD</button>
+  <h1 style="display:inline; float:right;"><a href=<%=user.getLink() %>> <%= user.name %></a>
+    <img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>>
+  </h1>
+  <hr>
+
+
+  <!-- Navbar end -->
+
+  <h1 style="font-size: 35px;">
+    <%= thread.title %>
+  </h1>
+
+
+  <div style="border: 2px solid #444444; padding: 5px;">
+    <h2>
+      <img class="yuvarlak" src=<%=thread.author.avatar %> alt=<%= thread.author.name %>>
+        <a style="  color: #bcbcbc;  " href=<%= "/users/"+  thread.author.id %>> <%= thread.author.name %></a>:
+    </h2>
+    <p>
+      <%= thread.content %>
+    </p>
+    <h3 style=" text-align:right;">
+      <%=new Date(thread.time).toLocaleString() %>
+    </h3>
+  </div>
+
+  <br>
+  <% thread.messages.forEach(message=>{ %>
+
+    <div style="border: 2px solid #444444; padding: 5px;">
+      <h2>
+        <img class="yuvarlak" src=<%=message.author.avatar %> alt=<%= message.author.name %>>
+          <a style="  color: #bcbcbc;  " href=<%= "/users/"+  message.author.id %>> <%= message.author.name %></a>:
+      </h2>
+
+      <h2>
+        <%= message.content %>
+      </h2>
+      <h3 style=" text-align:right;">
+        <%=new Date(message.time).toLocaleString() %>
+      </h3>
+
+    </div>
+
+    <br>
+    <% }); %>
+
+
+      <hr>
+
+
+      <form action="/threads/<%= thread.id %>" method="POST">
+        <textarea rows="4" cols="50" name="content"></textarea>
+        <br>
+
+        <button class="button" type="submit">Send!</button>
+      </form>
+
+
+</body>
+
+</html>

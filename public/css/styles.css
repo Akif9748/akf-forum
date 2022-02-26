@@ -1,0 +1,117 @@
+img.yuvarlak {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  object-fit: cover;
+}
+
+img.logo {
+  width: 266px;
+  height: 75px;
+  display: inline;
+}
+
+textarea { 
+  
+  font-family: monospace;
+  background-color: #262626;
+  border: 2px solid #444444;
+  color: #BCBCBC;
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
+p {
+  font-size: 25px;
+}
+
+hr {
+  border-color: #444444;
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 20px 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: monospace;
+  background: #262626;
+  color: #bcbcbc;
+  max-width: 69rem;
+  margin: auto;
+  margin-top: 10px;
+
+  /* funny number */
+}
+
+a:link {
+  color: #5f87af;
+}
+
+a:hover {
+  color: #af5f5f;
+}
+
+a:visited {
+  color: #8787af;
+}
+
+a:active {
+  color: #af5f5f;
+}
+
+pre {
+  background-color: #1c1c1c;
+  padding: 1em;
+  border: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin-bottom: 0.1rem;
+}
+
+hr {
+  border-color: #444444;
+}
+
+button, input {
+  font-family: monospace;
+  background-color: #262626;
+  border: 2px solid #444444;
+
+  color: #BCBCBC;
+  width: auto;
+  height: 30px;
+
+}
+
+button.buyuk {
+  width: 150px;
+  height: 50px;
+}
+
+input {
+  width: 75%;
+  cursor: pointer;
+  color: #bcbcbc;
+}
+
+button:hover {
+  background-color: #BCBCBC;
+  color: #262626;
+}
+
+.mainpage {
+  padding: 10px;
+  float: right;
+}
