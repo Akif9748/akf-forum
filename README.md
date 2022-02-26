@@ -40,6 +40,7 @@ A Node.js based forum software
   - [ ] API
   - [ ] Other client for forum via API
   - [ ] Footer...
+  - [ ] Search
 
 ## Image:
 ![image](https://user-images.githubusercontent.com/70021050/155854448-76d3e030-3840-43e7-aa3a-80946a0a4ab5.png)
