@@ -1,13 +1,12 @@
-
-
 # akf-forum
-<img src="https://raw.githubusercontent.com/Akif9748/akf-forum/main/public/images/logo.jpg" align="right" width="400px" />
+<img src="https://raw.githubusercontent.com/Akif9748/akf-forum/main/public/images/logo.jpg" align="right" width="300px" />
 
-A Node.js based forum software
+A Node.js based forum software.
 
 ## Installation
 - Clone this repo. Or download it.
-- Write `npm i` for install **dependencies** 
+- Write `npm i` to install **dependencies**.
+- Write `npm restart` for reset database, and `npm start` for run it. 
 
 ## Credits
 * [Akif9748](https://github.com/Akif9748) - Project owner
