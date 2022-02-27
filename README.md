@@ -15,8 +15,8 @@ A Node.js based forum software.
 
 
 ## To Do:
-- Messsages will be record on a new database table, with reactions, by their ids. And it will be add statics. Threads will take messages from new table.
 - Admin panel, etc.
+- İndexing. Message, thread, react count will added to user profiles
 
 ## Roadmap
 - [ ] User
@@ -29,7 +29,7 @@ A Node.js based forum software.
   - [x] Send message
   - [ ] Delete message
   - [ ] Edit message
-  - [ ] React message
+  - [x] React message
 - [ ] Forums
   - [ ] Category system.
       - [ ] Create category
