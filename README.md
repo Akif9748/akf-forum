@@ -22,7 +22,7 @@ A Node.js based forum software.
 - [ ] User
   - [x] Login
   - [x] Register
-  - [ ] Logout
+  - [x] Logout
   - [ ] Admin
   - [ ] More information. Message count, about etc...
 - [ ] Messages
