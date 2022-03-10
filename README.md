@@ -22,11 +22,11 @@ A Node.js based forum software.
   - [x] Login
   - [x] Register
   - [x] Logout
-  - [ ] Admin
+  - [x] Admin
   - [x] Message count
 - [ ] Messages
   - [x] Send message
-  - [ ] Delete message
+  - [x] Delete message
   - [ ] Edit message
   - [x] React message
 - [ ] Forums
