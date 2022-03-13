@@ -1,5 +1,5 @@
 # akf-forum
-<img src="https://raw.githubusercontent.com/Akif9748/akf-lang/main/public/images/logo.jpg" align="right" width="300px" />
+<img src="https://raw.githubusercontent.com/Akif9748/akf-forum/main/public/images/logo.jpg" align="right" width="300px" />
 
 A forum script written in Node.js.
 
@@ -42,3 +42,5 @@ A forum script written in Node.js.
   - [ ] Search
   - [x] New Thread theme, better render for messages
 ## Image:
+![image](https://user-images.githubusercontent.com/70021050/158060900-7384d394-cad7-4f73-94ad-7c8bd108ac44.png)
+
