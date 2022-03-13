@@ -14,6 +14,11 @@
 
 
 <body>
+
+    <%if(user.admin){%>
+        <button  onclick="window.location.href = '/admin'">ADMIN PANEL</button>    <hr>
+
+    <%};%>
     <!-- Navbar: -->
     <a href="/"><img class="logo" src="/images/logo.jpg" alt="AKF-FORUM"></a>
     <br>    <button class="buyuk" onclick="window.location.href = '/threads'">THREADS</button>

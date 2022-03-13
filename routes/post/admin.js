@@ -16,7 +16,7 @@ module.exports = (req, res) => {
         user2.write()
     }
 
-    res.render("admin", { user })
+    res.render("admin", { user, user2 })
 
 
 } 

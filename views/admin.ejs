@@ -27,15 +27,19 @@
 
     <!-- Navbar end -->
 
+
     <h1>Welcome to the admin panel of the forum, <%= user.name %>!</h1>
 
     <form action="/admin/" method="POST">
-        <h2>Write an ID for make admin:</h2> 
+        <h2>Write an ID for make admin:</h2>
         <input name="userid"></input>
         <hr>
-        <button class = "buyuk" type="submit">Make admin!</button>
+        <button class="buyuk" type="submit">Make admin!</button>
     </form>
-
+    <script>
+        if (<%= user2.admin %>) 
+            alert("Making admin of '<%= user2.name %>'' is success");
+    </script>
 </body>
 
 </html>

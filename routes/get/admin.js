@@ -8,5 +8,5 @@ module.exports = (req, res) => {
 
     if (!user.admin) return error(res, 404, "You have not got permissions for view to this page.");
 
-    res.render("admin", { user })
+    res.render("admin", { user, user2: false })
 } 
