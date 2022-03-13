@@ -30,33 +30,38 @@
 
   <!-- Navbar end -->
 
-  <h1>Avatar:</h1>
-  <img style="width:256px;height:256px;" src=<%=member.avatar %> alt=<%= member.name %>>
+ 
+    <ul>
+      <li>
+        <h1>Avatar:</h1>
+        <img style="width:256px;height:256px;" src=<%=member.avatar %> alt=<%= member.name %>>
+      </li>
 
-    <hr>
-    <h1>Name:</h1>
-    <p>
-
-
-      <%= member.name %>
-
-    </p>
-
-
-    <hr>
-    <h1>Created at:</h1>
-    <p>
-
-
-      <%= new Date(member.time).toLocaleString() %>
-
-    </p>
+      <li>
+        <h2>Name: <%= member.name %>
+        </h2>
+      </li>
+      <li>
+        <h2>Created at:
+          <%= new Date(member.time).toLocaleString() %>
+        </h2>
 
 
+      </li>
+      <li>
+        <h2>Is admin? <%= member.admin ? "Yes" : "No" %>
+        </h2>
+      </li>
 
-
-
-
+      <li>
+        <h2> Message: <%= counts.message %>
+        </h2>
+      </li>
+      <li>
+        <h2> Thread: <%= counts.thread %>
+        </h2>
+      </li>
+    </ul>
 
 
 </body>

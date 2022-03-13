@@ -1,8 +1,8 @@
-const { Thread, Message, User } = require("../../classes/index");
+const { User } = require("../../classes/index");
 const db = require("quick.db");
 const error = require("../../errors/error.js")
 
-module.exports = (req,res) =>{
+module.exports = (req, res) => {
     if (!req.session.loggedin) return res.redirect('/login');
     const user = new User().getId(req.session.userid)
 
@@ -20,8 +20,13 @@ module.exports = (req,res) =>{
     const member = new User().getId(id);
 
 
-    if (member)
-        res.render("user", { user, member })
+    if (member) {
+        const message = db.get("messages").filter(message => message.author.id === Number(id)).length
+        const thread = db.get("threads").filter(thread => thread.author.id === Number(id)).length
+
+        const counts = { message, thread }
+        res.render("user", { user, member, counts })
+    }
     else
         error(res, 404, "We have not got this user.");
 

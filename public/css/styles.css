@@ -1,3 +1,27 @@
+:root { /* Apprentice Scheme */
+  /*
+   * use `var(--col-x)` instead of directly typing the color.
+  */
+  --col-0: #1C1C1C;
+  --col-1: #AF5F5F;
+  --col-2: #5F875F;
+  --col-3: #87875F;
+  --col-4: #5F87AF;
+  --col-5: #5F5F87;
+  --col-6: #5F8787;
+  --col-7: #6C6C6C;
+  --col-8: #444444;
+  --col-9: #FF8700;
+  --col-10: #87AF87;
+  --col-11: #FFFFAF;
+  --col-12: #8FAFD7;
+  --col-13: #8787AF;
+  --col-14: #5FAFAF;
+  --col-15: #FFFFFF;
+  --col-fg: #BCBCBC;
+  --col-bg: #262626;
+}
+
 img.yuvarlak {
   border-radius: 50%;
   height: 30px;
@@ -14,9 +38,9 @@ img.logo {
 textarea { 
   
   font-family: monospace;
-  background-color: #262626;
-  border: 2px solid #444444;
-  color: #BCBCBC;
+  background-color: var(--col-bg);
+  border: 2px solid var(--col-8);
+  color: var(--col-fg);
   width: auto;
   height: auto;
   cursor: pointer;
@@ -27,9 +51,9 @@ p {
 }
 
 hr {
-  border-color: #444444;
+  border-color: var(--col-8);
   border: 0;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--col-fg);
   margin: 20px 0;
 }
 
@@ -41,8 +65,8 @@ h4,
 h5,
 h6 {
   font-family: monospace;
-  background: #262626;
-  color: #bcbcbc;
+  background: var(--col-bg);
+  color: var(--col-fg);
   max-width: 69rem;
   margin: auto;
   margin-top: 10px;
@@ -51,23 +75,23 @@ h6 {
 }
 
 a:link {
-  color: #5f87af;
+  color: var(--col-4);
 }
 
 a:hover {
-  color: #af5f5f;
+  color: var(--col-1);
 }
 
 a:visited {
-  color: #8787af;
+  color: var(--col-13);
 }
 
 a:active {
-  color: #af5f5f;
+  color: var(--col-1);
 }
 
 pre {
-  background-color: #1c1c1c;
+  background-color: var(--col-0);
   padding: 1em;
   border: 0;
 }
@@ -81,15 +105,15 @@ h5 {
 }
 
 hr {
-  border-color: #444444;
+  border-color: var(--col-8);
 }
 
 button, input {
   font-family: monospace;
-  background-color: #262626;
-  border: 2px solid #444444;
+  background-color: var(--col-bg);
+  border: 2px solid var(--col-8);
 
-  color: #BCBCBC;
+  color: var(--col-fg);
   width: auto;
   height: 30px;
 
@@ -103,12 +127,12 @@ button.buyuk {
 input {
   width: 75%;
   cursor: pointer;
-  color: #bcbcbc;
+  color: var(--col-fg);
 }
 
 button:hover {
-  background-color: #BCBCBC;
-  color: #262626;
+  background-color: var(--col-fg);
+  color: var(--col-bg);
 }
 
 .mainpage {

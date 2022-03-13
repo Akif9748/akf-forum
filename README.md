@@ -1,7 +1,7 @@
 # akf-forum
-<img src="https://raw.githubusercontent.com/Akif9748/akf-forum/main/public/images/logo.jpg" align="right" width="300px" />
+<img src="https://raw.githubusercontent.com/Akif9748/akf-lang/main/public/images/logo.jpg" align="right" width="300px" />
 
-A Node.js based forum software.
+A forum script written in Node.js.
 
 ## Installation
 - Clone this repo. Or download it.
@@ -18,7 +18,7 @@ A Node.js based forum software.
 - Admin panel, delete, edit messages.
 
 ## Roadmap
-- [ ] User
+- [x] User
   - [x] Login
   - [x] Register
   - [x] Logout
@@ -30,17 +30,15 @@ A Node.js based forum software.
   - [ ] Edit message
   - [x] React message
 - [ ] Forums
-  - [ ] Category system.
+  - [ ] Category system
       - [ ] Create category
       - [ ] Delete category
       - [ ] Edit category
       - [ ] Move category
 - [ ] Other
   - [ ] API
-  - [ ] Other client for forum via API
+  - [ ] Other client for forum via API 
   - [ ] Footer...
   - [ ] Search
   - [x] New Thread theme, better render for messages
-
 ## Image:
-![image](https://user-images.githubusercontent.com/70021050/155854448-76d3e030-3840-43e7-aa3a-80946a0a4ab5.png)

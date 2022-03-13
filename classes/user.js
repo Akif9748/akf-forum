@@ -3,22 +3,23 @@ const db = require("quick.db")
 module.exports = class User {
 
 
-    constructor(name = "guest", avatar = "/images/guest.png", time = new Date().getTime()) {
+    constructor(name = "guest", avatar = "/images/guest.png", time = new Date().getTime(), admin= false) {
 
         this.name = name;
         this.avatar = avatar;
         this.time = time;
-
+        this.admin = admin;
     }
 
     getId(id = this.id) {
         const user = db.get("users." + id);
         if (!user) return null;
-        this.id = id;
-        const { name = "guest", avatar = "/images/guest.png", time = new Date().getTime() } = user;
+        this.id = Number(id);
+        const { name = "guest", avatar = "/images/guest.png", time = new Date().getTime(), admin = false } = user;
         this.name = name;
         this.avatar = avatar;
-        this.time = time;
+        this.time = time;   
+        this.admin = admin;
         return this
     }
     takeId() {

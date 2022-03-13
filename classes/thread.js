@@ -1,15 +1,18 @@
 const db = require("quick.db")
 const User = require("./user")
 
+
+
+
 module.exports = class Thread {
 
-    constructor(title, content, author = new User(), messages = [], time = new Date().getTime()) {
+    constructor(title, author = new User(), messages = [], time = new Date().getTime(),deleted = false) {
 
-        this.content = content;
         this.author = author;
         this.title = title;
         this.messages = messages;
         this.time = time;
+        this.deleted = deleted;
 
     }
 
@@ -17,12 +20,12 @@ module.exports = class Thread {
         const thread = db.get("threads."+id);
         if (!thread) return null;
         this.id = id;
-        const { content, title, author, messages = [], time = new Date().getTime() } = thread;
-        this.content = content
+        const { title, author, messages = [], time = new Date().getTime(), deleted = false } = thread;
         this.title = title
         this.author = author
         this.messages = messages;
         this.time = time;
+        this.deleted = deleted;
 
         return this
     }
@@ -40,6 +43,7 @@ module.exports = class Thread {
     write(id = this.id) {
 
         db.set("threads."+id, this)
+        return this;
     }
     getLink(id = this.id) {
         return "/threads/" + id;

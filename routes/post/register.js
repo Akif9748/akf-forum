@@ -3,7 +3,9 @@ const error = require("../../errors/error.js")
 const { User } = require("../../classes/index");
 
 module.exports = (req, res) => {
-
+    req.session.loggedin = false;
+    req.session.username = null;
+    req.session.userid = null;
     let username = req.body.username;
     let password = req.body.password;
 

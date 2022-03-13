@@ -16,8 +16,7 @@
 <body>
     <!-- Navbar: -->
     <a href="/"><img class="logo" src="/images/logo.jpg" alt="AKF-FORUM"></a>
-    <br>    <button class="buyuk" onclick="window.location.href = '/threads'">THREADS</button>
-
+    <br> <button class="buyuk" onclick="window.location.href = '/threads'">THREADS</button>
     <button class="buyuk" onclick="window.location.href = '/search'">SEARCH</button>
     <button class="buyuk" onclick="window.location.href = '/users'">USERS</button>
     <button class="buyuk" onclick="window.location.href = '/createThread/'">OPEN THREAD</button>
@@ -27,32 +26,15 @@
     <hr>
 
     <!-- Navbar end -->
-    <h1>Welcome, <a href=<%=user.getLink() %>> <%= user.name %></a>
-        <img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>>
-        <br>
-        You can press logout here:
-        <button onclick="window.location.href = '/login/'">LOGOUT</button>
 
-    </h1>
+    <h1>Welcome to the admin panel of the forum, <%= user.name %>!</h1>
 
-    <br>
-    <h1>Statistics:</h1>
-    <ul>
-        <li>
-            <h3>Message count: <b> <%= messages %> </b></h3>
-        </li>
-        <li>
-            <h3>User count: <b> <%= users %> </b></h3>
-        </li>
-        <li>
-            <h3>Thread count: <b> <%= threads %></b></h3>
-        </li>
-        <li>
-            <h3>Memory usage: <b> <%= mem.toFixed(2); %> MB </b></h3>
-        </li>
-
-    </ul>
-
+    <form action="/admin/" method="POST">
+        <h2>Write an ID for make admin:</h2> 
+        <input name="userid"></input>
+        <hr>
+        <button class = "buyuk" type="submit">Make admin!</button>
+    </form>
 
 </body>
 

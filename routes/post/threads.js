@@ -8,7 +8,8 @@ module.exports = (req, res) => {
     const thread = new Thread().getId(id);
 
     if (thread) {
-        thread.push(new Message(req.body.content, new User().getId(req.session.userid)))
+        const message = new Message(req.body.content, new User().getId(req.session.userid), thread).takeId().write();
+        thread.push(message.id)
         thread.write();
         res.redirect('/threads/' + id);
 
