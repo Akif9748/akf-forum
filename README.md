@@ -24,6 +24,8 @@ A forum script written in Node.js.
   - [x] Logout
   - [x] Admin
   - [x] Message count
+  - [x] Delete User
+  - [ ] Singature & About me
 - [ ] Messages
   - [x] Send message
   - [x] Delete message

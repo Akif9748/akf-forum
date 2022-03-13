@@ -17,7 +17,7 @@ module.exports = class Thread {
     }
 
     getId(id = this.id) {
-        const thread = db.get("threads."+id);
+        const thread = db.get("threads").find(t => t.id == id);
         if (!thread) return null;
         this.id = id;
         const { title, author, messages = [], time = new Date().getTime(), deleted = false } = thread;
@@ -27,7 +27,7 @@ module.exports = class Thread {
         this.time = time;
         this.deleted = deleted;
 
-        return this
+        return this;
     }
     takeId(){
 

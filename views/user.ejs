@@ -30,39 +30,50 @@
 
   <!-- Navbar end -->
 
- 
-    <ul>
-      <li>
-        <h1>Avatar:</h1>
-        <img style="width:256px;height:256px;" src=<%=member.avatar %> alt=<%= member.name %>>
-      </li>
 
-      <li>
-        <h2>Name: <%= member.name %>
-        </h2>
-      </li>
-      <li>
-        <h2>Created at:
-          <%= new Date(member.time).toLocaleString() %>
-        </h2>
+  <ul>
+    <li>
+      <h1>Avatar:</h1>
+      <img style="width:256px;height:256px;" src=<%=member.avatar %> alt=<%= member.name %>>
+    </li>
+
+    <li>
+      <h2>Name: <%= member.name %>
+      </h2>
+    </li>
+    <li>
+      <h2>Created at:
+        <%= new Date(member.time).toLocaleString() %>
+      </h2>
 
 
-      </li>
-      <li>
-        <h2>Is admin? <%= member.admin ? "Yes" : "No" %>
-        </h2>
-      </li>
+    </li>
+    <li>
+      <h2>Is admin? <%= member.admin ? "Yes" : "No" %>
+      </h2>
+    </li>
 
-      <li>
-        <h2> Message: <%= counts.message %>
-        </h2>
-      </li>
-      <li>
-        <h2> Thread: <%= counts.thread %>
-        </h2>
-      </li>
-    </ul>
+    <li>
+      <h2> Message: <%= counts.message %>
+      </h2>
+    </li>
+    <li>
+      <h2> Thread: <%= counts.thread %>
+      </h2>
+    </li>
+  </ul>
 
+  <% if (user.admin) {%>
+    <form action="/admin/" method="POST">
+      <input name="userid" type="hidden" value="<%= member.id %>"></input>
+      <button class="buyuk" type="submit">Make admin!</button>
+
+    </form>
+
+    <form action="/userDelete/<%= member.id %>" method="POST">
+      <button class="buyuk" type="submit">Delete user!</button>
+    </form>
+    <% }; %>
 
 </body>
 

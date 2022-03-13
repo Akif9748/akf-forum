@@ -10,9 +10,9 @@ module.exports = (req, res) => {
 
     if (!id) {
 
-        const users = db.get("users").slice(0, 10);
+        const users = db.get("users").slice(0);
 
-        const links = users.map(user => "/users/" + user.id)
+        const links = users.filter(user=> !user.deleted).map(user => "/users/" + user.id)
         return res.render("users", { users, links, user })
 
     }
@@ -20,7 +20,7 @@ module.exports = (req, res) => {
     const member = new User().getId(id);
 
 
-    if (member) {
+    if (member && (user.admin || !member.deleted)) {
         const message = db.get("messages").filter(message => message.author.id === Number(id)).length
         const thread = db.get("threads").filter(thread => thread.author.id === Number(id)).length
 
