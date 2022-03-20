@@ -16,8 +16,10 @@ And, you can learn informations about API in `APIDOCS.md`.
 * [Akif9748](https://github.com/Akif9748) - Project owner, main developer
 * [Camroku](https://github.com/Camroku) - Made stylesheets
 
-## To Do:
-- Better method for params in URL
+## To Do (Backend, bug fixes) :
+- Better method for params in URL. Router, or etc.
+- Database change. (To MongoDB)
+
 
 ## Roadmap
 - [x] User
@@ -44,6 +46,7 @@ And, you can learn informations about API in `APIDOCS.md`.
   - [ ] Multiple theme support 
   - [ ] Search 
   - [x] New Thread theme, better render for messages
+
 ## Image:
 ![image](https://user-images.githubusercontent.com/70021050/158060900-7384d394-cad7-4f73-94ad-7c8bd108ac44.png)
 
