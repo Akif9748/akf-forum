@@ -8,14 +8,16 @@ A forum script written in Node.js.
 - Write `npm i` to install **dependencies**.
 - Write `npm restart` for reset database, and `npm start` for run it. 
 
+## API
+Akf-forum has got an API for other clients etc. You can test api with run apitest.py.
+And, you can learn informations about API in `APIDOCS.md`.
+
 ## Credits
-* [Akif9748](https://github.com/Akif9748) - Project owner
+* [Akif9748](https://github.com/Akif9748) - Project owner, main developer
 * [Camroku](https://github.com/Camroku) - Made stylesheets
 
-
-
 ## To Do:
-- Admin panel, delete, edit messages.
+- Better method for params in URL
 
 ## Roadmap
 - [x] User
@@ -26,22 +28,21 @@ A forum script written in Node.js.
   - [x] Message count
   - [x] Delete User
   - [ ] Singature & About me
+  - [ ] Edit user
 - [ ] Messages
   - [x] Send message
   - [x] Delete message
   - [ ] Edit message
   - [x] React message
-- [ ] Forums
-  - [ ] Category system
-      - [ ] Create category
-      - [ ] Delete category
-      - [ ] Edit category
-      - [ ] Move category
+- [ ] Threads
+  - [ ] Edit it!
+  - [ ] Delete it!
 - [ ] Other
-  - [ ] API
-  - [ ] Other client for forum via API 
-  - [ ] Footer...
-  - [ ] Search
+  - [x] API
+  - [x] Other client for forum via API 
+  - [ ] Footer of the site
+  - [ ] Multiple theme support 
+  - [ ] Search 
   - [x] New Thread theme, better render for messages
 ## Image:
 ![image](https://user-images.githubusercontent.com/70021050/158060900-7384d394-cad7-4f73-94ad-7c8bd108ac44.png)

@@ -5,9 +5,8 @@
     <link rel="stylesheet" href="/css/styles.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin panel!</title>
-    <meta name="description" content="Admin panel of Akf-forum!">
-    <meta name="author" content="Akif9748">
+    <title>Edit profile</title>
+    <meta name="description" content="Akf-forum!">
     <link rel="icon" type="image/x-icon" href="/images/favicon.jpg">
 
 </head>
@@ -16,7 +15,8 @@
 <body>
     <!-- Navbar: -->
     <a href="/"><img class="logo" src="/images/logo.jpg" alt="AKF-FORUM"></a>
-    <br> <button class="buyuk" onclick="window.location.href = '/threads'">THREADS</button>
+    <br>    <button class="buyuk" onclick="window.location.href = '/threads'">THREADS</button>
+
     <button class="buyuk" onclick="window.location.href = '/search'">SEARCH</button>
     <button class="buyuk" onclick="window.location.href = '/users'">USERS</button>
     <button class="buyuk" onclick="window.location.href = '/createThread/'">OPEN THREAD</button>
@@ -27,21 +27,24 @@
 
     <!-- Navbar end -->
 
+    <hr>
 
-    <h1>Welcome to the admin panel of the forum, <%= user.name %>!</h1>
 
-    <form action="/admin/" method="POST">
-        <h2>Write an ID for make admin:</h2>
-        <input name="userid"></input>
-        <hr>
-        <button class="buyuk" type="submit">Make admin!</button>
+
+    <h1>This page is not ready.</h1>
+    <hr>
+    <!---  <form action="/userEdit/<%=  %>" method="post">
+
+      
+        <input type="text" name="username" placeholder="Username" id="username" required>
+     
+        <input type="password" name="password" placeholder="Password" id="password" required>
+    
+        <input type="text" name="avatar" placeholder="Avatar URL" id="avatar">
+
+        <input type="submit" value="Register">
     </form>
-
-    <script>
-        if (<%= user2.admin %>) 
-            alert("Making admin of '<%= user2.name %>'' is success");
-    </script>
-    <!-- This website is powered by AKF-Forum -->
+-->
 </body>
 
 </html>

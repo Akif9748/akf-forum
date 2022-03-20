@@ -1,6 +1,6 @@
 const db = require("quick.db");
 const error = require("../../errors/error.js")
-const { User, Message } = require("../../classes/index");
+const { User } = require("../../classes/index");
 
 module.exports = (req, res) => {
     req.session.loggedin = false;
@@ -12,19 +12,19 @@ module.exports = (req, res) => {
         const user = db.get("secret." + username)
         if (user) {
             // Authenticate the user
-            if (user.key !== password) return error(res, 404, 'Incorrect Password!')
-            if (new User().getName(username).deleted) return error(res, 404, 'Incorrect Username and/or Password!')
+            if (user.key !== password) return error(res, 403, 'Incorrect Password!')
+            if (new User().getName(username).deleted) return error(res, 403, 'Incorrect Username and/or Password!')
             req.session.loggedin = true;
             req.session.username = username;
             req.session.userid = user.id;
 
             res.redirect('/');
         } else
-            error(res, 404, 'Incorrect Username and/or Password!')
+            error(res, 403, 'Incorrect Username and/or Password!')
 
 
     } else
-        error(res, 404, "You forgot entering some values")
+        error(res, 403, "You forgot entering some values")
 
 
 

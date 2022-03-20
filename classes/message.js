@@ -17,10 +17,10 @@ module.exports = class Message {
         this.react = react;
     }
     getId(id = this.id) {
-        const message = db.get("messages" ).find(msg => msg.id == id);
+        const message = db.get("messages").find(msg => msg.id == id);
         if (!message) return null;
 
-        this.id = id;
+        this.id = Number(id);
         const { content, author, thread = new Thread(), time = new Date().getTime(), deleted = false, edited = false, react = {} } = message;
         this.content = content;
         this.thread = thread;

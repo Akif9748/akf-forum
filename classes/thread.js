@@ -19,7 +19,7 @@ module.exports = class Thread {
     getId(id = this.id) {
         const thread = db.get("threads").find(t => t.id == id);
         if (!thread) return null;
-        this.id = id;
+        this.id = Number(id);
         const { title, author, messages = [], time = new Date().getTime(), deleted = false } = thread;
         this.title = title
         this.author = author

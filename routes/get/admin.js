@@ -1,5 +1,4 @@
 const { User } = require("../../classes/index");
-const { get } = require("quick.db");
 const error = require("../../errors/error.js");
 
 module.exports = (req, res) => {

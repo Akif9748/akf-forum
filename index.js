@@ -18,13 +18,19 @@ app.set("view engine", "ejs");
 //Temp:
 app.get("/", (req, res) => res.redirect("/index"));
 
+/**
+ * API:
+ */
+app.get("/api/:action/:id", require("./api"));
+
 for (const type of fs.readdirSync("./routes"))
     for (const file of fs.readdirSync("./routes/" + type))
         app[type](`/${file.replace(".js", "")}*`, require(`./routes/${type}/${file}`))
 
 app.get('*', (req, res) => error(res, 404, "We have not got this page."));
-app.post('*', (req, res) =>  error(res, 404, "We have not got this page."));
+app.post('*', (req, res) => error(res, 404, "We have not got this page."));
 
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log("SERVER ON PORT:", port));
+

@@ -1,6 +1,9 @@
-const Message = require("./message")
-const Thread = require("./thread")
-const User = require("./user")
-const React = require("./react")
+const Message = require("./message");
+const Thread = require("./thread");
+const User = require("./user");
+const React = require("./react");
 
-module.exports = { Message, Thread, User, React }
+/**
+ * Classes for akf-forum;
+ */
+module.exports = { Message, Thread, User, React };

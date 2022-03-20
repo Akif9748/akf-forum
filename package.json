@@ -1,5 +1,5 @@
 {
-  "name": "karum",
+  "name": "akf-lang",
   "version": "2.1.0",
   "description": "A forum script written in Node.js",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Akif9748/karum.git"
+    "url": "git+https://github.com/Akif9748/akf-lang.git"
   },
   "author": "Akif9748",
   "contributors": [
@@ -17,9 +17,9 @@
   ],
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/Akif9748/karum/issues"
+    "url": "https://github.com/Akif9748/akf-lang/issues"
   },
-  "homepage": "https://github.com/Akif9748/karum#readme",
+  "homepage": "https://github.com/Akif9748/akf-lang#readme",
   "dependencies": {
     "body-parser": "^1.19.2",
     "ejs": "^3.1.6",
