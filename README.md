@@ -18,8 +18,11 @@ And, you can learn informations about API in `APIDOCS.md`.
 
 ## To Do (Backend, bug fixes) :
 - Better method for params in URL. Router, or etc.
-- Database change. (To MongoDB)
-
+- Middleware. For logged in etc.
+- Page template. (Not onlt module.exports) config, file, etc. 
+- Better error codes, example 400 for bad request
+- Ratelimit
+- Database change. (To MongoDB) 
 
 ## Roadmap
 - [x] User
