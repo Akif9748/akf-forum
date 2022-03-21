@@ -1,13 +1,19 @@
-const db = require("quick.db");
-const error = require("../../errors/error.js")
-const { User } = require("../../classes/index");
+const { User } = require("../classes");
+const db = require("quick.db")
 
-module.exports = (req, res) => {
+const { Router } = require("express")
+const error = require("../errors/error")
+
+const app = Router();
+
+app.get("/", (req, res) => res.render("login"));
+
+app.post("/", (req, res) => {
     req.session.loggedin = false;
     req.session.username = null;
     req.session.userid = null;
-    let username = req.body.username;
-    let password = req.body.password;
+    const { username = null, password = null } = req.body;
+
     if (username && password) {
         const user = db.get("secret." + username)
         if (user) {
@@ -24,8 +30,11 @@ module.exports = (req, res) => {
 
 
     } else
-        error(res, 403, "You forgot entering some values")
+        error(res, 400, "You forgot entering some values")
 
 
 
-}
+})
+
+
+module.exports = app;

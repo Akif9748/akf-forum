@@ -22,7 +22,7 @@
 
   <button class="buyuk" onclick="window.location.href = '/search'">SEARCH</button>
   <button class="buyuk" onclick="window.location.href = '/users'">USERS</button>
-  <button class="buyuk" onclick="window.location.href = '/createThread/'">OPEN THREAD</button>
+  <button class="buyuk" onclick="window.location.href = '/threads/open/'">OPEN THREAD</button>
   <h1 style="display:inline; float:right;"><a href=<%=user.getLink() %>> <%= user.name %></a>
     <img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>>
   </h1>
@@ -50,12 +50,14 @@
       <h2>
         <%= message.content %>
       </h2>
-      <form style="text-align:right;display:inline;" action="/messageDelete/<%= message.id %>" method="post">
-
+      <form style="text-align:right;display:inline;" action="/message/delete/<%= message.id %>" method="post">
         <button style="display:inline;" class="button" type="submit">DELETE</button>
       </form>
 
-      <form style="text-align:right;" action="/react/<%= message.id %>" method="POST">
+
+      <form style="display:inline;" action="/message/<%= message.id %>" method="delete">
+      </form>
+      <form style="text-align:right;" action="/message/react/<%= message.id %>" method="POST">
 
         <h3 style="display:inline;">
           <%= Object.values(message.react).filter(Boolean).length - Object.values(message.react).filter(x=>!x).length %>
@@ -73,19 +75,20 @@
     <br>
     <% }); %>
 
-
       <hr>
 
 
-      <form action="/threads/<%= thread.id %>" method="POST">
+      <form action="/message" method="POST">
         <textarea rows="4" cols="50" name="content"></textarea>
+        <input name="threadID" type="hidden" value="<%= thread.id %>"></input>
+
         <br>
 
         <button class="button" type="submit">Send!</button>
       </form>
 
 
-    <!-- This website is powered by AKF-Forum -->
+      <!-- This website is powered by AKF-Forum -->
 </body>
 
 </html>

@@ -17,9 +17,7 @@ And, you can learn informations about API in `APIDOCS.md`.
 * [Camroku](https://github.com/Camroku) - Made stylesheets
 
 ## To Do (Backend, bug fixes) :
-- Better method for params in URL. Router, or etc.
 - Middleware. For logged in etc.
-- Page template. (Not onlt module.exports) config, file, etc. 
 - Better error codes, example 400 for bad request
 - Ratelimit
 - Database change. (To MongoDB) 

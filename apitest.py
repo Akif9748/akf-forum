@@ -39,12 +39,12 @@ example_response = {
             "messages": [0],  # ids of messages
             "time": 1647178870047,
             "deleted": False,
-            "id": "0"
+            "id": 0
         },
         # Other informations about message
         "deleted": False,
         "edited": False,
         "react": {},
-        "id": "1"
+        "id": 1
     }
 }
