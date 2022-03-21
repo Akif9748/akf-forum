@@ -19,8 +19,8 @@ And, you can learn informations about API in `APIDOCS.md`.
 ## To Do (Backend, bug fixes) :
 - Middleware. For logged in etc.
 - Better error codes, example 400 for bad request
-- Ratelimit
 - Database change. (To MongoDB) 
+- Better DB writing. Example, not `message.author.id`, `messsage.authorID`
 
 ## Roadmap
 - [x] User
@@ -33,6 +33,7 @@ And, you can learn informations about API in `APIDOCS.md`.
   - [ ] Singature & About me
   - [ ] Edit user
 - [ ] Messages
+  - [x] Ratelimit for sending message
   - [x] Send message
   - [x] Delete message
   - [ ] Edit message
