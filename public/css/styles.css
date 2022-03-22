@@ -1,4 +1,5 @@
-:root { /* Apprentice Scheme */
+:root {
+  /* Apprentice Scheme */
   /*
    * use `var(--col-x)` instead of directly typing the color.
   */
@@ -22,21 +23,10 @@
   --col-bg: #262626;
 }
 
-img.yuvarlak {
-  border-radius: 50%;
-  height: 30px;
-  width: 30px;
-  object-fit: cover;
-}
 
-img.logo {
-  width: 266px;
-  height: 75px;
-  display: inline;
-}
 
-textarea { 
-  
+textarea {
+
   font-family: monospace;
   background-color: var(--col-bg);
   border: 2px solid var(--col-8);
@@ -68,8 +58,8 @@ h6 {
   background: var(--col-bg);
   color: var(--col-fg);
   max-width: 69rem;
-  margin: auto;
   margin-top: 10px;
+  margin: auto;
 
   /* funny number */
 }
@@ -135,7 +125,88 @@ button:hover {
   color: var(--col-bg);
 }
 
-.mainpage {
-  padding: 10px;
-  float: right;
+
+/* NAVBAR: */
+
+.navbar {
+  background-color: #333;
+  overflow: hidden;
+}
+
+.navbar a {
+  float: left;
+  color: var(--col-fg);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border-right: 3px solid var(--col-8);
+}
+
+.navbar a:hover {
+  background-color: var(--col-bg);
+  color: var(--col-fg);
+}
+
+.navbar h1:hover {
+  background-color: var(--col-bg);
+  color: var(--col-fg);
+}
+
+.navbar a.active {
+  background-color: var(--col-14);
+  color: var(--col-15);
+}
+
+
+.user {
+  margin: 0;
+  border: 1px solid var(--col-8);
+}
+
+.user h1 {
+  font-family: monospace;
+  background: #333;
+  color: var(--col-fg);
+  margin: auto;
+  text-align: center;
+  line-height: 1;
+  color: var(--col-13);
+  font-size: 27px;
+}
+
+.user img {
+  padding: 6px 10px;
+}
+
+.user a {
+  color: var(--col-13);
+  padding: 0px 5px;
+}
+
+
+/* ADMIN */
+.admin {
+  background-color: #5F87AF;
+}
+
+.admin a {
+  font-family: monospace;
+  background-color: var(--col-bg);
+  border: 2px solid var(--col-8);
+
+  color: var(--col-fg);
+}
+
+
+/* IMAGES */
+img.yuvarlak {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+}
+
+img.logo {
+  width: 266px;
+  height: 75px;
 }

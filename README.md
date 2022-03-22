@@ -6,7 +6,8 @@ A forum script written in Node.js.
 ## Installation
 - Clone this repo. Or download it.
 - Write `npm i` to install **dependencies**.
-- Write `npm restart` for reset database, and `npm start` for run it. 
+- Write `npm restart` for **reset database**, and `npm start` for run it. 
+- Note, the reset database is important!
 
 ## API
 Akf-forum has got an API for other clients etc. You can test api with run apitest.py.
@@ -21,6 +22,7 @@ And, you can learn informations about API in `APIDOCS.md`.
 - Better error codes, example 400 for bad request
 - Database change. (To MongoDB) 
 - Better DB writing. Example, not `message.author.id`, `messsage.authorID`
+- `/errors/error` will change
 
 ## Roadmap
 - [x] User

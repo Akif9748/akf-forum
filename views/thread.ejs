@@ -16,20 +16,25 @@
 
 
 <body>
-  <!-- Navbar: -->
-  <a href="/"><img class="logo" src="/images/logo.jpg" alt="AKF-FORUM"></a>
-  <br> <button class="buyuk" onclick="window.location.href = '/threads'">THREADS</button>
+    <script src="/js/scripts.js"></script>
+    <div id="admin"></div>
+    <script>  if (<%= user.admin %>) admin();  </script>
+    
+    <!-- Navbar: -->
+    <a href="/"><img class="logo" src="/images/logo.jpg" alt="AKF-FORUM"></a>
+    <div class="navbar" id="navbar">
 
-  <button class="buyuk" onclick="window.location.href = '/search'">SEARCH</button>
-  <button class="buyuk" onclick="window.location.href = '/users'">USERS</button>
-  <button class="buyuk" onclick="window.location.href = '/threads/open/'">OPEN THREAD</button>
-  <h1 style="display:inline; float:right;"><a href=<%=user.getLink() %>> <%= user.name %></a>
-    <img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>>
-  </h1>
-  <hr>
+        <a href="/threads">THREADS</a>
+        <a href="/users">USERS</a>
+        <a href="/search">SEARCH</a>
+        <a href="/threads/open/">OPEN THREAD</a>
 
-
-  <!-- Navbar end -->
+        <div style="float: right;" class="user" id="user">
+            <a href = <%= user.getLink() %> > <h1> <%= user.name %><img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>> </h1>  </a>
+        </div>
+    </div>
+    <hr>
+    <!-- Navbar end -->
 
   <h1 style="font-size: 35px;">
     <%= thread.title %>
@@ -41,7 +46,7 @@
   <br>
   <% messages.forEach(message=>{ %>
 
-    <div id=<%="message-" + message.id %> style="border: 2px solid #444444; padding: 5px;">
+    <div id= <%= "message-" + message.id %> style="border: 2px solid #444444; padding: 5px;">
       <h2>
         <img class="yuvarlak" src=<%=message.author.avatar %> alt=<%= message.author.name %>>
           <a style="  color: #bcbcbc;  " href=<%="/users/" + message.author.id %>> <%= message.author.name %></a>:

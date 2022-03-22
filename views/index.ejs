@@ -9,34 +9,52 @@
     <meta name="description" content="Main page of Akf-forum!">
     <meta name="author" content="Akif9748">
     <link rel="icon" type="image/x-icon" href="/images/favicon.jpg">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="/js/scripts.js"></script>
 </head>
 
 
 <body>
+    <div id="admin"></div>
+    <script>  if (<%= user.admin %>) admin();  </script>
 
-    <%if(user.admin){%>
-        <button  onclick="window.location.href = '/admin'">ADMIN PANEL</button>    <hr>
 
-    <%};%>
     <!-- Navbar: -->
-    <a href="/"><img class="logo" src="/images/logo.jpg" alt="AKF-FORUM"></a>
-    <br>    <button class="buyuk" onclick="window.location.href = '/threads'">THREADS</button>
 
-    <button class="buyuk" onclick="window.location.href = '/search'">SEARCH</button>
-    <button class="buyuk" onclick="window.location.href = '/users'">USERS</button>
-    <button class="buyuk" onclick="window.location.href = '/threads/open/'">OPEN THREAD</button>
-    <h1 style="display:inline; float:right;"><a href=<%=user.getLink() %>> <%= user.name %></a>
-        <img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>>
-    </h1>
+
+    <a href="/"><img class="logo" src="/images/logo.jpg" alt="AKF-FORUM"></a>
+
+
+    <div class="navbar" id="navbar">
+
+        <a href="/threads">THREADS</a>
+        <a href="/users">USERS</a>
+        <a href="/search">SEARCH</a>
+        <a href="/threads/open/">OPEN THREAD</a>
+
+        <div style="float: right;" class="user" id="user">
+            <a href=<%=user.getLink() %>>
+                <h1>
+                    <%= user.name %><img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>>
+                </h1>
+            </a>
+        </div>
+
+    </div>
+
+
+
     <hr>
 
     <!-- Navbar end -->
+
+
+
     <h1>Welcome, <a href=<%=user.getLink() %>> <%= user.name %></a>
         <img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>>
-        <br>
-        You can press logout here:
-        <button onclick="window.location.href = '/login/'">LOGOUT</button>
+            <br>
+            You can press logout here:
+            <button onclick="window.location.href = '/login/'">LOGOUT</button>
 
     </h1>
 
@@ -44,16 +62,24 @@
     <h1>Statistics:</h1>
     <ul>
         <li>
-            <h3>Message count: <b> <%= messages %> </b></h3>
+            <h3>Message count: <b>
+                    <%= messages %>
+                </b></h3>
         </li>
         <li>
-            <h3>User count: <b> <%= users %> </b></h3>
+            <h3>User count: <b>
+                    <%= users %>
+                </b></h3>
         </li>
         <li>
-            <h3>Thread count: <b> <%= threads %></b></h3>
+            <h3>Thread count: <b>
+                    <%= threads %>
+                </b></h3>
         </li>
         <li>
-            <h3>Memory usage: <b> <%= mem.toFixed(2); %> MB </b></h3>
+            <h3>Memory usage: <b>
+                    <%= mem.toFixed(2); %> MB
+                </b></h3>
         </li>
 
     </ul>
