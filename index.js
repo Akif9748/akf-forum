@@ -13,7 +13,7 @@ app.set("view engine", "ejs");
 app.use(express.json());
 
 for (const file of fs.readdirSync("./routes"))
-        app.use("/" + file.slice(0, -3), require(`./routes/${file}`));
+        app.use("/" + file.replace(".js", ""), require(`./routes/${file}`));
 
 app.all("*", (req, res) => error(res, 404, "We have not got this page."));
 
