@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <link rel="stylesheet" href="/css/styles.css" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LOGIN</title>
-    <meta name="description" content="Login to Akf-forum!">
-    <meta name="author" content="Akif9748">
-    <link rel="icon" type="image/x-icon" href="/images/favicon.jpg">
-
-</head>
-
+    <%- include("extra/header", {title: "Login page!" }) %>
 
 <body>
     <!-- Navbar: -->
@@ -30,7 +20,7 @@
         <input type="submit" value="Login">
     </form>
 
-    <!-- This website is powered by AKF-Forum -->
+    <%- include("extra/footer") %>
 </body>
 
 </html>

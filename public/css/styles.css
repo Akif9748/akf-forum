@@ -210,3 +210,41 @@ img.logo {
   width: 266px;
   height: 75px;
 }
+
+
+/*
+*****************************
+           FOOTER
+*****************************
+*/
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--col-8);
+  color: white;
+  text-align: center;
+}
+
+.footer p {
+
+  font-size: 16px;
+  color: white;
+
+}
+
+/*
+*****************************
+         ADMIN TEXT
+*****************************
+*/
+.admin {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: var(--col-12);
+  color: white;
+  text-align: center;
+}

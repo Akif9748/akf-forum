@@ -1,52 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <link rel="stylesheet" href="/css/styles.css" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Threads!</title>
-    <meta name="description" content="Threads' page of Akf-forum!">
-    <meta name="author" content="Akif9748">
-    <link rel="icon" type="image/x-icon" href="/images/favicon.jpg">
+<%- include("extra/header", {title: "Main page!" }) %>
 
-</head>
+    <body>
+
+        <%- include("extra/navbar", {user}) %>
 
 
-<body>
-    <script src="/js/scripts.js"></script>
-    <div id="admin"></div>
-    <script>  if (<%= user.admin %>) admin();  </script>
-    
-    <!-- Navbar: -->
-    <a href="/"><img class="logo" src="/images/logo.jpg" alt="AKF-FORUM"></a>
-    <div class="navbar" id="navbar">
-
-        <a href="/threads">THREADS</a>
-        <a href="/users">USERS</a>
-        <a href="/search">SEARCH</a>
-        <a href="/threads/open/">OPEN THREAD</a>
-
-        <div style="float: right;" class="user" id="user">
-            <a href = <%= user.getLink() %> > <h1> <%= user.name %><img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>> </h1>  </a>
-        </div>
-    </div>
-    <hr>
-    <!-- Navbar end -->
+            <h1>Threads:</h1>
+            <ul>
+                <% threads.forEach(thread=>{ %>
+                    <li>
+                        <h1><a href=<%=links[threads.indexOf(thread)] %> > <%= thread.title %> by <%= thread.author.name
+                                        %></a>
+                        </h1>
+                    </li>
+                    <% }); %>
+            </ul>
 
 
-    <h1>Threads:</h1>
-    <ul>
-        <% threads.forEach(thread=>{ %>
-            <li>
-                <h1><a href=<%=links[threads.indexOf(thread)] %> > <%= thread.title %> by <%= thread.author.name %></a>
-                </h1>
-            </li>
-            <% }); %>
-    </ul>
-
-
-    <!-- This website is powered by AKF-Forum -->
-</body>
+            <%- include("extra/footer") %>
+    </body>
 
 </html>

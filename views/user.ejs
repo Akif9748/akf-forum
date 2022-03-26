@@ -1,87 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <link rel="stylesheet" href="/css/styles.css" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>
-    <%= member.name %>
-  </title>
-  <meta name="description" content="Akf-forum user page!">
-  <meta name="author" content="Akif9748">
-  <link rel="icon" type="image/x-icon" href="/images/favicon.jpg">
+<%- include("extra/header", {title: "Main page!" }) %>
 
-</head>
+  <body>
+
+    <%- include("extra/navbar", {user}) %>
 
 
-<body>
-    <script src="/js/scripts.js"></script>
-    <div id="admin"></div>
-    <script>  if (<%= user.admin %>) admin();  </script>
-    
-    <!-- Navbar: -->
-    <a href="/"><img class="logo" src="/images/logo.jpg" alt="AKF-FORUM"></a>
-    <div class="navbar" id="navbar">
+      <ul>
+        <li>
+          <h1>Avatar:</h1>
+          <img style="width:256px;height:256px;" src=<%=member.avatar %> alt=<%= member.name %>>
+        </li>
 
-        <a href="/threads">THREADS</a>
-        <a href="/users">USERS</a>
-        <a href="/search">SEARCH</a>
-        <a href="/threads/open/">OPEN THREAD</a>
-
-        <div style="float: right;" class="user" id="user">
-            <a href = <%= user.getLink() %> > <h1> <%= user.name %><img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>> </h1>  </a>
-        </div>
-    </div>
-    <hr>
-    <!-- Navbar end -->
+        <li>
+          <h2>Name: <%= member.name %>
+          </h2>
+        </li>
+        <li>
+          <h2>Created at:
+            <%= new Date(member.time).toLocaleString() %>
+          </h2>
 
 
-  <ul>
-    <li>
-      <h1>Avatar:</h1>
-      <img style="width:256px;height:256px;" src=<%=member.avatar %> alt=<%= member.name %>>
-    </li>
+        </li>
+        <li>
+          <h2>Is admin? <%= member.admin ? "Yes" : "No" %>
+          </h2>
+        </li>
 
-    <li>
-      <h2>Name: <%= member.name %>
-      </h2>
-    </li>
-    <li>
-      <h2>Created at:
-        <%= new Date(member.time).toLocaleString() %>
-      </h2>
+        <li>
+          <h2> Message: <%= counts.message %>
+          </h2>
+        </li>
+        <li>
+          <h2> Thread: <%= counts.thread %>
+          </h2>
+        </li>
+      </ul>
 
+      <% if (user.admin) {%>
+        <form action="/admin/" method="POST">
+          <input name="userid" type="hidden" value="<%= member.id %>"></input>
+          <button class="buyuk" type="submit">Make admin!</button>
 
-    </li>
-    <li>
-      <h2>Is admin? <%= member.admin ? "Yes" : "No" %>
-      </h2>
-    </li>
+        </form>
 
-    <li>
-      <h2> Message: <%= counts.message %>
-      </h2>
-    </li>
-    <li>
-      <h2> Thread: <%= counts.thread %>
-      </h2>
-    </li>
-  </ul>
+        <form action="/users/delete/<%= member.id %>" method="POST">
+          <button class="buyuk" type="submit">Delete user!</button>
+        </form>
+        <% }; %>
 
-  <% if (user.admin) {%>
-    <form action="/admin/" method="POST">
-      <input name="userid" type="hidden" value="<%= member.id %>"></input>
-      <button class="buyuk" type="submit">Make admin!</button>
-
-    </form>
-
-    <form action="/users/delete/<%= member.id %>" method="POST">
-      <button class="buyuk" type="submit">Delete user!</button>
-    </form>
-    <% }; %>
-
-    <!-- This website is powered by AKF-Forum -->
-</body>
+          <%- include("extra/footer") %>
+  </body>
 
 </html>
