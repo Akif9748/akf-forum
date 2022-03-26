@@ -185,21 +185,18 @@ button:hover {
 }
 
 
-/* ADMIN */
-.admin {
-  background-color: #5F87AF;
-}
-
-.admin a {
-  font-family: monospace;
-  background-color: var(--col-bg);
-  border: 2px solid var(--col-8);
-
-  color: var(--col-fg);
-}
+/*
+*****************************
+           IMAGES
+*****************************
+*/
 
 
-/* IMAGES */
+/*
+*****************************
+           IMAGES
+*****************************
+*/
 img.yuvarlak {
   border-radius: 50%;
   height: 30px;
@@ -243,8 +240,20 @@ img.logo {
   position: fixed;
   left: 0;
   top: 0;
+  height: 20px;
   width: 100%;
-  background-color: var(--col-12);
-  color: white;
   text-align: center;
+}
+
+.admin p {
+  font-size: 16px;
+  margin: auto;
+  color: var(--col-15);
+}
+
+.admin a {
+  background-color: var(--col-13);
+  border: 2px solid var(--col-8);
+  height: 20px;
+  color: var(--col-15);
 }
