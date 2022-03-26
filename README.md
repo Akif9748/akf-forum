@@ -52,5 +52,5 @@ And, you can learn informations about API in `APIDOCS.md`.
   - [x] New Thread theme, better render for messages
 
 ## Image:
-![image](https://user-images.githubusercontent.com/70021050/158060900-7384d394-cad7-4f73-94ad-7c8bd108ac44.png)
+![image](https://user-images.githubusercontent.com/70021050/160255959-ef216cba-1348-4d4b-9347-fe67e21348e7.png)
 
