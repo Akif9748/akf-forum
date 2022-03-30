@@ -9,7 +9,7 @@ app.get("/", (req, res) => {
     if (!req.session.loggedin) return res.redirect('/login');
     const user = new User().getId(req.session.userid)
 
-    if (!user.admin) return error(res, 404, "You have not got permissions for view to this page.");
+    if (!user.admin) return error(res, 403, "You have not got permissions for view to this page.");
 
     res.render("admin", { user, user2: false })
 }
@@ -20,7 +20,7 @@ app.post("/", (req, res) => {
 
     const user = new User().getId(req.session.userid)
 
-    if (!user.admin) return error(res, 404, "You have not got permissions for view to this page.");
+    if (!user.admin) return error(res, 403, "You have not got permissions for view to this page.");
     const user2 = new User().getId(req.body.userid)
 
     if (!user2) 
