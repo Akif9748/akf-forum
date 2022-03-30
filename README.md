@@ -24,6 +24,7 @@ And, you can learn informations about API in `APIDOCS.md`.
 - Better DB writing. Example, not `message.author.id`, `messsage.authorID`
 - `/errors/error` will change, better error page.
 - Support for not logins...
+- message/react/:id ❌ message/:id/react ✔️
 
 ## Roadmap
 - [x] User
