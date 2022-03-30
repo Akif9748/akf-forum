@@ -1,7 +1,7 @@
 # akf-forum
 <img src="https://raw.githubusercontent.com/Akif9748/akf-forum/main/public/images/logo.jpg" align="right" width="300px" />
 
-A forum script written in Node.js.
+A Node.js based forum software.
 
 ## Installation
 - Clone this repo. Or download it.
@@ -17,12 +17,13 @@ And, you can learn informations about API in `APIDOCS.md`.
 * [Akif9748](https://github.com/Akif9748) - Project owner, main developer
 * [Camroku](https://github.com/Camroku) - Made stylesheets
 
-## To Do (Backend, bug fixes) :
+## To Do (Backend, bug fixes) 
 - Middleware. For logged in etc.
 - Better error codes, example 400 for bad request
 - Database change. (To MongoDB) 
 - Better DB writing. Example, not `message.author.id`, `messsage.authorID`
-- `/errors/error` will change
+- `/errors/error` will change, better error page.
+- Support for not logins...
 
 ## Roadmap
 - [x] User
@@ -41,12 +42,13 @@ And, you can learn informations about API in `APIDOCS.md`.
   - [ ] Edit message
   - [x] React message
 - [ ] Threads
+  - [x] Open it!
   - [ ] Edit it!
   - [ ] Delete it!
 - [ ] Other
   - [x] API
   - [x] Other client for forum via API 
-  - [ ] Footer of the site
+  - [x] Footer of the site
   - [ ] Multiple theme support 
   - [ ] Search 
   - [x] New Thread theme, better render for messages
