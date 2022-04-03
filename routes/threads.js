@@ -19,6 +19,13 @@ app.get("/", (req, res) => {
 });
 
 
+app.get("/open*", (req, res) => {
+
+    const user = new User().getId(req.session.userid)
+    res.render("openThread", { user })
+
+});
+
 app.get("/:id", (req, res) => {
 
     const { id } = req.params;
@@ -34,15 +41,9 @@ app.get("/:id", (req, res) => {
 });
 
 
+
+
 app.use(require("../middlewares/login"));
-
-
-app.get("/open*", (req, res) => {
-
-    const user = new User().getId(req.session.userid)
-    res.render("openThread", { user })
-
-});
 
 
 app.post("/", (req, res) => {

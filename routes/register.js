@@ -22,7 +22,7 @@ app.post("/", (req, res) => {
             error(res, 404, `We have got an user named ${username}!`)
 
         else {
-            const user2 = new User(req.body.username, req.body.avatar).takeId()
+            const user2 = new User(req.body.username, req.body.avatar ?? null).takeId()
             db.set("secret." + username, { id: user2.id, key: password })
             req.session.loggedin = true;
             req.session.username = username;

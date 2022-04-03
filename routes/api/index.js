@@ -78,6 +78,22 @@ app.get("/message/:id", (req, res) => {
 
 })
 
+app.post("/message/", (req, res) => {
+
+    const error = (status, error) =>
+        res.status(status).json(new ApiResponse(status, { error }));
+    const { threadID = null, content = null } = req.body;
+    const thread = new Thread().getId(threadID);
+    if (!req.body.content) return error(400, "Missing message content in request body.");
+    if (!thread) return error(404, "We have not got this thread.");
+
+
+    const message = new Message(content, new User().getName(req.headers.username), thread).takeId().write();
+    thread.push(message.id).write();
+   
+    res.status(200).json(new ApiResponse(200, message));
+
+})
 app.get("/user/:id", (req, res) => {
 
     const error = (status, error) =>
