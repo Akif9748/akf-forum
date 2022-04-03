@@ -36,7 +36,7 @@ app.get("/:id", (req, res) => {
     else error(res, 404, "We have not got this user.");
 
 });
-app.post("/delete/:id", (req, res) => {
+app.post("/:id/delete/", (req, res) => {
     if (!req.session.loggedin) return res.redirect('/login');
     const user = new User().getId(req.session.userid);
     if (!user.admin)

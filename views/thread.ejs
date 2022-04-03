@@ -27,14 +27,11 @@
           <h2>
             <%= message.content %>
           </h2>
-          <form style="text-align:right;display:inline;" action="/message/delete/<%= message.id %>" method="post">
+          <form style="text-align:right;display:inline;" action="/message/<%= message.id %>/delete/" method="post">
             <button style="display:inline;" class="button" type="submit">DELETE</button>
           </form>
 
-
-          <form style="display:inline;" action="/message/<%= message.id %>" method="delete">
-          </form>
-          <form style="text-align:right;" action="/message/react/<%= message.id %>" method="POST">
+          <form style="text-align:right;" action="/message/<%= message.id %>/react/" method="POST">
 
             <h3 style="display:inline;">
               <%= Object.values(message.react).filter(Boolean).length - Object.values(message.react).filter(x=>

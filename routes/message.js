@@ -34,7 +34,7 @@ app.post("/", (req, res) => {
 });
 
 
-app.post("/delete/:id", (req, res) => {
+app.post("/:id/delete", (req, res) => {
     if (!req.session.loggedin) return res.redirect('/login');
 
     const message = new Message().getId(req.params.id)
@@ -49,7 +49,7 @@ app.post("/delete/:id", (req, res) => {
     res.status(200).redirect("/threads/" + message.thread.id);
 
 })
-app.post("/react/:id", (req, res) => {
+app.post("/:id/react", (req, res) => {
     if (!req.session.loggedin) return res.redirect('/login');
 
     const { id = null } = req.params;
