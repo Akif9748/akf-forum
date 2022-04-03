@@ -1,11 +1,7 @@
 const { User, Message, Thread } = require("../../classes");
 const db = require("quick.db");
-
-
 const { Router } = require("express")
-
 const app = Router();
-
 
 class ApiResponse {
     constructor(status, result) {
@@ -16,29 +12,37 @@ class ApiResponse {
 
 const { request, response } = require("express");
 
+
+/**
+ * AUTH TYPE:
+ 
+ headers: 
+    {
+        username: "Username for client",
+        password: "Password of selected username for client"
+    }
+
+*/
+
+/**
+  * REQUEST TYPE:
+  * GET /api/action/id 
+  * 
+  * @example message action:
+  * GET /api/message/0
+  *  
+  */
+
+
 /**
  * For intellisense
  * @param {request} req 
  * @param {response} res 
  */
 
-
-app.get("/:action/:id", (req, res) => {
-
+app.use((req, res, next) => {
     const error = (status, error) =>
         res.status(status).json(new ApiResponse(status, { error }))
-
-
-    /**
-     * AUTH TYPE:
-    
-     headers: 
-        {
-            username: "Username for client",
-            password: "Password of selected username for client"
-        }
-
-    */
 
     const { username = null, password = null } = req.headers;
 
@@ -52,40 +56,43 @@ app.get("/:action/:id", (req, res) => {
 
     if (user.key !== password)
         return error(401, 'Incorrect Password!')
+    next();
+})
+
+app.get("/message/:id", (req, res) => {
+
+    const error = (status, error) =>
+        res.status(status).json(new ApiResponse(status, { error }));
 
 
 
-    /**
-      * REQUEST TYPE:
-      * GET /api/action/id 
-      * 
-      * @example message action:
-      * GET /api/message/0
-      *  
-      */
-    const { action } = req.params;
+    const { id = null } = req.params;
+    if (!id) return error(400, "Missing id in query")
+    const message = new Message().getId(id);
 
-    if (action === "message") {
+    if (!message || message.deleted) return error(404, "We have not got any message declared as this id.");
 
-        const { id = null } = req.params;
-        if (!id) return error(400, "Missing id in query")
-        const message = new Message().getId(id);
+    res.status(200).json(new ApiResponse(200, message));
 
-        if (!message || message.deleted) return error(404, "We have not got any message declared as this id.");
 
-        res.status(200).json(new ApiResponse(200, message));
-    } else if (action === "user") {
-        const { id = null } = req.params;
-        if (!id) return error(400, "Missing id in query")
-        const member = new User().getId(id);
-        if (!member || member.deleted) return error(404, "We have not got any user declared as this id.");
 
-        res.status(200).json(new ApiResponse(200, member));
-    }
-    else
-        return error(400, "Missing/undefined param in action section: " + action);
+})
+
+app.get("/user/:id", (req, res) => {
+
+    const error = (status, error) =>
+        res.status(status).json(new ApiResponse(status, { error }))
+
+
+    const { id = null } = req.params;
+    if (!id) return error(400, "Missing id in query")
+    const member = new User().getId(id);
+    if (!member || member.deleted) return error(404, "We have not got any user declared as this id.");
+
+    res.status(200).json(new ApiResponse(200, member));
+
 });
 
-
+app.all("*", (req, res) => res.status(400).json(new ApiResponse(400, { error: "Bad request" })));
 
 module.exports = app;
