@@ -1,10 +1,14 @@
-
 <!-- Navbar: -->
 
-<script src="/js/scripts.js"></script>
 
-<div id="admin"></div>
-<script>  if (<%= user.admin %>) admin();  </script>
+<% if (user?.admin){ %>
+    <div class="admin">
+        <a class="admin" href="/admin"><p>You are admin, and you can go your page!</p></a>
+    </div>
+    <hr>
+
+<% } %>
+
 <a href="/"><img class="logo" src="/images/logo.jpg" alt="AKF-FORUM"></a>
 
 <div class="navbar" id="navbar">
@@ -14,13 +18,24 @@
     <a href="/search">SEARCH</a>
     <a href="/threads/open/">OPEN THREAD</a>
 
-    <div style="float: right;" class="user" id="user">
-        <a href=<%=user.getLink() %>>
-            <h1>
-                <%= user.name %><img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>>
-            </h1>
-        </a>
-    </div>
+    <% if (user){ %>
+        <div style="float: right;" class="user" id="user">
+            <a href=<%=user.getLink() %>>
+                <h1>
+                    <%= user.name %><img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>>
+                </h1>
+            </a>
+        </div>
+    
+        <% } else { %>
+            <a style="float: right; background-color: #5F875F;" href="/register">REGISTER</a>
+
+            <a style="float: right; background-color:#5F87AF; " href="/login">LOGIN</a>
+
+
+         <% } %> 
+    
+ 
 
 </div>
 

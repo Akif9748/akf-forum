@@ -18,12 +18,10 @@ And, you can learn informations about API in `APIDOCS.md`.
 * [Camroku](https://github.com/Camroku) - Made stylesheets
 
 ## To Do (Backend, bug fixes) 
-- Middleware. For logged in etc.
 - Better error codes, example 400 for bad request
 - Database change. (To MongoDB) 
 - Better DB writing. Example, not `message.author.id`, `messsage.authorID`
 - `/errors/error` will change, better error page.
-- Support for not logins...
 
 ## Roadmap
 - [x] User

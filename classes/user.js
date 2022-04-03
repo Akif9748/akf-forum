@@ -38,7 +38,7 @@ module.exports = class User {
         this.time = time;
         this.admin = admin;
         this.deleted = deleted;
-        return this ;
+        return this;
 
     }
      takeId() {

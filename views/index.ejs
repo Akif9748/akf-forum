@@ -4,9 +4,9 @@
 <%- include("extra/header", {title: "Main page!" }) %>
 <body>
 
-    <%- include("extra/navbar", {user}) %>
+    <%- include("extra/navbar") %>
     
-
+<% if (user) { %>
     <h1>Welcome, <a href=<%=user.getLink() %>> <%= user.name %></a>
         <img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>>
             <br>
@@ -16,6 +16,11 @@
     </h1>
 
     <br>
+<% } else { %>
+    <h1>Welcome, Guest!<br>You can press for register here:
+    <button class="buyuk" onclick= "window.location.href = '/register'">REGISTER</button>
+    </h1>
+ <% } %> 
     <h1>Statistics:</h1>
     <ul>
         <li>

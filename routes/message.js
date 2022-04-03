@@ -6,7 +6,6 @@ const { Router } = require("express");
 const app = Router();
 
 app.get("/:id", (req, res) => {
-    if (!req.session.loggedin) return res.redirect('/login');
     const message = new Message().getId(req.params.id);
 
     if (!message || message.deleted) return error(res, 404, "We have not got any message declared as this id.");
@@ -15,10 +14,9 @@ app.get("/:id", (req, res) => {
 
 });
 
+app.use(require("../middlewares/login"));
+
 app.post("/", (req, res) => {
-    if (!req.session.loggedin) return res.redirect('/login');
-
-
     const thread = new Thread().getId(req.body.threadID);
 
     if (thread) {
@@ -35,8 +33,6 @@ app.post("/", (req, res) => {
 
 
 app.post("/:id/delete", (req, res) => {
-    if (!req.session.loggedin) return res.redirect('/login');
-
     const message = new Message().getId(req.params.id)
     if (!message || message.deleted) return error(res, 404, "We have not got any message declared as this id.");
     const user = new User().getId(req.session.userid);
@@ -50,8 +46,6 @@ app.post("/:id/delete", (req, res) => {
 
 })
 app.post("/:id/react", (req, res) => {
-    if (!req.session.loggedin) return res.redirect('/login');
-
     const { id = null } = req.params;
     const info = req.body;
     const message = new Message().getId(id);

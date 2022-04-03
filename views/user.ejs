@@ -40,7 +40,7 @@
         </li>
       </ul>
 
-      <% if (user.admin) {%>
+      <% if (user?.admin) {%>
         <form action="/admin/" method="POST">
           <input name="userid" type="hidden" value="<%= member.id %>"></input>
           <button class="buyuk" type="submit">Make admin!</button>
@@ -52,7 +52,7 @@
         </form>
         <% }; %>
 
-          <%- include("extra/footer") %>
+        <%- include("extra/footer") %>
   </body>
 
 </html>

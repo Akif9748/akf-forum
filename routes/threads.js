@@ -6,16 +6,8 @@ const { Router } = require("express");
 
 const app = Router();
 
-app.get("/open*", (req, res) => {
-
-    if (!req.session.loggedin) return res.redirect('/login');
-    const user = new User().getId(req.session.userid)
-    res.render("openThread", { user })
-
-});
 
 app.get("/", (req, res) => {
-    if (!req.session.loggedin) return res.redirect('/login');
 
     const user = new User().getId(req.session.userid);
 
@@ -28,7 +20,6 @@ app.get("/", (req, res) => {
 
 
 app.get("/:id", (req, res) => {
-    if (!req.session.loggedin) return res.redirect('/login');
 
     const { id } = req.params;
 
@@ -42,8 +33,19 @@ app.get("/:id", (req, res) => {
         error(res, 404, "We have not got this thread.");
 });
 
+
+app.use(require("../middlewares/login"));
+
+
+app.get("/open*", (req, res) => {
+
+    const user = new User().getId(req.session.userid)
+    res.render("openThread", { user })
+
+});
+
+
 app.post("/", (req, res) => {
-    if (!req.session.loggedin) return res.redirect('/login');
 
     const user = new User().getId(req.session.userid);
 

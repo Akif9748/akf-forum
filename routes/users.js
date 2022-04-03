@@ -7,26 +7,21 @@ const error = require("../errors/error")
 const app = Router();
 
 app.get("/", (req, res) => {
-    if (!req.session.loggedin) return res.redirect('/login');
     const user = new User().getId(req.session.userid)
-
-
     const users = db.get("users").slice(0);
 
     const links = users.filter(user => !user.deleted).map(user => "/users/" + user.id);
     return res.render("users", { users, links, user })
 
-
-
 });
+
 app.get("/:id", (req, res) => {
-    if (!req.session.loggedin) return res.redirect('/login');
     const user = new User().getId(req.session.userid)
     const { id = null } = req.params;
     const member = new User().getId(req.params.id);
 
 
-    if (member && (user.admin || !member.deleted)) {
+    if (member && (user?.admin || !member.deleted)) {
         const message = db.get("messages").filter(message => message.author.id === Number(id)).length
         const thread = db.get("threads").filter(thread => thread.author.id === Number(id)).length
 
@@ -36,10 +31,13 @@ app.get("/:id", (req, res) => {
     else error(res, 404, "We have not got this user.");
 
 });
+
+app.use(require("../middlewares/login"));
+
+
 app.post("/:id/delete/", (req, res) => {
-    if (!req.session.loggedin) return res.redirect('/login');
     const user = new User().getId(req.session.userid);
-    if (!user.admin)
+    if (!user?.admin)
         return error(res, 403, "You have not got permission for this.");
 
     const id = req.url.slice(9 + 3)

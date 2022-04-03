@@ -1,37 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include("extra/header", {title: "Main page!" }) %>
+  <%- include("extra/header", {title: "Main page!" }) %>
 
-  <body>
+<body>
 
-    <%- include("extra/navbar", {user}) %>
-     
-
-      <h1 style="font-size: 35px;">
-        <%= thread.title %>
-      </h1>
+  <%- include("extra/navbar", {user}) %>
 
 
+    <h1 style="font-size: 35px;">
+      <%= thread.title %>
+    </h1>
 
+    <h2>By <a style="color: #bcbcbc;" href=<%="/users/" + thread.author.id %>> <%= thread.author.name %></a>
+      <img class="yuvarlak" src=<%= thread.author.avatar %> alt=<%= thread.author.name %>>
+    </h2>
+<hr>
+    <% messages.forEach(message=>{ %>
 
-      <br>
-      <% messages.forEach(message=>{ %>
+      <div id="message-<%= message.id %>" style="border: 2px solid #444444; padding: 10px;">
 
-        <div id=<%="message-" + message.id %> style="border: 2px solid #444444; padding: 5px;">
-          <h2>
-            <img class="yuvarlak" src=<%=message.author.avatar %> alt=<%= message.author.name %>>
-              <a style="  color: #bcbcbc;  " href=<%="/users/" + message.author.id %>> <%= message.author.name %></a>:
-          </h2>
+        <h3 style="float:right;">
+          <%=new Date(message.time).toLocaleString() %>
+        </h3>
 
-          <h2>
-            <%= message.content %>
-          </h2>
-          <form style="text-align:right;display:inline;" action="/message/<%= message.id %>/delete/" method="post">
-            <button style="display:inline;" class="button" type="submit">DELETE</button>
+        <h2>
+          <img class="yuvarlak" src=<%=message.author.avatar %> alt=<%= message.author.name %>>
+            <a style="color: #bcbcbc;" href=<%="/users/" + message.author.id %>> <%= message.author.name %></a>:
+        </h2>
+
+        <h2>
+          <%= message.content %>
+        </h2>
+
+        <br>
+
+        <% if (user){ %>
+
+          <form style="display:inline;" action="/message/<%= message.id %>/delete/" method="post">
+            </a><button type="submit">DELETE</button>
           </form>
-
-          <form style="text-align:right;" action="/message/<%= message.id %>/react/" method="POST">
+          <form style="float: right;" action="/message/<%= message.id %>/react/" method="POST">
 
             <h3 style="display:inline;">
               <%= Object.values(message.react).filter(Boolean).length - Object.values(message.react).filter(x=>
@@ -39,31 +48,36 @@
             </h3>
 
 
-            <button style="display:inline;" class="button" name="like" type="submit">+🔼</button>
-            <button style="display:inline;" class="button" name="dislike" type="submit">-🔽</button>
-            <h3 style="display:inline;">
-              <%=new Date(message.time).toLocaleString() %>
-            </h3>
+            <button style="display:inline;" name="like" type="submit">+🔼</button>
+            <button style="display:inline;" name="dislike" type="submit">-🔽</button>
+
           </form>
-        </div>
-
-        <br>
-        <% }); %>
-
-          <hr>
+          <% } %>
 
 
-          <form action="/message" method="POST">
-            <textarea rows="4" cols="50" name="content"></textarea>
-            <input name="threadID" type="hidden" value="<%= thread.id %>"></input>
+      </div>
 
-            <br>
+      <br>
+      <% }); %>
 
-            <button class="button" type="submit">Send!</button>
-          </form>
+        <hr>
 
 
-          <%- include("extra/footer") %>
-  </body>
+        <form action="/message" method="POST">
+          <textarea rows="4" cols="50" name="content"></textarea>
+          <input name="threadID" type="hidden" value="<%= thread.id %>"></input>
+
+          <br>
+          <% if (user){ %>
+            <button type="submit">Send!</button>
+            <%} else {%>
+              <button disabled>Login for send</button>
+              <% }%>
+
+        </form>
+
+
+        <%- include("extra/footer") %>
+</body>
 
 </html>

@@ -1,10 +1,3 @@
-const { Router } = require("express");
-
-const app = Router();
-
-app.get("/", (req, res, next) => {
+module.exports = (req, res) => {
     if (!req.session.loggedin) return res.redirect('/login');
-    next();
-});
-
-module.exports = app;
+}   
