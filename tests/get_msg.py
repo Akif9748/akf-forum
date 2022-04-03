@@ -7,7 +7,7 @@ headers = {
 }
 
 
-r = requests.get("http://localhost:3000/api/message/1/", headers=headers)
+r = requests.get("http://localhost:3000/api/messages/1/", headers=headers)
 
 print(r.json())
 

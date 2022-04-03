@@ -3,30 +3,27 @@
 
 Akf-forum has got an API for other clients etc. 
 
-You can find an example in apitest.py.
+You can find examples in `/tests` folder.
 
 ## Authorization
 You need this headers for send request to API:
-```jsonc
+```json
 {
     "username": "testUser", 
     "password": "testPassword"
 }
 ```
 
-
 ## How to request?
 
 ### Request type:
-  `GET /api/action/id` 
+  `GET /api/action` 
 
 ### "action" types:
-- `message`
-
-(for now, only message.)
-
-### "id":
-ID for action type.
+- GET `messages/:id`
+- GET `users/:id` 
+- GET `threads/:id`  
+- POST `messages` 
 
 
 ### Example request:

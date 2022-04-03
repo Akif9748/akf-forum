@@ -34,7 +34,7 @@ And, you can learn informations about API in `APIDOCS.md`.
   - [ ] Singature & About me
   - [ ] Edit user
 - [ ] Messages
-  - [x] Ratelimit for sending message
+  - [ ] Ratelimit for sending message
   - [x] Send message
   - [x] Delete message
   - [ ] Edit message
@@ -44,13 +44,17 @@ And, you can learn informations about API in `APIDOCS.md`.
   - [ ] Edit it!
   - [ ] Delete it!
 - [ ] Other
-  - [x] API
-  - [x] Other client for forum via API 
   - [x] Footer of the site
   - [ ] Multiple theme support 
   - [ ] Search 
   - [x] New Thread theme, better render for messages
   - [ ] sending message etc. Will turn api model
+- [ ] API
+  - [x] Other client for forum via API    
+  - [ ] Deleting message
+  - [x] Sending message
+  - [ ] Open thread
+  - [x] Get Thread info
 ## Image:
 ![image](https://user-images.githubusercontent.com/70021050/160255959-ef216cba-1348-4d4b-9347-fe67e21348e7.png)
 

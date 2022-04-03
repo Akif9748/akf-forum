@@ -12,7 +12,7 @@ body = {
     "threadID": 1
 }
 
-r = requests.post("http://localhost:3000/api/message/",
+r = requests.post("http://localhost:3000/api/messages/",
                   headers=headers, data=body)
 
 print(r.json())
