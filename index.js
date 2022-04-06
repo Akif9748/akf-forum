@@ -7,7 +7,7 @@ const error = require("./errors/error.js"),
         fs = require("fs"),
         app = express();
 
-mongoose.connect(process.env.MONGO_DB_URL, () => console.log("Database is connected"));
+mongoose.connect(process.env.MONGO_DB_URL ?? "mongodb://localhost:27017/akf-forum", () => console.log("Database is connected"));
 
 app.use(session({ secret: 'secret', resave: true, saveUninitialized: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
