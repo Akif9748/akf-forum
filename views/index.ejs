@@ -10,14 +10,14 @@
     <h1>Welcome, <a href=<%=user.getLink() %>> <%= user.name %></a>
         <img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>>
             <br>
-            You can press logout here:
+            You can log out of the site here:
             <button onclick="window.location.href = '/login/'">LOGOUT</button>
 
     </h1>
 
     <br>
 <% } else { %>
-    <h1>Welcome, Guest!<br>You can press for register here:
+    <h1>Welcome, Guest!<br>You can press the button to register:
     <button class="buyuk" onclick= "window.location.href = '/register'">REGISTER</button>
     </h1>
  <% } %> 
