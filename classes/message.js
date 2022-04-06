@@ -17,21 +17,25 @@ module.exports = class Message {
 
     }
     async getById(id = this.id) {
-        this.id = Number(id);
+        try {
+            this.id = Number(id);
 
-        const message = await MessageModel.findOne({ id });
-        if (!message) return null;
+            const message = await MessageModel.findOne({ id });
+            if (!message) return null;
 
-        const { content, authorID, author = null, threadID = null, time = Date.now(), deleted = false, edited = false, react = {} } = message;
-        this.content = content;
-        this.threadID = threadID;
-        this.author = author;
-        this.authorID = authorID;
-        this.time = time;
-        this.deleted = deleted;
-        this.edited = edited;
-        this.react = react;
-        return this;
+            const { content, authorID, author = null, threadID = null, time = Date.now(), deleted = false, edited = false, react = {} } = message;
+            this.content = content;
+            this.threadID = threadID;
+            this.author = author;
+            this.authorID = authorID;
+            this.time = time;
+            this.deleted = deleted;
+            this.edited = edited;
+            this.react = react;
+            return this;
+        } catch (e) {
+            return null;
+        }
     }
 
     async takeId() {

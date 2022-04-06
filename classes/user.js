@@ -14,34 +14,43 @@ module.exports = class User {
     }
 
     async getById(id = this.id) {
-        this.id = Number(id);
-        const user = await UserModel.findOne({ id });
-        if (!user) return null;
+        try {
+            this.id = Number(id);
+            const user = await UserModel.findOne({ id });
+            if (!user) return null;
 
-        const { name = "guest", avatar = "/images/guest.png", time = Date.now(), admin = false, deleted = false } = user;
-        this.name = name;
-        this.avatar = avatar;
-        this.time = time;
-        this.admin = admin;
-        this.deleted = deleted;
-        return this;
+            const { name = "guest", avatar = "/images/guest.png", time = Date.now(), admin = false, deleted = false } = user;
+            this.name = name;
+            this.avatar = avatar;
+            this.time = time;
+            this.admin = admin;
+            this.deleted = deleted;
+            return this;
+        } catch (e) {
+            return null;
+        }
 
     }
 
     async getByName(Name = this.name) {
+        try {
+            const user = await UserModel.findOne({ name: Name });
 
-        const user = await UserModel.findOne({ name: Name });
-        if (!user) return null;
+            if (!user) return null;
 
-        const { id, name = "guest", avatar = "/images/guest.png", time = Date.now(), admin = false, deleted = false } = user;
+            const { id, name = "guest", avatar = "/images/guest.png", time = Date.now(), admin = false, deleted = false } = user;
 
-        this.id = Number(id);
-        this.name = name;
-        this.avatar = avatar;
-        this.time = time;
-        this.admin = admin;
-        this.deleted = deleted;
-        return this;
+            this.id = Number(id);
+            this.name = name;
+            this.avatar = avatar;
+            this.time = time;
+            this.admin = admin;
+            this.deleted = deleted;
+            return this;
+        } catch (e) {
+            return null;
+        }
+
 
     }
 

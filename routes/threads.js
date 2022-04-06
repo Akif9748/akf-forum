@@ -50,7 +50,6 @@ app.use(require("../middlewares/login"));
 
 
 app.post("/", async (req, res) => {
-//    if (req.ratelimit)     return error(res, 429, "Wait until " + new Date(req.timeout.until).toLocaleTimeString("tr") + ", you are too quick for send.")
 
     const { title = null, content = null } = req.body;
 

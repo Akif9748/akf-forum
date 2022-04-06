@@ -15,7 +15,6 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(require("./middlewares/user"));
-app.use(require("./middlewares/timeout"));
 
 for (const file of fs.readdirSync("./routes"))
         app.use("/" + file.replace(".js", ""), require(`./routes/${file}`));

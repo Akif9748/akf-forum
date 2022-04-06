@@ -17,28 +17,32 @@ module.exports = class Thread {
     }
 
     async getById(id = this.id) {
-        this.id = Number(id);
+        try {
+            this.id = Number(id);
 
-    
-        const thread = await ThreadModel.findOne({ id });
-        if (!thread) return null;
 
-        const { title, authorID, author, messages = [], time = Date.now(), deleted = false } = thread;
-        this.title = title
-        this.author = author;
-        this.authorID = authorID;
-        this.messages = messages;
-        this.time = time;
-        this.deleted = deleted;
+            const thread = await ThreadModel.findOne({ id });
+            if (!thread) return null;
 
-        return this;
+            const { title, authorID, author, messages = [], time = Date.now(), deleted = false } = thread;
+            this.title = title
+            this.author = author;
+            this.authorID = authorID;
+            this.messages = messages;
+            this.time = time;
+            this.deleted = deleted;
+
+            return this;
+        } catch (e) {
+            return null;
+        }
     }
 
     push(messageID) {
         this.messages.push(messageID)
         return this;
     }
-    
+
     async takeId() {
         this.id = await ThreadModel.count({}) || 0;
         return this;
