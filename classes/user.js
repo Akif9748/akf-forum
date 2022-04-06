@@ -29,11 +29,13 @@ module.exports = class User {
     }
 
     async getByName(Name = this.name) {
-          
+
         const user = await UserModel.findOne({ name: Name });
         if (!user) return null;
 
-        const { name = "guest", avatar = "/images/guest.png", time = Date.now(), admin = false, deleted = false } = user;
+        const { id, name = "guest", avatar = "/images/guest.png", time = Date.now(), admin = false, deleted = false } = user;
+
+        this.id = Number(id);
         this.name = name;
         this.avatar = avatar;
         this.time = time;
