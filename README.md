@@ -22,7 +22,8 @@ And, you can learn informations about API in `APIDOCS.md`.
 - Database change. (To MongoDB) 
 - Better DB writing. Example, not `message.author.id`, `messsage.authorID`
 - `/errors/error` will change, better error page.
-
+- Redirect query.
+- middleware for timeouts
 ## Roadmap
 - [x] User
   - [x] Login
@@ -33,6 +34,7 @@ And, you can learn informations about API in `APIDOCS.md`.
   - [x] Delete User
   - [ ] Singature & About me
   - [ ] Edit user
+  - [ ] IP BAN
 - [ ] Messages
   - [ ] Ratelimit for sending message
   - [x] Send message
@@ -48,7 +50,7 @@ And, you can learn informations about API in `APIDOCS.md`.
   - [ ] Multiple theme support 
   - [ ] Search 
   - [x] New Thread theme, better render for messages
-  - [ ] sending message etc. Will turn api model
+  - [ ] Sending message etc. will turn api model
 - [ ] API
   - [x] Other client for forum via API    
   - [ ] Deleting message
