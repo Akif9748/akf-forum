@@ -21,7 +21,7 @@ And, you can learn informations about API in `APIDOCS.md`.
 - `/errors/error` will change, better error page.
 - Redirect query.
 - middleware for timeouts
-
+- DELETED USERS: USERLIST
 ## Roadmap
 - [x] User
   - [x] Login
