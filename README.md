@@ -6,7 +6,7 @@ A Node.js based forum software.
 ## Installation
 - Clone this repo. Or download it.
 - Write `npm i` to install **dependencies**.
-- Write `npm restart` for **reset database**, and `npm start` for run it. 
+- Write `node reset` for **reset database**, and `npm start` for run it. 
 - Note, the reset database is important!
 
 ## API
