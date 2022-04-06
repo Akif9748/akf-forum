@@ -17,8 +17,7 @@ app.use(require("../middlewares/login"));
 
 
 app.post("/", async (req, res) => {
-    if (req.ratelimit)
-        return error(res, 429, "Wait until " + new Date(req.timeout.until).toLocaleTimeString("tr") + ", you are too quick for send.")
+ //   if (req.ratelimit) return error(res, 429, "Wait until " + new Date(req.timeout.until).toLocaleTimeString("tr") + ", you are too quick for send.")
 
     const thread = await new Thread().getById(req.body.threadID);
     if (thread) {
@@ -27,8 +26,8 @@ app.post("/", async (req, res) => {
         thread.push(message.id);
         thread.write();
 
-        req.timeout.until += 1000 * 30;
-        await req.timeout.save()
+       // req.timeout.until += 1000 * 30;
+      //  await req.timeout.save()
 
         res.redirect('/threads/' + req.body.threadID);
 
