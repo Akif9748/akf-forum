@@ -18,10 +18,10 @@ And, you can learn informations about API in `APIDOCS.md`.
 * [Camroku](https://github.com/Camroku) - Made stylesheets
 
 ## To Do (Backend, bug fixes) 
-- Better error codes, example 400 for bad request
 - `/errors/error` will change, better error page.
 - Redirect query.
 - middleware for timeouts
+
 ## Roadmap
 - [x] User
   - [x] Login
@@ -48,11 +48,7 @@ And, you can learn informations about API in `APIDOCS.md`.
   - [ ] Multiple theme support 
   - [ ] Search 
   - [x] New Thread theme, better render for messages
-<<<<<<< HEAD
   - [ ] Sending message etc. Will turn api model
-=======
-  - [ ] Sending message etc. will turn api model
->>>>>>> d2f644f6306f78b2888c933f90bf3c8e1c10b868
 - [ ] API
   - [x] Other client for forum via API    
   - [ ] Deleting message

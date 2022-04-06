@@ -18,7 +18,7 @@ app.post("/", async (req, res) => {
         const user = await SecretModel.findOne({ username });
 
         if (user)
-            error(res, 404, `We have got an user named ${username}!`)
+            error(res, 400, `We have got an user named ${username}!`)
 
         else {
 
