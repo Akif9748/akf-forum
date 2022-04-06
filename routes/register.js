@@ -1,5 +1,5 @@
 const { User } = require("../classes");
-const db = require("quick.db")
+const { SecretModel } = require("../models");
 
 const { Router } = require("express")
 const error = require("../errors/error")
@@ -8,26 +8,29 @@ const app = Router();
 
 app.get("/", (req, res) => res.render("register"));
 
-app.post("/", (req, res) => {
-    req.session.loggedin = false;
-    req.session.username = null;
+app.post("/", async (req, res) => {
     req.session.userid = null;
-    const { username = null, password = null } = req.body;
 
+
+  let { username = null, password = null, avatar } = req.body;
 
     if (username && password) {
-        const user = db.get("secret." + username)
+        const user = await SecretModel.findOne({ username });
 
         if (user)
             error(res, 404, `We have got an user named ${username}!`)
 
         else {
-            const user2 = new User(req.body.username, req.body.avatar ?? null).takeId()
-            db.set("secret." + username, { id: user2.id, key: password })
-            req.session.loggedin = true;
-            req.session.username = username;
+
+            if (!avatar) avatar ="/images/guest.png";
+            
+            const user2 = await new User(req.body.username, avatar).takeId();
+
+            await SecretModel.create({ username, password, id: user2.id })
             req.session.userid = user2.id;
-            user2.write()
+
+            user2.write();
+
             res.redirect('/');
         }
 

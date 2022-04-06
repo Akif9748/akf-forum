@@ -1,9 +1,9 @@
-const db = require("quick.db")
+const { UserModel } = require("../models");
 
 module.exports = class User {
 
 
-    constructor(name = "guest", avatar = "/images/guest.png", time = new Date().getTime(), admin = false, deleted = false) {
+    constructor(name = "guest", avatar = "/images/guest.png", time = Date.now(), admin = false, deleted = false) {
 
         this.name = name;
         this.avatar = avatar;
@@ -13,26 +13,12 @@ module.exports = class User {
 
     }
 
-    getId(id = this.id) {
-        const user = db.get("users").find(u => u.id == id);
-        if (!user) return null;
+    async getById(id = this.id) {
         this.id = Number(id);
-        const { name = "guest", avatar = "/images/guest.png", time = new Date().getTime(), admin = false, deleted = false } = user;
-        this.name = name;
-        this.avatar = avatar;
-        this.time = time;
-        this.admin = admin;
-        this.deleted = deleted;
-        return this ;
-    
-    }
-
-    getName(name1 = this.name) {
-
-        const user = db.get("users").find(u => u.name == name1);
+        const user = await UserModel.findOne({ id });
         if (!user) return null;
-        this.id = Number(user.id);
-        const { name = "guest", avatar = "/images/guest.png", time = new Date().getTime(), admin = false, deleted = false } = user;
+
+        const { name = "guest", avatar = "/images/guest.png", time = Date.now(), admin = false, deleted = false } = user;
         this.name = name;
         this.avatar = avatar;
         this.time = time;
@@ -41,16 +27,36 @@ module.exports = class User {
         return this;
 
     }
-     takeId() {
-        let id = db.get("users");
-        this.id = id ? id.length : 0;
-        return this
+
+    async getByName(Name = this.name) {
+          
+        const user = await UserModel.findOne({ name: Name });
+        if (!user) return null;
+
+        const { name = "guest", avatar = "/images/guest.png", time = Date.now(), admin = false, deleted = false } = user;
+        this.name = name;
+        this.avatar = avatar;
+        this.time = time;
+        this.admin = admin;
+        this.deleted = deleted;
+        return this;
+
     }
 
-    write(id = this.id) {
-
-        db.set("users." + id, this)
+    async takeId() {
+        this.id = await UserModel.count({}) || 0;
+        return this;
     }
+
+    async write(id = this.id) {
+        const writing = await UserModel.findOneAndUpdate({ id }, this);
+
+        if (!writing)
+            await UserModel.create(this);
+
+        return this;
+    }
+
     getLink(id = this.id) {
         return "/users/" + id;
     }

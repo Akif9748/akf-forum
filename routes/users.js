@@ -1,30 +1,30 @@
-const { User } = require("../classes");
-const db = require("quick.db")
-
-const { Router } = require("express")
-const error = require("../errors/error")
-
+const { Router } = require("express");
 const app = Router();
 
-app.get("/", (req, res) => {
-    const user = new User().getId(req.session.userid)
-    const users = db.get("users").slice(0);
+const error = require("../errors/error");
+
+const { User } = require("../classes");
+const { UserModel, MessageModel, ThreadModel } = require("../models");
+
+app.get("/", async (req, res) => {
+    const user = req.user
+    const users = await UserModel.find({});
 
     const links = users.filter(user => !user.deleted).map(user => "/users/" + user.id);
     return res.render("users", { users, links, user })
 
 });
 
-app.get("/:id", (req, res) => {
-    const user = new User().getId(req.session.userid)
+app.get("/:id", async (req, res) => {
+    const user = req.user
     const { id = null } = req.params;
-    const member = new User().getId(req.params.id);
+    const member = await new User().getById(req.params.id);
 
 
     if (member && (user?.admin || !member.deleted)) {
-        const message = db.get("messages").filter(message => message.author.id === Number(id)).length
-        const thread = db.get("threads").filter(thread => thread.author.id === Number(id)).length
 
+        const message = await MessageModel.count({ authorID: id });
+        const thread = await ThreadModel.count({ authorID: id });
         const counts = { message, thread }
         res.render("user", { user, member, counts })
     }
@@ -35,18 +35,19 @@ app.get("/:id", (req, res) => {
 app.use(require("../middlewares/login"));
 
 
-app.post("/:id/delete/", (req, res) => {
-    const user = new User().getId(req.session.userid);
+app.post("/:id/delete/", async (req, res) => {
+    const user = req.user;
     if (!user?.admin)
         return error(res, 403, "You have not got permission for this.");
 
-    const id = req.url.slice(9 + 3)
-    const member = new User().getId(id);
+    const { id = null } = req.params;
+    const member = await new User().getById(id);
+
     if (!member || member.deleted) return error(res, 404, "We have not got any user declared as this id.");
- 
+
     member.deleted = true;
     member.write();
-    
+
     res.redirect("/admin");
 });
 

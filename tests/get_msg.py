@@ -1,6 +1,6 @@
 import requests
 
-# Headers for login to Akf-forum 
+# Headers for login to Akf-forum
 headers = {
     "username": "testUser",
     "password": "testPassword"
@@ -12,39 +12,24 @@ r = requests.get("http://localhost:3000/api/messages/1/", headers=headers)
 print(r.json())
 
 example_response = {
-    "status": 200,
-    "result":
-    {  # content of message
-        "content": "a",
-        # author of message
-        "author": {
-            "name": "ForumcuCocuk",
-            "avatar": "/images/guest.png",
-            "time": 1647177723873,
-            "admin": True,
-            "id": 1
+    'status': 200,
+    'result': {
+        'authorID': 0,
+        'content': 'a',
+        'author': {
+            'name': 'Akif9748',
+            'avatar': 'https://www.technopat.net/sosyal/data/avatars/o/298/298223.jpg?1644694020',
+            'time': 1649189944864,
+            'admin': False,
+            'deleted': False,
+            'id': 0
         },
-        # UNIX Timestamp of message
-        "time": 1647178873587,
-        # thread information of message
-        "thread": {
-            "author": {
-                "name": "ForumcuCocuk",
-                "avatar": "/images/guest.png",
-                "time": 1647177723873,
-                "admin": True,
-                "id": 1
-            },
-            "title": "My",
-            "messages": [0],  # ids of messages
-            "time": 1647178870047,
-            "deleted": False,
-            "id": 0
-        },
-        # Other informations about message
-        "deleted": False,
-        "edited": False,
-        "react": {},
-        "id": 1
+        'time': 1649189950166,
+        'threadID': 0,
+        'deleted': False,
+        'edited': False,
+        # Reactions: {userid: isLike (Bool)}
+        'react': {'0': True},
+        'id': 0
     }
 }

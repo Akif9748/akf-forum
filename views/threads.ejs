@@ -12,9 +12,8 @@
             <ul>
                 <% threads.forEach(thread=>{ %>
                     <li>
-                        <h1><a href=<%=links[threads.indexOf(thread)] %> > <%= thread.title %> by <%= thread.author.name
-                                        %></a>
-                        </h1>
+                        <h1 style="display: inline;"> <a href=<%= thread.getLink() %> ><%= thread.title %></a></h1> 
+                        <h3 style="display: inline;"> | By <%= thread.author.name  %></h3>
                     </li>
                     <% }); %>
             </ul>

@@ -19,8 +19,6 @@ And, you can learn informations about API in `APIDOCS.md`.
 
 ## To Do (Backend, bug fixes) 
 - Better error codes, example 400 for bad request
-- Database change. (To MongoDB) 
-- Better DB writing. Example, not `message.author.id`, `messsage.authorID`
 - `/errors/error` will change, better error page.
 
 ## Roadmap
@@ -48,12 +46,12 @@ And, you can learn informations about API in `APIDOCS.md`.
   - [ ] Multiple theme support 
   - [ ] Search 
   - [x] New Thread theme, better render for messages
-  - [ ] sending message etc. Will turn api model
+  - [ ] Sending message etc. Will turn api model
 - [ ] API
   - [x] Other client for forum via API    
   - [ ] Deleting message
   - [x] Sending message
-  - [ ] Open thread
+  - [x] Open thread
   - [x] Get Thread info
 ## Image:
 ![image](https://user-images.githubusercontent.com/70021050/160255959-ef216cba-1348-4d4b-9347-fe67e21348e7.png)

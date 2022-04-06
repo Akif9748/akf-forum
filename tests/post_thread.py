@@ -9,10 +9,10 @@ headers = {
 # Body for message parameters
 body = {
     "content": "This message sent via API",
-    "threadID": 0
+    "title": "This thread opened by API"
 }
 
-r = requests.post("http://localhost:3000/api/messages/",
+r = requests.post("http://localhost:3000/api/threads/",
                   headers=headers, data=body)
 
 print(r.json())

@@ -7,23 +7,23 @@ const app = Router();
 
 app.use(require("../middlewares/login"));
 
-app.get("/", (req, res) => {
-    const user = new User().getId(req.session.userid)
+app.get("/", async (req, res) => {
+    const user = req.user;
 
     if (!user.admin) return error(res, 403, "You have not got permissions for view to this page.");
 
     res.render("admin", { user, user2: false })
 });
 
-app.post("/", (req, res) => {
+app.post("/", async (req, res) => {
 
-    const user = new User().getId(req.session.userid)
+    const user = req.user;
 
     if (!user.admin) return error(res, 403, "You have not got permissions for view to this page.");
-    const user2 = new User().getId(req.body.userid)
+    const user2 = await new User().getById(req.body.userid)
 
-    if (!user2) 
-    return error(res, 404, "We have not got this user in all of the forum. Vesselam.");
+    if (!user2)
+        return error(res, 404, "We have not got this user in all of the forum. Vesselam.");
 
     else {
         user2.admin = true;

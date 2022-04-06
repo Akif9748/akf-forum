@@ -17,6 +17,7 @@
     </h2>
 <hr>
     <% messages.forEach(message=>{ %>
+      <% if (message){ %>
 
       <div id="message-<%= message.id %>" style="border: 2px solid #444444; padding: 10px;">
 
@@ -57,7 +58,13 @@
 
       </div>
 
-      <br>
+      <% } else { %>
+        <div id="deleted-message" style="border: 2px solid #444444; padding: 10px;">
+          <h1>DELETED MESSAGE</h1>
+        </div>
+        <% } %>
+        <br>
+
       <% }); %>
 
         <hr>

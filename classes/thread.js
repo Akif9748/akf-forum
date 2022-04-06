@@ -1,14 +1,14 @@
-const db = require("quick.db")
 const User = require("./user")
 
-
+const { ThreadModel } = require("../models");
 
 
 module.exports = class Thread {
 
-    constructor(title, author = new User(), messages = [], time = new Date().getTime(),deleted = false) {
+    constructor(title, author = User, messages = [], time = Date.now(), deleted = false) {
 
         this.author = author;
+        this.authorID = author?.id;
         this.title = title;
         this.messages = messages;
         this.time = time;
@@ -16,38 +16,44 @@ module.exports = class Thread {
 
     }
 
-    getId(id = this.id) {
-        const thread = db.get("threads").find(t => t.id == id);
-        if (!thread) return null;
+    async getById(id = this.id) {
         this.id = Number(id);
-        const { title, author, messages = [], time = new Date().getTime(), deleted = false } = thread;
+
+    
+        const thread = await ThreadModel.findOne({ id });
+        if (!thread) return null;
+
+        const { title, authorID, author, messages = [], time = Date.now(), deleted = false } = thread;
         this.title = title
-        this.author = author
+        this.author = author;
+        this.authorID = authorID;
         this.messages = messages;
         this.time = time;
         this.deleted = deleted;
 
         return this;
     }
-    takeId(){
 
-
-        this.id = db.get("threads").length;
-        return this
-    }
-
-    push(message){
-        this.messages.push(message)
+    push(messageID) {
+        this.messages.push(messageID)
         return this;
     }
-    write(id = this.id) {
-
-        db.set("threads."+id, this)
+    
+    async takeId() {
+        this.id = await ThreadModel.count({}) || 0;
         return this;
     }
+    async write(id = this.id) {
+        const writing = await ThreadModel.findOneAndUpdate({ id }, this);
+
+        if (!writing)
+            await ThreadModel.create(this);
+
+        return this;
+    }
+
+
     getLink(id = this.id) {
         return "/threads/" + id;
-
-
     }
 }

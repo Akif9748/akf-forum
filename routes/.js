@@ -1,17 +1,14 @@
-const { User } = require("../classes");
-const { get } = require("quick.db")
-
+const { UserModel, ThreadModel, MessageModel } = require("../models")
 const { Router } = require("express");
 const app = Router();
 
-app.get("/", (req, res) => {
-
+app.get("/", async (req, res) => {
     const
         mem = process.memoryUsage().heapUsed / Math.pow(2, 20),
-        users = get("users").length,
-        threads = get("threads").length,
-        messages = get("messages").length,
-        user = new User().getId(req.session.userid);
+        users = await UserModel.count({}),
+        threads = await ThreadModel.count({}),
+        messages = await MessageModel.count({}),
+        user = req.user;
 
     res.render("index", { mem, user, users, threads, messages })
 
