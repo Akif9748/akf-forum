@@ -8,7 +8,7 @@ A forum software written in Node.js.
 - Run `npm i` to install **dependencies**.
 - Run `node reset` to **reset the database**, and `npm start` for run it. 
 
-**Note:** the reseting the database is important!
+**Note:** Reseting the database is important!
 
 ## API
 Akf-forum has got an API for other clients etc. You can test api with run apitest.py.
