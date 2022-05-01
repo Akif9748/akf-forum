@@ -22,39 +22,55 @@ And, you can learn informations about API in `APIDOCS.md`.
 - Redirect query.
 - middleware for timeouts
 - DELETED USERS: USERLIST
-## Roadmap
-- [x] User
-  - [x] Login
-  - [x] Register
-  - [x] Logout
-  - [x] Admin
-  - [x] Message count
-  - [x] Delete User
-  - [ ] Singature & About me
-  - [ ] Edit user
-  - [ ] IP BAN
-- [ ] Messages
-  - [ ] Ratelimit for sending message
-  - [x] Send message
-  - [x] Delete message
-  - [ ] Edit message
-  - [x] React message
-- [ ] Threads
-  - [x] Open it!
-  - [ ] Edit it!
-  - [ ] Delete it!
-- [ ] Other
-  - [x] Footer of the site
-  - [ ] Multiple theme support 
-  - [ ] Search 
-  - [x] New Thread theme, better render for messages
-  - [ ] Sending message etc. Will turn api model
-- [ ] API
-  - [x] Other client for forum via API    
-  - [ ] Deleting message
-  - [x] Sending message
-  - [x] Open thread
-  - [x] Get Thread info
-## Image:
-![image](https://user-images.githubusercontent.com/70021050/160255959-ef216cba-1348-4d4b-9347-fe67e21348e7.png)
 
+## Roadmap
+### User
+| To do | Is done? | Priority |
+| ----- | -------- | -------- |
+| Login | Yes | HIGH |
+| Register | Yes | HIGH |
+| Logout | Yes | HIGH |
+| Admin | Yes | HIGH |
+| Message count | Yes | MEDIUM |
+| Delete user | Yes | HIGH |
+| Signature | No | LOW |
+| About me | No | LOW |
+| Edit user | No | HIGH |
+| IP ban | No | HIGH |
+
+### Messages
+| To do | Is done? | Priority |
+| ----- | -------- | -------- |
+| Ratelimit | No | HIGH |
+| Send | Yes | HIGH |
+| Delete | Yes | HIGH |
+| Edit | No | HIGH |
+| React | Yes | MEDIUM |
+
+### Threads
+| To do | Is done? | Priority |
+| ----- | -------- | -------- |
+| Create | Yes | HIGH |
+| Edit | No | HIGH |
+| Delete | No | HIGH |
+
+### API
+| To do | Is done? | Priority |
+| ----- | -------- | -------- |
+| Other clients for forum via API | Yes | LOW |
+| Delete message | No | MEDIUM |
+| Send message | Yes | MEDIUM |
+| Create thread | Yes | MEDIUM |
+| Get info about thread | Yes | MEDIUM |
+
+### Other
+| To do | Is done? | Priority |
+| ----- | -------- | -------- |
+| Footer | Yes | LOW |
+| Multi-theme support | No | MEDIUM |
+| Search | No | MEDIUM |
+| Better view | Yes | MEDIUM |
+| Sending message etc. will return API model | No | MEDIUM |
+
+## Screenshot
+![akf-forum](https://user-images.githubusercontent.com/70021050/160255959-ef216cba-1348-4d4b-9347-fe67e21348e7.png)
