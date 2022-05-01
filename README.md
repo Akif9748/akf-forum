@@ -1,23 +1,24 @@
 # akf-forum
 <img src="https://raw.githubusercontent.com/Akif9748/akf-forum/main/public/images/logo.jpg" align="right" width="300px" />
 
-A Node.js based forum software.
+A forum software written in Node.js.
 
 ## Installation
-- Clone this repo. Or download it.
-- Write `npm i` to install **dependencies**.
-- Write `node reset` for **reset database**, and `npm start` for run it. 
-- Note, the reset database is important!
+- Clone or download this repo.
+- Run `npm i` to install **dependencies**.
+- Run `node reset` to **reset the database**, and `npm start` for run it. 
+
+**Note:** the reseting the database is important!
 
 ## API
 Akf-forum has got an API for other clients etc. You can test api with run apitest.py.
-And, you can learn informations about API in `APIDOCS.md`.
+And, you can learn about API in `APIDOCS.md`.
 
 ## Credits
-* [Akif9748](https://github.com/Akif9748) - Project owner, main developer
+* [Akif9748](https://github.com/Akif9748) - Project mainteiner, main developer
 * [Camroku](https://github.com/Camroku) - Made stylesheets
 
-## To Do (Backend, bug fixes) 
+## To do (Backend, bug fixes) 
 - `/errors/error` will change, better error page.
 - Redirect query.
 - middleware for timeouts
