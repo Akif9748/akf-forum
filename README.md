@@ -27,50 +27,50 @@ And, you can learn informations about API in `APIDOCS.md`.
 ### User
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
-| Login | Yes | HIGH |
-| Register | Yes | HIGH |
-| Logout | Yes | HIGH |
-| Admin | Yes | HIGH |
-| Message count | Yes | MEDIUM |
-| Delete user | Yes | HIGH |
-| Signature | No | LOW |
-| About me | No | LOW |
-| Edit user | No | HIGH |
-| IP ban | No | HIGH |
+| Login | 🟢 | HIGH |
+| Register | 🟢 | HIGH |
+| Logout | 🟢 | HIGH |
+| Admin | 🟢 | HIGH |
+| Message count | 🟢 | MEDIUM |
+| Delete user | 🟢 | HIGH |
+| Signature | 🔴 | LOW |
+| About me | 🔴 | LOW |
+| Edit user | 🔴 | HIGH |
+| IP ban | 🔴 | HIGH |
 
 ### Messages
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
-| Ratelimit | No | HIGH |
-| Send | Yes | HIGH |
-| Delete | Yes | HIGH |
-| Edit | No | HIGH |
-| React | Yes | MEDIUM |
+| Ratelimit | 🔴 | HIGH |
+| Send | 🟢 | HIGH |
+| Delete | 🟢 | HIGH |
+| Edit | 🔴 | HIGH |
+| React | 🟢 | MEDIUM |
 
 ### Threads
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
-| Create | Yes | HIGH |
-| Edit | No | HIGH |
-| Delete | No | HIGH |
+| Create | 🟢 | HIGH |
+| Edit | 🔴 | HIGH |
+| Delete | 🔴 | HIGH |
 
 ### API
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
-| Other clients for forum via API | Yes | LOW |
-| Delete message | No | MEDIUM |
-| Send message | Yes | MEDIUM |
-| Create thread | Yes | MEDIUM |
-| Get info about thread | Yes | MEDIUM |
+| Other clients for forum via API | 🟢 | LOW |
+| Delete message | 🔴 | MEDIUM |
+| Send message | 🟢 | MEDIUM |
+| Create thread | 🟢 | MEDIUM |
+| Get info about thread | 🟢 | MEDIUM |
 
 ### Other
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
-| Footer | Yes | LOW |
-| Multi-theme support | No | MEDIUM |
-| Search | No | MEDIUM |
-| Better view | Yes | MEDIUM |
-| Sending message etc. will return API model | No | MEDIUM |
+| Footer | 🟢 | LOW |
+| Multi-theme support | 🔴 | MEDIUM |
+| Search | 🔴 | MEDIUM |
+| Better view | 🟢 | MEDIUM |
+| Sending message etc. will return API model | 🔴 | MEDIUM |
 
 ## Screenshot
 ![akf-forum](https://user-images.githubusercontent.com/70021050/160255959-ef216cba-1348-4d4b-9347-fe67e21348e7.png)
