@@ -22,8 +22,8 @@ And, you can learn about API in `util/APIDOCS.md`.
 ## To do (Backend, bug fixes) 
 - `/errors/error` will change, better error page.
 - Redirect query.
-- Will fix API
 - message.js/12, so, admin perms,(req.user?.admin || !thread.deleted), and api in message
+- the forum will only use api path...
 ## Roadmap
 ### User
 | To do | Is done? | Priority |
@@ -34,10 +34,9 @@ And, you can learn about API in `util/APIDOCS.md`.
 | Admin | 🟢 | HIGH |
 | Message count | 🟢 | MEDIUM |
 | Delete user | 🟢 | HIGH |
-| Signature | 🔴 | LOW |
 | About me | 🔴 | LOW |
 | Edit user | 🔴 | HIGH |
-| IP ban | 🔴 | HIGH |
+| IP ban | 🔴 | MEDIUM |
 
 ### Messages
 | To do | Is done? | Priority |
@@ -51,6 +50,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 ### Threads
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
+| Ratelimit | 🟢 | HIGH |
 | Create | 🟢 | HIGH |
 | Delete | 🟢 | HIGH |
 | Edit | 🔴 | HIGH |
@@ -62,16 +62,18 @@ And, you can learn about API in `util/APIDOCS.md`.
 | Send message | 🟢 | MEDIUM |
 | Create thread | 🟢 | MEDIUM |
 | Get info about thread | 🟢 | MEDIUM |
-| Delete message | 🔴 | MEDIUM |
+| Delete message & thread | 🔴 | MEDIUM |
+| Edit message & thread | 🔴 | MEDIUM |
+
 
 ### Other
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
-| Footer | 🟢 | LOW |
+| Footer | 🟡 | LOW |
 | Multi-theme support | 🔴 | LOW |
 | Search | 🔴 | MEDIUM |
 | Better view | 🟢 | MEDIUM |
-| Sending message etc. will use fetch API | 🔴 | MEDIUM |
+| Sending message etc. will use fetch API | 🔴 | HIGH |
 
 ## Screenshot
 ![akf-forum](https://user-images.githubusercontent.com/70021050/160255959-ef216cba-1348-4d4b-9347-fe67e21348e7.png)
