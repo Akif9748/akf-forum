@@ -1,5 +1,6 @@
 const { ThreadModel, MessageModel } = require("../models");
 const error = require("../errors/error")
+const rateLimit = require('express-rate-limit')
 
 const { Router } = require("express");
 
@@ -15,8 +16,9 @@ app.get("/:id", async (req, res) => {
 
 app.use(require("../middlewares/login"));
 
-
-app.post("/", async (req, res) => {
+app.post("/", rateLimit({
+    windowMs: 60_000, max: 1, standardHeaders: true, legacyHeaders: false
+}), async (req, res) => {
 
     const thread = await ThreadModel.get(req.body.threadID);
     if (thread) {
@@ -42,7 +44,7 @@ app.post("/:id/delete", async (req, res) => {
     await message.save();
 
 
-    res.status(200).redirect( "/threads/" + message.threadID);
+    res.status(200).redirect("/threads/" + message.threadID);
 
 })
 app.post("/:id/react", async (req, res) => {

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const schema = new mongoose.Schema({
-    id: { type: String, unique: true },
+    id: { type: String },
 
     name: String,
     avatar: { type: String, default: "/images/guest.png" },

@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const app = Router();
+const rateLimit = require('express-rate-limit')
 
 const error = require("../errors/error")
 const { ThreadModel, MessageModel } = require("../models")
@@ -47,7 +48,9 @@ app.get("/:id", async (req, res) => {
 app.use(require("../middlewares/login"));
 
 
-app.post("/", async (req, res) => {
+app.post("/", rateLimit({
+    windowMs: 10*60_000, max: 1, standardHeaders: true, legacyHeaders: false
+}), async (req, res) => {
 
     const { title = null, content = null } = req.body;
 

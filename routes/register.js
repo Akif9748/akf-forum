@@ -1,6 +1,7 @@
 const { UserModel, SecretModel } = require("../models");
 const { Router } = require("express")
 const error = require("../errors/error")
+const bcrypt = require("bcrypt");
 
 const app = Router();
 
@@ -24,6 +25,9 @@ app.post("/", async (req, res) => {
             const user2 = new UserModel({ name: req.body.username, avatar })
             await user2.takeId()
             await user2.save();
+
+            const salt = await bcrypt.genSalt(10);
+            password = await bcrypt.hash(password, salt);
             await SecretModel.create({ username, password, id: user2.id })
             req.session.userid = user2.id;
 

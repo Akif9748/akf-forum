@@ -6,9 +6,10 @@ A forum software written in Node.js.
 ## Installation
 - Clone or download this repo.
 - Run `npm i` to install **dependencies**.
-- Run `node util/reset` to **reset the database**, and `npm start` for run it. 
+- Run `npm start` for run it. 
 
-**Note:** Reseting the database is important!
+### Extra
+Run `node util/reset` to **reset the database**, and run `node util/admin` for give admin perms for first member.
 
 ## API
 Akf-forum has got an API for other clients etc. You can test api with run apitest.py.
@@ -21,7 +22,6 @@ And, you can learn about API in `util/APIDOCS.md`.
 ## To do (Backend, bug fixes) 
 - `/errors/error` will change, better error page.
 - Redirect query.
-- middleware for timeouts
 - Will fix API
 
 ## Roadmap
@@ -42,7 +42,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 ### Messages
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
-| Ratelimit | 🔴 | HIGH |
+| Ratelimit | 🟢 | HIGH |
 | Send | 🟢 | HIGH |
 | Delete | 🟢 | HIGH |
 | Edit | 🔴 | HIGH |

@@ -12,7 +12,7 @@
       <%= thread.title %>
     </h1>
 
-    <h2>By <a style="color: #bcbcbc;" href=<%="/users/" + thread.author.id %>> <%= thread.author.name %></a>
+    <h2>By <a href=<%="/users/" + thread.author.id %>> <%= thread.author.name %></a>
       <img class="yuvarlak" src=<%= thread.author.avatar %> alt=<%= thread.author.name %>>
     </h2>
 <hr>
@@ -27,7 +27,7 @@
 
         <h2>
           <img class="yuvarlak" src=<%=message.author.avatar %> alt=<%= message.author.name %>>
-            <a style="color: #bcbcbc;" href=<%="/users/" + message.author.id %>> <%= message.author.name %></a>:
+            <a href=<%="/users/" + message.author.id %>> <%= message.author.name %></a>:
         </h2>
 
         <h2>
