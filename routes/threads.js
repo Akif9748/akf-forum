@@ -33,7 +33,7 @@ app.get("/:id", async (req, res) => {
 
         const messages = await Promise.all(thread.messages.map(async id => {
             const message = await MessageModel.get(id)
-            return (message.deleted || !message) ? null : message;
+            return (user.admin || !message?.deleted) ? message : null;
         }));
 
         res.render("thread", { thread, messages, user })

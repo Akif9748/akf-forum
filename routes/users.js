@@ -4,9 +4,8 @@ const app = Router();
 const error = require("../errors/error");
 const { UserModel, MessageModel, ThreadModel } = require("../models");
 
-app.get("/", async (req, res) => {
-    const user = req.user
-    const users = await UserModel.find({ deleted: false });
+app.get("/", async ({ user }, res) => {
+    const users = await UserModel.find(user.admin ? {} : { deleted: false });
     return res.render("users", { users, user })
 
 });
@@ -21,7 +20,7 @@ app.get("/:id", async (req, res) => {
 
         const message = await MessageModel.count({ authorID: id });
         const thread = await ThreadModel.count({ authorID: id });
-        res.render("user", { user, member, counts:{ message, thread } })
+        res.render("user", { user, member, counts: { message, thread } })
     }
     else error(res, 404, "We have not got this user.");
 

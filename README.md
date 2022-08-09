@@ -22,9 +22,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 - `/errors/error` will change, better error page.
 - Redirect query.
 - middleware for timeouts
-- DELETED USERS: USERLIST
 - Will fix API
-- if admin you van see deleted messages.
 
 ## Roadmap
 ### User
