@@ -45,33 +45,33 @@ And, you can learn about API in `util/APIDOCS.md`.
 | Ratelimit | 🟢 | HIGH |
 | Send | 🟢 | HIGH |
 | Delete | 🟢 | HIGH |
-| Edit | 🔴 | HIGH |
 | React | 🟢 | MEDIUM |
+| Edit | 🔴 | HIGH |
 
 ### Threads
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
 | Create | 🟢 | HIGH |
+| Delete | 🟢 | HIGH |
 | Edit | 🔴 | HIGH |
-| Delete | 🔴 | HIGH |
 
 ### API
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
 | Other clients for forum via API | 🟢 | LOW |
-| Delete message | 🔴 | MEDIUM |
 | Send message | 🟢 | MEDIUM |
 | Create thread | 🟢 | MEDIUM |
 | Get info about thread | 🟢 | MEDIUM |
+| Delete message | 🔴 | MEDIUM |
 
 ### Other
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
 | Footer | 🟢 | LOW |
-| Multi-theme support | 🔴 | MEDIUM |
+| Multi-theme support | 🔴 | LOW |
 | Search | 🔴 | MEDIUM |
 | Better view | 🟢 | MEDIUM |
-| Sending message etc. will return API model | 🔴 | MEDIUM |
+| Sending message etc. will use fetch API | 🔴 | MEDIUM |
 
 ## Screenshot
 ![akf-forum](https://user-images.githubusercontent.com/70021050/160255959-ef216cba-1348-4d4b-9347-fe67e21348e7.png)
