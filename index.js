@@ -1,13 +1,14 @@
 const error = require("./errors/error.js"),
         session = require('express-session'),
         bodyParser = require('body-parser'),
-        port = process.env.PORT ?? 3000,
+        port = process.env.PORT || 3000,
         mongoose = require("mongoose"),
         express = require('express'),
         fs = require("fs"),
         app = express();
 
-mongoose.connect(process.env.MONGO_DB_URL ?? "mongodb://localhost:27017/akf-forum", () => console.log("Database is connected"));
+require("dotenv").config();
+mongoose.connect(process.env.MONGO_DB_URL || "mongodb://localhost:27017/akf-forum", () => console.log("Database is connected"));
 
 app.use(session({ secret: 'secret', resave: true, saveUninitialized: true }));
 app.use(bodyParser.urlencoded({ extended: true }));

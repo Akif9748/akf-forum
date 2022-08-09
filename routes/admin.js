@@ -1,4 +1,4 @@
-const { User } = require("../classes");
+const { UserModel } = require("../models")
 
 const { Router } = require("express")
 const error = require("../errors/error")
@@ -20,14 +20,14 @@ app.post("/", async (req, res) => {
     const user = req.user;
 
     if (!user.admin) return error(res, 403, "You have not got permissions for view to this page.");
-    const user2 = await new User().getById(req.body.userid)
+    const user2 = await UserModel.get(req.body.userid);
 
     if (!user2)
         return error(res, 404, "We have not got this user in all of the forum. Vesselam.");
 
     else {
         user2.admin = true;
-        user2.write()
+        await user2.save()
     }
 
     res.render("admin", { user, user2 })

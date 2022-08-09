@@ -1,7 +1,10 @@
 const { Router } = require("express")
 const app = Router();
 
-
+/**
+ * @deprecated 
+ * for less time
+ */
 const { request, response } = require("express");
 const { SecretModel } = require("../../models")
 const ApiResponse = require("./ApiResponse")
@@ -31,7 +34,7 @@ const ApiResponse = require("./ApiResponse")
  * @param {request} req 
  * @param {response} res 
  */
-
+/*
 app.use(async (req, res, next) => {
     const error = (status, error) =>
         res.status(status).json(new ApiResponse(status, { error }))
@@ -54,7 +57,7 @@ app.use(async (req, res, next) => {
 app.use("/messages", require("./routes/message"))
 app.use("/users", require("./routes/user"))
 app.use("/threads", require("./routes/threads"))
-
+*/
 app.all("*", (req, res) => res.status(400).json(new ApiResponse(400, { error: "Bad request" })));
 
 module.exports = app;

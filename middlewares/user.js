@@ -1,6 +1,6 @@
-const { User } = require("../classes");
+const { UserModel } = require("../models");
 
 module.exports = async (req, res, next) => {
-    req.user = await new User().getById(req.session.userid);
+    req.user = await UserModel.get(req.session.userid);
     next();
 }   

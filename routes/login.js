@@ -1,6 +1,5 @@
-const { User } = require("../classes");
+const { UserModel, SecretModel } = require("../models");
 const { Router } = require("express");
-const { SecretModel } = require("../models");
 const error = require("../errors/error");
 const app = Router();
 
@@ -15,7 +14,7 @@ app.post("/", async (req, res) => {
         const user = await SecretModel.findOne({ username });
         if (user) {
             if (user.password !== password) return error(res, 403, 'Incorrect Password!')
-            const member = await new User().getByName(username)
+            const member = await UserModel.findOne({ name: username });
             if (!member || member.deleted) return error(res, 403, 'Incorrect Username and/or Password!')
 
             req.session.userid = user.id;

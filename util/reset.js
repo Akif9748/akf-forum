@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost:27017/akf-forum', () => console.log("Database is connected"));
+require("dotenv").config();
 
-const { SecretModel, UserModel, MessageModel, ThreadModel } = require("./models");
+mongoose.connect(process.env.MONGO_DB_URL, () => console.log("Database is connected"));
+
+const { SecretModel, UserModel, MessageModel, ThreadModel } = require("../models");
 (async () => {
 
     await UserModel.deleteMany({});

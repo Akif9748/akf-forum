@@ -12,7 +12,7 @@
             <ul>
                 <% users.forEach(user=>{ %>
                     <li>
-                        <h1><a href=<%=links[user.id] %> > <%= user.name %></a>
+                        <h1><a href=<%= user.getLink() %> > <%= user.name %></a>
                             <img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>>
                         </h1>
                     </li>

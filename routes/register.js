@@ -1,6 +1,4 @@
-const { User } = require("../classes");
-const { SecretModel } = require("../models");
-
+const { UserModel, SecretModel } = require("../models");
 const { Router } = require("express")
 const error = require("../errors/error")
 
@@ -12,7 +10,7 @@ app.post("/", async (req, res) => {
     req.session.userid = null;
 
 
-  let { username = null, password = null, avatar } = req.body;
+    let { username = null, password = null, avatar } = req.body;
 
     if (username && password) {
         const user = await SecretModel.findOne({ username });
@@ -22,14 +20,12 @@ app.post("/", async (req, res) => {
 
         else {
 
-            if (!avatar) avatar ="/images/guest.png";
-            
-            const user2 = await new User(req.body.username, avatar).takeId();
 
+            const user2 = new UserModel({ name: req.body.username, avatar })
+            await user2.takeId()
+            await user2.save();
             await SecretModel.create({ username, password, id: user2.id })
             req.session.userid = user2.id;
-
-            user2.write();
 
             res.redirect('/');
         }

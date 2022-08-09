@@ -1,10 +1,12 @@
 const { Schema, model } = require("mongoose")
 
-module.exports = model('secret', new Schema({
+const schema = new Schema({
 
     username: { type: String, unique: true },
     password: String,
-    id: { type: Number, unique: true }
+    id: { type:String, unique: true }
 
 
-}))
+});
+
+module.exports = model('secret', schema);

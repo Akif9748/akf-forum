@@ -33,8 +33,8 @@ app.post("/", async (req, res) => {
     const user = await new User().getByName(req.headers.username)
     const thread = await new Thread(title, user).takeId()
     const message = await new Message(content, user, thread.id).takeId()
-    thread.push(message.id).write();
-    await message.write();
+    thread.push(message.id).save();
+    await message.save();
 
     res.status(200).json(new ApiResponse(200, thread));
 

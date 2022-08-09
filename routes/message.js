@@ -1,4 +1,4 @@
-const { Thread, Message, User } = require("../classes");
+const { ThreadModel, MessageModel } = require("../models");
 const error = require("../errors/error")
 
 const { Router } = require("express");
@@ -6,7 +6,7 @@ const { Router } = require("express");
 const app = Router();
 
 app.get("/:id", async (req, res) => {
-    const message = await new Message().getById(req.params.id);
+    const message = await MessageModel.get(req.params.id);
 
     if (!message || message.deleted) return error(res, 404, "We have not got any message declared as this id.");
     res.redirect("/threads/" + message.threadID);
@@ -18,12 +18,11 @@ app.use(require("../middlewares/login"));
 
 app.post("/", async (req, res) => {
 
-    const thread = await new Thread().getById(req.body.threadID);
+    const thread = await ThreadModel.get(req.body.threadID);
     if (thread) {
-        const message = await new Message(req.body.content, req.user, thread.id).takeId()
-        await message.write();
-        thread.push(message.id);
-        thread.write();
+        const message = await new MessageModel({ content: req.body.content, author: req.user, threadID: thread.id }).takeId();
+        await message.save();
+        await thread.push(message.id).save();
 
         res.redirect('/threads/' + req.body.threadID);
 
@@ -34,29 +33,29 @@ app.post("/", async (req, res) => {
 });
 
 app.post("/:id/delete", async (req, res) => {
-    const message = await new Message().getById(req.params.id)
+    const message = await MessageModel.get(req.params.id);
     if (!message || message.deleted) return error(res, 404, "We have not got any message declared as this id.");
     const user = req.user;
     if (user.id != message.authorID && !user.admin)
         return error(res, 403, "You have not got permission for this.");
     message.deleted = true;
-    message.write();
+    await message.save();
 
 
-    res.status(200).redirect("/threads/" + message.threadID);
+    res.status(200).redirect( "/threads/" + message.threadID);
 
 })
 app.post("/:id/react", async (req, res) => {
-    const { id = null } = req.params;
     const info = req.body;
-    const message = await new Message().getById(id);
+    const message = await MessageModel.get(req.params.id);
     if (message) {
-        if (!(req.session.userid in message.react))
-            message.react[req.session.userid] = "like" in info;
-        else
+        if (req.user.id in message.react)
             delete message.react[req.session.userid];
+        else
+            message.react[req.session.userid] = "like" in info;
 
-        message.write();
+
+        await message.save();
         res.redirect("/threads/" + message.threadID);
     } else error(res, 404, "We have not got this Message for reacting.");
 

@@ -1,17 +1,34 @@
-const { Schema, model } = require("mongoose")
+const mongoose = require("mongoose")
+const UserModel = require("./User");
 
-module.exports = model('message', new Schema({
-    id: { type: Number, unique: true },
+const schema = new mongoose.Schema({
+    id: { type: String, unique: true },
 
-    authorID: Number,
-    threadID: Number,
-    author: Object,
-    
+    threadID: String,
+    author: UserModel.schema, // user-model
+
     content: String,
-    time: Number,
+    time: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
     edited: { type: Boolean, default: false },
-    messages: [Number],
-    react: Object
+    react: { type:Object, default: {} }
 
-}))
+})
+
+schema.virtual('authorID').get(function() { return this.author?.id; });
+
+schema.methods.takeId = async function () {
+    this.id = String(await model.count() || 0);
+    return this;
+}
+
+schema.methods.getLink = function (id = this.id) {
+    return "/messages/" + id;
+}
+
+const model = mongoose.model('message', schema);
+
+model.get = id => model.findOne({ id });
+
+module.exports = model;
+

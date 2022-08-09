@@ -6,13 +6,13 @@ A forum software written in Node.js.
 ## Installation
 - Clone or download this repo.
 - Run `npm i` to install **dependencies**.
-- Run `node reset` to **reset the database**, and `npm start` for run it. 
+- Run `node util/reset` to **reset the database**, and `npm start` for run it. 
 
 **Note:** Reseting the database is important!
 
 ## API
 Akf-forum has got an API for other clients etc. You can test api with run apitest.py.
-And, you can learn about API in `APIDOCS.md`.
+And, you can learn about API in `util/APIDOCS.md`.
 
 ## Credits
 * [Akif9748](https://github.com/Akif9748) - Project mainteiner, main developer
@@ -23,6 +23,8 @@ And, you can learn about API in `APIDOCS.md`.
 - Redirect query.
 - middleware for timeouts
 - DELETED USERS: USERLIST
+- Will fix API
+- if admin you van see deleted messages.
 
 ## Roadmap
 ### User

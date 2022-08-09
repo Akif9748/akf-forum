@@ -1,26 +1,24 @@
 const { Router } = require("express");
 const app = Router();
 
-const { Thread, Message, User } = require("../classes");
 const error = require("../errors/error")
-const { ThreadModel } = require("../models")
+const { ThreadModel, MessageModel } = require("../models")
 
 
 app.get("/", async (req, res) => {
 
     const user = req.user;
 
-    const threads = await Promise.all((await ThreadModel.find({}).limit(10))
-        .map(async threads => await new Thread().getById(threads.id)));
+    const threads = await ThreadModel.find({}).limit(10);
 
     return res.render("threads", { threads, user });
 });
 
 
-app.get("/open*", async (req, res) => {
+app.get("/create*", async (req, res) => {
 
     const user = req.user
-    res.render("openThread", { user })
+    res.render("createThread", { user })
 
 });
 
@@ -28,13 +26,13 @@ app.get("/:id", async (req, res) => {
 
     const { id } = req.params;
 
-    const thread = await new Thread().getById(id);
+    const thread = await ThreadModel.get(id);
 
     if (thread) {
         const user = req.user;
 
         const messages = await Promise.all(thread.messages.map(async id => {
-            const message = await new Message().getById(id)
+            const message = await MessageModel.get(id)
             return (message.deleted || !message) ? null : message;
         }));
 
@@ -54,13 +52,14 @@ app.post("/", async (req, res) => {
     const { title = null, content = null } = req.body;
 
     if (!title || !content) return error(res, 400, "Title and/or content is missing");
-    const user =  req.user
-    const thread = await new Thread(title, user).takeId()
-    const message = await new Message(content, user, thread.id).takeId()
+    const user = req.user
+    const thread = await new ThreadModel({ title, author: user }).takeId()
 
-    thread.push(message.id).write();
+    const message = await new MessageModel({ content, author: user, threadID: thread.id }).takeId()
 
-    message.write();
+    await thread.push(message.id).save();
+
+    await message.save();
 
     res.redirect('/threads/' + thread.id);
 })

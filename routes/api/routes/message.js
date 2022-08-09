@@ -31,8 +31,8 @@ app.post("/", async (req, res) => {
 
 
     const message = await new Message(content, await new User().getByName(req.headers.username), thread.id).takeId()
-    message.write();
-    thread.push(message.id).write();
+    message.save();
+    thread.push(message.id).save();
 
     res.status(200).json(new ApiResponse(200, message));
 
