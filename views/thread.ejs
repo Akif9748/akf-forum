@@ -11,10 +11,19 @@
     <h1 style="font-size: 35px;">
       <%= thread.title %>
     </h1>
-
-    <h2>By <a href=<%="/users/" + thread.author.id %>> <%= thread.author.name %></a>
+   
+    <h2 style="display:inline;">By <a href=<%="/users/" + thread.author.id %>> <%= thread.author.name %></a>
       <img class="yuvarlak" src=<%= thread.author.avatar %> alt=<%= thread.author.name %>>
     </h2>
+    
+    <% if (user){ %>
+
+      <form style="display:inline;" action="/threads/<%= thread.id %>/delete/" method="post">
+        </a><button type="submit">DELETE</button>
+      </form>
+
+    <% }; %>
+
 <hr>
     <% messages.forEach(message=>{ %>
       <% if (message){ %>

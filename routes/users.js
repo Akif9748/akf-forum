@@ -5,7 +5,7 @@ const error = require("../errors/error");
 const { UserModel, MessageModel, ThreadModel } = require("../models");
 
 app.get("/", async ({ user }, res) => {
-    const users = await UserModel.find(user.admin ? {} : { deleted: false });
+    const users = await UserModel.find(user?.admin ? {} : { deleted: false });
     return res.render("users", { users, user })
 
 });
