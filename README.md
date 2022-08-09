@@ -23,7 +23,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 - `/errors/error` will change, better error page.
 - Redirect query.
 - Will fix API
-
+- message.js/12, so, admin perms,(req.user?.admin || !thread.deleted), and api in message
 ## Roadmap
 ### User
 | To do | Is done? | Priority |

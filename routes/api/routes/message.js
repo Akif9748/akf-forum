@@ -1,5 +1,5 @@
-const { User, Message, Thread } = require("../../../classes");
-const ApiResponse = require("../ApiResponse");
+const { UserModel, MessageModel, ThreadModel } = require("../../../models");
+const rateLimit = require('express-rate-limit')
 
 const { Router } = require("express")
 
@@ -7,34 +7,37 @@ const app = Router();
 
 app.get("/:id", async (req, res) => {
 
-    const error = (status, error) =>
-        res.status(status).json(new ApiResponse(status, { error }));
 
     const { id = null } = req.params;
-    if (!id) return error(400, "Missing id in query")
-    const message = await new Message().getById(id);
+    if (!id) return res.error(400, "Missing id in query")
+    const message = await MessageModel.get(id);
 
-    if (!message || message.deleted) return error(404, "We have not got any message declared as this id.");
+    if (!message || message.deleted) return res.error(404, "We have not got any message declared as this id.");
 
-    res.status(200).json(new ApiResponse(200, message));
+    res.complate(message);
 
 })
 
-app.post("/", async (req, res) => {
-    const error = (status, error) =>
-        res.status(status).json(new ApiResponse(status, { error }));
+app.post("/", rateLimit({
+    windowMs: 60_000, max: 1, standardHeaders: true, legacyHeaders: false,
+    handler: (request, response, next, options) =>
+        !request.user.admin ?
+            response.error(options.statusCode, "You are begin ratelimited")
+            : next()
+}), async (req, res) => {
+
     const { threadID = null, content = null } = req.body;
-    const thread = await new Thread().getById(threadID);
+    if (!content) return res.error(400, "Missing message content in request body.");
 
-    if (!content) return error(400, "Missing message content in request body.");
-    if (!thread) return error(404, "We have not got this thread.");
+    const thread = await ThreadModel.get(threadID);
 
+    if (!thread) return res.error(404, "We have not got this thread.");
 
-    const message = await new Message(content, await new User().getByName(req.headers.username), thread.id).takeId()
-    message.save();
-    thread.push(message.id).save();
+    const message = await new MessageModel({ content, author: req.user, threadID: thread.id }).takeId();
+    await message.save();
+    await thread.push(message.id).save();
 
-    res.status(200).json(new ApiResponse(200, message));
+    res.complate(message);
 
 })
 

@@ -28,9 +28,9 @@ app.get("/:id", async (req, res) => {
     const { id } = req.params;
 
     const thread = await ThreadModel.get(id);
+    const user = req.user;
 
-    if (thread && !thread.deleted) {
-        const user = req.user;
+    if (thread && (user?.admin || !thread.deleted)) {
 
         const messages = await Promise.all(thread.messages.map(async id => {
             const message = await MessageModel.get(id)
@@ -49,7 +49,11 @@ app.use(require("../middlewares/login"));
 
 
 app.post("/", rateLimit({
-    windowMs: 10 * 60_000, max: 1, standardHeaders: true, legacyHeaders: false
+    windowMs: 10 * 60_000, max: 1, standardHeaders: true, legacyHeaders: false,
+    handler: (request, response, next, options) =>
+        !request.user.admin ?
+            error(response, options.statusCode, "You are begin ratelimited")
+            : next()
 }), async (req, res) => {
 
     const { title = null, content = null } = req.body;

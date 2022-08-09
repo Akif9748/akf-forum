@@ -17,7 +17,11 @@ app.get("/:id", async (req, res) => {
 app.use(require("../middlewares/login"));
 
 app.post("/", rateLimit({
-    windowMs: 60_000, max: 1, standardHeaders: true, legacyHeaders: false
+    windowMs: 60_000, max: 1, standardHeaders: true, legacyHeaders: false,
+    handler: (request, response, next, options) =>
+        !request.user.admin ?
+            error(response, options.statusCode, "You are begin ratelimited")
+            : next()
 }), async (req, res) => {
 
     const thread = await ThreadModel.get(req.body.threadID);

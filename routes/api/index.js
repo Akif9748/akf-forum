@@ -1,13 +1,10 @@
 const { Router } = require("express")
 const app = Router();
+const bcrypt = require("bcrypt");
 
-/**
- * @deprecated 
- * for less time
- */
 const { request, response } = require("express");
-const { SecretModel } = require("../../models")
-const ApiResponse = require("./ApiResponse")
+const { SecretModel, UserModel } = require("../../models")
+
 /**
  * AUTH TYPE:
  
@@ -34,30 +31,37 @@ const ApiResponse = require("./ApiResponse")
  * @param {request} req 
  * @param {response} res 
  */
-/*
+
 app.use(async (req, res, next) => {
-    const error = (status, error) =>
-        res.status(status).json(new ApiResponse(status, { error }))
+    res.error = (status, error) =>
+        res.status(status).json({ status, result: { error } })
+
+    res.complate = result => res.status(200).json({ status: 200, result });
 
     const { username = null, password = null } = req.headers;
 
     if (!username || !password)
-        return error(401, "Authorise headers are missing")
+        return res.error(401, "Authorise headers are missing")
 
     const user = await SecretModel.findOne({ username });
 
     if (!user)
-        return error(401, "We have not got any user has got this name")
+        return res.error(401, "We have not got any user has got this name")
 
-    if (user.password !== password)
-        return error(401, 'Incorrect Password!')
+    const validPassword = await bcrypt.compare(password, user.password);
+
+    if (!validPassword)
+        return res.error(401, 'Incorrect Password!')
+    req.user = await UserModel.findOne({ name: req.headers.username });
+
     next();
 });
 
+/* will add for loop */
 app.use("/messages", require("./routes/message"))
 app.use("/users", require("./routes/user"))
 app.use("/threads", require("./routes/threads"))
-*/
-app.all("*", (req, res) => res.status(400).json(new ApiResponse(400, { error: "Bad request" })));
+
+app.all("*", (req, res) => res.error(400, "Bad request"));
 
 module.exports = app;
