@@ -72,9 +72,10 @@
 
       <% }); %>
 
-      <script>
+      <script type="module">
  
-
+        import request from "../js/request.js";
+        
         document.addEventListener("click", async e=>{
           if (!e.target.id.includes("like"))return;
             const res = await fetch("/api/messages/"+e.target.value+"/react/" + e.target.id, { method: 'POST' })
@@ -102,7 +103,7 @@
 
         </form>
         <% if (user){ %>
-        <script src="/js/send.js"></script>
+        <script type="module" src="/js/send.js"></script>
         <% }%>
 
         <%- include("extra/footer") %>

@@ -1,18 +1,13 @@
+import request from "./request.js";
+
 document.getElementById("send").addEventListener("submit", async e => {
 
     e.preventDefault();
     const form = e.target;
     const data = new FormData(form);
-    fetch("/api/messages", {
-        method: 'POST',
-        body: JSON.stringify({ threadID: data.get("threadID"), content: data.get("content") }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).then(res => res.json())
+    request("/api/messages", "POST", { threadID: data.get("threadID"), content: data.get("content") })
         .then(res => {
-            if (res.result.error) return alert(res.result.error);
-
+            if (!res) return;
             form.reset();
             const message = res.result;
             document.getElementById("messages").innerHTML += `<br>
@@ -37,8 +32,5 @@ document.getElementById("send").addEventListener("submit", async e => {
 </div>
 
 </div>`;
-
-        }).catch(err => {
-            alert(err);
         });
 });
