@@ -21,7 +21,6 @@ And, you can learn about API in `util/APIDOCS.md`.
 
 ## To do (Backend, bug fixes) 
 - We will use "alert" for errors with fetch api. this added for messages and reactions...
-- message.js/12, so, admin perms,, and api in message.
 - the forum will only use api path... this added for messages and reactions...
 
 ## Roadmap
