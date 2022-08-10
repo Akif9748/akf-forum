@@ -14,7 +14,6 @@ print(r.json())
 example_response = {
     'status': 200,
     'result': {
-        'authorID': 0,
         'content': 'a',
         'author': {
             'name': 'Akif9748',
@@ -22,14 +21,14 @@ example_response = {
             'time': 1649189944864,
             'admin': False,
             'deleted': False,
-            'id': 0
+            'id': "0"
         },
         'time': 1649189950166,
-        'threadID': 0,
+        'threadID': "0",
         'deleted': False,
         'edited': False,
         # Reactions: {userid: isLike (Bool)}
         'react': {'0': True},
-        'id': 0
+        'id': "0"
     }
 }

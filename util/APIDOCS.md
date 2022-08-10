@@ -16,15 +16,12 @@ You need this headers for send request to API:
 
 ## How to request?
 
-### Request type:
-  `GET /api/action` 
-
-### "action" types:
-- GET `messages/:id`
-- GET `users/:id` 
-- GET `threads/:id`  
-- POST `messages` 
-
+### Request types:
+- GET `/api/messages/:id`
+- GET `/api/users/:id` 
+- GET `/api/threads/:id`  
+- POST `/api/messages` 
+- POST `/api/messages/:id/react/:type` 
 
 ### Example request:
 ```GET /api/message/1```
@@ -40,28 +37,15 @@ You need this headers for send request to API:
         "deleted": false,
         "edited": false,
         "react": {},
-        "id": 1,
+        "id": "1",
         "author": {
             "name": "ForumcuCocuk",
             "avatar": "/images/guest.png",
             "time": 1647177723873,
             "admin": true,
-            "id": 1
+            "id": "1"
         },
-        "thread": {
-            "author": {
-                "name": "Akif9748",
-                "avatar": "/images/guest.png",
-                "time": 1647177705200,
-                "admin": true,
-                "id": 0
-            },
-            "title": "First Thread",
-            "messages": [0, 1], 
-            "time": 1647178870047,
-            "deleted": false,
-            "id": 0
-        }   
+        "threadID":"0" 
     }
 }
 

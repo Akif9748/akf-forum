@@ -19,6 +19,6 @@ example_response = {
         'time': 1647895891332,
         'admin': True,
         'deleted': False,
-        'id': 0
+        'id': "0"
     }
 }

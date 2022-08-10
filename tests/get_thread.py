@@ -20,12 +20,12 @@ example_response = {
             "time": 1647895891332,
             "admin": False,
             "deleted": False,
-            "id": 0
+            "id": "0"
         },
         "title": "First Thread",
-        "messages": [0, 1, 2, 3],
+        "messages": ["0", "1", "2", "3"],
         "time": 1647895907054,
         "deleted": False,
-        "id": 0
+        "id": "0"
     }
 }

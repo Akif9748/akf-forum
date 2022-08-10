@@ -44,7 +44,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 | Send | 🟢 | HIGH |
 | Delete | 🟢 | HIGH |
 | React | 🟢 | MEDIUM |
-| Edit | 🔴 | HIGH |
+| Edit | 🔴 | MEDIUM |
 
 ### Threads
 | To do | Is done? | Priority |
@@ -52,7 +52,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 | Ratelimit | 🟢 | HIGH |
 | Create | 🟢 | HIGH |
 | Delete | 🟢 | HIGH |
-| Edit | 🔴 | HIGH |
+| Edit | 🔴 | MEDIUM |
 
 ### API
 | To do | Is done? | Priority |
@@ -61,14 +61,8 @@ And, you can learn about API in `util/APIDOCS.md`.
 | Send message | 🟢 | MEDIUM |
 | Create thread | 🟢 | MEDIUM |
 | Get info about thread | 🟢 | MEDIUM |
-<<<<<<< HEAD
-| Delete message & thread | 🔴 | MEDIUM |
-| Edit message & thread | 🔴 | MEDIUM |
-
-=======
-| Delete message | 🔴 | MEDIUM |
-| React | 🟢 | MEDIUM |
->>>>>>> 9f10a32b7ce05cbb81acacb8277b68c25d4baa34
+| Delete message & thread | 🔴 | HIGH |
+| Edit message & thread | 🔴 | HIGH |
 
 ### Other
 | To do | Is done? | Priority |
@@ -77,7 +71,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 | Multi-theme support | 🔴 | LOW |
 | Search | 🔴 | MEDIUM |
 | Better view | 🟢 | MEDIUM |
-| Sending message etc. will use fetch API | 🔴 | HIGH |
+| Sending message etc. will use fetch API | 🟡 | HIGH |
 
 ## Screenshot
 ![akf-forum](https://user-images.githubusercontent.com/70021050/160255959-ef216cba-1348-4d4b-9347-fe67e21348e7.png)
