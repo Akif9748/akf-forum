@@ -9,10 +9,10 @@ A forum software written in Node.js.
 - Run `npm start` for run it. 
 
 ### Extra
-Run `node util/reset` to **reset the database**, and run `node util/admin` for give admin perms for first member.
+Run `node util/reset` to **reset the database**, and run `node util/admin` for give admin perms to first member.
 
 ## API
-Akf-forum has got an API for other clients etc. You can test api with run apitest.py.
+Akf-forum has got an API for other clients etc. You can test api with python files in `test` folder. python is only for testing 😭
 And, you can learn about API in `util/APIDOCS.md`.
 
 ## Credits
@@ -20,10 +20,10 @@ And, you can learn about API in `util/APIDOCS.md`.
 * [Camroku](https://github.com/Camroku) - Made stylesheets
 
 ## To do (Backend, bug fixes) 
-- `/errors/error` will change, better error page.
-- Redirect query.
-- message.js/12, so, admin perms,(req.user?.admin || !thread.deleted), and api in message
+- `/errors/error` will ~~change~~ deprecate, it will be in res.error . And we will use "alert" for errors with fetch api.
+- message.js/12, so, admin perms,(req.user?.admin || !thread.deleted), and api in message.
 - the forum will only use api path...
+
 ## Roadmap
 ### User
 | To do | Is done? | Priority |
@@ -62,9 +62,14 @@ And, you can learn about API in `util/APIDOCS.md`.
 | Send message | 🟢 | MEDIUM |
 | Create thread | 🟢 | MEDIUM |
 | Get info about thread | 🟢 | MEDIUM |
+<<<<<<< HEAD
 | Delete message & thread | 🔴 | MEDIUM |
 | Edit message & thread | 🔴 | MEDIUM |
 
+=======
+| Delete message | 🔴 | MEDIUM |
+| React | 🟢 | MEDIUM |
+>>>>>>> 9f10a32b7ce05cbb81acacb8277b68c25d4baa34
 
 ### Other
 | To do | Is done? | Priority |
