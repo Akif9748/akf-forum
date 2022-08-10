@@ -20,15 +20,15 @@ And, you can learn about API in `util/APIDOCS.md`.
 * [Camroku](https://github.com/Camroku) - Made stylesheets
 
 ## To do (Backend, bug fixes) 
-- `/errors/error` will ~~change~~ deprecate, it will be in res.error . And we will use "alert" for errors with fetch api.
+- `/errors/error` will ~~change~~ deprecate, it will be in res.error . And we will use "alert" for errors with fetch api. this added for messages and reactions...
 - message.js/12, so, admin perms,(req.user?.admin || !thread.deleted), and api in message.
-- the forum will only use api path...
+- the forum will only use api path... this added for messages and reactions...
 
 ## Roadmap
 ### User
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
-| Login | 🟢 | HIGH |
+| Login via redirect query | 🟢 | HIGH |
 | Register | 🟢 | HIGH |
 | Logout | 🟢 | HIGH |
 | Admin | 🟢 | HIGH |

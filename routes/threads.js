@@ -34,6 +34,9 @@ app.get("/:id", async (req, res) => {
 
         const messages = await Promise.all(thread.messages.map(async id => {
             const message = await MessageModel.get(id)
+            const arr = Object.values(message.react)
+            message.reactCount = arr.filter(Boolean).length - arr.filter(x => !x).length;
+            
             return user?.admin || !message?.deleted ? message : null;
         }));
 

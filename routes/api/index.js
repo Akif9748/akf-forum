@@ -38,6 +38,7 @@ app.use(async (req, res, next) => {
 
     res.complate = result => res.status(200).json({ status: 200, result });
 
+    if (req.user) return next();
     const { username = null, password = null } = req.headers;
 
     if (!username || !password)

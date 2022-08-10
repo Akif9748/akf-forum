@@ -29,8 +29,10 @@
     
         <% } else { %>
             <a style="float: right; background-color: #5F875F;" href="/register">REGISTER</a>
-
-            <a style="float: right; background-color:#5F87AF; " href="/login">LOGIN</a>
+            <a  id="login" style="float: right; background-color:#5F87AF; " href="/login">LOGIN</a>
+            <script>
+                document.getElementById("login").href += "?redirect="+window.location.pathname
+            </script>
 
 
          <% } %> 

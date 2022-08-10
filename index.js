@@ -22,4 +22,4 @@ for (const file of fs.readdirSync("./routes"))
 
 app.all("*", (req, res) => error(res, 404, "We have not got this page."));
 
-app.listen(port, () => console.log("Akf-forum on port:", port));
+app.listen(port, () => console.log("akf-forum on port:", port));

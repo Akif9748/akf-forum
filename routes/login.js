@@ -4,7 +4,7 @@ const error = require("../errors/error");
 const app = Router();
 const bcrypt = require("bcrypt");
 
-app.get("/", (req, res) => res.render("login"));
+app.get("/", (req, res) => res.render("login",{redirect: req.query.redirect}));
 
 app.post("/", async (req, res) => {
     req.session.userid = null;
@@ -23,7 +23,7 @@ app.post("/", async (req, res) => {
 
             req.session.userid = user.id;
 
-            res.redirect('/');
+            res.redirect( req.query.redirect ||  '/');
         } else
             error(res, 403, 'Incorrect Username and/or Password!')
 

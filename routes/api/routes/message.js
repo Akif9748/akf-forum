@@ -40,5 +40,23 @@ app.post("/", rateLimit({
     res.complate(message);
 
 })
+app.post("/:id/react/:type", async (req, res) => {
+
+    const message = await MessageModel.get(req.params.id);
+    if (message) {
+
+        if (req.user.id in message.react)
+            delete message.react[req.session.userid];
+        else
+            message.react[req.session.userid] = req.params.type === "like";
+        message.markModified("react");
+        await message.save();
+
+        const arr = Object.values(message.react)
+        res.complate(arr.filter(Boolean).length - arr.filter(x => !x).length)
+    } else error(res, 404, "We have not got this Message for reacting.");
+
+
+});
 
 module.exports = app;

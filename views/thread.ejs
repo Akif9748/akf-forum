@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <%- include("extra/header", { title : thread.title }) %>
+<%- include("extra/header", { title: thread.title }) %>
 
 <body>
 
@@ -24,7 +24,8 @@
 
     <% }; %>
 
-<hr>
+  <hr>
+  <div id="messages">
     <% messages.forEach(message=>{ %>
       <% if (message){ %>
 
@@ -50,18 +51,13 @@
           <form style="display:inline;" action="/message/<%= message.id %>/delete/" method="post">
             </a><button type="submit">DELETE</button>
           </form>
-          <form style="float: right;" action="/message/<%= message.id %>/react/" method="POST">
+          <div style="float: right;">
+            <h3 id="count<%= message.id %>" style="display:inline;"><%= message.reactCount %></h3>
+            <button style="display:inline;" id="like" value="<%= message.id %>">+🔼</button>
+            <button style="display:inline;" id="dislike" value="<%= message.id %>" >-🔽</button>
+          </div>
 
-            <h3 style="display:inline;">
-              <%= Object.values(message.react).filter(Boolean).length - Object.values(message.react).filter(x=>
-                !x).length %>
-            </h3>
-
-
-            <button style="display:inline;" name="like" type="submit">+🔼</button>
-            <button style="display:inline;" name="dislike" type="submit">-🔽</button>
-
-          </form>
+        
           <% } %>
 
 
@@ -76,22 +72,38 @@
 
       <% }); %>
 
+      <script>
+ 
+
+        document.addEventListener("click", async e=>{
+          if (!e.target.id.includes("like"))return;
+            const res = await fetch("/api/messages/"+e.target.value+"/react/" + e.target.id, { method: 'POST' })
+              .then(res=>res.json());
+            document.getElementById("count"+e.target.value).innerHTML = res.result;
+            
+        });
+  
+
+      </script>
+  </div>    
         <hr>
 
 
-        <form action="/message" method="POST">
+        <form id= "send">
           <textarea rows="4" cols="133" name="content"></textarea>
           <input name="threadID" type="hidden" value="<%= thread.id %>"></input>
 
           <br>
           <% if (user){ %>
             <button type="submit">Send!</button>
-            <%} else {%>
-              <button disabled>Login for send</button>
-              <% }%>
+          <%} else {%>
+            <button disabled>Login for send</button>
+          <% }%>
 
         </form>
-
+        <% if (user){ %>
+        <script src="/js/send.js"></script>
+        <% }%>
 
         <%- include("extra/footer") %>
 </body>
