@@ -59,8 +59,8 @@ app.use(async (req, res, next) => {
 });
 
 /* will add for loop */
-app.use("/messages", require("./routes/message"))
-app.use("/users", require("./routes/user"))
+app.use("/messages", require("./routes/messages"))
+app.use("/users", require("./routes/users"))
 app.use("/threads", require("./routes/threads"))
 
 app.all("*", (req, res) => res.error(400, "Bad request"));

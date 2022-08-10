@@ -34,4 +34,18 @@ app.post("/", async (req, res) => {
 
 });
 
+app.post("/:id/delete", async (req, res) => {
+    const thread = await ThreadModel.get(req.params.id);
+    if (!thread || thread.deleted) return res.error( 404, "We have not got any thread declared as this id.");
+    const user = req.user;
+    if (user.id != thread.authorID && !user.admin)
+        return res.error( 403, "You have not got permission for this.");
+
+    thread.deleted = true;
+    await thread.save();
+
+    res.complate(thread);
+
+})
+
 module.exports = app;

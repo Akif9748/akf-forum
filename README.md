@@ -61,7 +61,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 | Send message | 🟢 | MEDIUM |
 | Create thread | 🟢 | MEDIUM |
 | Get info about thread | 🟢 | MEDIUM |
-| Delete message & thread | 🔴 | HIGH |
+| Delete message & thread | 🟢 | HIGH |
 | Edit message & thread | 🔴 | HIGH |
 
 ### Other

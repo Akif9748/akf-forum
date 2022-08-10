@@ -16,12 +16,12 @@
       <img class="yuvarlak" src=<%= thread.author.avatar %> alt=<%= thread.author.name %>>
     </h2>
     
-    <% if (user){ %>
+    <% if (user && !thread.deleted){ %>
 
-      <form style="display:inline;" action="/threads/<%= thread.id %>/delete/" method="post">
-        </a><button type="submit">DELETE</button>
-      </form>
-
+      <button id="delete_thread" value="<%= thread.id %>" style="display:inline;" type="submit">DELETE</button> 
+      <button id="edit_thread" style="display:inline;" type="submit">EDIT</button> 
+    <% } else { %>
+        <h3 style="display:inline;">This thread has been deleted</h3>
     <% }; %>
 
   <hr>
@@ -47,10 +47,14 @@
         <br>
 
         <% if (user){ %>
-
-          <form style="display:inline;" action="/message/<%= message.id %>/delete/" method="post">
-            </a><button type="submit">DELETE</button>
+          <% if (!message.deleted){ %>
+          <form style="display:inline;">
+            <button id="delete_message" value="<%= message.id %>" type="submit">DELETE</button>
           </form>
+          <% } else { %>
+            <h3 style="display:inline;">This message has been deleted</h3>
+          <% }; %>
+
           <div style="float: right;">
             <h3 id="count<%= message.id %>" style="display:inline;"><%= message.reactCount %></h3>
             <button style="display:inline;" id="like" value="<%= message.id %>">+🔼</button>
@@ -72,21 +76,9 @@
 
       <% }); %>
 
-      <script type="module">
- 
-        import request from "../js/request.js";
-        
-        document.addEventListener("click", async e=>{
-          if (!e.target.id.includes("like"))return;
-            const res = await fetch("/api/messages/"+e.target.value+"/react/" + e.target.id, { method: 'POST' })
-              .then(res=>res.json());
-            document.getElementById("count"+e.target.value).innerHTML = res.result;
-            
-        });
-  
-
-      </script>
+      
   </div>    
+
         <hr>
 
 
@@ -103,7 +95,7 @@
 
         </form>
         <% if (user){ %>
-        <script type="module" src="/js/send.js"></script>
+        <script type="module" src="/js/thread.js"></script>
         <% }%>
 
         <%- include("extra/footer") %>

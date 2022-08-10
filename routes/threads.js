@@ -45,47 +45,4 @@ app.get("/:id", async (req, res) => {
 });
 
 
-
-
-app.use(require("../middlewares/login"));
-
-
-app.post("/", rateLimit({
-    windowMs: 10 * 60_000, max: 1, standardHeaders: true, legacyHeaders: false,
-    handler: (request, response, next, options) =>
-        !request.user.admin ?
-            res.error(options.statusCode, "You are begin ratelimited")
-            : next()
-}), async (req, res) => {
-
-    const { title = null, content = null } = req.body;
-
-    if (!title || !content) return res.error( 400, "Title and/or content is missing");
-    const user = req.user
-    const thread = await new ThreadModel({ title, author: user }).takeId()
-
-    const message = await new MessageModel({ content, author: user, threadID: thread.id }).takeId()
-
-    await thread.push(message.id).save();
-
-    await message.save();
-
-    res.redirect('/threads/' + thread.id);
-})
-
-app.post("/:id/delete", async (req, res) => {
-    const thread = await ThreadModel.get(req.params.id);
-    if (!thread || thread.deleted) return res.error( 404, "We have not got any thread declared as this id.");
-    const user = req.user;
-    if (user.id != thread.authorID && !user.admin)
-        return res.error( 403, "You have not got permission for this.");
-
-    thread.deleted = true;
-    await thread.save();
-
-
-    res.status(200).redirect("/threads/");
-
-})
-
 module.exports = app;

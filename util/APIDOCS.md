@@ -17,10 +17,13 @@ You need this headers for send request to API:
 ## How to request?
 
 ### Request types:
-- GET `/api/messages/:id`
 - GET `/api/users/:id` 
+- POST `/api/threads` 
 - GET `/api/threads/:id`  
-- POST `/api/messages` 
+- POST `/api/threads/:id/delete` 
+- GET `/api/messages/:id`
+- POST `/api/messages`
+- POST `/api/messages/:id/delete`
 - POST `/api/messages/:id/react/:type` 
 
 ### Example request:

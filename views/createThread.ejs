@@ -9,7 +9,7 @@
 
 
 
-            <form action="/threads/" method="POST">
+            <form>
                 <h2>Title:</h2>
                 <input name="title"></input>
 
@@ -22,6 +22,29 @@
             </form>
 
 
+            <script type="module">
+
+                import request from "../../js/request.js";
+
+                document.addEventListener("submit", async e => {
+                    e.preventDefault();
+                    const form = e.target;
+                    const data = new FormData(form);
+
+                    const response = await request("/api/threads/", "POST", { 
+                        title:  data.get("title"), content: data.get("content")
+                    });
+              
+
+                    if (response.result) {
+                        alert("Thread opened");
+                        window.location.href = "/threads/" + response.result.id;
+                    }
+
+                });
+
+
+            </script>
             <%- include("extra/footer") %>
     </body>
 

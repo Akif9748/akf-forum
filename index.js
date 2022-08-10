@@ -19,6 +19,6 @@ app.use(require("./middlewares/user"));
 for (const file of fs.readdirSync("./routes"))
         app.use("/" + file.replace(".js", ""), require(`./routes/${file}`));
 
-app.all("*", (req, res) => res.error(404, "We have not got this page."));
+app.all("*", (req, res) => res.status(404).render("error", { type: 404, error: "We have not got this page." }));
 
 app.listen(port, () => console.log("akf-forum on port:", port));

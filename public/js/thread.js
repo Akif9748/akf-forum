@@ -1,4 +1,32 @@
 import request from "./request.js";
+document.addEventListener("click", async e => {
+
+    if (e.target.id === "delete_thread") {
+        const response = await request("/api/threads/"+e.target.value+"/delete");
+        if (response.result.deleted) {
+            alert("Thread deleted");
+            window.location.href = "/threads";
+        }
+
+    } else if (e.target.id === "delete_message") {
+        const response = await request("/api/messages/" + e.target.value + "/delete");
+        if (response.result.deleted) {
+            alert("Message deleted");
+            location.reload();
+        }
+    } /*else if (e.target.id === "edit_thread") {
+      window.location.href = "/threads/<%= thread.id %>/edit";
+    } */
+
+
+
+    if (!e.target.id.includes("like")) return;
+    const res = await request("/api/messages/" + e.target.value + "/react/" + e.target.id)
+
+    document.getElementById("count" + e.target.value).innerHTML = res.result;
+
+});
+
 
 document.getElementById("send").addEventListener("submit", async e => {
 
