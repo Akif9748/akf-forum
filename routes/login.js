@@ -1,6 +1,5 @@
 const { UserModel, SecretModel } = require("../models");
 const { Router } = require("express");
-const error = require("../errors/error");
 const app = Router();
 const bcrypt = require("bcrypt");
 
@@ -17,19 +16,19 @@ app.post("/", async (req, res) => {
 
             const validPassword = await bcrypt.compare(password, user.password);
 
-            if (!validPassword) return error(res, 403, 'Incorrect Password!')
+            if (!validPassword) return res.error( 403, 'Incorrect Password!')
             const member = await UserModel.findOne({ name: username });
-            if (!member || member.deleted) return error(res, 403, 'Incorrect Username and/or Password!')
+            if (!member || member.deleted) return res.error( 403, 'Incorrect Username and/or Password!')
 
             req.session.userid = user.id;
 
             res.redirect( req.query.redirect ||  '/');
         } else
-            error(res, 403, 'Incorrect Username and/or Password!')
+        res.error( 403, 'Incorrect Username and/or Password!')
 
 
     } else
-        error(res, 400, "You forgot entering some values")
+    res.error( 400, "You forgot entering some values")
 
 
 

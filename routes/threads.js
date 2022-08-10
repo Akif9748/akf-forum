@@ -2,7 +2,6 @@ const { Router } = require("express");
 const app = Router();
 const rateLimit = require('express-rate-limit')
 
-const error = require("../errors/error")
 const { ThreadModel, MessageModel } = require("../models")
 
 
@@ -42,7 +41,7 @@ app.get("/:id", async (req, res) => {
 
         res.render("thread", { thread, messages, user })
     } else
-        error(res, 404, "We have not got this thread.");
+        res.error( 404, "We have not got this thread.");
 });
 
 
@@ -55,13 +54,13 @@ app.post("/", rateLimit({
     windowMs: 10 * 60_000, max: 1, standardHeaders: true, legacyHeaders: false,
     handler: (request, response, next, options) =>
         !request.user.admin ?
-            error(response, options.statusCode, "You are begin ratelimited")
+            res.error(options.statusCode, "You are begin ratelimited")
             : next()
 }), async (req, res) => {
 
     const { title = null, content = null } = req.body;
 
-    if (!title || !content) return error(res, 400, "Title and/or content is missing");
+    if (!title || !content) return res.error( 400, "Title and/or content is missing");
     const user = req.user
     const thread = await new ThreadModel({ title, author: user }).takeId()
 
@@ -76,10 +75,10 @@ app.post("/", rateLimit({
 
 app.post("/:id/delete", async (req, res) => {
     const thread = await ThreadModel.get(req.params.id);
-    if (!thread || thread.deleted) return error(res, 404, "We have not got any thread declared as this id.");
+    if (!thread || thread.deleted) return res.error( 404, "We have not got any thread declared as this id.");
     const user = req.user;
     if (user.id != thread.authorID && !user.admin)
-        return error(res, 403, "You have not got permission for this.");
+        return res.error( 403, "You have not got permission for this.");
 
     thread.deleted = true;
     await thread.save();

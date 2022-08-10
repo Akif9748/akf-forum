@@ -12,7 +12,7 @@ app.get("/:id", async (req, res) => {
     if (!id) return res.error(400, "Missing id in query")
     const message = await MessageModel.get(id);
 
-    if (!message || message.deleted) return res.error(404, "We have not got any message declared as this id.");
+    if (!message || (message.deleted && req.user && !req.user.admin)) return res.error(404, "We have not got any message declared as this id.");
 
     res.complate(message);
 

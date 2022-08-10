@@ -1,6 +1,5 @@
 const { UserModel, SecretModel } = require("../models");
 const { Router } = require("express")
-const error = require("../errors/error")
 const bcrypt = require("bcrypt");
 
 const app = Router();
@@ -17,7 +16,7 @@ app.post("/", async (req, res) => {
         const user = await SecretModel.findOne({ username });
 
         if (user)
-            error(res, 400, `We have got an user named ${username}!`)
+            res.error(res, 400, `We have got an user named ${username}!`)
 
         else {
 
@@ -35,7 +34,7 @@ app.post("/", async (req, res) => {
         }
 
     } else
-        error(res, 400, "You forgot entering some values")
+        res.error(res, 400, "You forgot entering some values")
 
 
 })
