@@ -32,6 +32,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 | Admin | 🟢 | HIGH |
 | Message count | 🟢 | MEDIUM |
 | Delete user | 🟢 | HIGH |
+| Undelete | 🔴 | MEDIUM |
 | About me | 🔴 | LOW |
 | Edit user | 🔴 | HIGH |
 | IP ban | 🔴 | MEDIUM |
@@ -42,6 +43,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 | Ratelimit | 🟢 | HIGH |
 | Send | 🟢 | HIGH |
 | Delete | 🟢 | HIGH |
+| Undelete | 🔴 | MEDIUM |
 | React | 🟢 | MEDIUM |
 | Edit | 🔴 | MEDIUM |
 
@@ -51,12 +53,14 @@ And, you can learn about API in `util/APIDOCS.md`.
 | Ratelimit | 🟢 | HIGH |
 | Create | 🟢 | HIGH |
 | Delete | 🟢 | HIGH |
+| Undelete | 🔴 | MEDIUM |
 | Edit | 🔴 | MEDIUM |
 
 ### API
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
 | Other clients for forum via API | 🟢 | LOW |
+| Get message**s** | 🔴 | MEDIUM |
 | Send message | 🟢 | MEDIUM |
 | Create thread | 🟢 | MEDIUM |
 | Get info about thread | 🟢 | MEDIUM |

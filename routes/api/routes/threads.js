@@ -5,18 +5,36 @@ const app = Router();
 
 app.get("/:id", async (req, res) => {
 
-    const { id = null } = req.params;
-    if (!id) return res.error(400, "Missing id in query")
+    const { id } = req.params;
 
     const thread = await ThreadModel.get(id);
     if (thread && (req.user?.admin || !thread.deleted))
-        res.complate( thread);
+        res.complate(thread);
     else
-        return res.error(404, "We have not got any thread declared as this id.");
+        return res.error(404, "We don't have any thread with this id.");
 
 
 });
 
+app.get("/:id/messages/", async (req, res) => {
+
+
+    const { id = null } = req.params;
+    const limit = Number(req.query.limit);
+
+    const query = { threadID: id };
+    if (!req.user.admin)  query.deleted = false;
+
+    const options = { sort: { date: -1 } };
+    if (limit) options.limit = limit;
+
+    const messages = await MessageModel.find(query, null, options)
+
+    if (!messages.length) return res.error(404, "We don't have any messages in this thread.");
+
+    res.complate(messages);
+
+})
 
 app.post("/", async (req, res) => {
 
@@ -36,10 +54,10 @@ app.post("/", async (req, res) => {
 
 app.post("/:id/delete", async (req, res) => {
     const thread = await ThreadModel.get(req.params.id);
-    if (!thread || thread.deleted) return res.error( 404, "We have not got any thread declared as this id.");
+    if (!thread || thread.deleted) return res.error(404, "We don't have any thread with this id.");
     const user = req.user;
     if (user.id != thread.authorID && !user.admin)
-        return res.error( 403, "You have not got permission for this.");
+        return res.error(403, "You have not got permission for this.");
 
     thread.deleted = true;
     await thread.save();

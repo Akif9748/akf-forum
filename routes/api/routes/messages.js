@@ -1,9 +1,10 @@
-const { UserModel, MessageModel, ThreadModel } = require("../../../models");
+const { MessageModel, ThreadModel } = require("../../../models");
 const rateLimit = require('express-rate-limit')
 
 const { Router } = require("express")
 
 const app = Router();
+
 
 app.get("/:id", async (req, res) => {
 

@@ -59,26 +59,27 @@
             if (e.target.id == "admin") {
 
               const response = await request("/api/users/<%= member.id %>/admin");
+  
+              if (response.result.admin)
+                return alert("Making admin of " + response.result.name + " is success!");
 
-              if (response.result.admin) 
-                return alert("Making admin of "+response.result.name+" is success!");
-            } 
-         
+            }
+
             const response = await request("/api/users/<%= member.id %>/delete");
-
-            if (response.result.deleted) 
+     
+            if (response.result.deleted)
               alert("User Deleted");
-            
+
           });
 
 
         </script>
         <% }; %>
-        <% if (member.deleted) {%>
-          <h1>This user has been deleted!</h1>
-        <% }; %>
-          
-          <%- include("extra/footer") %>
+          <% if (member.deleted) {%>
+            <h1>This user has been deleted!</h1>
+            <% }; %>
+
+              <%- include("extra/footer") %>
   </body>
 
 </html>

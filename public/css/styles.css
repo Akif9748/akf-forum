@@ -99,7 +99,8 @@ hr {
   border-color: var(--col-8);
 }
 
-button, input {
+button,
+input {
   font-family: monospace;
   background-color: var(--col-bg);
   border: 2px solid var(--col-8);
@@ -186,11 +187,11 @@ button:hover {
 }
 
 
-/*
-*****************************
-           IMAGES
-*****************************
-*/
+div.message {
+  border: 2px solid var(--col-8);
+  padding: 10px;
+}
+
 
 
 /*

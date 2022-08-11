@@ -3,102 +3,56 @@
 
 <%- include("extra/header", { title: thread.title }) %>
 
-<body>
+  <body>
 
-  <%- include("extra/navbar", {user}) %>
+    <%- include("extra/navbar", {user}) %>
 
 
-    <h1 style="font-size: 35px;">
-      <%= thread.title %>
-    </h1>
-   
-    <h2 style="display:inline;">By <a href=<%="/users/" + thread.author.id %>> <%= thread.author.name %></a>
-      <img class="circle" src=<%= thread.author.avatar %> alt=<%= thread.author.name %>>
-    </h2>
-    
-    <% if (user && !thread.deleted){ %>
+      <h1 style="font-size: 35px;">
+        <%= thread.title %>
+      </h1>
 
-      <button id="delete_thread" value="<%= thread.id %>" style="display:inline;" type="submit">DELETE</button> 
-      <button id="edit_thread" style="display:inline;" type="submit">EDIT</button> 
-    <% } else { %>
-        <h3 style="display:inline;">This thread has been deleted</h3>
-    <% }; %>
+      <h2 style="display:inline;">By <a href=<%="/users/" + thread.author.id %>> <%= thread.author.name %></a>
+        <img class="circle" src=<%=thread.author.avatar %> alt=<%= thread.author.name %>>
+      </h2>
 
-  <hr>
-  <div id="messages">
-    <% messages.forEach(message=>{ %>
-      <% if (message){ %>
+      <% if (user && !thread.deleted){ %>
 
-      <div id="message-<%= message.id %>" style="border: 2px solid #444444; padding: 10px;">
-
-        <h3 style="float:right;">
-          <%=new Date(message.time).toLocaleString() %>
-        </h3>
-
-        <h2>
-          <img class="circle" src=<%=message.author.avatar %> alt=<%= message.author.name %>>
-            <a href=<%="/users/" + message.author.id %>> <%= message.author.name %></a>:
-        </h2>
-
-        <h2>
-          <%= message.content %>
-        </h2>
-
-        <br>
-
-        <% if (user){ %>
-          <% if (!message.deleted){ %>
-          <form style="display:inline;">
-            <button id="delete_message" value="<%= message.id %>" type="submit">DELETE</button>
-          </form>
-          <% } else { %>
-            <h3 style="display:inline;">This message has been deleted</h3>
+        <button id="delete_thread" value="<%= thread.id %>" style="display:inline;" type="submit">DELETE</button>
+        <button id="edit_thread" style="display:inline;" type="submit">EDIT</button>
+        <% } else if (thread.deleted) { %>
+          <h3 style="display:inline;">This thread has been deleted</h3>
           <% }; %>
 
-          <div style="float: right;">
-            <h3 id="count<%= message.id %>" style="display:inline;"><%= message.reactCount %></h3>
-            <button style="display:inline;" id="like" value="<%= message.id %>">+🔼</button>
-            <button style="display:inline;" id="dislike" value="<%= message.id %>" >-🔽</button>
-          </div>
-
-        
-          <% } %>
+            <hr>
 
 
-      </div>
+            <div id="messages" value="<%= thread.id %>">
+              <% if (!user){ %>
+                <h1>Guests cant view messages!</h1>
+                <% }%>
+            </div>
 
-      <% } else { %>
-        <div id="deleted-message" style="border: 2px solid #444444; padding: 10px;">
-          <h1>DELETED MESSAGE</h1>
-        </div>
-        <% } %>
-        <br>
-
-      <% }); %>
-
-      
-  </div>    
-
-        <hr>
+            <hr>
 
 
-        <form id= "send">
-          <textarea rows="4" cols="133" name="content"></textarea>
-          <input name="threadID" type="hidden" value="<%= thread.id %>"></input>
+            <form id="send">
+              <textarea rows="4" cols="133" name="content"></textarea>
+              <input name="threadID" type="hidden" value="<%= thread.id %>"></input>
 
-          <br>
-          <% if (user){ %>
-            <button type="submit">Send!</button>
-          <%} else {%>
-            <button disabled>Login for send</button>
-          <% }%>
+              <br>
+              <% if (user){ %>
+                <button type="submit">Send!</button>
+                <%} else {%>
+                  <button disabled>Login for send</button>
+                  <% }%>
 
-        </form>
-        <% if (user){ %>
-        <script type="module" src="/js/thread.js"></script>
-        <% }%>
+            </form>
+            <% if (user){ %>
+              <script type="module" src="/js/thread.js"></script>
+              <% }%>
 
-        <%- include("extra/footer") %>
-</body>
+                <%- include("extra/footer") %>
+  </body>
 
 </html>

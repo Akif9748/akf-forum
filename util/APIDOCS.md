@@ -22,6 +22,7 @@ You need this headers for send request to API:
 - POST `/api/users/:id/admin` for give admin permissions for a user.
 
 - GET `/api/threads/:id` for fetch thread.
+- GET `/api/threads/:id/messages/:limit` for fetch messages in thread.
 - POST `/api/threads` for create thread.
 - POST `/api/threads/:id/delete` for delete thread.
 
