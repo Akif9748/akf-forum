@@ -57,7 +57,8 @@ function renderMessage(message) {
 
             renderMessage(message);
         }
-    
+    window.scrollTo(0, document.body.scrollHeight);
+
 })();
 
 

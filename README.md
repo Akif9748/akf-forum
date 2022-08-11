@@ -71,6 +71,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
 | Footer | 🟡 | LOW |
+| auto-scroll  | 🟡 | LOW |
 | Multi-theme support | 🔴 | LOW |
 | Search | 🔴 | MEDIUM |
 | Better view | 🟢 | MEDIUM |
