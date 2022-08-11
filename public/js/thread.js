@@ -44,7 +44,7 @@ document.getElementById("send").addEventListener("submit", async e => {
 <h3 style="float:right;">${new Date(message.time).toLocaleString()}</h3>
 
 <h2>
-<img class="yuvarlak" src=${message.author.avatar} alt=${message.author.name}>
+<img class="circle" src=${message.author.avatar} alt=${message.author.name}>
 <a href="/users/${message.author.id}"> ${message.author.name}</a>:
 </h2>
 

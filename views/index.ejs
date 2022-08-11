@@ -8,17 +8,17 @@
     
 <% if (user) { %>
     <h1>Welcome, <a href=<%=user.getLink() %>> <%= user.name %></a>
-        <img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>>
+        <img class="circle" src=<%=user.avatar %> alt=<%= user.name %>>
             <br>
             You can log out of the site here:
-            <button onclick="window.location.href = '/login/'">LOGOUT</button>
-
+            <a href="/login/"><button>LOGOUT</button> </a>
     </h1>
 
     <br>
 <% } else { %>
     <h1>Welcome, Guest!<br>You can press the button to register:
-    <button class="buyuk" onclick= "window.location.href = '/register'">REGISTER</button>
+        <a href="/register/"> <button class="big">REGISTER</button> </a>
+       
     </h1>
  <% } %> 
     <h1>Statistics:</h1>

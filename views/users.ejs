@@ -13,7 +13,7 @@
                 <% users.forEach(user=>{ %>
                     <li>
                         <h1><a href=<%= user.getLink() %> > <%= user.name %> <%= user.deleted ? "(DELETED)" :""  %></a> 
-                            <img class="yuvarlak" src=<%=user.avatar %> alt=<%= user.name %>>
+                            <img class="circle" src=<%=user.avatar %> alt=<%= user.name %>>
                         </h1>
                     </li>
                 <% }); %>
