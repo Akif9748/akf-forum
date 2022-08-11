@@ -19,9 +19,12 @@ You need this headers for send request to API:
 ### Request types:
 - GET `/api/users/:id` for fetch user.
 - POST `/api/users/:id/delete` for delete user.
-- POST `/api/threads` for create thread.
+- POST `/api/users/:id/admin` for give admin permissions for a user.
+
 - GET `/api/threads/:id` for fetch thread.
+- POST `/api/threads` for create thread.
 - POST `/api/threads/:id/delete` for delete thread.
+
 - GET `/api/messages/:id` for fetch message.
 - POST `/api/messages` for create message.
 - POST `/api/messages/:id/delete` for delete message.

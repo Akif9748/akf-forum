@@ -1,30 +1,8 @@
 const { Router } = require("express")
 const app = Router();
 const bcrypt = require("bcrypt");
-
 const { request, response } = require("express");
 const { SecretModel, UserModel } = require("../../models")
-
-/**
- * AUTH TYPE:
- 
- headers: 
-    {
-        username: "Username for client",
-        password: "Password of selected username for client"
-    }
-
-*/
-
-/**
-  * REQUEST TYPE:
-  * GET /api/action/id 
-  * 
-  * @example message action:
-  * GET /api/message/0
-  *  
-  */
-
 
 /**
  * Auth checker

@@ -41,10 +41,8 @@
       </ul>
 
       <% if (user?.admin && !member.deleted) {%>
-        <form action="/admin/" method="POST">
-          <input name="userid" type="hidden" value="<%= member.id %>"></input>
+        <form id="admin">
           <button class="buyuk" type="submit">Give admin permissions!</button>
-
         </form>
 
         <form id="delete">
@@ -56,17 +54,21 @@
           import request from "../../js/request.js";
 
           document.addEventListener("submit", async e => {
-
-            if (e.target.id !== "delete") return
             e.preventDefault();
+
+            if (e.target.id == "admin") {
+
+              const response = await request("/api/users/<%= member.id %>/admin");
+
+              if (response.result.admin) 
+                return alert("Making admin of "+response.result.name+" is success!");
+            } 
          
             const response = await request("/api/users/<%= member.id %>/delete");
 
-            if (response.result.deleted) {
+            if (response.result.deleted) 
               alert("User Deleted");
-              window.location.href = "/users";
-            }
-
+            
           });
 
 

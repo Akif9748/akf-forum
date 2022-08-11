@@ -9,19 +9,31 @@
 
             <h1>Welcome to the admin panel of the forum, <%= user.name %>!</h1>
 
-            <form action="/admin/" method="POST">
+            <form>
                 <h2>Write an ID to give someone admin permissions:</h2>
                 <input name="userid"></input>
                 <hr>
                 <button class="buyuk" type="submit">Give admin permissions!</button>
             </form>
 
-            <script>
-                if (<%= user2.admin %>)
-                alert("Making admin of '<%= user2.name %>' is success");
+            <script type="module">
+
+                import request from "../../js/request.js";
+
+                document.addEventListener("submit", async e => {
+                    e.preventDefault();
+
+                    const response = await request("/api/users/" + e.target[0].value + "/admin");
+
+                    if (response.result.admin) 
+                        alert("Making admin of "+response.result.name+" is success!");
+                    
+                });
+
+
             </script>
 
-            <%- include("extra/footer") %>
+        <%- include("extra/footer") %>
 
     </body>
 

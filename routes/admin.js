@@ -1,40 +1,17 @@
-const { UserModel } = require("../models")
-
 const { Router } = require("express")
 
 const app = Router();
 
-app.use((rq,rs,n)=>{
-    if (!rq.session.userid) return rs.redirect('/login');
-    n();
-});
-
 app.get("/", async (req, res) => {
+    if (!req.session.userid) return res.redirect('/login');
+
     const user = req.user;
 
-    if (!user.admin) return res.error(  403, "You have not got permissions for view to this page.");
+    if (!user?.admin) return res.error(  403, "You have not got permissions for view to this page.");
 
     res.render("admin", { user, user2: false })
 });
 
-app.post("/", async (req, res) => {
 
-    const user = req.user;
-
-    if (!user.admin) return res.error(403, "You have not got permissions for view to this page.");
-    const user2 = await UserModel.get(req.body.userid);
-
-    if (!user2)
-        return res.error( 404, "We have not got this user in all of the forum. Vesselam.");
-
-    else {
-        user2.admin = true;
-        await user2.save()
-    }
-
-    res.render("admin", { user, user2 })
-
-
-});
 
 module.exports = app;

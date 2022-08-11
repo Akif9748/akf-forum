@@ -7,9 +7,8 @@ const { UserModel } = require("../models");
 (async () => {
 
   const member= await UserModel.get(0);
-  console.log(member);
   member.admin = true;
-  member.save();
+  console.log(await member.save());
 })();
 
 

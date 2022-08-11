@@ -19,10 +19,6 @@ And, you can learn about API in `util/APIDOCS.md`.
 * [Akif9748](https://github.com/Akif9748) - Project mainteiner, main developer
 * [Camroku](https://github.com/Camroku) - Made stylesheets
 
-## To do (Backend, bug fixes) 
-- We will use "alert" for errors with fetch api. this added for messages and reactions...
-- the forum will only use api path... this added for messages and reactions...
-
 ## Roadmap
 ### User
 | To do | Is done? | Priority |
@@ -71,7 +67,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 | Multi-theme support | 🔴 | LOW |
 | Search | 🔴 | MEDIUM |
 | Better view | 🟢 | MEDIUM |
-| Sending message etc. will use fetch API | 🟡 | HIGH |
+| Sending message etc. will use fetch API | 🟢 | HIGH |
 
 ## Screenshot
 ![akf-forum](https://user-images.githubusercontent.com/70021050/160255959-ef216cba-1348-4d4b-9347-fe67e21348e7.png)

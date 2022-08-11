@@ -29,5 +29,22 @@ app.post("/:id/delete/", async (req, res) => {
 
     res.complate(member);
 });
+app.post("/:id/admin/", async (req, res) => {
 
+    const user = req.user;
+
+    if (!user.admin) return res.error(403, "You have not got permissions for view to this page.");
+    const user2 = await UserModel.get(req.params.id);
+
+    if (!user2)
+        return res.error(404, "This user is not available.");
+
+    else {
+        user2.admin = true;
+        await user2.save()
+    }
+
+    res.complate(user2);
+
+});
 module.exports = app;
