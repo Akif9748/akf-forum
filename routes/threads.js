@@ -39,7 +39,7 @@ app.get("/:id", async (req, res) => {
             return user?.admin || !message?.deleted ? message : null;
         }));
 
-        res.render("thread", { thread, messages, user })
+        res.render("thread", { thread, messages, user,scroll:req.query.scroll || false });
     } else
         res.error( 404, "We have not got this thread.");
 });

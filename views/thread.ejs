@@ -48,10 +48,13 @@
                   <% }%>
 
             </form>
+            
             <% if (user){ %>
               <script type="module" src="/js/thread.js"></script>
               <% }%>
-
+              <script>
+               document.getElementById("message-<%= scroll %>").scrollIntoView();
+              </script>
                 <%- include("extra/footer") %>
   </body>
 
