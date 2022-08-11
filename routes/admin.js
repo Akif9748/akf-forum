@@ -4,7 +4,10 @@ const { Router } = require("express")
 
 const app = Router();
 
-app.use(require("../middlewares/login"));
+app.use((rq,rs,n)=>{
+    if (!rq.session.userid) return rs.redirect('/login');
+    n();
+});
 
 app.get("/", async (req, res) => {
     const user = req.user;

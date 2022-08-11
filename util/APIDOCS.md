@@ -3,7 +3,7 @@
 
 Akf-forum has got an API for other clients etc. 
 
-You can find examples in `/tests` folder.
+You can find examples in `tests` folder.
 
 ## Authorization
 You need this headers for send request to API:
@@ -17,14 +17,15 @@ You need this headers for send request to API:
 ## How to request?
 
 ### Request types:
-- GET `/api/users/:id` 
-- POST `/api/threads` 
-- GET `/api/threads/:id`  
-- POST `/api/threads/:id/delete` 
-- GET `/api/messages/:id`
-- POST `/api/messages`
-- POST `/api/messages/:id/delete`
-- POST `/api/messages/:id/react/:type` 
+- GET `/api/users/:id` for fetch user.
+- POST `/api/users/:id/delete` for delete user.
+- POST `/api/threads` for create thread.
+- GET `/api/threads/:id` for fetch thread.
+- POST `/api/threads/:id/delete` for delete thread.
+- GET `/api/messages/:id` for fetch message.
+- POST `/api/messages` for create message.
+- POST `/api/messages/:id/delete` for delete message.
+- POST `/api/messages/:id/react/:type` for react to a message.
 
 ### Example request:
 ```GET /api/message/1```
