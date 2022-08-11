@@ -25,23 +25,4 @@ app.get("/:id", async (req, res) => {
 
 });
 
-app.use(require("../middlewares/login"));
-
-
-app.post("/:id/delete/", async (req, res) => {
-    const user = req.user;
-    if (!user?.admin)
-        return res.error( 403, "You have not got permission for this.");
-
-    const { id = null } = req.params;
-    const member = await UserModel.get(id);
-
-    if (!member || member.deleted) return res.error( 404, "We have not got any user declared as this id.");
-
-    member.deleted = true;
-    await member.save();
-
-    res.redirect("/admin");
-});
-
 module.exports = app;

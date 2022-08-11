@@ -9,7 +9,7 @@ document.addEventListener("click", async e => {
         }
 
     } else if (e.target.id === "delete_message") {
-        const response = await request("/api/messages/" + e.target.value + "/delete");
+        const response = await request(`/api/messages/${e.target.value}/delete`);
         if (response.result.deleted) {
             alert("Message deleted");
             location.reload();

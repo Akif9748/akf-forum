@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include("extra/header", {title: member.name }) %>
+<%- include("extra/header", { title: member.name }) %>
 
   <body>
 
-    <%- include("extra/navbar", {user}) %>
+    <%- include("extra/navbar", { user }) %>
 
 
       <ul>
@@ -40,19 +40,43 @@
         </li>
       </ul>
 
-      <% if (user?.admin) {%>
+      <% if (user?.admin && !member.deleted) {%>
         <form action="/admin/" method="POST">
           <input name="userid" type="hidden" value="<%= member.id %>"></input>
           <button class="buyuk" type="submit">Give admin permissions!</button>
 
         </form>
 
-        <form action="/users/<%= member.id %>/delete" method="POST">
+        <form id="delete">
           <button class="buyuk" type="submit">Delete user!</button>
         </form>
-        <% }; %>
 
-        <%- include("extra/footer") %>
+        <script type="module">
+
+          import request from "../../js/request.js";
+
+          document.addEventListener("submit", async e => {
+
+            if (e.target.id !== "delete") return
+            e.preventDefault();
+         
+            const response = await request("/api/users/<%= member.id %>/delete");
+
+            if (response.result.deleted) {
+              alert("User Deleted");
+              window.location.href = "/users";
+            }
+
+          });
+
+
+        </script>
+        <% }; %>
+        <% if (member.deleted) {%>
+          <h1>This user has been deleted!</h1>
+        <% }; %>
+          
+          <%- include("extra/footer") %>
   </body>
 
 </html>

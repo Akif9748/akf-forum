@@ -1,4 +1,4 @@
-const { UserModel, MessageModel, ThreadModel } = require("../../../models");
+const { MessageModel, ThreadModel } = require("../../../models");
 const { Router } = require("express")
 
 const app = Router();
