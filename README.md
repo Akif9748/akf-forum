@@ -60,7 +60,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
 | Other clients for forum via API | 🟢 | LOW |
-| Get message**s** | 🔴 | MEDIUM |
+| Get message**s** | 🟢 | MEDIUM |
 | Send message | 🟢 | MEDIUM |
 | Create thread | 🟢 | MEDIUM |
 | Get info about thread | 🟢 | MEDIUM |
