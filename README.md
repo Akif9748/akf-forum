@@ -59,6 +59,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 ### API
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
+| RATELIMITS | 🟡 | MEDIUM |
 | Other clients for forum via API | 🟢 | LOW |
 | Get message**s** | 🟢 | MEDIUM |
 | Send message | 🟢 | MEDIUM |
