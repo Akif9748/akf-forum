@@ -1,5 +1,3 @@
-<!-- Navbar: -->
-
 
 <% if (user?.admin){ %>
     <div class="admin">
@@ -31,7 +29,7 @@
             <a style="float: right; background-color: #5F875F;" href="/register">REGISTER</a>
             <a  id="login" style="float: right; background-color:#5F87AF; " href="/login">LOGIN</a>
             <script>
-                document.getElementById("login").href += "?redirect="+window.location.pathname
+document.getElementById("login").href += "?redirect="+window.location.pathname;
             </script>
 
 
@@ -40,9 +38,4 @@
  
 
 </div>
-
-
-
 <hr>
-
-<!-- Navbar end -->
