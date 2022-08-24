@@ -48,13 +48,16 @@
                   <% }%>
 
             </form>
-            
+
             <% if (user){ %>
               <script type="module" src="/js/thread.js"></script>
               <% }%>
-              <script>
-               document.getElementById("message-<%= scroll %>").scrollIntoView();
-              </script>
+                <script>
+                  document.getElementById("message-<%= scroll %>").scrollIntoView();
+                </script>
+           <!--    <button id="left_page"  style=" float: right;"  type="submit">PREV</button>
+
+                <button id="right_page" style="display:inline;float: right;" type="submit">NEXT</button>--> 
                 <%- include("extra/footer") %>
   </body>
 
