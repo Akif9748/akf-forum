@@ -9,9 +9,9 @@ app.get("/:id", async (req, res) => {
 
     const thread = await ThreadModel.get(id);
     if (thread && (req.user?.admin || !thread.deleted))
-        res.complate(thread);
+        res.complate(thread.toObject({ virtuals: true }));
     else
-        return res.error(404,  `We don't have any thread with id ${id}.`);
+        return res.error(404, `We don't have any thread with id ${id}.`);
 
 
 });
@@ -23,7 +23,7 @@ app.get("/:id/messages/", async (req, res) => {
     const limit = Number(req.query.limit);
 
     const query = { threadID: id };
-    if (!req.user.admin)  query.deleted = false;
+    if (!req.user.admin) query.deleted = false;
 
     const options = { sort: { date: -1 } };
     if (limit) options.limit = limit;
@@ -32,7 +32,7 @@ app.get("/:id/messages/", async (req, res) => {
 
     if (!messages.length) return res.error(404, "We don't have any messages in this thread.");
 
-    res.complate(messages);
+    res.complate(messages.toObject({ virtuals: true }));
 
 })
 
@@ -48,13 +48,13 @@ app.post("/", async (req, res) => {
     await thread.push(message.id).save();
     await message.save();
 
-    res.complate(thread);
+    res.complate(thread.toObject({ virtuals: true }));
 
 });
 
 app.post("/:id/delete", async (req, res) => {
     const thread = await ThreadModel.get(req.params.id);
-    if (!thread || thread.deleted) return res.error(404,  `We don't have any thread with id ${req.params.id}.`);
+    if (!thread || thread.deleted) return res.error(404, `We don't have any thread with id ${req.params.id}.`);
     const user = req.user;
     if (user.id != thread.authorID && !user.admin)
         return res.error(403, "You have not got permission for this.");
@@ -62,7 +62,7 @@ app.post("/:id/delete", async (req, res) => {
     thread.deleted = true;
     await thread.save();
 
-    res.complate(thread);
+    res.complate(thread.toObject({ virtuals: true }));
 
 })
 

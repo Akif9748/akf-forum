@@ -17,8 +17,8 @@ app.get("/:id", async (req, res) => {
 
     if (member && (user?.admin || !member.deleted)) {
 
-        const message = await MessageModel.count({ authorID: id });
-        const thread = await ThreadModel.count({ authorID: id });
+        const message = await MessageModel.count({ "author.id": id });// this place was having problem. fixed
+        const thread = await ThreadModel.count({ "author.id": id });
         res.render("user", { user, member, counts: { message, thread } })
     }
     else res.error(404, "We have not got this user.");

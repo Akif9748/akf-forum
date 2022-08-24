@@ -12,7 +12,7 @@ app.get("/:id", async (req, res) => {
 
     if (!message || (message.deleted && req.user && !req.user.admin)) return res.error(404, `We don't have any thread with id ${id}.`);
 
-    res.complate(message);
+    res.complate(message.toObject({ virtuals: true }));
 
 })
 
@@ -29,13 +29,13 @@ app.post("/", rateLimit({
 
     const thread = await ThreadModel.get(threadID);
 
-    if (!thread) return res.error(404,  `We don't have any thread with id ${threadID}.`);
+    if (!thread) return res.error(404, `We don't have any thread with id ${threadID}.`);
 
     const message = await new MessageModel({ content, author: req.user, threadID: thread.id }).takeId();
     await message.save();
     await thread.push(message.id).save();
 
-    res.complate(message);
+    res.complate(message.toObject({ virtuals: true }));
 
 })
 app.post("/:id/react/:type", async (req, res) => {
@@ -50,8 +50,8 @@ app.post("/:id/react/:type", async (req, res) => {
         message.markModified("react");
         await message.save();
 
-        const arr = Object.values(message.react)
-        res.complate(arr.filter(Boolean).length - arr.filter(x => !x).length)
+       
+        res.complate(message.toObject({ virtuals: true }));
     } else error(res, 404, `We don't have any message with id ${req.params.id}.`);
 
 
@@ -59,14 +59,14 @@ app.post("/:id/react/:type", async (req, res) => {
 
 app.post("/:id/delete", async (req, res) => {
     const message = await MessageModel.get(req.params.id);
-    if (!message || (message.deleted && req.user && !req.user.admin)) return res.error( 404, "We have not got any message declared as this id.");
+    if (!message || (message.deleted && req.user && !req.user.admin)) return res.error(404, "We have not got any message declared as this id.");
     const user = req.user;
     if (user.id != message.authorID && !user.admin)
-        return res.error( 403, "You have not got permission for this.");
+        return res.error(403, "You have not got permission for this.");
     message.deleted = true;
     await message.save();
 
-    res.complate(message);
+    res.complate(message.toObject({ virtuals: true }));
 
 })
 

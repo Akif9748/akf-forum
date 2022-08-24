@@ -11,10 +11,9 @@ const { SecretModel, UserModel } = require("../../models")
  */
 
 app.use(async (req, res, next) => {
-    res.error = (status, error) =>
-        res.status(status).json({ status, result: { error } })
+    res.error = (status, error) => res.status(status).json(error);
 
-    res.complate = result => res.status(200).json({ status: 200, result });
+    res.complate = result => res.status(200).json(result);
 
     if (req.user) return next();
     const { username = null, password = null } = req.headers;

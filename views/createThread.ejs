@@ -36,9 +36,9 @@
                     });
               
 
-                    if (response.result) {
+                    if (response) {
                         alert("Thread opened");
-                        window.location.href = "/threads/" + response.result.id;
+                        window.location.href = "/threads/" + response.id;
                     }
 
                 });

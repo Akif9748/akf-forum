@@ -18,6 +18,10 @@ app.use(express.json());
 app.use(async (req, res, next) => {
         res.error = (type, error) => res.status(type).render("error", { type, error });
         req.user = await UserModel.get(req.session.userid);
+        if (user.deleted) {
+                req.session.destroy();
+                return res.error(403, "Your account has been deleted.");
+        }
         next();
 });
 

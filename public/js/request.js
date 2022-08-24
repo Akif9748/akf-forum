@@ -8,7 +8,7 @@ export default async function request(link, method = "POST", body={}) {
             }
         }).then(res => res.json())
 
-        if (res.result.error) return alert(res.result.error);
+        if (res.error) return alert(res.error);
 
         return res;
 

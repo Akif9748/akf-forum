@@ -16,6 +16,10 @@ const schema = new mongoose.Schema({
 })
 
 schema.virtual('authorID').get(function() { return this.author?.id; });
+schema.virtual('reactCount').get(function() {
+    const arr = Object.values(this.react)
+    return arr.filter(Boolean).length - arr.filter(x => !x).length; 
+});
 
 schema.methods.takeId = async function () {
     this.id = String(await model.count() || 0);

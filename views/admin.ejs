@@ -25,8 +25,8 @@
 
                     const response = await request("/api/users/" + e.target[0].value + "/admin");
 
-                    if (response.result.admin) 
-                        alert("Making admin of "+response.result.name+" is success!");
+                    if (response.admin) 
+                        alert("Making admin of "+response.name+" is success!");
                     
                 });
 

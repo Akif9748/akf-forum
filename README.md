@@ -75,7 +75,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 | auto-scroll  | 🟢 | LOW |
 | Multi-theme support | 🔴 | LOW |
 | Search | 🔴 | MEDIUM |
-| Better view | 🟢 | MEDIUM |
+| Better view, page support | 🔴 | MEDIUM |
 | Sending message etc. will use fetch API | 🟢 | HIGH |
 
 ## Screenshot

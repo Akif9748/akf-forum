@@ -60,14 +60,14 @@
 
               const response = await request("/api/users/<%= member.id %>/admin");
   
-              if (response.result.admin)
-                return alert("Making admin of " + response.result.name + " is success!");
+              if (response.admin)
+                return alert("Making admin of " + response.name + " is success!");
 
             }
 
             const response = await request("/api/users/<%= member.id %>/delete");
      
-            if (response.result.deleted)
+            if (response.deleted)
               alert("User Deleted");
 
           });
