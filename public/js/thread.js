@@ -16,7 +16,7 @@ function renderMessage(message) {
         <a href=${"/users/" + message.author.id}> ${message.author.name}</a>:
     </h2>
 
-    <h2>${message.content}</h2><br>
+    <p>${message.content}</p><br>
     <div id="message-delete-${message.id}">
     ${!message.deleted ?
             `<form style="display:inline;">
@@ -40,7 +40,7 @@ function renderMessage(message) {
  */
 (async () => {
 
-    const { result } = await fetch(`/api/threads/${messages.getAttribute("value")}/messages/`).then(res => res.json());
+    const result = await fetch(`/api/threads/${messages.getAttribute("value")}/messages/`).then(res => res.json());
  
     if (result?.error) {
 
@@ -75,8 +75,8 @@ function renderMessage(message) {
         .then(res => {
             if (!res) return;
             form.reset();
-            res.result.reactCount = 0;
-            renderMessage(res.result);
+            res.reactCount = 0;
+            renderMessage(res);
         });
 });
 
@@ -88,7 +88,7 @@ document.addEventListener("click", async e => {
  //   e.preventDefault();
     if (e.target.id === "delete_thread") {
         const response = await request("/api/threads/" + e.target.value + "/delete");
-        if (response.result.deleted) {
+        if (response.deleted) {
             alert("Thread deleted");
             window.location.href = "/threads";
         }
@@ -96,7 +96,7 @@ document.addEventListener("click", async e => {
     } else if (e.target.id === "delete_message") {
         e.preventDefault();
         const response = await request(`/api/messages/${e.target.value}/delete`);
-        if (response.result.deleted) {
+        if (response.deleted) {
             alert("Message deleted");
             document.getElementById("message-delete-" + e.target.value).innerHTML="<h3 style=\"display:inline;\">This message has been deleted</h3>";
         }
@@ -107,6 +107,6 @@ document.addEventListener("click", async e => {
     if (!e.target.id.includes("like")) return;
     const res = await request("/api/messages/" + e.target.value + "/react/" + e.target.id)
 
-    document.getElementById("count" + e.target.value).innerHTML = res.result;
+    document.getElementById("count" + e.target.value).innerHTML = res.reactCount;
 
 });
