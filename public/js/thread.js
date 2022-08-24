@@ -1,7 +1,7 @@
 import request from "./request.js";
 
 const messages = document.getElementById("messages");
-
+let messages_raw = [];
 function renderMessage(message) {
     const messageElement = document.createElement("div");
     messageElement.classList.add("message");
@@ -16,7 +16,7 @@ function renderMessage(message) {
         <a href=${"/users/" + message.author.id}> ${message.author.name}</a>:
     </h2>
 
-    <p>${message.content.replaceAll("\n","<br>")}</p><br>
+    <p>${message.content.replaceAll("\n", "<br>")}</p><br>
     <div id="message-delete-${message.id}">
     ${!message.deleted ?
             `<form style="display:inline;">
@@ -40,18 +40,17 @@ function renderMessage(message) {
  */
 (async () => {
 
-    const result = await fetch(`/api/threads/${messages.getAttribute("value")}/messages/`).then(res => res.json());
- 
-    if (result?.error) {
+    messages_raw = await fetch(`/api/threads/${messages.getAttribute("value")}/messages/`).then(res => res.json());
+    if (messages_raw?.error) {
 
         document.getElementById("messages").innerHTML
             += '<div class="message"><h1>THIS THREAD HAS NOT GOT ANY MESSAGE</h1></div>';
 
 
-    } else 
-        for (const message of result) 
+    } else
+        for (const message of messages_raw)
             renderMessage(message);
-        
+
     window.scrollTo(0, document.body.scrollHeight);
 
 })();
@@ -80,7 +79,8 @@ document.getElementById("send").addEventListener("submit", async e => {
  * Button Listener
  */
 document.addEventListener("click", async e => {
- //   e.preventDefault();
+    let page = 1;
+    //   e.preventDefault();
     if (e.target.id === "delete_thread") {
         const response = await request("/api/threads/" + e.target.value + "/delete");
         if (response.deleted) {
@@ -93,12 +93,22 @@ document.addEventListener("click", async e => {
         const response = await request(`/api/messages/${e.target.value}/delete`);
         if (response.deleted) {
             alert("Message deleted");
-            document.getElementById("message-delete-" + e.target.value).innerHTML="<h3 style=\"display:inline;\">This message has been deleted</h3>";
+            document.getElementById("message-delete-" + e.target.value).innerHTML = "<h3 style=\"display:inline;\">This message has been deleted</h3>";
         }
-    } /*else if (e.target.id === "edit_thread") {
+    } else if (e.target.id === "left_page") {
+        e.preventDefault();
+        
+    }else if (e.target.id === "right_page") {
+        e.preventDefault();
+        const response = await request(`/api/messages/${e.target.value}/delete`);
+        if (response.deleted) {
+            alert("Message deleted");
+            document.getElementById("message-delete-" + e.target.value).innerHTML = "<h3 style=\"display:inline;\">This message has been deleted</h3>";
+        }
+    }/*else if (e.target.id === "edit_thread") {
       window.location.href = "/threads/<%= thread.id }/edit";
     } */
-    
+
     if (!e.target.id.includes("like")) return;
     const res = await request("/api/messages/" + e.target.value + "/react/" + e.target.id)
 
