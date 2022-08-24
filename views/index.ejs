@@ -5,8 +5,8 @@
 <body>
 
     <%- include("extra/navbar") %>
-    
-<% if (user) { %>
+
+    <% if (user) { %>
     <h1>Welcome, <a href=<%=user.getLink() %>> <%= user.name %></a>
         <img class="circle" src=<%=user.avatar %> alt=<%= user.name %>>
             <br>

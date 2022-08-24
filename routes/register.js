@@ -1,6 +1,7 @@
 const { UserModel, SecretModel } = require("../models");
 const { Router } = require("express")
 const bcrypt = require("bcrypt");
+const rateLimit = require('express-rate-limit')
 
 const app = Router();
 

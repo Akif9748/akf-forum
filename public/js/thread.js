@@ -16,7 +16,7 @@ function renderMessage(message) {
         <a href=${"/users/" + message.author.id}> ${message.author.name}</a>:
     </h2>
 
-    <p>${message.content}</p><br>
+    <p>${message.content.replaceAll("\n","<br>")}</p><br>
     <div id="message-delete-${message.id}">
     ${!message.deleted ?
             `<form style="display:inline;">
@@ -49,14 +49,9 @@ function renderMessage(message) {
 
 
     } else 
-        for (const message of result) {
-
-            const arr = Object.values(message.react || {})
-
-            message.reactCount = arr.filter(Boolean).length - arr.filter(x => !x).length;
-
+        for (const message of result) 
             renderMessage(message);
-        }
+        
     window.scrollTo(0, document.body.scrollHeight);
 
 })();

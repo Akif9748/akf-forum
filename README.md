@@ -43,6 +43,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 | Ratelimit | 🟢 | HIGH |
 | Send | 🟢 | HIGH |
 | Delete | 🟢 | HIGH |
+| Regex for scripts | 🔴 | HIGH |
 | Undelete | 🔴 | MEDIUM |
 | React | 🟢 | MEDIUM |
 | Edit | 🔴 | MEDIUM |

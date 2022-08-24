@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const app = Router();
-const rateLimit = require('express-rate-limit')
 
 const { ThreadModel, MessageModel } = require("../models")
 
@@ -32,11 +31,8 @@ app.get("/:id", async (req, res) => {
     if (thread && (user?.admin || !thread.deleted)) {
 
         const messages = await Promise.all(thread.messages.map(async id => {
-            const message = await MessageModel.get(id)
-            const arr = Object.values(message.react)
-            message.reactCount = arr.filter(Boolean).length - arr.filter(x => !x).length;
-            
-            return user?.admin || !message?.deleted ? message : null;
+            const message = await MessageModel.get(id)           
+            return user?.admin || !message?.deleted ? message.toObject({ virtuals: true }) : null;
         }));
 
         res.render("thread", { thread, messages, user,scroll:req.query.scroll || false });

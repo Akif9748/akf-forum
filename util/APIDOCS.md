@@ -32,7 +32,7 @@ You need this headers for send request to API:
 - POST `/api/messages/:id/react/:type` for react to a message.
 
 ### Example request:
-```GET /api/message/1```
+```GET /api/messages/1```
 
 #### Example API Output:
  ```json
