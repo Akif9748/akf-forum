@@ -6,7 +6,12 @@ const app = Router();
 
 app.get("/", (req, res) => res.render("register"));
 
-app.post("/", async (req, res) => {
+app.post("/", rateLimit({
+    windowMs: 24*60*60_000, max: 1, standardHeaders: true, legacyHeaders: false,
+    handler: (request, response, next, options) =>
+            response.error(options.statusCode, "You are begin ratelimited")
+           
+}), async (req, res) => {
     req.session.userid = null;
 
 

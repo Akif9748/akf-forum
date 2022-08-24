@@ -66,7 +66,7 @@ function renderMessage(message) {
 /**
  * Message Sender
  */
- document.getElementById("send").addEventListener("submit", async e => {
+document.getElementById("send").addEventListener("submit", async e => {
 
     e.preventDefault();
     const form = e.target;
