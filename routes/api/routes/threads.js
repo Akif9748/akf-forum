@@ -32,7 +32,7 @@ app.get("/:id/messages/", async (req, res) => {
 
     if (!messages.length) return res.error(404, "We don't have any messages in this thread.");
 
-    res.complate(messages.toObject({ virtuals: true }));
+    res.complate(messages.map(x => x.toObject({ virtuals: true })));
 
 })
 

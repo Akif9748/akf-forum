@@ -8,7 +8,7 @@ const app = Router();
 
 app.get("/:id", async (req, res) => {
 
-    const message = await MessageModel.get(id);
+    const message = await MessageModel.get(req.params.id);
 
     if (!message || (message.deleted && req.user && !req.user.admin)) return res.error(404, `We don't have any thread with id ${id}.`);
 
