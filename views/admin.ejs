@@ -1,40 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include("extra/old_header", {title: "Admin panel!" }) %>
-
-    <body>
-
-        <%- include("extra/old_navbar", {user}) %>
-
-            <h1>Welcome to the admin panel of the forum, <%= user.name %>!</h1>
-
-            <form>
-                <h2>Write an ID to give someone admin permissions:</h2>
-                <input name="userid"></input>
-                <hr>
-                <button class="big" type="submit">Give admin permissions!</button>
-            </form>
-
-            <script type="module">
-
-                import request from "../../js/request.js";
-
-                document.addEventListener("submit", async e => {
-                    e.preventDefault();
-
-                    const response = await request("/api/users/" + e.target[0].value + "/admin");
-
-                    if (response.admin) 
-                        alert("Making admin of "+response.name+" is success!");
-                    
-                });
+<%- include("extra/meta", {title: "User list!" }) %>
 
 
-            </script>
-
-        <%- include("extra/old_footer") %>
-
-    </body>
-
+<body style="text-align: center;">
+  <%- include("extra/navbar") %>
+<b>SİLME LAN İT BEN SİLECEĞİM</b>
+    <h1 style="color: #4d18e6;">Welcome to the admin panel of the forum, <%= user.name %>!</h1>
+    <h2 style="color: #606060;">Write an ID to give someone admin permissions:</h2>
+</body> 
 </html>
+
+<!--tam olarak neresi, body içi de, sana komik bisey gostercektim kayybolmus.
+veritabanı sifrem sence neydi fdsajıgdsıgasd nereden bileyim oradan müneccime mi benziyorum
+neyse tamam sdapgdsjagsadp
+lşösdlkşsdklsklsdkl buradan da konuşmadık demeyiz
+ evet benziyorsn cogu seyi tahmin ediyorsun. buradan konusalim artik zeynep goruldu yok burada, ney yazdiysan da gdiyior gdsagdsgdsh
+-->
