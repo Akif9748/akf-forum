@@ -90,12 +90,12 @@ And, you can learn about API in `util/APIDOCS.md`.
 ### New Theme
 - [x] Users
 - [x] Threads
-- [ ] Login
-- [ ] Register
+- [x] Login
+- [x] Register
 - [ ] Thread
 - [ ] User
-- [ ] Main page
-- [ ] Error
+- [x] Main page
+- [x] Error
 - [ ] ADMIN
 - [ ] Create Thread
 

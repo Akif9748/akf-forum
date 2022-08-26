@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include("extra/old_header", {title: "Main page!" }) %>
-<body>
+<%- include("extra/meta", {title: "User list!" }) %>
 
-    <%- include("extra/old_navbar") %>
 
-    <% if (user) { %>
-    <h1>Welcome, <a href=<%=user.getLink() %>> <%= user.name %></a>
-        <img class="circle" src=<%=user.avatar %> alt=<%= user.name %>>
+<body style="text-align: center;">
+  <%- include("extra/navbar") %>
+
+  <% if (user) { %>
+    <h1 style="color: #4d18e6;">Welcome,  <div class="box-username"><%= user.name %>
+                <div class="avatar"><img src="<%=user.avatar %>"></div>
+            </div>
             <br>
             You can log out of the site here:
-            <a href="/login/"><button>LOGOUT</button> </a>
+            <a href="/login" class="btn-outline-primary">LOGOUT</a>
     </h1>
 
     <br>
 <% } else { %>
-    <h1>Welcome, Guest!<br>You can press the button to register:
-        <a href="/register/"> <button class="big">REGISTER</button> </a>
-       
+    <h1 style="color: #4d18e6;">Welcome, Guest!<br>You can press the button to register:
+        <a href="/register" class="btn-outline-primary">REGISTER</a>
+
     </h1>
  <% } %> 
-    <h1>Statistics:</h1>
+    <h1 style="color: #606060;">Statistics:</h1>
     <ul>
         <li>
             <h3>Message count: <b>
@@ -45,9 +47,7 @@
         </li>
 
     </ul>
-
-    <%- include("extra/old_footer") %>
-
 </body>
 
 </html>
+

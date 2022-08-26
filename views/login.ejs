@@ -1,26 +1,23 @@
+
+</html>
 <!DOCTYPE html>
 <html lang="en">
 
-    <%- include("extra/old_header", {title: "Login page!" }) %>
-
-<body>
-    <!-- Navbar: -->
-    <a href="/"><img class="logo" src="/images/logo.jpg" alt="AKF-FORUM"></a>
-    <br>
-    <a href="/register/"> <button class="big">REGISTER</button> </a>
-    <hr>
+<%- include("extra/meta", {title: "Log in!" }) %>
 
 
+<body style="text-align: center;">
+    <%- include("extra/navbar") %>
 
-    <h1>Login</h1>
-    <hr>
-    <form action="/login?redirect=<%= redirect %>" method="post">
-        <input type="text" name="username" placeholder="Username" id="username" required>
-        <input type="password" name="password" placeholder="Password" id="password" required>
-        <input type="submit" value="Login">
-    </form>
+    <h1 style="color: #4d18e6;">Login</h1>
 
-    <%- include("extra/old_footer") %>
+  <form action="/login?redirect=<%= redirect %>" method="post">
+      <input type="text" name="username" placeholder="Username" id="username" required>
+      <input type="password" name="password" placeholder="Password" id="password" required>
+      <input type="submit" value="Login">
+  </form>
+
+ 
 </body>
 
 </html>

@@ -16,8 +16,8 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(async (req, res, next) => {
-        res.error = (type, error) => res.status(type).render("error", { type, error });
         req.user = await UserModel.get(req.session.userid);
+        res.error = (type, error) => res.status(type).render("error", {user: req.user, type, error });
         if (req.user?.deleted) {
                 req.session.destroy();
                 return res.error(403, "Your account has been deleted.");

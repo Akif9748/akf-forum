@@ -5,7 +5,7 @@ const rateLimit = require('express-rate-limit')
 
 const app = Router();
 
-app.get("/", (req, res) => res.render("register"));
+app.get("/", (req, res) => res.render("register",{user:null}));
 
 app.post("/", rateLimit({
     windowMs: 24*60*60_000, max: 1, standardHeaders: true, legacyHeaders: false,

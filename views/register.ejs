@@ -1,23 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-<%- include("extra/old_header", {title: "Register!" }) %>
-
-<body>
+<%- include("extra/meta", {title: "Register!" }) %>
 
 
-    <a href="/"><img class="logo" src="/images/logo.jpg" alt="AKF-FORUM"></a>
-    <br>
+<body style="text-align: center;">
+    <%- include("extra/navbar") %>
 
-    <a href="/login/"> <button class="big">LOGIN</button> </a>
+    <h1 style="color: #4d18e6;">Register</h1>
 
-    <hr>
-
-
-
-    <h1>Register</h1>
-    <hr>
     <form action="/register" method="post">
 
       
@@ -30,7 +21,7 @@
         <input type="submit" value="Register">
     </form>
 
-    <%- include("extra/old_footer") %>
+ 
 </body>
 
 </html>
