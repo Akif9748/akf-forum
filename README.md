@@ -91,14 +91,14 @@ And, you can learn about API in `util/APIDOCS.md`.
 | Sending message etc. will use fetch API | 🟢 | HIGH |
 
 ### New Theme
-- [x] Users
-- [x] Threads
 - [x] Login
 - [x] Register
-- [ ] Thread
-- [ ] User
 - [x] Main page
 - [x] Error
-- [ ] ADMIN
+- [x] Users
+- [x] Threads
+- [ ] Thread
+- [ ] User
+- [ ] Admin
 - [ ] Create Thread
 
