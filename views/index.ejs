@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include("extra/header", {title: "Main page!" }) %>
+<%- include("extra/old_header", {title: "Main page!" }) %>
 <body>
 
-    <%- include("extra/navbar") %>
+    <%- include("extra/old_navbar") %>
 
     <% if (user) { %>
     <h1>Welcome, <a href=<%=user.getLink() %>> <%= user.name %></a>
@@ -46,7 +46,7 @@
 
     </ul>
 
-    <%- include("extra/footer") %>
+    <%- include("extra/old_footer") %>
 
 </body>
 

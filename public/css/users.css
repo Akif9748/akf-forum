@@ -1,0 +1,41 @@
+.users {
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.user-box {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 5px 0 #beb9b9;
+}
+
+.user-box-title {
+  padding: 10px;
+  margin: 8px;
+  font-weight: 500;
+}
+
+.user-box-title>span {
+  color: #ff0000;
+}
+
+.user-box-img {
+  width: 80px;
+  height: 80px;
+}
+
+@media (max-width: 992px) {
+  .users {
+    display: block;
+  }
+
+  .user-box {
+    margin-bottom: 10px;
+  }
+}

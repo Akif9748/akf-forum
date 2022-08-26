@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+<%- include("extra/meta", {title: "Threads!" }) %>
 
-<%- include("extra/header", {title: "Thread list" }) %>
+<body>
+  <link rel="stylesheet" href="/css/threads.css" />
 
-    <body>
+<%- include("extra/navbar") %>
 
-        <%- include("extra/navbar", {user}) %>
+<div class="threads">
 
+  <% threads.forEach(thread=>{ %>
+    <a href="<%= thread.getLink() %>" class="">
+        <div class="threads-box">
+          <div class="thread-box-title">
+            <% if (thread.deleted) { %> <span>[DELETED]</span><% } %>
+            <%= thread.title  %>
+          </div>
+          <div class="box-username">
+            <%= user.name %>  <div class="avatar"><img src="<%=user.avatar %>"> </div>
+          </div>
+             
+        </div>
+    </a>             
+    <br>                
+   <% }); %>
+        
+</div>
 
-            <h1>Threads:</h1>
-            <ul>
-                <% threads.forEach(thread=>{ %>
-                    <li>
-                        <h1 style="display: inline;"> <a href=<%= thread.getLink() %> ><%= thread.title %></a></h1> 
-                        <h3 style="display: inline;"> | By <%= thread.author.name  %> <%= thread.deleted ? "(DELETED)" :""  %></h3>
-                    </li>
-                <% }); %>
-            </ul>
-            
-
-            <%- include("extra/footer") %>
-    </body>
-
-</html>
+</body>

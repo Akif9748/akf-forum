@@ -1,0 +1,36 @@
+
+.threads {
+  width: 100%;
+  padding: 20px;
+}
+
+.threads-box {
+  width: 100%;
+  padding: 8px;
+  box-shadow: 0 0 5px 0 #cbcbcb;
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 0px 8px 0px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.threads-box:hover {
+  background-color: #e2e2e2;
+}
+.thread-box-title {
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.thread-box-title>span {
+  color: #ff0000;
+}
+
+
+@media (max-width: 480px) {
+  .threads-box {
+    flex-direction: column;
+  }
+}

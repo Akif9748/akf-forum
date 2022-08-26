@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include("extra/header", {title: "Admin panel!" }) %>
+<%- include("extra/old_header", {title: "Admin panel!" }) %>
 
     <body>
 
-        <%- include("extra/navbar", {user}) %>
+        <%- include("extra/old_navbar", {user}) %>
 
             <h1>Welcome to the admin panel of the forum, <%= user.name %>!</h1>
 
@@ -33,7 +33,7 @@
 
             </script>
 
-        <%- include("extra/footer") %>
+        <%- include("extra/old_footer") %>
 
     </body>
 

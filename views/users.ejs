@@ -1,27 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include("extra/header", {title: "User list!" }) %>
-
-    <body>
-
-        <%- include("extra/navbar", {user}) %>
+<%- include("extra/meta", {title: "User list!" }) %>
 
 
-            <h1>USERS:</h1>
-            <ul>
-                <% users.forEach(user=>{ %>
-                    <li>
-                        <h1><a href=<%= user.getLink() %> > <%= user.name %> <%= user.deleted ? "(DELETED)" :""  %></a> 
-                            <img class="circle" src=<%=user.avatar %> alt=<%= user.name %>>
-                        </h1>
-                    </li>
-                <% }); %>
-            </ul>
+<body>
+  <link rel="stylesheet" href="/css/users.css" />
 
+  <%- include("extra/navbar") %>
 
+  <div class="users">
+  <% users.forEach(user=>{ %>
+      <div class="user-box">
+        <img src="<%=user.avatar %>" class="user-box-img">
+        <div class="user-box-title"> <a href="<%= user.getLink() %>">
+          <% if (user.deleted) { %> <span>[DELETED]</span><% } %>
+          <%= user.name %></a></div>
+      </div>
+  <% }); %>
 
-            <%- include("extra/footer") %>
-    </body>
+  </div>
+</body>
 
-</html>

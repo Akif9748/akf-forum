@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: initial;
+}
+
+.header {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+}
+
+.logo {
+    padding: 10px;
+    font-size: 28px;
+    color: #4d18e6;
+    font-weight: 900;
+}
+
+.logo>span {
+    color: #606060;
+}
+
+.buttons {
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.btn-primary {
+    color: #e8e8e8;
+    background-color: #4d18e6;
+    padding: 10px 20px 10px 20px;
+    border-radius: 4px;
+    font-weight: 700;
+    margin: 10px;
+    cursor: pointer;
+    border: 2px solid #4d18e6;
+}
+
+.btn-outline-primary {
+    color: #4d18e6;
+    padding: 10px 20px 10px 20px;
+
+    border-radius: 4px;
+    font-weight: 700;
+    margin: 10px;
+    cursor: pointer;
+    border: 2px solid #e2e2e2;
+}
+
+.menu {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn-primary:hover {
+    color: #4d18e6;
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid #4d18e6;
+}
+
+.menu-item {
+    padding: 10px;
+    font-weight: 700;
+    background-color: #606060;
+    color: #ffffff;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+    margin: 0px 10px 0px 0px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.active-menu {
+    background-color: #4d18e6;
+}
+
+body {
+    font-family: Poppins;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+
+.btn-outline-primary:hover {
+    border: 2px solid #4d18e6;
+}
+
+
+.menu-item:hover {
+    background-color: #4d18e6;
+}
+
+.admin-bar {
+    font-size: 15px;
+    color: #ffffff;
+    background: #4d18e6;
+    text-align: center;
+}
+
+div.avatar {
+    padding-left: 10px;
+}
+
+.avatar>img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.box-username {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: #4d18e6;
+}
+
+@media (max-width: 992px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu {
+        flex-direction: column;
+    }
+
+    .menu-item {
+        margin: 0px 10px 10px 0px;
+    }
+
+
+}
+
+@media (max-width: 480px) {
+    .btn-outline-primary {
+        width: 100%;
+        text-align: center;
+    }
+
+    .buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-primary {
+        width: 100%;
+        text-align: center;
+    }
+}

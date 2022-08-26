@@ -1,11 +1,10 @@
 {
   "name": "akf-forum",
   "version": "2.9.2",
-  "description": "A forum script written in Node.js",
+  "description": "A Node.js based forum software",
   "main": "index.js",
   "scripts": {
-    "start": "node .",
-    "reset": "node reset.js"
+    "start": "node ."
   },
   "repository": {
     "type": "git",
@@ -13,7 +12,8 @@
   },
   "author": "Akif9748",
   "contributors": [
-    "Camroku"
+    "Camroku",
+    "Tokmak"
   ],
   "license": "GPL-3.0-or-later",
   "bugs": {

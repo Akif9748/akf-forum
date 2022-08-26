@@ -3,6 +3,8 @@ const { Router } = require("express");
 const app = Router();
 
 app.get("/", async (req, res) => {
+    
+
     const
         mem = process.memoryUsage().heapUsed / Math.pow(2, 20),
         users = await UserModel.count({deleted:false}),

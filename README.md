@@ -19,8 +19,13 @@ Python is only for testing 😭
 And, you can learn about API in `util/APIDOCS.md`.
 
 ## Credits
-* [Akif9748](https://github.com/Akif9748) - Project mainteiner, main developer
-* [Camroku](https://github.com/Camroku) - Made stylesheets
+* [Akif9748](https://github.com/Akif9748) - Project mainteiner, main developer, made **old** frontend
+* [Tokmak](https://github.com/-) - Made **new** frontend
+* [Camroku](https://github.com/Camroku) - Made **old** stylesheets
+
+## Screenshot
+![akf-forum](https://user-images.githubusercontent.com/70021050/160255959-ef216cba-1348-4d4b-9347-fe67e21348e7.png)
+
 
 ## Roadmap
 ### User
@@ -60,7 +65,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 ### API
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
-| RATELIMITS | 🟡 | MEDIUM |
+| RATELIMITS | 🟢 | MEDIUM |
 | Other clients for forum via API | 🟢 | LOW |
 | Get message**s** | 🟢 | MEDIUM |
 | Send message | 🟢 | MEDIUM |
@@ -74,10 +79,20 @@ And, you can learn about API in `util/APIDOCS.md`.
 | ----- | -------- | -------- |
 | Footer | 🟢 | LOW |
 | auto-scroll  | 🟢 | LOW |
-| Multi-theme support | 🔴 | LOW |
-| Search | 🔴 | MEDIUM |
+| Multi-theme support | 🟡 | LOW |
+| Search | 🟡 | MEDIUM |
 | Better view, page support, support message limit correct | 🔴 | MEDIUM |
 | Sending message etc. will use fetch API | 🟢 | HIGH |
 
-## Screenshot
-![akf-forum](https://user-images.githubusercontent.com/70021050/160255959-ef216cba-1348-4d4b-9347-fe67e21348e7.png)
+### New Theme
+- [x] Users
+- [x] Threads
+- [ ] Login
+- [ ] Register
+- [ ] Thread
+- [ ] User
+- [ ] Main page
+- [ ] Error
+- [ ] ADMIN
+- [ ] Create Thread
+
