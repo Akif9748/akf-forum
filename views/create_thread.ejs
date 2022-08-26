@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("extra/meta", {title: "User list!" }) %>
+
+
+<body style="text-align: center;">
+  <%- include("extra/navbar") %>
+
+
+  <form>
+    <h2 style="color: #4d18e6;">Title:</h2>
+    <input name="title"></input>
+
+    <hr>
+    <h2 style="color: #4d18e6;">Content:</h2>
+    <textarea rows="4" cols="50" name="content"></textarea>
+
+    <hr>
+    <button class="big" type="submit">Create Thread!</button>
+</form>
+
+
+<script type="module">
+
+    import request from "../../js/request.js";
+
+    document.addEventListener("submit", async e => {
+        e.preventDefault();
+        const form = e.target;
+        const data = new FormData(form);
+
+        const response = await request("/api/threads/", "POST", { 
+            title:  data.get("title"), content: data.get("content")
+        });
+  
+
+        if (response) {
+            alert("Thread opened");
+            window.location.href = "/threads/" + response.id;
+        }
+
+    });
+
+
+</script>
+</body>
+
+</html>

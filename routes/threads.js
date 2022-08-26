@@ -17,7 +17,7 @@ app.get("/", async (req, res) => {
 app.get("/create*", async (req, res) => {
 
     const user = req.user
-    res.render("createThread", { user })
+    res.render("create_thread", { user })
 
 });
 

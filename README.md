@@ -97,8 +97,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 - [x] Error
 - [x] Users
 - [x] Threads
+- [x] Create Thread
 - [ ] Thread
 - [ ] User
 - [ ] Admin
-- [ ] Create Thread
-
