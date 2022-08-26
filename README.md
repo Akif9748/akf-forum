@@ -24,7 +24,10 @@ And, you can learn about API in `util/APIDOCS.md`.
 * [Camroku](https://github.com/Camroku) - Made **old** stylesheets
 
 ## Screenshot
+### Old frontend
 ![akf-forum](https://user-images.githubusercontent.com/70021050/160255959-ef216cba-1348-4d4b-9347-fe67e21348e7.png)
+### New frontend
+![image](https://user-images.githubusercontent.com/70021050/186941146-f9a8fbf8-9b2b-4028-afc8-81cff559d9fb.png)
 
 
 ## Roadmap
