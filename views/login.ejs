@@ -11,7 +11,7 @@
 
     <h1 class="title">Login</h1>
 
-  <form action="/login?redirect=<%= redirect %>" method="post">
+  <form action="/login?redirect=<%= redirect !== "/register" ? redirect : "/"  %>" method="post">
     
       <input type="text" name="username" placeholder="Username" class="input" required>
       <input type="password" name="password" placeholder="Password" class="input" required>
