@@ -4,17 +4,18 @@
 <html lang="en">
 
 <%- include("extra/meta", {title: "Log in!" }) %>
-
+  <link rel="stylesheet" href="/css/login.css" />
 
 <body style="text-align: center;">
     <%- include("extra/navbar") %>
 
-    <h1 style="color: #4d18e6;">Login</h1>
+    <h1 class="title">Login</h1>
 
   <form action="/login?redirect=<%= redirect %>" method="post">
-      <input type="text" name="username" placeholder="Username" id="username" required>
-      <input type="password" name="password" placeholder="Password" id="password" required>
-      <input type="submit" value="Login">
+    
+      <input type="text" name="username" placeholder="Username" class="input" required>
+      <input type="password" name="password" placeholder="Password" class="input" required>
+      <input type="submit" style="width:100%"class="btn-primary" value="Login">
   </form>
 
  
