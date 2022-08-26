@@ -33,7 +33,9 @@ And, you can learn about API in `util/APIDOCS.md`.
 ## Roadmap
 ### TO-DO:
 - If thread deleted, not show its messages in API.
-- If redirect => /register, return
+- Thread.ejs fix with new theme
+- Profile photos will store in database
+
 ### Frontend
 ### User
 | To do | Is done? | Priority |
@@ -56,7 +58,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 | Send | 🟢 | HIGH |
 | Delete | 🟢 | HIGH |
 | Regex for scripts | 🔴 | HIGH |
-| Undelete | 🔴 | MEDIUM |
+| Undelete | 🟡 | MEDIUM |
 | React | 🟢 | MEDIUM |
 | Edit | 🔴 | MEDIUM |
 
@@ -66,7 +68,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 | Ratelimit | 🟢 | HIGH |
 | Create | 🟢 | HIGH |
 | Delete | 🟢 | HIGH |
-| Undelete | 🔴 | MEDIUM |
+| Undelete | 🟢 | MEDIUM |
 | Edit | 🔴 | MEDIUM |
 
 ### API
@@ -83,21 +85,15 @@ And, you can learn about API in `util/APIDOCS.md`.
 ### Other
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
-| Footer | 🟢 | LOW |
+| Footer | 🔴 | LOW |
 | auto-scroll  | 🟢 | LOW |
-| Multi-theme support | 🟡 | LOW |
-| Search | 🟡 | MEDIUM |
-| Better view, page support, support message limit correct | 🔴 | MEDIUM |
-| Sending message etc. will use fetch API | 🟢 | HIGH |
+| Multi-theme support, black theme | 🟡 | LOW |
+| Search | 🔴 | MEDIUM |
+| Page support, support message limit correct | 🔴 | MEDIUM |
+| from form to AJAX | 🟢 | HIGH |
 
-### New Theme
-- [x] Login
-- [x] Register
-- [x] Main page
-- [x] Error
-- [x] Users
-- [x] Threads
-- [x] Create Thread
-- [ ] Thread
-- [ ] User
-- [ ] Admin
+## Major Version History
+- V3: New Theme
+- V2: Backend fix, mongoose is fixed. Really big fix.
+- V1: Mongoose added.
+- V0: Birth with quick.db

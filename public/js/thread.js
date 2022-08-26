@@ -79,13 +79,20 @@ document.getElementById("send").addEventListener("submit", async e => {
  * Button Listener
  */
 document.addEventListener("click", async e => {
-    let page = 1;
     //   e.preventDefault();
     if (e.target.id === "delete_thread") {
         const response = await request("/api/threads/" + e.target.value + "/delete");
         if (response.deleted) {
             alert("Thread deleted");
-            window.location.href = "/threads";
+            location.reload();
+        }
+
+    } else if (e.target.id === "undelete_thread") {
+        const response = await request("/api/threads/" + e.target.value + "/undelete");
+        if (!response.deleted) {
+            alert("Thread undeleted");
+            location.reload();
+
         }
 
     } else if (e.target.id === "delete_message") {
@@ -95,17 +102,7 @@ document.addEventListener("click", async e => {
             alert("Message deleted");
             document.getElementById("message-delete-" + e.target.value).innerHTML = "<h3 style=\"display:inline;\">This message has been deleted</h3>";
         }
-    } else if (e.target.id === "left_page") {
-        e.preventDefault();
-        
-    }else if (e.target.id === "right_page") {
-        e.preventDefault();
-        const response = await request(`/api/messages/${e.target.value}/delete`);
-        if (response.deleted) {
-            alert("Message deleted");
-            document.getElementById("message-delete-" + e.target.value).innerHTML = "<h3 style=\"display:inline;\">This message has been deleted</h3>";
-        }
-    }/*else if (e.target.id === "edit_thread") {
+    } /*else if (e.target.id === "edit_thread") {
       window.location.href = "/threads/<%= thread.id }/edit";
     } */
 

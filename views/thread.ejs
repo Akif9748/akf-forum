@@ -1,69 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include("extra/old_header", { title: thread.title }) %>
-
-  <body>
-
-    <%- include("extra/old_navbar", {user}) %>
+<%- include("extra/meta", {title: "Thread list!" }) %>
 
 
-      <h1 style="font-size: 35px;">
-        <%= thread.title %>
-      </h1>
+<body style="text-align: center;">
+  <%- include("extra/navbar") %>
 
-      <h2 style="display:inline;">By <a href=<%="/users/" + thread.author.id %>> <%= thread.author.name %></a>
-        <img class="circle" src=<%=thread.author.avatar %> alt=<%= thread.author.name %>>
-      </h2>
-
-      <% if (user && !thread.deleted){ %>
-
-        <button id="delete_thread" value="<%= thread.id %>" style="display:inline;" type="submit">DELETE</button>
-        <button id="edit_thread" style="display:inline;" type="submit">EDIT</button>
-        <% } else if (thread.deleted) { %>
-          <h3 style="display:inline;">This thread has been deleted</h3>
-          <% }; %>
-
-            <hr>
+  <link rel="stylesheet" href="/css/thread.css" />
+ 
 
 
-            <div id="messages" value="<%= thread.id %>">
-              <% if (!user){ %>
-                <h1>Guests cant view messages!</h1>
-                <% }%>
-            </div>
+  <h1 style="font-size: 35px;color: #4d18e6;" >
+    <%= thread.title %>
+  </h1>
 
-            <hr>
+  <h2 style="display:inline;">By <a href=<%="/users/" + thread.author.id %>> <%= thread.author.name %></a>
+    <img class="circle" src=<%=thread.author.avatar %> alt=<%= thread.author.name %>>
+  </h2>
+
+  <% if (user && !thread.deleted){ %>
+
+    <button id="delete_thread" value="<%= thread.id %>" style="display:inline;" type="submit">DELETE</button>
+    <button id="edit_thread" style="display:inline;" type="submit">EDIT</button>
+    <% } else if (thread.deleted) { %>
+      <h3 style="display:inline;">This thread has been deleted</h3>
+      <button id="undelete_thread" value="<%= thread.id %>" style="display:inline;" type="submit">UNDELETE</button>
+
+      <% }; %>
 
 
-            <form id="send">
-              <textarea rows="4" cols="133" name="content"></textarea>
-              <input name="threadID" type="hidden" value="<%= thread.id %>"></input>
+        <hr>
 
-              <br>
-              <% if (user){ %>
-                <button type="submit">Send!</button>
-                <%} else {%>
-                  <button disabled>Login for send</button>
-                  <% }%>
 
-            </form>
+        <div id="messages" value="<%= thread.id %>">
+          <% if (!user){ %>
+            <h1>Guests cant view messages!</h1>
+            <% }%>
 
-            <% if (user){ %>
-              <script type="module" src="/js/thread.js"></script>
+            <!--EXAMPLE MESSAGE-->
+            <div class="message" id="message-3">
+    
+              <h3 style="float:right;">26.08.2022 15:37:42</h3>
+          
+              <h2>
+                <img class="circle" src="https://cdn.discordapp.com/avatars/539506680140922890/abd74d10aac094fc8a5ad5c86f29fdb9.png?size=1024" alt="Akif9748">
+                  <a href="/users/0"> Akif9748</a>:
+              </h2>
+          
+              <p>Example message for development</p><br>
+              <div id="message-delete-3">
+              <form style="display:inline;">
+                  <button id="delete_message" value="3" type="submit">DELETE</button>
+              </form>
+              </div>
+              <div style="float: right;">
+                  <h3 id="count3" style="display:inline;">0</h3>
+                  <button style="display:inline;" id="like" value="3">+🔼</button>
+                  <button style="display:inline;" id="dislike" value="3">-🔽</button>
+              </div>
+          </div>
+                      <!--EXAMPLE MESSAGE END-->
+
+        </div>
+
+        <hr>
+
+
+        <form id="send">
+          <textarea rows="4" cols="133" name="content"></textarea>
+          <input name="threadID" type="hidden" value="<%= thread.id %>"></input>
+
+          <br>
+          <% if (user){ %>
+            <button type="submit">Send!</button>
+            <%} else {%>
+              <button disabled>Login for send</button>
               <% }%>
-                <script>
-                  document.getElementById("message-<%= scroll %>").scrollIntoView();
-                </script>
 
-                 <!--     <div style="float: right;">
-                          <h3 id="page_count" style="display:inline;">1</h3>
-                          <button id="left_page" style=" display:inline;float: right;" type="submit">PREV</button>
-                          
-                          <button id="right_page" style="display:inline;float: right;" type="submit">NEXT</button>
-                      </div>--> 
-              
-                <%- include("extra/old_footer") %>
-  </body>
+        </form>
+
+        <% if (user){ %>
+          <script type="module" src="/js/thread.js"></script>
+        <% }%>
+        <script>
+          document.getElementById("message-<%= scroll %>").scrollIntoView();
+        </script>
+
+            <!-- BURAYA Bİ İLERİ BİR GERİ SAYFA BUTONU GELMEZ Mİ BE-->
+</body>
 
 </html>
