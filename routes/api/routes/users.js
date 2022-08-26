@@ -32,10 +32,10 @@ app.post("/:id/delete/", async (req, res) => {
 app.post("/:id/undelete/", async (req, res) => {
     if (!req.user.admin) return res.error(403, "You have not got permission for this.");
 
-    const member = await UserModel.get(id);
+    const member = await UserModel.get(req.params.id);
 
     if (!member )  return res.error(404, `We don't have any user with id ${req.params.id}.`);
-   
+
     if (!member.deleted) return res.error(404, "This user is not deleted, first, delete it.");
 
     member.deleted = false;

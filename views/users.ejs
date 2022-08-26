@@ -14,7 +14,7 @@
       <div class="user-box">
         <img src="<%=user.avatar %>" class="user-box-img">
         <div class="user-box-title"> <a href="<%= user.getLink() %>">
-          <% if (user.deleted) { %> <span>[DELETED]</span><% } %>
+          <% if (user.deleted) { %> <span style="color: RED;">[DELETED]</span><% } %>
           <%= user.name %></a></div>
       </div>
   <% }); %>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include("extra/meta", {title: "User list!" }) %>
+<%- include("extra/meta", {title: member.name }) %>
 
 
 <body style="text-align: center;">
@@ -66,17 +66,38 @@
 
         const response = await request("/api/users/<%= member.id %>/delete");
  
-        if (response.deleted)
-          alert("User Deleted");
+        if (!response.deleted) return
+          alert("User is deleted!");
+          location.reload()
 
       });
 
 
     </script>
-    <% }; %>
-      <% if (member.deleted) {%>
+  <% }; %>
+  <% if (member.deleted) {%>
         <h1>This user has been deleted!</h1>
-        <% }; %>
+
+        <form id="undelete">
+          <button class="big" type="submit">Undelete user!</button>
+        </form>
+    
+        <script type="module">
+    
+          import request from "../../js/request.js";
+    
+          document.addEventListener("submit", async e => {
+   
+            const response = await request("/api/users/<%= member.id %>/undelete");
+     
+            if (response.deleted) return;
+              alert("User is undeleted successfully!");
+    location.reload()
+          });
+    
+    
+        </script>
+  <% }; %>
 </body>
 
 </html>

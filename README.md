@@ -44,7 +44,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 | Admin | 🟢 | HIGH |
 | Message count | 🟢 | MEDIUM |
 | Delete user | 🟢 | HIGH |
-| Undelete | 🔴 | MEDIUM |
+| Undelete | 🟢 | MEDIUM |
 | About me | 🔴 | LOW |
 | Edit user | 🔴 | HIGH |
 | IP ban | 🔴 | MEDIUM |
