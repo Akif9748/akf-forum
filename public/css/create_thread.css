@@ -1,0 +1,22 @@
+.title {
+  color: #4d18e6;
+  font-weight: 700;
+}
+form{
+display: flex;
+flex-direction: column;
+align-items: center;
+max-width: 1000px;
+margin: 0 auto;
+}
+
+.input {
+  padding: 8px 10px;
+  font-family: inherit;
+  display: block;
+  font-weight: 600;
+  color: #4c4c4c;
+  width: 500px;
+  margin-bottom: 10px;
+  border: 2px solid #d9d9d9;
+}
