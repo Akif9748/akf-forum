@@ -20,7 +20,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 
 ## Credits
 * [Akif9748](https://github.com/Akif9748) - Project mainteiner, main developer, made **old** frontend
-* [Tokmak](https://github.com/-) - Made **new** frontend
+* [Tokmak](https://github.com/tokmak0) - Made **new** frontend
 * [Camroku](https://github.com/Camroku) - Made **old** stylesheets
 
 ## Screenshot
