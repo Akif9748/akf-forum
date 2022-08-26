@@ -33,7 +33,7 @@ And, you can learn about API in `util/APIDOCS.md`.
 ## Roadmap
 ### TO-DO:
 - If thread deleted, not show its messages in API.
-
+- If redirect => /register, return
 ### Frontend
 ### User
 | To do | Is done? | Priority |

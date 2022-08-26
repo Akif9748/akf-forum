@@ -1,85 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include("extra/old_header", { title: member.name }) %>
-
-  <body>
-
-    <%- include("extra/old_navbar", { user }) %>
+<%- include("extra/meta", {title: "User list!" }) %>
 
 
-      <ul>
-        <li>
-          <h1>Avatar:</h1>
-          <img style="width:256px;height:256px;" src=<%=member.avatar %> alt=<%= member.name %>>
-        </li>
+<body style="text-align: center;">
+  <%- include("extra/navbar") %>
 
-        <li>
-          <h2>Name: <%= member.name %>
-          </h2>
-        </li>
-        <li>
-          <h2>Created at:
-            <%= new Date(member.time).toLocaleString() %>
-          </h2>
+  <ul>
+    <li>
+      <h1 style="color: #4d18e6;">Avatar:</h1>
+      <img style="width:256px;height:256px;" src=<%=member.avatar %> alt=<%= member.name %>>
+    </li>
 
-
-        </li>
-        <li>
-          <h2>Is admin? <%= member.admin ? "Yes" : "No" %>
-          </h2>
-        </li>
-
-        <li>
-          <h2> Message: <%= counts.message %>
-          </h2>
-        </li>
-        <li>
-          <h2> Thread: <%= counts.thread %>
-          </h2>
-        </li>
-      </ul>
-
-      <% if (user?.admin && !member.deleted) {%>
-        <form id="admin">
-          <button class="big" type="submit">Give admin permissions!</button>
-        </form>
-
-        <form id="delete">
-          <button class="big" type="submit">Delete user!</button>
-        </form>
-
-        <script type="module">
-
-          import request from "../../js/request.js";
-
-          document.addEventListener("submit", async e => {
-            e.preventDefault();
-
-            if (e.target.id == "admin") {
-
-              const response = await request("/api/users/<%= member.id %>/admin");
-  
-              if (response.admin)
-                return alert("Making admin of " + response.name + " is success!");
-
-            }
-
-            const response = await request("/api/users/<%= member.id %>/delete");
-     
-            if (response.deleted)
-              alert("User Deleted");
-
-          });
+    <li>
+      <h2 style="color: #606060;">Name: <%= member.name %>
+      </h2>
+    </li>
+    <li>
+      <h2 style="color: #606060;">Created at:
+        <%= new Date(member.time).toLocaleString() %>
+      </h2>
 
 
-        </script>
+    </li>
+    <li>
+      <h2 style="color: #606060;">Is admin? <%= member.admin ? "Yes" : "No" %>
+      </h2>
+    </li>
+
+    <li>
+      <h2 style="color: #606060;"> Message: <%= counts.message %>
+      </h2>
+    </li>
+    <li>
+      <h2 style="color: #606060;"> Thread: <%= counts.thread %>
+      </h2>
+    </li>
+  </ul>
+
+  <% if (user?.admin && !member.deleted) {%>
+    <form id="admin">
+      <button class="big" type="submit">Give admin permissions!</button>
+    </form>
+
+    <form id="delete">
+      <button class="big" type="submit">Delete user!</button>
+    </form>
+
+    <script type="module">
+
+      import request from "../../js/request.js";
+
+      document.addEventListener("submit", async e => {
+        e.preventDefault();
+
+        if (e.target.id == "admin") {
+
+          const response = await request("/api/users/<%= member.id %>/admin");
+
+          if (response.admin)
+            return alert("Making admin of " + response.name + " is success!");
+
+        }
+
+        const response = await request("/api/users/<%= member.id %>/delete");
+ 
+        if (response.deleted)
+          alert("User Deleted");
+
+      });
+
+
+    </script>
+    <% }; %>
+      <% if (member.deleted) {%>
+        <h1>This user has been deleted!</h1>
         <% }; %>
-          <% if (member.deleted) {%>
-            <h1>This user has been deleted!</h1>
-            <% }; %>
-
-              <%- include("extra/old_footer") %>
-  </body>
+</body>
 
 </html>
