@@ -31,6 +31,10 @@ And, you can learn about API in `util/APIDOCS.md`.
 
 
 ## Roadmap
+### TO-DO:
+- If thread deleted, not show its messages in API.
+
+### Frontend
 ### User
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
@@ -66,16 +70,15 @@ And, you can learn about API in `util/APIDOCS.md`.
 | Edit | 🔴 | MEDIUM |
 
 ### API
-| To do | Is done? | Priority |
-| ----- | -------- | -------- |
-| RATELIMITS | 🟢 | MEDIUM |
-| Other clients for forum via API | 🟢 | LOW |
-| Get message**s** | 🟢 | MEDIUM |
-| Send message | 🟢 | MEDIUM |
-| Create thread | 🟢 | MEDIUM |
-| Get info about thread | 🟢 | MEDIUM |
-| Delete message & thread | 🟢 | HIGH |
-| Edit message & thread | 🔴 | HIGH |
+| To do | Is done? 
+| ----- | -------- 
+| RATELIMITS | 🟢 
+| Get message**s** | 🟢 
+| Create message & thread & user | 🟢 
+| Get message & thread & user | 🟢 
+| Delete message & thread & user | 🟢 
+| Undelete message & thread & user | 🟢 
+| Edit message & thread & user | 🔴 
 
 ### Other
 | To do | Is done? | Priority |

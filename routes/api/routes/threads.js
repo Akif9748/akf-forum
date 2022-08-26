@@ -65,5 +65,19 @@ app.post("/:id/delete", async (req, res) => {
     res.complate(thread.toObject({ virtuals: true }));
 
 })
+app.post("/:id/undelete", async (req, res) => {
+    if (!req.user.admin) return res.error(403, "You have not got permission for this.");
 
+    const thread = await ThreadModel.get(req.params.id);
+
+    if (!thread )  return res.error(404, `We don't have any thread with id ${req.params.id}.`);
+   
+    if (!thread.deleted) return res.error(404, "This thread is not deleted, first, delete it.");
+
+    thread.deleted = false;
+    await thread.save();
+
+    res.complate(thread.toObject({ virtuals: true }));
+
+})
 module.exports = app;

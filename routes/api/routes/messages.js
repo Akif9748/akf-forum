@@ -10,7 +10,7 @@ app.get("/:id", async (req, res) => {
 
     const message = await MessageModel.get(req.params.id);
 
-    if (!message || (message.deleted && req.user && !req.user.admin)) return res.error(404, `We don't have any thread with id ${id}.`);
+    if (!message || (message.deleted && req.user && !req.user.admin)) return res.error(404,  `We don't have any message with id ${req.params.id}.`);
 
     res.complate(message.toObject({ virtuals: true }));
 
@@ -59,11 +59,28 @@ app.post("/:id/react/:type", async (req, res) => {
 
 app.post("/:id/delete", async (req, res) => {
     const message = await MessageModel.get(req.params.id);
-    if (!message || (message.deleted && req.user && !req.user.admin)) return res.error(404, "We have not got any message declared as this id.");
+    if (!message || (message.deleted && req.user && !req.user.admin)) 
+    return res.error(404, `We don't have any message with id ${req.params.id}.`);
     const user = req.user;
     if (user.id != message.authorID && !user.admin)
         return res.error(403, "You have not got permission for this.");
     message.deleted = true;
+    await message.save();
+
+    res.complate(message.toObject({ virtuals: true }));
+
+})
+
+app.post("/:id/undelete", async (req, res) => {
+    if (!req.user.admin) return res.error(403, "You have not got permission for this.");
+
+    const message = await MessageModel.get(req.params.id);
+
+    if (!message ) return res.error(404,  `We don't have any message with id ${req.params.id}.`);
+   
+    if (!message.deleted) return res.error(404, "This message is not deleted, first, delete it.");
+
+    message.deleted = false;
     await message.save();
 
     res.complate(message.toObject({ virtuals: true }));
