@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-
+const { def_theme } = require("../config.json");
 const schema = new mongoose.Schema({
     id: { type: String },
 
@@ -7,7 +7,8 @@ const schema = new mongoose.Schema({
     avatar: { type: String, default: "/images/guest.png" },
     time: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
-    admin: { type: Boolean, default: false }
+    admin: { type: Boolean, default: false },
+    theme: { type: String, default: def_theme }
 
 });
 

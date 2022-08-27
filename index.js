@@ -1,5 +1,6 @@
-const { UserModel } = require("./models"),
+const { def_theme } = require("./config.json"),
         session = require('express-session'),
+        { UserModel } = require("./models"),
         bodyParser = require('body-parser'),
         port = process.env.PORT || 3000,
         mongoose = require("mongoose"),
@@ -17,7 +18,11 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(async (req, res, next) => {
         req.user = await UserModel.get(req.session.userid);
-        res.error = (type, error) => res.status(type).render("error", {user: req.user, type, error });
+        res.reply = (page, options = {}, status = 200) => res.status(status)
+                .render(page, { user: req.user, theme: req.user?.theme || def_theme, ...options });
+
+        res.error = (type, error) => res.reply("error", { type, error }, type);
+
         if (req.user?.deleted) {
                 req.session.destroy();
                 return res.error(403, "Your account has been deleted.");

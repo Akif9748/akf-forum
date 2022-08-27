@@ -4,6 +4,5 @@ node_modules/
 # env
 .env
 
-# Test files:
-a.js
-db.js
+# Test files
+test.js

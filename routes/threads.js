@@ -6,19 +6,14 @@ const { ThreadModel, MessageModel } = require("../models")
 
 app.get("/", async (req, res) => {
 
-    const user = req.user;
+    const threads = await ThreadModel.find(req.user?.admin ? {} : { deleted: false }).limit(10);
 
-    const threads = await ThreadModel.find(user?.admin ? {} : { deleted: false }).limit(10);
-
-    return res.render("threads", { threads, user });
+    return res.reply("threads", { threads });
 });
 
 
 app.get("/create*", async (req, res) => {
-
-    const user = req.user
-    res.render("create_thread", { user })
-
+    res.reply("create_thread")
 });
 
 app.get("/:id", async (req, res) => {
@@ -31,13 +26,13 @@ app.get("/:id", async (req, res) => {
     if (thread && (user?.admin || !thread.deleted)) {
 
         const messages = await Promise.all(thread.messages.map(async id => {
-            const message = await MessageModel.get(id)           
+            const message = await MessageModel.get(id)
             return user?.admin || !message?.deleted ? message.toObject({ virtuals: true }) : null;
         }));
 
-        res.render("thread", { thread, messages, user,scroll:req.query.scroll || false });
+        res.reply("thread", { thread, messages, scroll: req.query.scroll || false });
     } else
-        res.error( 404, "We have not got this thread.");
+        res.error(404, "We have not got this thread.");
 });
 
 

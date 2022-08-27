@@ -10,6 +10,7 @@ A Node.js based forum software.
 
 ### Extra
 Run `node util/reset` to **reset the database**, and run `node util/admin` for give admin perms to first member.
+Edit `config.json` for default themes of users...
 
 ## API
 Akf-forum has got an API for AJAX, other clients etc. And, you can learn about API in `util/APIDOCS.md`.
@@ -43,6 +44,7 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 | Message count | 🟢 | MEDIUM |
 | Delete user | 🟢 | HIGH |
 | Undelete | 🟢 | MEDIUM |
+| PM | 🔴 | MEDIUM |
 | About me | 🔴 | LOW |
 | Edit user | 🔴 | HIGH |
 | IP ban | 🔴 | MEDIUM |
@@ -81,13 +83,13 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 ### Other
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
-| Footer | 🔴 | LOW |
+| from form to AJAX | 🟢 | HIGH |
 | auto-scroll  | 🟢 | LOW |
 | Multi-theme support, black theme | 🟡 | LOW |
 | Search | 🔴 | MEDIUM |
 | Page support, support message limit correct | 🔴 | MEDIUM |
-| from form to AJAX | 🟢 | HIGH |
-
+| Locales | 🔴 | MEDIUM |
+| Footer | 🔴 | LOW |
 ## Major Version History
 - V3: New Theme
 - V2: Backend fix, mongoose is fixed. Really big fix.

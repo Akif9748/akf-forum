@@ -15,8 +15,8 @@
     <%= thread.title %>
   </h1>
 
-  <h2 style="display:inline;">By <a href=<%="/users/" + thread.author.id %>> <%= thread.author.name %></a>
-    <img class="circle" src=<%=thread.author.avatar %> alt=<%= thread.author.name %>>
+  <h2 style="display:inline;">By <a href="<%="/users/" + thread.author.id %>"> <%= thread.author.name %></a>
+    <img class="circle" src="<%=thread.author.avatar %>">
   </h2>
 
   <% if (user && !thread.deleted){ %>

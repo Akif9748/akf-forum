@@ -12,7 +12,7 @@ app.get("/", async (req, res) => {
         messages = await MessageModel.count({deleted:false}),
         user = req.user;
 
-    res.render("index", { mem, user, users, threads, messages })
+    res.reply("index", { mem, users, threads, messages })
 
 })
 
