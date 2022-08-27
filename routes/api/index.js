@@ -1,7 +1,6 @@
-const { Router } = require("express")
+const { Router, request, response } = require("express")
 const app = Router();
 const bcrypt = require("bcrypt");
-const { request, response } = require("express");
 const { SecretModel, UserModel } = require("../../models")
 
 /**
@@ -11,7 +10,7 @@ const { SecretModel, UserModel } = require("../../models")
  */
 
 app.use(async (req, res, next) => {
-    res.error = (status, error) => res.status(status).json({error});
+    res.error = (status, error) => res.status(status).json({ error });
 
     res.complate = result => res.status(200).json(result);
 
@@ -26,10 +25,9 @@ app.use(async (req, res, next) => {
     if (!user)
         return res.error(401, "We have not got any user has got this name")
 
-    const validPassword = await bcrypt.compare(password, user.password);
 
-    if (!validPassword)
-        return res.error(401, 'Incorrect Password!')
+    if (!bcrypt.compare(password, user.password)) return res.error(401, 'Incorrect Password!');
+
     req.user = await UserModel.findOne({ name: req.headers.username });
 
     next();

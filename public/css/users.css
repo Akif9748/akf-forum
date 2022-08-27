@@ -13,6 +13,7 @@
   flex-direction: column;
   align-items: center;
   box-shadow: 0 0 5px 0 #beb9b9;
+  max-width:500px;
 }
 
 .user-box-title {
@@ -28,6 +29,7 @@
 .user-box-img {
   width: 80px;
   height: 80px;
+  margin: auto;
 }
 
 @media (max-width: 992px) {

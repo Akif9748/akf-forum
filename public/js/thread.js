@@ -1,7 +1,11 @@
 import request from "./request.js";
 
-const messages = document.getElementById("messages");
-let messages_raw = [];
+const message_div = document.getElementById("messages");
+
+const messages_raw = await fetch(`/api/threads/${message_div.getAttribute("value")}/messages/`).then(res => res.json());
+for (const message of messages_raw)
+    renderMessage(message);
+
 function renderMessage(message) {
     const messageElement = document.createElement("div");
     messageElement.classList.add("message");
@@ -12,50 +16,35 @@ function renderMessage(message) {
     <h3 style="float:right;">${new Date(message.time).toLocaleString()}</h3>
 
     <h2>
-      <img class="circle" src=${message.author.avatar} alt=${message.author.name}>
-        <a href=${"/users/" + message.author.id}> ${message.author.name}</a>:
+      <img class="circle" src="${message.author.avatar}" alt="${message.author.name}">
+        <a href="/users/${message.author.id}"> ${message.author.name}</a>:
     </h2>
 
     <p>${message.content.replaceAll("\n", "<br>")}</p><br>
     <div id="message-delete-${message.id}">
-    ${!message.deleted ?
-            `<form style="display:inline;">
-        <button id="delete_message" value="${message.id}" type="submit">DELETE</button>
-    </form>` :
-            "<h3 style=\"display:inline;\">This message has been deleted</h3>"}
+    ${/* if */!message.deleted ?
+            `
+            <a onclick="delete_message('${message.id}');">DELETE</a>
+            <a onclick="edit_message('${message.id}');">EDIT</a>
+            ` /* else */ :
+            `<h3 style=\"display:inline;\">This message has been deleted</h3>
+            <a onclick="undelete_message('${message.id}');">UNDELETE</a>
+           `
+
+        }
     </div>
     <div style="float: right;">
-        <h3 id="count${message.id}" style="display:inline;">${message.reactCount}</h3>
-        <button style="display:inline;" id="like" value="${message.id}">+🔼</button>
-        <button style="display:inline;" id="dislike" value="${message.id}" >-🔽</button>
+    <h3 id="count${message.id}" style="display:inline;">0</h3>
+    <a onclick="react('${message.id}', 'like');">+🔼</a>
+    <a onclick="react('${message.id}', 'dislike');">-🔽</a>
     </div>
 `;
 
-    messages.appendChild(messageElement);
-    messages.innerHTML += "<br>";
+    message_div.appendChild(messageElement);
+    message_div.innerHTML += "<br>";
 };
 
-/**
- * Main Renderer
- */
-(async () => {
-
-    messages_raw = await fetch(`/api/threads/${messages.getAttribute("value")}/messages/`).then(res => res.json());
-    if (messages_raw?.error) {
-
-        document.getElementById("messages").innerHTML
-            += '<div class="message"><h1>THIS THREAD HAS NOT GOT ANY MESSAGE</h1></div>';
-
-
-    } else
-        for (const message of messages_raw)
-            renderMessage(message);
-
-    window.scrollTo(0, document.body.scrollHeight);
-
-})();
-
-
+window.scrollTo(0, document.body.scrollHeight);
 
 /**
  * Message Sender
@@ -74,41 +63,49 @@ document.getElementById("send").addEventListener("submit", async e => {
         });
 });
 
-
 /**
- * Button Listener
+ * OTHER FUNCTIONS
  */
-document.addEventListener("click", async e => {
-    //   e.preventDefault();
-    if (e.target.id === "delete_thread") {
-        const response = await request("/api/threads/" + e.target.value + "/delete");
-        if (response.deleted) {
-            alert("Thread deleted");
-            location.reload();
-        }
 
-    } else if (e.target.id === "undelete_thread") {
-        const response = await request("/api/threads/" + e.target.value + "/undelete");
-        if (!response.deleted) {
-            alert("Thread undeleted");
-            location.reload();
+async function delete_thread(id) {
+    const response = await request("/api/threads/" + id + "/delete");
+    if (response.deleted) {
+        alert("Thread deleted");
+        location.reload();
+    }
 
-        }
+}
+async function undelete_thread(id) {
+    const response = await request("/api/threads/" + id + "/undelete");
+    if (!response.deleted) {
+        alert("Thread undeleted");
+        location.reload();
 
-    } else if (e.target.id === "delete_message") {
-        e.preventDefault();
-        const response = await request(`/api/messages/${e.target.value}/delete`);
-        if (response.deleted) {
-            alert("Message deleted");
-            document.getElementById("message-delete-" + e.target.value).innerHTML = "<h3 style=\"display:inline;\">This message has been deleted</h3>";
-        }
-    } /*else if (e.target.id === "edit_thread") {
-      window.location.href = "/threads/<%= thread.id }/edit";
-    } */
+    }
 
-    if (!e.target.id.includes("like")) return;
-    const res = await request("/api/messages/" + e.target.value + "/react/" + e.target.id)
+}
+async function undelete_message(id) {
+    const response = await request(`/api/messages/${id}/undelete`);
+    if (!response.deleted)
+        document.getElementById("message-delete-" + id).innerHTML = `<a onclick=\"delete_message('${id}');\">DELETE</a>`;
 
-    document.getElementById("count" + e.target.value).innerHTML = res.reactCount;
+}
+async function delete_message(id) {
+    const response = await request(`/api/messages/${id}/delete`);
+    if (response.deleted) {
+        alert("Message deleted");
+        document.getElementById("message-delete-" + id).innerHTML = `
+        <h3 style=\"display:inline;\">This message has been deleted</h3>        
+        <a onclick="undelete_message('${id}');">UNDELETE</a>`;// ADMIN PERM FIX
+    }
+}
+async function react(id, type) {
+    const res = await request(`/api/messages/${id}/react/${type}`)
+    document.getElementById(`count${id}`).innerHTML = res.reactCount;
+}
 
-});
+window.delete_message = delete_message;
+window.undelete_message = undelete_message;
+window.react = react;
+window.delete_thread = delete_thread;
+window.undelete_thread = undelete_thread;

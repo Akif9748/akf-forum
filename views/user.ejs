@@ -40,22 +40,16 @@
   </ul>
 
   <% if (user?.admin && !member.deleted) {%>
-    <form id="admin">
-      <button class="big" type="submit">Give admin permissions!</button>
-    </form>
+      <a class="big" id="admin">Give admin permissions!</a>
 
-    <form id="delete">
-      <button class="big" type="submit">Delete user!</button>
-    </form>
-
+      <a class="big"  id="delete">Delete user!</a>
+ 
     <script type="module">
 
       import request from "../../js/request.js";
-
-      document.addEventListener("submit", async e => {
+      document.addEventListener("click", async e => {
         e.preventDefault();
-
-        if (e.target.id == "admin") {
+    if (e.target.id == "admin") {
 
           const response = await request("/api/users/<%= member.id %>/admin");
 
@@ -77,23 +71,22 @@
   <% }; %>
   <% if (member.deleted) {%>
         <h1>This user has been deleted!</h1>
-
-        <form id="undelete">
-          <button class="big" type="submit">Undelete user!</button>
-        </form>
+        <a onclick="undelete();" type="">Undelete user! </a>
+  
+ 
     
         <script type="module">
     
           import request from "../../js/request.js";
-    
-          document.addEventListener("submit", async e => {
-   
+          async function undelete(params) {
+            
             const response = await request("/api/users/<%= member.id %>/undelete");
      
             if (response.deleted) return;
               alert("User is undeleted successfully!");
               location.reload()
-          });
+          }
+        
     
     
         </script>

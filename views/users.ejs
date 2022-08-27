@@ -11,11 +11,13 @@
 
   <div class="users">
   <% users.forEach(user=>{ %>
+      <div style="display:flex;justify-content:center;">
       <div class="user-box">
         <img src="<%= user.avatar %>" class="user-box-img">
         <div class="user-box-title"> <a href="<%= user.getLink() %>">
         <% if (user.deleted) { %> <span style="color: RED;">[DELETED]</span><% } %>
           <%= user.name %></a></div>
+      </div>
       </div>
   <% }); %>
 

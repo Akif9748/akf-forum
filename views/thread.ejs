@@ -8,26 +8,26 @@
   <%- include("extra/navbar") %>
 
   <link rel="stylesheet" href="/css/thread.css" />
- 
+  <% if (user){ %>
+    <script type="module" src="/js/thread.js"></script>
+  <% }%>
 
 
-  <h1 style="font-size: 35px;color: #4d18e6;" >
-    <%= thread.title %>
-  </h1>
+  <h1 style="font-size: 35px;color: #4d18e6;" ><%= thread.title %></h1>
 
-  <h2 style="display:inline;">By <a href="<%="/users/" + thread.author.id %>"> <%= thread.author.name %></a>
+  <h2 style="display:inline;">By <a href="<%='/users/' + thread.author.id %>"> <%= thread.author.name %></a>
     <img class="circle" src="<%=thread.author.avatar %>">
   </h2>
 
   <% if (user && !thread.deleted){ %>
 
-    <button id="delete_thread" value="<%= thread.id %>" style="display:inline;" type="submit">DELETE</button>
-    <button id="edit_thread" style="display:inline;" type="submit">EDIT</button>
-    <% } else if (thread.deleted) { %>
-      <h3 style="display:inline;">This thread has been deleted</h3>
-      <button id="undelete_thread" value="<%= thread.id %>" style="display:inline;" type="submit">UNDELETE</button>
+    <a onclick="delete_thread('<%= thread.id %>' )" value=style="display:inline;" >DELETE</a>
+    <a onclick="edit_thread('<%= thread.id %>')" style="display:inline;" >EDIT</a>
+  <% } else if (thread.deleted) { %>
+    <h3 style="display:inline;">This thread has been deleted</h3>
+    <a onclick="undelete_thread('<%= thread.id %>')" style="display:inline;" >UNDELETE</a>
 
-      <% }; %>
+  <% }; %>
 
 
         <hr>
@@ -44,20 +44,20 @@
               <h3 style="float:right;">26.08.2022 15:37:42</h3>
           
               <h2>
-                <img class="circle" src="https://cdn.discordapp.com/avatars/539506680140922890/abd74d10aac094fc8a5ad5c86f29fdb9.png?size=1024" alt="Akif9748">
+                <img class="circle" src="https://cdn.discordapp.com/avatars/539506680140922890/abd74d10aac094fc8a5ad5c86f29fdb9.png?size=1024">
                   <a href="/users/0"> Akif9748</a>:
               </h2>
           
               <p>Example message for development</p><br>
               <div id="message-delete-3">
-              <form style="display:inline;">
-                  <button id="delete_message" value="3" type="submit">DELETE</button>
-              </form>
+                <a onclick="delete_message('3');">DELETE</a>
+                <a onclick="edit_message('3');">EDIT</a>
+
               </div>
               <div style="float: right;">
                   <h3 id="count3" style="display:inline;">0</h3>
-                  <button style="display:inline;" id="like" value="3">+🔼</button>
-                  <button style="display:inline;" id="dislike" value="3">-🔽</button>
+                  <a onclick="react('3', 'like');">+🔼</a>
+                  <a onclick="react('3', 'dislike');">-🔽</a>
               </div>
           </div>
                       <!--EXAMPLE MESSAGE END-->
@@ -74,15 +74,13 @@
           <br>
           <% if (user){ %>
             <button type="submit">Send!</button>
-            <%} else {%>
-              <button disabled>Login for send</button>
-              <% }%>
+          <%} else {%>
+            <button disabled>Login for send</button>
+          <% }%>
 
         </form>
 
-        <% if (user){ %>
-          <script type="module" src="/js/thread.js"></script>
-        <% }%>
+ 
         <script>
           document.getElementById("message-<%= scroll %>").scrollIntoView();
         </script>
