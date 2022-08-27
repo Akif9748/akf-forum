@@ -1,9 +1,7 @@
 # API documentation of Akf-forum
 <img src="https://raw.githubusercontent.com/Akif9748/akf-forum/main/public/images/logo.jpg" align="right" width="300px" />
 
-Akf-forum has got an API for other clients etc. 
-
-You can find examples in `tests` folder.
+Akf-forum has got an API for AJAX, other clients etc. 
 
 ## Authorization
 You need this headers for send request to API:
@@ -13,6 +11,7 @@ You need this headers for send request to API:
     "password": "testPassword"
 }
 ```
+But in front end, the API will works with session.
 
 ## How to request?
 
@@ -35,31 +34,33 @@ You need this headers for send request to API:
 - POST `/api/messages/:id/react/:type` for react to a message.
 
 ### Example request:
-```GET /api/messages/1```
+GET ```/api/messages/0```
 
 #### Example API Output:
- ```json
- {
-    "status": 200,
-    "result":
-    {       
-        "content": "First message",
-        "time": 1647178873587,
+```json
+{
+    "_id": "63067429bc01da866fad508b",
+    "threadID": "0",
+    "author": {
+        "id": "0",
+        "name": "Akif9748",
+        "avatar": "https://cdn.discordapp.com/avatars/539506680140922890/abd74d10aac094fc8a5ad5c86f29fdb9.png?size=1024",
+        "time": "2022-08-24T18:54:55.666Z",
         "deleted": false,
-        "edited": false,
-        "react": {},
-        "id": "1",
-        "author": {
-            "name": "ForumcuCocuk",
-            "avatar": "/images/guest.png",
-            "time": 1647177723873,
-            "admin": true,
-            "id": "1"
-        },
-        "threadID":"0" 
-    }
+        "admin": false,
+        "_id": "630673ffbc01da866fad507b",
+        "__v": 0
+    },
+    "content": "deneme",
+    "deleted": false,
+    "edited": false,
+    "time": "2022-08-24T18:55:37.744Z",
+    "id": "0",
+    "__v": 0,
+    "react": {
+        "0": true
+    },
+    "authorID": "0",
+    "reactCount": 1
 }
-
- ```
-
-
+```
