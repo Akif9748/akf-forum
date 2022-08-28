@@ -3,9 +3,10 @@
 
 <%- include("extra/meta", {title: member.name }) %>
 
+
+<body>
   <link rel="stylesheet" href="/css/user.css" />
 
-<body >
   <%- include("extra/navbar") %>
 
   <div class="content">
@@ -13,8 +14,7 @@
     <img style="width:100px;height:100px;border-radius:50%;" src="<%=member.avatar %>">
     </div>
     <div class="box">
-      <h2 class="box-title">Name: <%= member.name %>
-      </h2>
+      <h2 class="box-title">Name:</h2>
     <h2 class="box-title">
       <%= member.name %>
     </h2>
@@ -53,17 +53,15 @@
 <%= counts.thread %>
       </h2>
     </div>
-  </div>
-  <% if (user?.admin && !member.deleted) {%>
-      <a class="big" id="admin">Give admin permissions!</a>
 
-      <a class="big"  id="delete">Delete user!</a>
+  <% if (user?.admin && !member.deleted) {%>
+      <a class="btn-outline-primary" id="admin">Give admin permissions!</a>
+      <a class="btn-outline-primary"  id="delete">Delete user!</a>
  
     <script type="module">
 
       import request from "../../js/request.js";
       document.addEventListener("click", async e => {
-        e.preventDefault();
     if (e.target.id == "admin") {
 
           const response = await request("/api/users/<%= member.id %>/admin");
@@ -71,13 +69,17 @@
           if (response.admin)
             return alert("Making admin of " + response.name + " is success!");
 
-        }
+        }else if (e.target.id == "delete") {
 
-        const response = await request("/api/users/<%= member.id %>/delete");
+          const response = await request("/api/users/<%= member.id %>/delete");
  
-        if (!response.deleted) return
+          if (!response.deleted) return
           alert("User is deleted!");
           location.reload()
+
+        }
+
+      
 
       });
 
@@ -86,14 +88,14 @@
   <% }; %>
   <% if (member.deleted) {%>
         <h1>This user has been deleted!</h1>
-        <a onclick="undelete();" type="">Undelete user! </a>
+        <a onclick="undelete();" class="btn-primary"  >Undelete user! </a>
   
  
     
         <script type="module">
     
           import request from "../../js/request.js";
-          async function undelete(params) {
+          window.undelete= async function undelete(params) {
             
             const response = await request("/api/users/<%= member.id %>/undelete");
      
@@ -106,6 +108,8 @@
     
         </script>
   <% }; %>
+
+</div>
 </body>
 
 </html>

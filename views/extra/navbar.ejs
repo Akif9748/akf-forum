@@ -12,13 +12,13 @@
     <div class="buttons">
         
     <% if (user){ %>
-    
         <a href="<%=user.getLink() %>" class="btn-outline-primary" >
             <div class="box-username"><%= user.name %>
                 <div class="avatar"><img src="<%=user.avatar %>"></div>
             </div>
         </a>
-   
+        <a id="logout" href="/login" class="btn-primary">Logout</a>
+ 
  
     <% } else { %>
             

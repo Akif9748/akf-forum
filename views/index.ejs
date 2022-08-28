@@ -4,7 +4,9 @@
 <%- include("extra/meta", {title: "Welcome to the Akf-forum!" }) %>
 
 
-<body style="text-align: center;">
+<body >
+    <link rel="stylesheet" href="/css/user.css" />
+
   <%- include("extra/navbar") %>
 
   <% if (user) { %>
@@ -24,29 +26,29 @@
     </h1>
  <% } %> 
     <h1 style="color: #606060;">Statistics:</h1>
-    <ul>
-        <li>
-            <h3>Message count: <b>
-                    <%= messages %>
-                </b></h3>
-        </li>
-        <li>
-            <h3>User count: <b>
-                    <%= users %>
-                </b></h3>
-        </li>
-        <li>
-            <h3>Thread count: <b>
-                    <%= threads %>
-                </b></h3>
-        </li>
-        <li>
-            <h3>Memory usage: <b>
-                    <%= mem.toFixed(2); %> MB
-                </b></h3>
-        </li>
-
-    </ul>
+ 
+  
+    <div class="content">
+        <div class="box">
+            <h2 class="box-title">Message count:</h2>
+            <h2 class="box-title">  <%= messages %></h2>
+        </div>
+   
+        <div class="box">
+          <h2 class="box-title">User count: </h2>
+          <h2 class="box-title">  <%= users %> </h2>
+        </div>
+        <div class="box">              
+          <h2 class="box-title">Thread count:</h2>
+          <h2 class="box-title"><%= threads %></h2>
+        </div>
+    
+        <div class="box">    
+            <h2 class="box-title"> Memory usage: </h2>
+            <h2 class="box-title"><%= mem.toFixed(2); %> MB</h2>
+        </div>
+     
+    </div> 
 </body>
 
 </html>
