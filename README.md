@@ -30,12 +30,14 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 ## Roadmap
 ### TO-DO:
 - If thread deleted, not show its messages in API.
-- Thread.ejs fix with new theme
 - Profile photos will store in database
 - regex for pfp for now and
-- admin perm for undelete, thread+message
+- admin perm for undelete, thread + message
 - page support for threads
-
+- message "<b>"
+- author name of thread
+- page for threads - users
+- edit & delete button for thread
 ### Frontend
 ### User
 | To do | Is done? | Priority |
@@ -58,7 +60,7 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 | Ratelimit | 🟢 | HIGH |
 | Send | 🟢 | HIGH |
 | Delete | 🟢 | HIGH |
-| Regex for scripts | 🔴 | HIGH |
+| Regex for scripts | 🟢 | HIGH |
 | Undelete | 🟢 | MEDIUM |
 | React | 🟢 | MEDIUM |
 | Edit | 🔴 | MEDIUM |

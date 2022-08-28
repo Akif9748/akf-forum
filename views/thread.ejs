@@ -1,104 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include("extra/meta", {title: "Thread list!" }) %>
+<%- include("extra/meta", {title: thread.title }) %>
 
 
 <body>
   <%- include("extra/navbar") %>
-<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-    
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
   <link rel="stylesheet" href="/css/thread.css" />
   <% if (user){ %>
-    <script type="module" src="/js/thread.js"></script>
-  <% }%>
+  <script type="module" src="/js/thread.js"></script>
+  <% }; %>
+  <div style="text-align:center;padding:8px">
+    <div class="title"><%= thread.title %></div>
+    <div class="date">
+      <%= new Date(thread.time).toLocaleString() %> • Views: <%= thread.views %>
+    </div>
+  </div>
+  <div id="messages" value="<%= thread.id %>">
 
-      <div style="text-align:center;padding:8px">
-      <div class="title">İlk Forum</div>
-      <div class="date">
-        20/04/2000
-      </div>
-      </div>
-  <div class="thread">
+  <% messages.filter(Boolean).forEach(message=>{ %>
+
+  <div class="message" id="message-<%= message.id %>">
     <div class="left">
-      <img src="https://renk.gen.tr/images/acik-mavi-renk.jpg"/>
-      <div class="username">Tokmak</div>
-       <div class="date">
-        20/04/2000
+      <img src="<%= message.author.avatar || '/images/guest.png' %>"/>
+      <div class="username"><a href="/users/<%=message.author.id %>"><%=message.author.name %></a></div>
+      <div class="date">
+        <%= new Date(message.time).toLocaleDateString() %> 
+      </div>
+      <div class="date">
+        <%= new Date(message.time).toLocaleTimeString() %> 
       </div>
     </div>  
 
-    <div class="content">
-    Merhaba ! Bu benim ilk yazım    Merhaba ! Bu benim ilk yazım
-    Merhaba ! Bu benim ilk yazım
-    Merhaba ! Bu benim ilk yazım
-    Merhaba ! Bu benim ilk yazım
-    Merhaba ! Bu benim ilk yazım
-    Merhaba ! Bu benim ilk yazım
-    Merhaba ! Bu benim ilk yazım
-  
-    </div>
-  <div class="dots" onclick="dots()">
-<i class='bx bx-dots-horizontal-rounded' ></i>
-  </div>
-<div class="dots-menu">
-    <a>Delete</a>
-    <a>Edit</a>
-      
+    <div class="content"><%- message.content %></div>
+<% if(user){ %>
+  <% if(user.id === message.author.id || user.admin){ %>
+
+    <div class="dots" onclick="dots('<%=message.id %>')">
+      <i class='bx bx-dots-horizontal-rounded' ></i>
     </div>
 
-    
-    <div class="likes">
-      <div>
-<i class='bx bx-like'></i> 5
+    <% if (!message.deleted){ %>
+              
+      <div class="dots-menu" id="dot-<%=message.id %>">
+        <a onclick="delete_message('<%=message.id %>');">Delete</a>
+        <a onclick="edit_message('<%=message.id %>');">Edit</a>
       </div>
-      <div>
-<i class='bx bx-dislike'></i> 30
-      </div>
+      <% }else if (user.admin){ %>
+        <div class="dots-menu" id="dot-<%=message.id %>">
+          <a onclick="undelete_message('<%=message.id %>');">UNDELETE</a>
+        </div>
+  <% } %>
+   
+  <% } %>
+
+  
+  <div class="reactions">
+    <div>
+<i class='bx bx-like'></i> <%=message.react.like.length %>
+    </div>
+    <div>
+<i class='bx bx-dislike'></i> <%=message.react.dislike.length %>
     </div>
   </div>
+  <% }; %>
 
-<div class="pagination">
-  <div class="back">
-    <i class='bx bxs-chevron-left'></i>
   </div>
-  <div class="numbers">
-  <a class="number active" href="/deneme">1</a>
-  <a class="number" href="/deneme">2</a>
-  <a class="number" href="/deneme">3</a>
-  <a class="number" href="/deneme">4</a>
-  <a class="number" href="/deneme">5</a>
-  <a class="number" href="/deneme">6</a>
 
-    
+    <% }); %>
   </div>
- <div class="after">
-    <i class='bx bxs-chevron-right'></i>
-  </div>
-  
-</div>
+  <div class="pagination">
+    <div class="back">
+    <% if (page > 0){ %>
+      <a href="<%= thread.getLink() %>?page=<%= page-1 %>" class='bx bxs-chevron-left'></a>
+    <% } %>  
+    </div>
     
 
+    <div class="numbers">
+      <% for(let i=0;i< Math.ceil(messages.length/10);i++){ %>
+      <a class="number <%= i==page?'active':'' %>" href="<%= thread.getLink() %>?page=<%= i %>"><%= i %></a>
+      <% } %>
+    </div>
 
-  <!-- ==== Dots Event ==== -->
-
-
-<script>
-function dots(){
-  var box= document.getElementsByClassName("dots-menu")[0];
-  box.classList.toggle("active")
-}
-
-
-</script>
-    
-    
+    <div class="after">
+    <% if (Math.ceil(messages.length/10)-1 > page){ %>
+      <a href="<%= thread.getLink() %>?page=<%= page +1 %>" class='bx bxs-chevron-right'></a>
+    <% } %>
+    </div>
  
-        <script>
-          document.getElementById("message-<%= scroll %>").scrollIntoView();
-        </script>
+  </div>
 
-            <!-- BURAYA Bİ İLERİ BİR GERİ SAYFA BUTONU GELMEZ Mİ BE-->
+  <script>
+    document.getElementById("message-<%= scroll  %>").scrollIntoView();
+    function dots(id) {
+      document.getElementById('dot-'+id).classList.toggle('active')
+    }
+  </script>
+
 </body>
 
 </html>

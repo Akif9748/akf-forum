@@ -1,136 +1,140 @@
 .title {
- color: #414141;
-font-weight: 700;
-font-size: 36px;
+  color: #414141;
+  font-weight: 700;
+  font-size: 36px;
 }
-.date{
+
+.date {
   color: gray;
 }
 
-.thread{
+.message {
   max-width: 800px;
   box-shadow: 0 0 5px 0 #c3c3c3;
   margin: 10px auto;
   padding: 20px;
-  display:flex;
-  gap:10px;
-  position:relative;
+  display: flex;
+  gap: 10px;
+  position: relative;
 }
 
-.thread .left{
+.message .left {
   text-align: center;
-border-right: 2px solid #d9d9d9;
+  border-right: 2px solid #d9d9d9;
 }
 
-.thread .left img{
+.message .left img {
   width: 100px;
-height: 100px;
-border-radius: 50%;
-margin-right: 5px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 5px;
 }
 
-.thread .left .username{
-color: #555;
+.message .left .username {
+  color: #555;
 }
 
-.content{
+.content {
   width: 70%;
 }
 
-.likes{
-  position:absolute;
-  right:20px;
-  bottom:20px;
-  display:flex;
-  align-items:center;
-  gap:10px;
+.reactions {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.likes div{
-  display:flex;
-  align-items:center;
-  gap:5px;
-  padding:4px;
+
+.reactions div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px;
   color: #747474;
-  cursor:pointer;
-  transition:color 0.3s ease;
-}
-.likes div:hover{
-    color: #151515;
-
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
-.likes div i{
-  font-size:22px;
+.reactions div:hover {
+  color: #151515;
+
+}
+
+.reactions div i {
+  font-size: 22px;
 }
 
 
-.pagination{
+.pagination {
   box-shadow: 0 0 5px 0 #c3c3c3;
   margin: 10px auto;
   padding: 8px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  max-width:400px;
-  gap:10px;
-  position:relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 400px;
+  gap: 10px;
+  position: relative;
 }
 
-.pagination .back ,
+.pagination .back,
 .pagination .after {
-  color:#747474;
-  font-size:26px;
-  cursor:pointer;
+  color: #747474;
+  font-size: 26px;
+  cursor: pointer;
 }
 
 
-.pagination .numbers{
-  display:flex;
-  align-items:center;
-  gap:5px;
+.pagination .numbers {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
+
 .pagination .number {
-	color: #747474;
-	font-size: 22px;
-	border: 0 0 5px #747474;
-	padding: 8px;
-	border-radius: 2px;
-	font-weight: 600;
-	cursor: pointer;
-	margin: 8px;
-}
-.pagination .number.active{
-color: #4d18e6;
-font-weight: 700;
+  color: #747474;
+  font-size: 22px;
+  border: 0 0 5px #747474;
+  padding: 8px;
+  border-radius: 2px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 8px;
 }
 
-
-.dots{
-position: absolute;
-right: 20px;
-font-size: 22px;
-top: 10px;
-color: #747474;
-  cursor:pointer;
+.pagination .number.active {
+  color: #4d18e6;
+  font-weight: 700;
 }
 
-.dots-menu{
- position: absolute;
-top: 50px;
-right: 0;
-background-color: #e6e6e6;
-padding: ;
-width: 100px;
-text-align: center;
-  display:none;
+
+.dots {
+  position: absolute;
+  right: 20px;
+  font-size: 22px;
+  top: 10px;
+  color: #747474;
+  cursor: pointer;
 }
 
-.dots-menu.active{
-  display:block;
+.dots-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #e6e6e6;
+  width: 100px;
+  text-align: center;
+  display: none;
 }
 
-.dots-menu a{
-  display:block;
-  margin:8px;
-  cursor:pointer;
+.dots-menu.active {
+  display: block;
+}
+
+.dots-menu a {
+  display: block;
+  margin: 8px;
+  cursor: pointer;
 }
