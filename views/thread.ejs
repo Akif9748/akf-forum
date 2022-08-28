@@ -23,6 +23,9 @@
     <div class="left">
       <img src="https://renk.gen.tr/images/acik-mavi-renk.jpg"/>
       <div class="username">Tokmak</div>
+       <div class="date">
+        20/04/2000
+      </div>
     </div>  
 
     <div class="content">
@@ -33,8 +36,18 @@
     Merhaba ! Bu benim ilk yazım
     Merhaba ! Bu benim ilk yazım
     Merhaba ! Bu benim ilk yazım
-
+  
     </div>
+  <div class="dots" onclick="dots()">
+<i class='bx bx-dots-horizontal-rounded' ></i>
+  </div>
+<div class="dots-menu">
+    <a>Delete</a>
+    <a>Edit</a>
+      
+    </div>
+
+    
     <div class="likes">
       <div>
 <i class='bx bx-like'></i> 5
@@ -50,7 +63,7 @@
     <i class='bx bxs-chevron-left'></i>
   </div>
   <div class="numbers">
-  <a class="number" href="/deneme">1</a>
+  <a class="number active" href="/deneme">1</a>
   <a class="number" href="/deneme">2</a>
   <a class="number" href="/deneme">3</a>
   <a class="number" href="/deneme">4</a>
@@ -67,6 +80,18 @@
     
 
 
+  <!-- ==== Dots Event ==== -->
+
+
+<script>
+function dots(){
+  var box= document.getElementsByClassName("dots-menu")[0];
+  box.classList.toggle("active")
+}
+
+
+</script>
+    
     
  
         <script>
