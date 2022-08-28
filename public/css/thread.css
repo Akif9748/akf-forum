@@ -1,139 +1,136 @@
-:root {
-  /* Apprentice Scheme */
-  /*
-   * use `var(--col-x)` instead of directly typing the color.
-  */
-  --col-0: #1C1C1C;
-  --col-1: #AF5F5F;
-  --col-2: #5F875F;
-  --col-3: #87875F;
-  --col-4: #5F87AF;
-  --col-5: #5F5F87;
-  --col-6: #5F8787;
-  --col-7: #6C6C6C;
-  --col-8: #444444;
-  --col-9: #FF8700;
-  --col-10: #87AF87;
-  --col-11: #FFFFAF;
-  --col-12: #8FAFD7;
-  --col-13: #8787AF;
-  --col-14: #5FAFAF;
-  --col-15: #FFFFFF;
-  --col-fg: #BCBCBC;
-  --col-bg: #262626;
+.title {
+ color: #414141;
+font-weight: 700;
+font-size: 36px;
+}
+.date{
+  color: gray;
 }
 
-
-
-textarea {
-
-  font-family: monospace;
-  border: 2px solid var(--col-8);
-  color: var(--col-fg);
-  width: auto;
-  height: auto;
-  cursor: pointer;
-  resize: none;
+.thread{
+  max-width: 800px;
+  box-shadow: 0 0 5px 0 #c3c3c3;
+  margin: 10px auto;
+  padding: 20px;
+  display:flex;
+  gap:10px;
+  position:relative;
 }
 
-
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-  margin-bottom: 0.1rem;
-}
-
-
-
-button,
-input {
-  font-family: monospace;
-  background-color: var(--col-bg);
-  border: 2px solid var(--col-8);
-
-  color: var(--col-fg);
-  width: auto;
-  height: 30px;
-
-}
-
-button.big {
-  width: 150px;
-  height: 50px;
-}
-
-input {
-  width: 75%;
-  cursor: pointer;
-  color: var(--col-fg);
-}
-
-button:hover {
-  background-color: var(--col-fg);
-  color: var(--col-bg);
-}
-
-
-/* NAVBAR: */
-
-
-.user {
-  margin: 0;
-  border: 1px solid var(--col-8);
-}
-
-.user h1 {
-  font-family: monospace;
-  background: #333;
-  color: var(--col-fg);
-  margin: auto;
+.thread .left{
   text-align: center;
-  line-height: 1;
-  color: var(--col-13);
-  font-size: 27px;
+border-right: 2px solid #d9d9d9;
 }
 
-.user img {
-  padding: 6px 10px;
+.thread .left img{
+  width: 100px;
+height: 100px;
+border-radius: 50%;
+margin-right: 5px;
 }
 
-.user a {
-  color: var(--col-13);
-  padding: 0px 5px;
+.thread .left .username{
+color: #555;
+}
+
+.content{
+  width: 70%;
+}
+
+.likes{
+  position:absolute;
+  right:20px;
+  bottom:20px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.likes div{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  padding:4px;
+  color: #747474;
+  cursor:pointer;
+  transition:color 0.3s ease;
+}
+.likes div:hover{
+    color: #151515;
+
+}
+
+.likes div i{
+  font-size:22px;
 }
 
 
-div.message {
-  border: 2px solid var(--col-8);
-  margin: auto;
-  padding-inline: 100;
+.pagination{
+  box-shadow: 0 0 5px 0 #c3c3c3;
+  margin: 10px auto;
+  padding: 8px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  max-width:400px;
+  gap:10px;
+  position:relative;
+}
+
+.pagination .back ,
+.pagination .after {
+  color:#747474;
+  font-size:26px;
+  cursor:pointer;
 }
 
 
-
-/*
-*****************************
-           IMAGES
-*****************************
-*/
-img.circle {
-  border-radius: 50%;
-  height: 30px;
-  width: 30px;
+.pagination .numbers{
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+.pagination .number {
+	color: #747474;
+	font-size: 22px;
+	border: 0 0 5px #747474;
+	padding: 8px;
+	border-radius: 2px;
+	font-weight: 600;
+	cursor: pointer;
+	margin: 8px;
+}
+.pagination .number.active{
+color: #4d18e6;
+font-weight: 700;
 }
 
-img.logo {
-  width: 266px;
-  height: 75px;
+
+.dots{
+position: absolute;
+right: 20px;
+font-size: 22px;
+top: 10px;
+color: #747474;
+  cursor:pointer;
 }
 
+.dots-menu{
+ position: absolute;
+top: 50px;
+right: 0;
+background-color: #e6e6e6;
+padding: ;
+width: 100px;
+text-align: center;
+  display:none;
+}
 
-/*
-*****************************
-         ADMIN TEXT
-*****************************
-*/
-p {font-size: 18px;}
+.dots-menu.active{
+  display:block;
+}
+
+.dots-menu a{
+  display:block;
+  margin:8px;
+  cursor:pointer;
+}
