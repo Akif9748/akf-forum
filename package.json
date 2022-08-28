@@ -19,7 +19,10 @@
   "bugs": {
     "url": "https://github.com/Akif9748/akf-forum/issues"
   },
-  "homepage": "https://akf-forum.herokuapp.com/",
+  "engines": {
+    "node": ">=16"
+  },
+  "homepage": "https://akf-forum.glitch.me/",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.2",

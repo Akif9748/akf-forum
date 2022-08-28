@@ -58,7 +58,7 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 | Send | 🟢 | HIGH |
 | Delete | 🟢 | HIGH |
 | Regex for scripts | 🔴 | HIGH |
-| Undelete | 🟡 | MEDIUM |
+| Undelete | 🟢 | MEDIUM |
 | React | 🟢 | MEDIUM |
 | Edit | 🔴 | MEDIUM |
 

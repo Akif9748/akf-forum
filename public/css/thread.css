@@ -28,7 +28,6 @@
 textarea {
 
   font-family: monospace;
-  background-color: var(--col-bg);
   border: 2px solid var(--col-8);
   color: var(--col-fg);
   width: auto;
@@ -130,36 +129,6 @@ button:hover {
 
 /* NAVBAR: */
 
-.navbar {
-  background-color: #333;
-  overflow: hidden;
-}
-
-.navbar a {
-  float: left;
-  color: var(--col-fg);
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  border-right: 3px solid var(--col-8);
-}
-
-.navbar a:hover {
-  background-color: var(--col-bg);
-  color: var(--col-fg);
-}
-
-.navbar h1:hover {
-  background-color: var(--col-bg);
-  color: var(--col-fg);
-}
-
-.navbar a.active {
-  background-color: var(--col-14);
-  color: var(--col-15);
-}
-
 
 .user {
   margin: 0;
@@ -213,50 +182,7 @@ img.logo {
 
 /*
 *****************************
-           FOOTER
-*****************************
-*/
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: var(--col-8);
-  color: white;
-  text-align: center;
-}
-
-.footer p {
-
-  font-size: 16px;
-  color: white;
-
-}
-
-/*
-*****************************
          ADMIN TEXT
 *****************************
 */
-.admin {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 20px;
-  width: 100%;
-  text-align: center;
-}
-
-.admin p {
-  font-size: 16px;
-  margin: auto;
-  color: var(--col-15);
-}
-
-.admin a {
-  background-color: var(--col-13);
-  border: 2px solid var(--col-8);
-  height: 20px;
-  color: var(--col-15);
-}
 p {font-size: 18px;}

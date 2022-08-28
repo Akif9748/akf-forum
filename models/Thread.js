@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const  UserModel  = require("./User");
+const UserModel  = require("./User");
 const schema = new mongoose.Schema({
     id: { type: String, unique: true },
 
@@ -8,7 +8,8 @@ const schema = new mongoose.Schema({
     title: String,
     time: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
-    messages: [String]
+    messages: [String],
+    views: { type: Number, default: 0 }
 
 });
 

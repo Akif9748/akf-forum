@@ -4,93 +4,94 @@
 <%- include("extra/meta", {title: member.name }) %>
 
 
-<body style="text-align: center;">
-  <%- include("extra/navbar") %>
+  <body style="text-align: center;">
+    <%- include("extra/navbar") %>
 
-  <ul>
-    <li>
-      <h1 style="color: #4d18e6;">Avatar:</h1>
-      <img style="width:256px;height:256px;" src="<%=member.avatar %>">
-    </li>
+      <ul>
+        <li>
+          <h1 style="color: #4d18e6;">Avatar:</h1>
+          <img style="width:256px;height:256px;" src="<%=member.avatar %>">
+        </li>
 
-    <li>
-      <h2 style="color: #606060;">Name: <%= member.name %>
-      </h2>
-    </li>
-    <li>
-      <h2 style="color: #606060;">Created at:
-        <%= new Date(member.time).toLocaleString() %>
-      </h2>
-
-
-    </li>
-    <li>
-      <h2 style="color: #606060;">Is admin? <%= member.admin ? "Yes" : "No" %>
-      </h2>
-    </li>
-
-    <li>
-      <h2 style="color: #606060;"> Message: <%= counts.message %>
-      </h2>
-    </li>
-    <li>
-      <h2 style="color: #606060;"> Thread: <%= counts.thread %>
-      </h2>
-    </li>
-  </ul>
-
-  <% if (user?.admin && !member.deleted) {%>
-      <a class="big" id="admin">Give admin permissions!</a>
-
-      <a class="big"  id="delete">Delete user!</a>
- 
-    <script type="module">
-
-      import request from "../../js/request.js";
-      document.addEventListener("click", async e => {
-        e.preventDefault();
-    if (e.target.id == "admin") {
-
-          const response = await request("/api/users/<%= member.id %>/admin");
-
-          if (response.admin)
-            return alert("Making admin of " + response.name + " is success!");
-
-        }
-
-        const response = await request("/api/users/<%= member.id %>/delete");
- 
-        if (!response.deleted) return
-          alert("User is deleted!");
-          location.reload()
-
-      });
+        <li>
+          <h2 style="color: #606060;">Name: <%= member.name %>
+          </h2>
+        </li>
+        <li>
+          <h2 style="color: #606060;">Created at:
+            <%= new Date(member.time).toLocaleString() %>
+          </h2>
 
 
-    </script>
-  <% }; %>
-  <% if (member.deleted) {%>
-        <h1>This user has been deleted!</h1>
-        <a onclick="undelete();" type="">Undelete user! </a>
-  
- 
-    
+        </li>
+        <li>
+          <h2 style="color: #606060;">Is admin? <%= member.admin ? "Yes" : "No" %>
+          </h2>
+        </li>
+
+        <li>
+          <h2 style="color: #606060;"> Message: <%= counts.message %>
+          </h2>
+        </li>
+        <li>
+          <h2 style="color: #606060;"> Thread: <%= counts.thread %>
+          </h2>
+        </li>
+      </ul>
+
+      <% if (user?.admin && !member.deleted) {%>
+        <a class="big" id="admin">Give admin permissions!</a>
+
+        <a class="big" id="delete">Delete user!</a>
+
         <script type="module">
-    
+
           import request from "../../js/request.js";
-          async function undelete(params) {
-            
-            const response = await request("/api/users/<%= member.id %>/undelete");
-     
-            if (response.deleted) return;
-              alert("User is undeleted successfully!");
+          document.addEventListener("click", async e => {
+            e.preventDefault();
+            if (e.target.id == "admin") {
+
+              const response = await request("/api/users/<%= member.id %>/admin");
+
+              if (response.admin)
+                return alert("Making admin of " + response.name + " is success!");
+
+            } else if (e.target.id == "delete") {
+
+              const response = await request("/api/users/<%= member.id %>/delete");
+
+              if (!response.deleted) return;
+              alert("User is deleted!");
               location.reload()
-          }
-        
-    
-    
+            }
+
+          });
+
+
         </script>
-  <% }; %>
-</body>
+        <% }; %>
+          <% if (member.deleted) {%>
+            <h1>This user has been deleted!</h1>
+            <a onclick="undelete();" type="">Undelete user! </a>
+
+
+
+            <script type="module">
+
+              import request from "../../js/request.js";
+              async function undelete(params) {
+
+                const response = await request("/api/users/<%= member.id %>/undelete");
+
+                if (response.deleted) return;
+                alert("User is undeleted successfully!");
+                location.reload()
+              }
+
+
+
+            </script>
+            <% }; %>
+  </body>
 
 </html>

@@ -23,7 +23,7 @@ app.post("/", rateLimit({
 
 
     const user2 = new UserModel({ name: req.body.username })
-    if (avatar&&/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g.test(avatar)) user2.avatar = avatar;
+    if (avatar && /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g.test(avatar)) user2.avatar = avatar;
     await user2.takeId()
     await user2.save();
 
