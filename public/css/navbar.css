@@ -18,7 +18,7 @@ a {
     padding: 20px;
     display: flex;
     justify-content: space-between;
-    align-self: center;
+    align-items: center;
 }
 
 .logo {
@@ -92,9 +92,7 @@ a {
 
 body {
     font-family: Poppins;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+
 }
 
 
@@ -151,10 +149,18 @@ div.avatar {
 }
 
 @media (max-width: 480px) {
+    .btn-outline-primary {
+        width: 100%;
+        text-align: center;
+    }
 
     .buttons {
         flex-direction: column;
         width: 100%;
     }
 
+    .btn-primary {
+        width: 100%;
+        text-align: center;
+    }
 }
