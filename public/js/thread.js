@@ -20,7 +20,7 @@ function renderMessage(message) {
         <a href="/users/${message.author.id}"> ${message.author.name}</a>:
     </h2>
 
-    <p>${message.content.replaceAll("\n", "<br>")}</p><br>
+    <p>${message.content.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;").replaceAll("'", "&#39;").replaceAll("\n", "<br>")}</p><br>
     <div id="message-delete-${message.id}">
     ${/* if */!message.deleted ?
             `

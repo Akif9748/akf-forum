@@ -5,12 +5,12 @@ const rateLimit = require('express-rate-limit')
 
 const app = Router();
 
-app.get("/", (req, res) => res.reply("register", { user: null }));
-
-app.post("/", rateLimit({
+app.get("/", rateLimit({
     windowMs: 24 * 60 * 60_000, max: 1, standardHeaders: true, legacyHeaders: false,
     handler: (_r, response, _n, options) => response.error(options.statusCode, "You are begin ratelimited")
-}), async (req, res) => {
+}), (req, res) => res.reply("register", { user: null }));
+
+app.post("/", async (req, res) => {
     req.session.userid = null;
 
 
