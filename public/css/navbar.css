@@ -151,18 +151,10 @@ div.avatar {
 }
 
 @media (max-width: 480px) {
-    .btn-outline-primary {
-        width: 100%;
-        text-align: center;
-    }
 
     .buttons {
         flex-direction: column;
         width: 100%;
     }
 
-    .btn-primary {
-        width: 100%;
-        text-align: center;
-    }
 }

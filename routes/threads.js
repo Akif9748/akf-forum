@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const app = Router();
 
-const { ThreadModel, MessageModel } = require("../models")
+const { ThreadModel } = require("../models")
 
 
 app.get("/", async (req, res) => {

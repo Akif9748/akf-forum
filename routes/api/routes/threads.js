@@ -21,16 +21,18 @@ app.get("/:id/messages/", async (req, res) => {
 
     const { id } = req.params;
     const limit = Number(req.query.limit);
+    const skip = Number(req.query.skip);
 
     const query = { threadID: id };
     if (!req.user.admin) query.deleted = false;
 
     const options = { sort: { date: -1 } };
     if (limit) options.limit = limit;
+    if (skip) options.skip = skip;
 
     const messages = await MessageModel.find(query, null, options)
 
-    if (!messages.length) return res.error(404, "We don't have any messages in this thread.");
+    if (!messages.length) return res.error(404, "We don't have any messages in this with your query thread.");
 
     res.complate(messages.map(x => x.toObject({ virtuals: true })));
 
