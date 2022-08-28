@@ -9,43 +9,47 @@
 
   <%- include("extra/navbar") %>
 
-  <% if (user) { %>
-    <h1 style="color: #4d18e6;">Welcome,  <div class="box-username"><%= user.name %>
-                <div class="avatar"><img src="<%=user.avatar %>"></div>
-            </div>
-            <br>
-            You can log out of the site here:
-            <a href="/login" class="btn-outline-primary">LOGOUT</a>
-    </h1>
 
-    <br>
-<% } else { %>
-    <h1 style="color: #4d18e6;">Welcome, Guest!<br>You can press the button to register:
-        <a href="/register" class="btn-outline-primary">REGISTER</a>
-
-    </h1>
- <% } %> 
-    <h1 style="color: #606060;">Statistics:</h1>
- 
   
     <div class="content">
+        <% if (user) { %>
+            <h2 style="color: #4d18e6;"><div class="box-username">Welcome, <%= user.name %>
+                        <div class="avatar"><img src="<%=user.avatar %>"></div>
+
+                    </div>
+                    You can log out of the site here:
+
+            </h2>
+           
+            <a href="/login" class="btn-outline-primary">LOGOUT</a>
+            <br>
+        <% } else { %>
+            <h2 style="color: #4d18e6;">Welcome, Guest!<br>You can press the button to register:
+                <a href="/register" class="btn-outline-primary">REGISTER</a>
+        
+            </h2>
+         <% } %> 
+         
+        <h2 style="color: #606060;">Statistics:</h2>
+
         <div class="box">
             <h2 class="box-title">Message count:</h2>
-            <h2 class="box-title">  <%= messages %></h2>
+            <h2 class="box-value"><%= messages %></h2>
         </div>
    
         <div class="box">
           <h2 class="box-title">User count: </h2>
-          <h2 class="box-title">  <%= users %> </h2>
+          <h2 class="box-value"><%= users %> </h2>
         </div>
+        
         <div class="box">              
           <h2 class="box-title">Thread count:</h2>
-          <h2 class="box-title"><%= threads %></h2>
+          <h2 class="box-value"><%= threads %></h2>
         </div>
     
         <div class="box">    
-            <h2 class="box-title"> Memory usage: </h2>
-            <h2 class="box-title"><%= mem.toFixed(2); %> MB</h2>
+            <h2 class="box-title">Memory usage:</h2>
+            <h2 class="box-value"><%= mem.toFixed(2); %> MB</h2>
         </div>
      
     </div> 

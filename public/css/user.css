@@ -21,7 +21,10 @@
   width: 100%;
 }
 
-.box-title,
+.box-title{
+  color: #4d18e6;
+  font-weight: 300;
+}
 .box-value {
   color: #606060;
   font-weight: 300;
