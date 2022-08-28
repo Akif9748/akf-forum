@@ -15,43 +15,25 @@
     </div>
     <div class="box">
       <h2 class="box-title">Name:</h2>
-    <h2 class="box-title">
-      <%= member.name %>
-    </h2>
-
+      <h2 class="box-value"><%= member.name %></h2>
     </div>
 
     <div class="box">
-      <h2 class="box-title">Created at:
-      </h2>
-      <h2 class="box-title">  
-      <%= new Date(member.time).toLocaleString() %>
-      </h2>
-      </div>
+      <h2 class="box-title">Created at:</h2>
+      <h2 class="box-value"><%= new Date(member.time).toLocaleString() %></h2>
+    </div>
     <div class="box">
-      
-      <h2 class="box-title">Is admin?
-      </h2>
-      <h2 class="box-title">
-      <%= member.admin ? "Yes" : "No" %>
-      </h2>
+      <h2 class="box-title">Is admin?</h2>
+      <h2 class="box-value"><%= member.admin ? "Yes" : "No" %></h2>
     </div>
 
-      <div class="box">
-        
-      <h2 class="box-title"> Message:
-      </h2>
-        <h2 class="box-title">
-          <%= counts.message %>
-        </h2>
-      </div>
     <div class="box">
-      
-      <h2 class="box-title"> Thread:
-      </h2>
-      <h2 class="box-title">
-<%= counts.thread %>
-      </h2>
+      <h2 class="box-title"> Message:</h2>
+      <h2 class="box-value"><%= counts.message %></h2>
+    </div>
+    <div class="box">
+      <h2 class="box-title">Thread:</h2>
+      <h2 class="box-value"><%= counts.thread %></h2>
     </div>
 
   <% if (user?.admin && !member.deleted) {%>
