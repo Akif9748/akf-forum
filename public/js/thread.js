@@ -1,12 +1,8 @@
 import request from "./request.js";
-
 const message_div = document.getElementById("messages");
 
-const messages_raw = await fetch(`/api/threads/${message_div.getAttribute("value")}/messages/`).then(res => res.json());
-for (const message of messages_raw)
-    renderMessage(message);
 
-function renderMessage(message) {
+function render_message(message) {
     const messageElement = document.createElement("div");
     messageElement.classList.add("message");
     messageElement.setAttribute("id", "message-" + message.id);
@@ -16,7 +12,7 @@ function renderMessage(message) {
     <h3 style="float:right;">${new Date(message.time).toLocaleString()}</h3>
 
     <h2>
-      <img class="circle" src="${message.author.avatar}" alt="${message.author.name}">
+      <img class="circle" src="${message.author.avatar}">
         <a href="/users/${message.author.id}"> ${message.author.name}</a>:
     </h2>
 
@@ -34,7 +30,7 @@ function renderMessage(message) {
         }
     </div>
     <div style="float: right;">
-    <h3 id="count${message.id}" style="display:inline;">0</h3>
+    <h3 id="count${message.id}" style="display:inline;">${message.reactCount}</h3>
     <a onclick="react('${message.id}', 'like');">+🔼</a>
     <a onclick="react('${message.id}', 'dislike');">-🔽</a>
     </div>
@@ -59,7 +55,7 @@ document.getElementById("send").addEventListener("submit", async e => {
             if (!res) return;
             form.reset();
             res.reactCount = 0;
-            renderMessage(res);
+            render_message(res);
         });
 });
 

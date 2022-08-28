@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const app = Router();
 
-const { ThreadModel } = require("../models")
+const { ThreadModel,MessageModel } = require("../models")
 
 
 app.get("/", async (req, res) => {
@@ -21,11 +21,17 @@ app.get("/:id", async (req, res) => {
     const thread = await ThreadModel.get(id);
     thread.views++;
 
-    if (thread && (req.user?.admin || !thread.deleted)) 
-        res.reply("thread", { thread, scroll: req.query.scroll || false });
-    else
+    if (thread && (req.user?.admin || !thread.deleted)) {
+        const messages = await Promise.all(thread.messages.map(async id => {
+            const message = await MessageModel.get(id)
+            message.content = message.content.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;").replaceAll("'", "&#39;").replaceAll("\n", "<br>")
+            return req.user?.admin || !message?.deleted ? message.toObject({ virtuals: true }) : null;
+        }));
+
+        res.reply("thread", { thread, messages, scroll: req.query.scroll || false });
+    } else
         res.error(404, "We have not got this thread.");
-    thread.save();    
+    thread.save();
 });
 
 

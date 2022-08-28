@@ -35,33 +35,38 @@
 
 
         <div id="messages" value="<%= thread.id %>">
-          <% if (!user){ %>
-            <h1>Guests cant view messages!</h1>
-            <% }%>
+       
+            <% messages.filter(Boolean).forEach(message=>{ %>
 
-            <!--EXAMPLE MESSAGE-->
-            <div class="message" id="message-3">
+            <div class="message" id="message-<%= message.id %>">
     
-              <h3 style="float:right;">26.08.2022 15:37:42</h3>
+              <h3 style="float:right;"><%= new Date(message.time).toLocaleString() %> </h3>
           
               <h2>
-                <img class="circle" src="https://cdn.discordapp.com/avatars/539506680140922890/abd74d10aac094fc8a5ad5c86f29fdb9.png?size=1024">
-                  <a href="/users/0"> Akif9748</a>:
+                <img class="circle" src="<%= message.author.avatar %>">
+                  <a href="/users/<%=message.author.id %>"><%=message.author.name %></a>:
               </h2>
           
-              <p>Example message for development</p><br>
-              <div id="message-delete-3">
-                <a onclick="delete_message('3');">DELETE</a>
-                <a onclick="edit_message('3');">EDIT</a>
+              <p><%= message.content%></p><br>
+              <div id="message-delete-<%=message.id %>">
+              
+                <% if (!message.deleted){ %>
+              
+                <a onclick="delete_message('<%=message.id %>');">DELETE</a>
+                <a onclick="edit_message('<%=message.id %>');">EDIT</a>
+                <% }else{ %>
+                  <h3 style="display:inline;">This message has been deleted</h3>
+            <a onclick="undelete_message('<%=message.id %>');">UNDELETE</a>
+                  <% } %>
 
               </div>
               <div style="float: right;">
-                  <h3 id="count3" style="display:inline;">0</h3>
-                  <a onclick="react('3', 'like');">+🔼</a>
-                  <a onclick="react('3', 'dislike');">-🔽</a>
+                  <h3 id="count<%=message.id %>" style="display:inline;"><%=message.reactCount %></h3>
+                  <a onclick="react('<%=message.id %>', 'like');">+🔼</a>
+                  <a onclick="react('<%=message.id %>', 'dislike');">-🔽</a>
               </div>
           </div>
-                      <!--EXAMPLE MESSAGE END-->
+                      <% }); %>
 
         </div>
 
