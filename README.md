@@ -34,6 +34,7 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 - Profile photos will store in database
 - regex for pfp for now and
 - admin perm for undelete, thread+message
+- page support for threads
 
 ### Frontend
 ### User

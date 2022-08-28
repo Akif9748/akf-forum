@@ -36,55 +36,7 @@ textarea {
   resize: none;
 }
 
-p {
-  font-size: 25px;
-}
 
-hr {
-  border-color: var(--col-8);
-  border: 0;
-  border-top: 1px solid var(--col-fg);
-  margin: 20px 0;
-}
-
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: monospace;
-  background: var(--col-bg);
-  color: var(--col-fg);
-  max-width: 69rem;
-  margin-top: 10px;
-  margin: auto;
-
-  /* funny number */
-}
-
-a:link {
-  color: var(--col-4);
-}
-
-a:hover {
-  color: var(--col-1);
-}
-
-a:visited {
-  color: var(--col-13);
-}
-
-a:active {
-  color: var(--col-1);
-}
-
-pre {
-  background-color: var(--col-0);
-  padding: 1em;
-  border: 0;
-}
 
 h1,
 h2,
@@ -94,9 +46,7 @@ h5 {
   margin-bottom: 0.1rem;
 }
 
-hr {
-  border-color: var(--col-8);
-}
+
 
 button,
 input {
@@ -158,7 +108,8 @@ button:hover {
 
 div.message {
   border: 2px solid var(--col-8);
-  padding: 10px;
+  margin: auto;
+  padding-inline: 100;
 }
 
 
