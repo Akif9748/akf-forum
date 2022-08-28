@@ -11,15 +11,14 @@ const schema = new mongoose.Schema({
     time: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
     edited: { type: Boolean, default: false },
-    react: { type:Object, default: {} }
+    react: {
+        like: [Number],
+        dislike: [Number]
+    }
 
 })
 
-schema.virtual('authorID').get(function() { return this.author?.id; });
-schema.virtual('reactCount').get(function() {
-    const arr = Object.values(this.react)
-    return arr.filter(Boolean).length - arr.filter(x => !x).length; 
-});
+schema.virtual('authorID').get(function () { return this.author?.id; });
 
 schema.methods.takeId = async function () {
     this.id = String(await model.count() || 0);

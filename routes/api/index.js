@@ -25,8 +25,7 @@ app.use(async (req, res, next) => {
     if (!user)
         return res.error(401, "We have not got any user has got this name")
 
-
-    if (!bcrypt.compare(password, user.password)) return res.error(401, 'Incorrect Password!');
+    if (!await bcrypt.compare(password, user.password)) return res.error(401, 'Incorrect Password!');
 
     req.user = await UserModel.findOne({ name: req.headers.username });
 

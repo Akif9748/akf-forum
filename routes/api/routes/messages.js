@@ -10,7 +10,7 @@ app.get("/:id", async (req, res) => {
 
     const message = await MessageModel.get(req.params.id);
 
-    if (!message || (message.deleted && req.user && !req.user.admin)) return res.error(404,  `We don't have any message with id ${req.params.id}.`);
+    if (!message || (message.deleted && req.user && !req.user.admin)) return res.error(404, `We don't have any message with id ${req.params.id}.`);
 
     res.complate(message.toObject({ virtuals: true }));
 
@@ -41,26 +41,40 @@ app.post("/", rateLimit({
 app.post("/:id/react/:type", async (req, res) => {
 
     const message = await MessageModel.get(req.params.id);
-    if (message) {
+    if (!message) return error(res, 404, `We don't have any message with id ${req.params.id}.`);
 
-        if (req.user.id in message.react)
-            delete message.react[req.session.userid];
-        else
-            message.react[req.session.userid] = req.params.type === "like";
-        message.markModified("react");
-        await message.save();
+    if (req.params.type == "like") {
+        if (message.react.like.includes(req.user.id))
+            message.react.like.pull(req.user.id);
+        else {
+            message.react.like.push(req.user.id);
+            message.react.dislike.pull(req.user.id);
+        }
 
-       
-        res.complate(message.toObject({ virtuals: true }));
-    } else error(res, 404, `We don't have any message with id ${req.params.id}.`);
 
+    } else if (req.params.type == "dislike") {
+
+        if (message.react.dislike.includes(req.user.id))
+            message.react.dislike.pull(req.user.id);
+        else {
+            message.react.dislike.push(req.user.id);
+            message.react.like.pull(req.user.id);
+        }
+
+    } else {
+        return res.error(400, `We don't have any react type with name ${req.params.type}.`);
+    }
+
+    await message.save();
+
+    res.complate(message.toObject({ virtuals: true }));
 
 });
 
 app.post("/:id/delete", async (req, res) => {
     const message = await MessageModel.get(req.params.id);
-    if (!message || (message.deleted && req.user && !req.user.admin)) 
-    return res.error(404, `We don't have any message with id ${req.params.id}.`);
+    if (!message || (message.deleted && req.user && !req.user.admin))
+        return res.error(404, `We don't have any message with id ${req.params.id}.`);
     const user = req.user;
     if (user.id != message.authorID && !user.admin)
         return res.error(403, "You have not got permission for this.");
@@ -76,8 +90,8 @@ app.post("/:id/undelete", async (req, res) => {
 
     const message = await MessageModel.get(req.params.id);
 
-    if (!message ) return res.error(404,  `We don't have any message with id ${req.params.id}.`);
-   
+    if (!message) return res.error(404, `We don't have any message with id ${req.params.id}.`);
+
     if (!message.deleted) return res.error(404, "This message is not deleted, first, delete it.");
 
     message.deleted = false;

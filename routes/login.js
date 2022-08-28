@@ -14,7 +14,7 @@ app.post("/", async (req, res) => {
         const user = await SecretModel.findOne({ username });
         if (user) {
 
-            if (!bcrypt.compare(password, user.password)) return res.error( 403, 'Incorrect Password!')
+            if (!await bcrypt.compare(password, user.password)) return res.error( 403, 'Incorrect Password!')
             const member = await UserModel.findOne({ name: username });
             if (!member || member.deleted) return res.error( 403, 'Incorrect Username and/or Password!')
 

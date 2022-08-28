@@ -58,9 +58,9 @@ GET ```/api/messages/0```
     "id": "0",
     "__v": 0,
     "react": {
-        "0": true
+        "like": [0],
+        "dislike":[]
     },
-    "authorID": "0",
-    "reactCount": 1
+    "authorID": "0"
 }
 ```
