@@ -41,8 +41,10 @@
     <p class="box-value">
       <%= member.about %>
     </p>
+    <% if (user && (user.id === member.id ||user.admin)) {%>
 
-    <a class="btn-outline-primary"  id="edit">Change name of the user!</a>
+    <a class="btn-outline-primary"  id="edit_n">Change name of the user!</a>
+    <a class="btn-outline-primary"  id="edit_a">Change avatar of the user!</a>
 
     <% if (user?.admin && !member.deleted) {%>
     <a class="btn-outline-primary" id="admin">Give admin permissions!</a>
@@ -67,7 +69,7 @@
           alert("User is deleted!");
           location.reload()
 
-        }else if (e.target.id == "edit") {
+        }else if (e.target.id == "edit_n") {
    
           const name = prompt("Enter new username!");
           const res =await request(`/api/users/<%= member.id %>/edit`, "POST", { name });
@@ -76,9 +78,14 @@
           location.reload();
 
 
+        }else if (e.target.id == "edit_a") {
+   
+          const avatar = prompt("Enter new avatar URL!");
+          const res =await request(`/api/users/<%= member.id %>/edit`, "POST", { avatar });
+          if (res.error) return;
+          alert(`User updated!`);
+          location.reload();
         }
-
-      
 
       });
 
