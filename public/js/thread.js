@@ -2,24 +2,30 @@ import request from "./request.js";
 
 window.edit_t = async function (id) {
     const title = prompt("Enter new title!");
-    const res = await request(`/api/threads/${id}/edit`, "POST", { title });
+    const res = await request(`/api/threads/${id}/edit`, "PATCH", { title });
     if (res.error) return;
     alert(`Thread updated`);
     document.getElementById("title").innerHTML = title;
 
 }
-
-
-window.thread = async function (id, un = "") {
-    const res = await request(`/api/threads/${id}/${un}delete`);
+window.delete_thread = async function (id) {
+    const res = await request(`/api/threads/${id}/`, "DELETE");
     if (res.error) return;
 
-    alert(`Thread ${un}deleted`);
+    alert(`Thread deleted`);
+    location.reload();
+}
+
+window.undelete_thread = async function (id) {
+    const res = await request(`/api/threads/${id}/undelete`);
+    if (res.error) return;
+
+    alert(`Thread undeleted`);
     location.reload();
 }
 window.edit_message = async function (id) {
     const content = prompt("Enter new content!");
-    const res = await request(`/api/messages/${id}/edit`, "POST", { content });
+    const res = await request(`/api/messages/${id}/`, "PATCH", { content });
     if (res.error) return;
 
     alert(`Message updated`);
@@ -36,7 +42,7 @@ window.undelete_message = async function (id) {
 }
 
 window.delete_message = async function (id) {
-    const response = await request(`/api/messages/${id}/delete`);
+    const response = await request(`/api/messages/${id}/`,"DELETE");
     if (response.deleted) {
         alert("Message deleted");
         document.getElementById("dots-" + id).innerHTML = `

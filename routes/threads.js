@@ -12,7 +12,7 @@ app.get("/", async (req, res) => {
 });
 
 
-app.get("/create*", (req, res) => res.reply("create_thread"));
+app.get("/create/", (req, res) => res.reply("create_thread"));
 
 app.get("/:id/", async (req, res) => {
 

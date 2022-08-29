@@ -14,7 +14,7 @@ app.get("/:id", async (req, res) => {
 
 });
 
-app.post("/:id/delete/", async (req, res) => {
+app.delete("/:id/", async (req, res) => {
     const user = req.user;
     if (!user.admin)
         return res.error(403, "You have not got permission for this.");
@@ -46,7 +46,7 @@ app.post("/:id/undelete/", async (req, res) => {
 })
 
 
-app.post("/:id/edit", async (req, res) => {
+app.patch("/:id/", async (req, res) => {
 
     const member = await UserModel.get(req.params.id);
 

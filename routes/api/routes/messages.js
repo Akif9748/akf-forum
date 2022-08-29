@@ -15,7 +15,7 @@ app.get("/:id", async (req, res) => {
     res.complate(message.toObject({ virtuals: true }));
 
 })
-app.post("/:id/edit", async (req, res) => {
+app.patch("/:id/", async (req, res) => {
 
     const message = await MessageModel.get(req.params.id);
 
@@ -88,7 +88,7 @@ app.post("/:id/react/:type", async (req, res) => {
 
 });
 
-app.post("/:id/delete", async (req, res) => {
+app.delete("/:id/", async (req, res) => {
     const message = await MessageModel.get(req.params.id);
     if (!message || (message.deleted && req.user && !req.user.admin))
         return res.error(404, `We don't have any message with id ${req.params.id}.`);

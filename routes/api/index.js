@@ -1,5 +1,6 @@
 const { Router, request, response } = require("express")
 const app = Router();
+const fs =require("fs")
 const bcrypt = require("bcrypt");
 const { SecretModel, UserModel } = require("../../models")
 
@@ -32,11 +33,9 @@ app.use(async (req, res, next) => {
     next();
 });
 
-/* will add for loop */
-app.use("/messages", require("./routes/messages"))
-app.use("/users", require("./routes/users"))
-app.use("/threads", require("./routes/threads"))
-
+for (const file of fs.readdirSync("./routes/api/routes")) 
+    app.use("/" + file.replace(".js", ""), require(`./routes/${file}`));
+    
 app.all("*", (req, res) => res.error(400, "Bad request"));
 
 module.exports = app;

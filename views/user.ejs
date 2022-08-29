@@ -36,52 +36,51 @@
       <h2 class="box-value"><%= counts.thread %></h2>
     </div>
     <div class="box">
-      <h2 class="box-title">About:</h2><br>
+      <h2 class="box-title">About:</h2>
     </div>
     <p class="box-value">
       <%= member.about %>
     </p>
-    <% if (user && (user.id === member.id ||user.admin)) {%>
-
-    <a class="btn-outline-primary"  id="edit_n">Change name of the user!</a>
-    <a class="btn-outline-primary"  id="edit_a">Change avatar of the user!</a>
 
     <% if (user?.admin && !member.deleted) {%>
+    <a class="btn-outline-primary" id="edit_name">Change name of the user!</a>
+    <a class="btn-outline-primary" id="edit_avatar">Change avatar of the user!</a>
+    <a class="btn-outline-primary" id="edit_about">Change about of the user!</a>
     <a class="btn-outline-primary" id="admin">Give admin permissions!</a>
-    <a class="btn-outline-primary"  id="delete">Delete user!</a>
+    <a class="btn-outline-primary" id="delete">Delete user!</a>
 
     <script type="module">
 
       import request from "../../js/request.js";
       document.addEventListener("click", async e => {
-    if (e.target.id == "admin") {
+        if (e.target.id == "admin") {
 
           const response = await request("/api/users/<%= member.id %>/admin");
 
           if (response.admin)
             return alert("Making admin of " + response.name + " is success!");
 
-        }else if (e.target.id == "delete") {
+        } else if (e.target.id == "delete") {
 
-          const response = await request("/api/users/<%= member.id %>/delete");
+          const response = await request("/api/users/<%= member.id %>","DELETE");
  
           if (!response.deleted) return
           alert("User is deleted!");
           location.reload()
 
-        }else if (e.target.id == "edit_n") {
-   
-          const name = prompt("Enter new username!");
-          const res =await request(`/api/users/<%= member.id %>/edit`, "POST", { name });
-          if (res.error) return;
-          alert(`User updated!`);
-          location.reload();
+        } else {
 
+          const body = {};
 
-        }else if (e.target.id == "edit_a") {
-   
-          const avatar = prompt("Enter new avatar URL!");
-          const res =await request(`/api/users/<%= member.id %>/edit`, "POST", { avatar });
+          if (e.target.id == "edit_name") 
+            body.name = prompt("Enter new username!");
+          else if (e.target.id == "edit_avatar") 
+            body.avatar = prompt("Enter new avatar URL!");
+          else if (e.target.id == "edit_avatar") 
+            body.about = prompt("Enter new about text!");
+          else return;
+          const res = await request(`/api/users/<%= member.id %>`, "PATCH", body);
+
           if (res.error) return;
           alert(`User updated!`);
           location.reload();
@@ -89,33 +88,26 @@
 
       });
 
-
     </script>
-  <% }; %>
-  <% if (member.deleted) {%>
-        <h1>This user has been deleted!</h1>
-        <a onclick="undelete();" class="btn-primary"  >Undelete user! </a>
+    <% }; %>
+    <% if (member.deleted) {%>
+    <h1>This user has been deleted!</h1>
+    <a onclick="undelete();" class="btn-primary"  >Undelete user! </a>
   
- 
-    
-        <script type="module">
-    
-          import request from "../../js/request.js";
-          window.undelete= async function undelete(params) {
+    <script type="module">
+      import request from "../../js/request.js";
+      window.undelete= async function undelete(params) {
             
-            const response = await request("/api/users/<%= member.id %>/undelete");
+      const response = await request("/api/users/<%= member.id %>/undelete");
      
-            if (response.deleted) return;
-              alert("User is undeleted successfully!");
-              location.reload()
-          }
-        
-    
-    
-        </script>
-  <% }; %>
+      if (response.deleted) return;
+        alert("User is undeleted successfully!");
+        location.reload()
+      }
+    </script>
+    <% }; %>
 
-</div>
+  </div>
 </body>
 
 </html>

@@ -53,7 +53,7 @@ app.post("/", async (req, res) => {
     res.complate(thread.toObject({ virtuals: true }));
 
 });
-app.post("/:id/edit", async (req, res) => {
+app.patch("/:id/", async (req, res) => {
 
     const thread = await ThreadModel.get(req.params.id);
 
@@ -68,7 +68,7 @@ app.post("/:id/edit", async (req, res) => {
     res.complate(thread.toObject({ virtuals: true }));
 
 })
-app.post("/:id/delete", async (req, res) => {
+app.delete("/:id/", async (req, res) => {
     const thread = await ThreadModel.get(req.params.id);
     if (!thread || thread.deleted) return res.error(404, `We don't have any thread with id ${req.params.id}.`);
     const user = req.user;

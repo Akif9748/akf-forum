@@ -6,9 +6,7 @@ mongoose.connect(process.env.MONGO_DB_URL, () => console.log("Database is connec
 const { UserModel } = require("../models");
 (async () => {
 
-  const member= await UserModel.get(0);
+  const member= await UserModel.get("0");
   member.admin = true;
   console.log(await member.save());
 })();
-
-

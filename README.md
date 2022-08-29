@@ -37,6 +37,7 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 - API, ?fast=
 - extra ratelimits
 - better edits
+- IP BAN CLI IN ADMIN PANEL
 
 ### Frontend
 #### User

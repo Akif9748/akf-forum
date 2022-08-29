@@ -16,25 +16,30 @@ But in front end, the API will works with session.
 ## How to request?
 
 ### Request types:
+- GET `/api/bans/` fetch all bans.
+- GET `/api/bans/:id` fetch a ban.
+- POST `/api/bans/:id?reason=flood` for ban an IP adress.
+- DELETE `/api/bans/:id` for unban an IP adress.
+
 - GET `/api/users/:id` for fetch user.
-- POST `/api/users/:id/delete` for delete user.
+- DELETE `/api/users/:id/` for delete user.
 - POST `/api/users/:id/undelete` for undelete user.
 - POST `/api/users/:id/admin` for give admin permissions for a user.
-- POST `/api/users/:id/edit` for edit user.
+- PATCH `/api/users/:id/` for edit user.
 
 - GET `/api/threads/:id` for fetch thread.
 - GET `/api/threads/:id/messages/` for fetch messages in thread.
 - POST `/api/threads` for create thread.
-- POST `/api/threads/:id/delete` for delete thread.
+- DELETE `/api/threads/:id/` for delete thread.
 - POST `/api/threads/:id/undelete` for undelete thread.
-- POST `/api/threads/:id/edit` for edit thread.
+- PATCH `/api/threads/:id/` for edit thread.
 
 - GET `/api/messages/:id` for fetch message.
 - POST `/api/messages` for create message.
-- POST `/api/messages/:id/delete` for delete message.
+- DELETE `/api/messages/:id/` for delete message.
 - POST `/api/messages/:id/undelete` for undelete message.
 - POST `/api/messages/:id/react/:type` for react to a message.
-- POST `/api/messages/:id/edit` for edit message.
+- PATCH `/api/messages/:id/` for edit message.
 
 ### Example request:
 GET ```/api/messages/0```

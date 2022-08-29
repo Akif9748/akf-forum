@@ -34,8 +34,6 @@ app.use(session({ secret: 'secret', resave: true, saveUninitialized: true }),
     }
 );
 
-
-
 for (const file of fs.readdirSync("./routes"))
     app.use("/" + file.replace(".js", ""), require(`./routes/${file}`));
 
