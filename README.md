@@ -94,8 +94,8 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 | Page support, support message limit correct | 🟢 | MEDIUM |
 | Multi-theme support, black theme | 🟡 | LOW |
 | Search | 🔴 | MEDIUM |
-| Locales | 🔴 | LOW |
 | Footer | 🔴 | LOW |
+
 ## Major Version History
 - V3: New Theme
 - V2: Backend fix, mongoose is fixed. Really big fix.
