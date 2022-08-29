@@ -50,7 +50,7 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 | Delete user | 🟢 | HIGH |
 | Undelete | 🟢 | MEDIUM |
 | About me | 🟢 | LOW |
-| Edit user | 🟡 | HIGH |
+| Edit user | 🟢 | HIGH |
 | IP ban | 🟢 | MEDIUM |
 | Profile Message | 🔴 | MEDIUM |
 
