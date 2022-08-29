@@ -16,7 +16,7 @@
   <div style="text-align:center;padding:8px">
     <div class="title" id="title"><%= thread.title %></div>
     <div class="date">
-      <%= new Date(thread.time).toLocaleString() %> • Views: <%= thread.views %> <%= "• "+thread.edited %>
+      <%= new Date(thread.time).toLocaleString() %> • Views: <%= thread.views %> <%= "• "+(thread.edited ) ? "Edited" : "Not edited"%>
     </div>
 
   </div>
