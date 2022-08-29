@@ -35,11 +35,19 @@
       <h2 class="box-title">Thread:</h2>
       <h2 class="box-value"><%= counts.thread %></h2>
     </div>
+    <div class="box">
+      <h2 class="box-title">About:</h2><br>
+    </div>
+    <p class="box-value">
+      <%= member.about %>
+    </p>
 
-  <% if (user?.admin && !member.deleted) {%>
-      <a class="btn-outline-primary" id="admin">Give admin permissions!</a>
-      <a class="btn-outline-primary"  id="delete">Delete user!</a>
- 
+    <a class="btn-outline-primary"  id="edit">Change name of the user!</a>
+
+    <% if (user?.admin && !member.deleted) {%>
+    <a class="btn-outline-primary" id="admin">Give admin permissions!</a>
+    <a class="btn-outline-primary"  id="delete">Delete user!</a>
+
     <script type="module">
 
       import request from "../../js/request.js";
@@ -58,6 +66,15 @@
           if (!response.deleted) return
           alert("User is deleted!");
           location.reload()
+
+        }else if (e.target.id == "edit") {
+   
+          const name = prompt("Enter new username!");
+          const res =await request(`/api/users/<%= member.id %>/edit`, "POST", { name });
+          if (res.error) return;
+          alert(`User updated!`);
+          location.reload();
+
 
         }
 

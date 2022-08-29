@@ -14,7 +14,7 @@ app.post("/", async (req, res) => {
     req.session.userid = null;
 
 
-    let { username = null, password: body_pass = null, avatar } = req.body;
+    let { username = null, password: body_pass = null, avatar, about } = req.body;
 
     if (!username || !body_pass) return res.error(res, 400, "You forgot entering some values");
     const user = await SecretModel.findOne({ username });
@@ -24,6 +24,9 @@ app.post("/", async (req, res) => {
 
     const user2 = new UserModel({ name: req.body.username })
     if (avatar && /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g.test(avatar)) user2.avatar = avatar;
+
+    if (about) user2.about = about;
+
     await user2.takeId()
     await user2.save();
 

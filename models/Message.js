@@ -14,9 +14,7 @@ const schema = new mongoose.Schema({
     react: {
         like: [Number],
         dislike: [Number]
-    },
-    index: { type: Number, default: 0 }
-
+    }
 })
 
 schema.virtual('authorID').get(function () { return this.author?.id; });

@@ -31,17 +31,15 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 ### TO-DO:
 - If thread deleted, not show its messages in API.
 - Profile photos will store in database
-- regex for pfp for now and
-- admin perm for undelete, thread + message
-- page support for threads, send, if multi page, send => other page
-- message "<b>"
+- replacer function global
 - author name of thread
-- page for threads - users
+- page for threads - users []
 - API, ?fast=
-- fix error messages, ~~declared as id~~, other...
+- extra ratelimits
+- better edits
 
 ### Frontend
-### User
+#### User
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
 | Login via redirect query | 🟢 | HIGH |
@@ -51,12 +49,12 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 | Message count | 🟢 | MEDIUM |
 | Delete user | 🟢 | HIGH |
 | Undelete | 🟢 | MEDIUM |
-| PM | 🔴 | MEDIUM |
-| About me | 🔴 | LOW |
-| Edit user | 🔴 | HIGH |
-| IP ban | 🔴 | MEDIUM |
+| About me | 🟢 | LOW |
+| Edit user | 🟡 | HIGH |
+| IP ban | 🟢 | MEDIUM |
+| Profile Message | 🔴 | MEDIUM |
 
-### Messages
+#### Messages
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
 | Ratelimit | 🟢 | HIGH |
@@ -65,16 +63,16 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 | Regex for scripts | 🟢 | HIGH |
 | Undelete | 🟢 | MEDIUM |
 | React | 🟢 | MEDIUM |
-| Edit | 🔴 | MEDIUM |
+| Edit | 🟢 | MEDIUM |
 
-### Threads
+#### Threads
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
 | Ratelimit | 🟢 | HIGH |
 | Create | 🟢 | HIGH |
 | Delete | 🟢 | HIGH |
 | Undelete | 🟢 | MEDIUM |
-| Edit | 🔴 | MEDIUM |
+| Edit | 🟢 | MEDIUM |
 
 ### API
 | To do | Is done? 
@@ -85,17 +83,17 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 | Get message & thread & user | 🟢 
 | Delete message & thread & user | 🟢 
 | Undelete message & thread & user | 🟢 
-| Edit message & thread & user | 🔴 
+| Edit message & thread & user | 🟢 
 
 ### Other
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
 | from form to AJAX | 🟢 | HIGH |
 | auto-scroll  | 🟢 | LOW |
+| Page support, support message limit correct | 🟢 | MEDIUM |
 | Multi-theme support, black theme | 🟡 | LOW |
 | Search | 🔴 | MEDIUM |
-| Page support, support message limit correct | 🔴 | MEDIUM |
-| Locales | 🔴 | MEDIUM |
+| Locales | 🔴 | LOW |
 | Footer | 🔴 | LOW |
 ## Major Version History
 - V3: New Theme

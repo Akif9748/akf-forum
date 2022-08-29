@@ -9,7 +9,7 @@ app.get("/:id", async (req, res) => {
 
     if (!message || (message.deleted && req.user && !req.user.admin)) return res.error( 404,
         `We don't have any message with id ${req.params.id}.`);
-    res.redirect(`/threads/${message.threadID}?scroll=${req.params.id}`);
+    res.redirect(`/threads/${message.threadID}?scroll=${message.id}`);
 
 });
 

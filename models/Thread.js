@@ -1,5 +1,6 @@
-const mongoose = require("mongoose")
-const UserModel  = require("./User");
+const mongoose = require("mongoose");
+const UserModel = require("./User");
+const MessageModel = require("./Message");
 const schema = new mongoose.Schema({
     id: { type: String, unique: true },
 
@@ -8,13 +9,19 @@ const schema = new mongoose.Schema({
     title: String,
     time: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
+    edited: { type: Boolean, default: false },
+
     messages: [String],
     views: { type: Number, default: 0 }
 
 });
 
-schema.virtual('authorID').get(function() { return this.author?.id; });
-
+schema.virtual('authorID').get(function () { return this.author?.id; });
+schema.methods.messageCount = async function (admin = false) {
+    const query = { threadID: this.id }; 
+    if (!admin) query.deleted = false;
+    return await MessageModel.count(query) || 0;
+};
 schema.methods.push = function (messageID) {
     this.messages.push(messageID);
     return this;

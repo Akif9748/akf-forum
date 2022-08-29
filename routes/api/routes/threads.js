@@ -53,7 +53,21 @@ app.post("/", async (req, res) => {
     res.complate(thread.toObject({ virtuals: true }));
 
 });
+app.post("/:id/edit", async (req, res) => {
 
+    const thread = await ThreadModel.get(req.params.id);
+
+    if (!thread || (thread.deleted && req.user && !req.user.admin)) return res.error(404, `We don't have any message with id ${req.params.id}.`);
+
+    if (req.user.id !== thread.authorID && !req.user.admin) return res.error(403, "You have not got permission for this.");
+    const { title = null } = req.body;
+    if (!title) return res.error(400, "Missing thread title in request body.");
+    thread.title = title;
+    await thread.save();
+
+    res.complate(thread.toObject({ virtuals: true }));
+
+})
 app.post("/:id/delete", async (req, res) => {
     const thread = await ThreadModel.get(req.params.id);
     if (!thread || thread.deleted) return res.error(404, `We don't have any thread with id ${req.params.id}.`);
@@ -77,6 +91,8 @@ app.post("/:id/undelete", async (req, res) => {
     if (!thread.deleted) return res.error(404, "This thread is not deleted, first, delete it.");
 
     thread.deleted = false;
+    thread.edited=true; 
+
     await thread.save();
 
     res.complate(thread.toObject({ virtuals: true }));

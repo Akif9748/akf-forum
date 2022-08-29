@@ -34,7 +34,7 @@ app.post("/:id/undelete/", async (req, res) => {
 
     const member = await UserModel.get(req.params.id);
 
-    if (!member )  return res.error(404, `We don't have any user with id ${req.params.id}.`);
+    if (!member) return res.error(404, `We don't have any user with id ${req.params.id}.`);
 
     if (!member.deleted) return res.error(404, "This user is not deleted, first, delete it.");
 
@@ -44,6 +44,31 @@ app.post("/:id/undelete/", async (req, res) => {
     res.complate(member.toObject({ virtuals: true }));
 
 })
+
+
+app.post("/:id/edit", async (req, res) => {
+
+    const member = await UserModel.get(req.params.id);
+
+    if (!member || (member.deleted && !req.user.admin)) return res.error(404, `We don't have any message with id ${req.params.id}.`);
+
+    if (req.user.id !== member.id && !req.user.admin) return res.error(403, "You have not got permission for this.");
+    const { avatar, name, about } = req.body;
+    if (!avatar && !name) return res.error(400, "Missing member informations in request body.");
+    if (avatar && /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g.test(avatar))
+        member.avatar = avatar;
+    if (name) member.name = name;
+
+    if (about) member.about = about;
+    member.edited = true;
+
+
+    await member.save();
+
+    res.complate(member.toObject({ virtuals: true }));
+
+})
+
 app.post("/:id/admin/", async (req, res) => {
 
     const user = req.user;
@@ -54,10 +79,10 @@ app.post("/:id/admin/", async (req, res) => {
     if (!user2)
         return res.error(404, `We don't have any user with id ${id}.`);
 
-    else {
-        user2.admin = true;
-        await user2.save()
-    }
+
+    user2.admin = true;
+    await user2.save()
+
 
     res.complate(user2);
 

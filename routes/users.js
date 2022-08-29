@@ -18,9 +18,13 @@ app.get("/:id", async (req, res) => {
 
         const message = await MessageModel.count({ "author.id": id });
         const thread = await ThreadModel.count({ "author.id": id });
+        member.about = member.about.replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+            .replaceAll("\"", "&quot;").replaceAll("'", "&#39;")
+            .replaceAll("\n", "<br>");
         res.reply("user", { member, counts: { message, thread } })
     }
-    else res.error(404,  `We don't have any user with id ${id}.`);
+    else res.error(404, `We don't have any user with id ${id}.`);
 
 });
 

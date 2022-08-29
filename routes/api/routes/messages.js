@@ -15,6 +15,23 @@ app.get("/:id", async (req, res) => {
     res.complate(message.toObject({ virtuals: true }));
 
 })
+app.post("/:id/edit", async (req, res) => {
+
+    const message = await MessageModel.get(req.params.id);
+
+    if (!message || (message.deleted && req.user && !req.user.admin)) return res.error(404, `We don't have any message with id ${req.params.id}.`);
+
+    if (req.user.id !== message.authorID && !req.user.admin) return res.error(403, "You have not got permission for this.");
+    const { content = null } = req.body;
+    if (!content) return res.error(400, "Missing message content in request body.");
+    message.content = content;
+    message.edited=true; 
+
+    await message.save();
+
+    res.complate(message.toObject({ virtuals: true }));
+
+})
 
 app.post("/", rateLimit({
     windowMs: 60_000, max: 1, standardHeaders: true, legacyHeaders: false,
@@ -31,7 +48,7 @@ app.post("/", rateLimit({
 
     if (!thread) return res.error(404, `We don't have any thread with id ${threadID}.`);
 
-    const message = await new MessageModel({ content, author: req.user, threadID: thread.id, index: thread.messages.length }).takeId();
+    const message = await new MessageModel({ content, author: req.user, threadID: thread.id }).takeId();
     await message.save();
     await thread.push(message.id).save();
 

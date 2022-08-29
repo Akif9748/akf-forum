@@ -18,11 +18,14 @@ app.get("/:id/", async (req, res) => {
 
     const { user, params: { id } } = req
 
-    const page = Number(req.query.page || 0);
+    let page = Number(req.query.page || 0);
+
     const thread = await ThreadModel.get(id)
+    thread.count = await thread.messageCount(user?.admin);
+    thread.pages = Math.ceil(thread.count / 10);
     if (thread && (user?.admin || !thread.deleted)) {
         thread.views++;
-        const query = { threadID: id }; 
+        const query = { threadID: id };
         if (!user || !user.admin) query.deleted = false;
 
         const messages = await MessageModel.find(query).sort({ time: 1 }).limit(10).skip(page * 10)
@@ -34,13 +37,12 @@ app.get("/:id/", async (req, res) => {
                 return message.toObject({ virtuals: true });
             }))
 
-
         res.reply("thread", { page, thread, messages, scroll: req.query.scroll || thread.messages[0].id });
 
         thread.save();
 
     } else
-        res.error(404, "We have not got this thread.");
+        res.error(404, `We don't have any thread with id ${id}.`);
 });
 
 

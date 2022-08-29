@@ -23,7 +23,7 @@ app.use(async (req, res, next) => {
     const user = await SecretModel.findOne({ username });
 
     if (!user)
-        return res.error(401, "We have not got any user has got this name")
+        return res.error(401, `We don't have any thread with name ${username}.`)
 
     if (!await bcrypt.compare(password, user.password)) return res.error(401, 'Incorrect Password!');
 

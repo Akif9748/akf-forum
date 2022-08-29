@@ -20,18 +20,21 @@ But in front end, the API will works with session.
 - POST `/api/users/:id/delete` for delete user.
 - POST `/api/users/:id/undelete` for undelete user.
 - POST `/api/users/:id/admin` for give admin permissions for a user.
+- POST `/api/users/:id/edit` for edit user.
 
 - GET `/api/threads/:id` for fetch thread.
 - GET `/api/threads/:id/messages/` for fetch messages in thread.
 - POST `/api/threads` for create thread.
 - POST `/api/threads/:id/delete` for delete thread.
 - POST `/api/threads/:id/undelete` for undelete thread.
+- POST `/api/threads/:id/edit` for edit thread.
 
 - GET `/api/messages/:id` for fetch message.
 - POST `/api/messages` for create message.
 - POST `/api/messages/:id/delete` for delete message.
 - POST `/api/messages/:id/undelete` for undelete message.
 - POST `/api/messages/:id/react/:type` for react to a message.
+- POST `/api/messages/:id/edit` for edit message.
 
 ### Example request:
 GET ```/api/messages/0```

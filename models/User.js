@@ -7,6 +7,8 @@ const schema = new mongoose.Schema({
     avatar: { type: String, default: "/images/guest.png" },
     time: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
+    edited: { type: Boolean, default: false },
+    about: { type: String, default: "" },
     admin: { type: Boolean, default: false },
     theme: { type: String, default: def_theme }
 

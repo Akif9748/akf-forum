@@ -14,7 +14,7 @@
   <% }; %>
 
   <div style="text-align:center;padding:8px">
-    <div class="title"><%= thread.title %></div>
+    <div class="title" id="title"><%= thread.title %></div>
     <div class="date">
       <%= new Date(thread.time).toLocaleString() %> • Views: <%= thread.views %>
     </div>
@@ -26,7 +26,7 @@
    <% if (user && !thread.deleted){ %>
 
     <a onclick="thread('<%= thread.id %>')" class="btn-outline-primary" >DELETE</a>
-    <a onclick="edit_thread('<%= thread.id %>')" class="btn-outline-primary" >EDIT</a>
+    <a onclick="edit_t('<%= thread.id %>')" class="btn-outline-primary" >EDIT</a>
     <% } else if (thread.deleted) { %>
     <h3 style="display:inline;">This thread has been deleted</h3>
     <a onclick="thread('<%= thread.id %>', 'un')" class="btn-primary" >UNDELETE</a>
@@ -58,6 +58,9 @@
         <% if (message.deleted){ %>
         <i class='bx bx-trash bx-sm' id="deleted-<%=message.id %>" style="color: RED;"></i>
         <% } %>
+        <% if (message.edited){ %>
+        <i class='bx bx-pencil bx-sm' id="edited-<%=message.id %>" style="color: GREEN;"></i>
+        <% } %>
         <i class='bx bx-dots-horizontal-rounded' ></i>
       </div>
 
@@ -88,32 +91,53 @@
 
     <% }); %>
   </div>
+  <% if (user){ %>
+
   <div class="message">
     <form id="send">
       <textarea rows="4" cols="100" name="content"></textarea>
       <input name="threadID" type="hidden" value="<%= thread.id %>"></input>
+      <input name="page" type="hidden" value="<%= page %>"></input>
+
+      <script type="module">
+        import request from "../../js/request.js";
+
+        document.getElementById("send").addEventListener("submit", async e => {
+
+        e.preventDefault();
     
-      <% if (user){ %>
+        const data = new FormData(e.target);
+
+        request("/api/messages", "POST", { threadID: "<%= thread.id %>", content: data.get("content") })
+          .then(res => {
+            let tp = Number("<%= thread.pages %>")
+            let tm = Number("<%= thread.count %>") 
+            if (tp*10===tm) tp++;
+            if (res) location.href = `/threads/${data.get("threadID")}?page=${tp-1}`;
+
+          });
+        });
+      </script>
       <button class="btn-primary">Send!</button>
-      <%} else {%>
-      <a class="btn-outline-primary" href="/login?redirect=<%= thread.getLink() %>">Login for send</a>
-      <% }%>
+    
     </form>
   </div>
+  <% }%>
   <div class="pagination">
     <div class="back">
-    <% if (page > 0){ %>
+      <% if (page > 0){ %>
       <a href="<%= thread.getLink() %>?page=<%= page-1 %>" class='bx bxs-chevron-left'></a>
-    <% } %>  
+      <% } %>  
     </div>
     
-
     <div class="numbers">
-      <a class="number" href="<%= thread.getLink() %>?page=<%= page %>"><%= page+1 %></a>
+      <% for(let i=0; i < thread.pages; i++){ %>
+      <a class="number <%= i==page?'active':'' %>" href="<%= thread.getLink() %>?page=<%= i %>"><%= i+1 %></a>
+      <% } %>
     </div>
 
     <div class="after">
-      <% if (Math.ceil(messages.length/10) > page){ %>
+      <% if (thread.pages-1 > page) { %>
       <a href="<%= thread.getLink() %>?page=<%= page +1 %>" class='bx bxs-chevron-right'></a>
       <% } %>
     </div>
