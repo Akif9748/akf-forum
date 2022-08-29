@@ -1,46 +1,4 @@
 import request from "./request.js";
-const message_div = document.getElementById("messages");
-
-
-function render_message(message) {
-    const messageElement = document.createElement("div");
-    messageElement.classList.add("message");
-    messageElement.setAttribute("id", "message-" + message.id);
-
-    messageElement.innerHTML = `
-    
-    <h3 style="float:right;">${new Date(message.time).toLocaleString()}</h3>
-
-    <h2>
-      <img class="circle" src="${message.author.avatar}">
-        <a href="/users/${message.author.id}"> ${message.author.name}</a>:
-    </h2>
-
-    <p>${message.content.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;").replaceAll("'", "&#39;").replaceAll("\n", "<br>")}</p><br>
-    <div id="message-delete-${message.id}">
-    ${/* if */!message.deleted ?
-            `
-            <a onclick="delete_message('${message.id}');">DELETE</a>
-            <a onclick="edit_message('${message.id}');">EDIT</a>
-            ` /* else */ :
-            `<h3 style=\"display:inline;\">This message has been deleted</h3>
-            <a onclick="undelete_message('${message.id}');">UNDELETE</a>
-           `
-
-        }
-    </div>
-    <div style="float: right;">
-    <h3 id="count${message.id}" style="display:inline;">${message.reactCount}</h3>
-    <a onclick="react('${message.id}', 'like');">+🔼</a>
-    <a onclick="react('${message.id}', 'dislike');">-🔽</a>
-    </div>
-`;
-
-    message_div.appendChild(messageElement);
-    message_div.innerHTML += "<br>";
-};
-
-window.scrollTo(0, document.body.scrollHeight);
 
 /**
  * Message Sender
@@ -52,10 +10,7 @@ document.getElementById("send")?.addEventListener("submit", async e => {
     const data = new FormData(form);
     request("/api/messages", "POST", { threadID: data.get("threadID"), content: data.get("content") })
         .then(res => {
-            if (!res) return;
-            form.reset();
-            res.reactCount = 0;
-            render_message(res);
+            if (res) location.href = `/messages/${res.id}`;
         });
 });
 
@@ -63,7 +18,7 @@ document.getElementById("send")?.addEventListener("submit", async e => {
  * OTHER FUNCTIONS
  */
 
-async function delete_thread(id) {
+window.delete_thread = async function (id) {
     const response = await request("/api/threads/" + id + "/delete");
     if (response.deleted) {
         alert("Thread deleted");
@@ -71,37 +26,39 @@ async function delete_thread(id) {
     }
 
 }
-async function undelete_thread(id) {
+window.undelete_thread = async function (id) {
     const response = await request("/api/threads/" + id + "/undelete");
     if (!response.deleted) {
         alert("Thread undeleted");
         location.reload();
-
     }
 
 }
-async function undelete_message(id) {
+window.undelete_message = async function (id) {
     const response = await request(`/api/messages/${id}/undelete`);
-    if (!response.deleted)
-        document.getElementById("message-delete-" + id).innerHTML = `<a onclick=\"delete_message('${id}');\">DELETE</a>`;
+    if (response.deleted) return;
+    document.getElementById("deleted-" + id).remove();
+    document.getElementById("dot-" + id).innerHTML = `
+    <a onclick="delete_message('${id}');">DELETE</a>
+    <a onclick="edit_message('${id}');">EDIT</a>
+    `
+
 
 }
-async function delete_message(id) {
+window.delete_message = async function (id) {
     const response = await request(`/api/messages/${id}/delete`);
     if (response.deleted) {
         alert("Message deleted");
-        document.getElementById("message-delete-" + id).innerHTML = `
-        <h3 style=\"display:inline;\">This message has been deleted</h3>        
+        document.getElementById("dots-" + id).innerHTML = `
+        <i class='bx bx-trash bx-sm' id="deleted-${id}" style="color: RED;"></i>
+        `+ document.getElementById("dots-" + id).innerHTML;
+
+        document.getElementById("dot-" + id).innerHTML = `     
         <a onclick="undelete_message('${id}');">UNDELETE</a>`;// ADMIN PERM FIX
     }
 }
-async function react(id, type) {
+window.react = async function (id, type) {
     const res = await request(`/api/messages/${id}/react/${type}`)
-    document.getElementById(`count${id}`).innerHTML = res.reactCount;
+    document.getElementById(`like-${id}`).innerHTML = res.react.like.length;
+    document.getElementById(`dislike-${id}`).innerHTML = res.react.dislike.length;
 }
-
-window.delete_message = delete_message;
-window.undelete_message = undelete_message;
-window.react = react;
-window.delete_thread = delete_thread;
-window.undelete_thread = undelete_thread;

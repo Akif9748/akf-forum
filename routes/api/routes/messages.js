@@ -31,7 +31,7 @@ app.post("/", rateLimit({
 
     if (!thread) return res.error(404, `We don't have any thread with id ${threadID}.`);
 
-    const message = await new MessageModel({ content, author: req.user, threadID: thread.id }).takeId();
+    const message = await new MessageModel({ content, author: req.user, threadID: thread.id, index: thread.messages.length }).takeId();
     await message.save();
     await thread.push(message.id).save();
 

@@ -26,7 +26,7 @@ app.get("/:id/messages/", async (req, res) => {
     const query = { threadID: id };
     if (!req.user.admin) query.deleted = false;
 
-    const options = { sort: { date: -1 } };
+    const options = { sort: { time: -1 } };
     if (limit) options.limit = limit;
     if (skip) options.skip = skip;
 

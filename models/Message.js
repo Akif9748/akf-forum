@@ -14,7 +14,8 @@ const schema = new mongoose.Schema({
     react: {
         like: [Number],
         dislike: [Number]
-    }
+    },
+    index: { type: Number, default: 0 }
 
 })
 

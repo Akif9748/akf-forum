@@ -11,17 +11,16 @@ app.get("/", async ({ user }, res) => {
 
 app.get("/:id", async (req, res) => {
     const user = req.user
-    const { id = null } = req.params;
+    const { id } = req.params;
     const member = await UserModel.get(id);
-
 
     if (member && (user?.admin || !member.deleted)) {
 
-        const message = await MessageModel.count({ "author.id": id });// this place was having problem. fixed
+        const message = await MessageModel.count({ "author.id": id });
         const thread = await ThreadModel.count({ "author.id": id });
         res.reply("user", { member, counts: { message, thread } })
     }
-    else res.error(404, "We have not got this user.");
+    else res.error(404,  `We don't have any user with id ${id}.`);
 
 });
 

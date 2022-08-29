@@ -33,11 +33,13 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 - Profile photos will store in database
 - regex for pfp for now and
 - admin perm for undelete, thread + message
-- page support for threads
+- page support for threads, send, if multi page, send => other page
 - message "<b>"
 - author name of thread
 - page for threads - users
-- edit & delete button for thread
+- API, ?fast=
+- fix error messages, ~~declared as id~~, other...
+
 ### Frontend
 ### User
 | To do | Is done? | Priority |

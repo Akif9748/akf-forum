@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const app = Router();
 
-const { ThreadModel,MessageModel } = require("../models")
+const { ThreadModel, MessageModel } = require("../models")
 
 
 app.get("/", async (req, res) => {
@@ -14,27 +14,33 @@ app.get("/", async (req, res) => {
 
 app.get("/create*", (req, res) => res.reply("create_thread"));
 
-app.get("/:id", async (req, res) => {
+app.get("/:id/", async (req, res) => {
 
-    const { id } = req.params;
-    const page = req.query.page || 0;
-    const thread = await ThreadModel.get(id).skip(page * 10).limit(page * 10 + 10);
-    thread.views++;
+    const { user, params: { id } } = req
 
-    if (thread && (req.user?.admin || !thread.deleted)) {
-        const messages = await Promise.all(thread.messages.map(async id => {
-            const message = await MessageModel.get(id)
-            message.content = message.content.replaceAll("&", "&amp;")
-            .replaceAll("<", "&lt;").replaceAll(">", "&gt;")
-            .replaceAll("\"", "&quot;").replaceAll("'", "&#39;")
-            .replaceAll("\n", "<br>");
-            return req.user?.admin || !message?.deleted ? message.toObject({ virtuals: true }) : null;
-        }));
+    const page = Number(req.query.page || 0);
+    const thread = await ThreadModel.get(id)
+    if (thread && (user?.admin || !thread.deleted)) {
+        thread.views++;
+        const query = { threadID: id };
+        if (!user || !user.admin) query.deleted = false;
 
-        res.reply("thread", { page,thread, messages, scroll: req.query.scroll || thread.messages[0]});
+        const messages = await MessageModel.find(query).sort({ time: 1 }).skip(page * 10).limit(page * 10 + 10)
+            .then(messages => messages.map(message => {
+                message.content = message.content.replaceAll("&", "&amp;")
+                    .replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+                    .replaceAll("\"", "&quot;").replaceAll("'", "&#39;")
+                    .replaceAll("\n", "<br>");
+                return message.toObject({ virtuals: true });
+            }))
+
+
+        res.reply("thread", { page, thread, messages, scroll: req.query.scroll || thread.messages[0].id });
+
+        thread.save();
+
     } else
         res.error(404, "We have not got this thread.");
-    thread.save();
 });
 
 
