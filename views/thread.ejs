@@ -65,7 +65,7 @@
       <% if (!message.deleted){ %>
         <a onclick="delete_message('<%=message.id %>');">Delete</a>
         <a onclick="edit_message('<%=message.id %>');">Edit</a>
-      <% }else if (user.admin){ %>
+      <% }else { %>
         <a onclick="undelete_message('<%=message.id %>');">Undelete</a>
       <% } %>
       </div>
@@ -92,13 +92,11 @@
     <form id="send">
       <textarea rows="4" cols="100" name="content"></textarea>
       <input name="threadID" type="hidden" value="<%= thread.id %>"></input>
-
-
     
       <% if (user){ %>
-        <button class="btn-primary">Send!</button>
+      <button class="btn-primary">Send!</button>
       <%} else {%>
-        <a class="btn-outline-primary" href="/login?redirect=<%= thread.getLink() %>">Login for send</a>
+      <a class="btn-outline-primary" href="/login?redirect=<%= thread.getLink() %>">Login for send</a>
       <% }%>
     </form>
   </div>
@@ -111,9 +109,7 @@
     
 
     <div class="numbers">
-      <% for(let i=0;i <= Math.ceil(messages.length/10) ;i++){ %>
-      <a class="number <%= i==page?'active':'' %>" href="<%= thread.getLink() %>?page=<%= i %>"><%= i+1 %></a>
-      <% } %>
+      <a class="number" href="<%= thread.getLink() %>?page=<%= page %>"><%= page+1 %></a>
     </div>
 
     <div class="after">

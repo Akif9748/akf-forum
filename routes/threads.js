@@ -22,10 +22,10 @@ app.get("/:id/", async (req, res) => {
     const thread = await ThreadModel.get(id)
     if (thread && (user?.admin || !thread.deleted)) {
         thread.views++;
-        const query = { threadID: id };
+        const query = { threadID: id }; 
         if (!user || !user.admin) query.deleted = false;
 
-        const messages = await MessageModel.find(query).sort({ time: 1 }).skip(page * 10).limit(page * 10 + 10)
+        const messages = await MessageModel.find(query).sort({ time: 1 }).limit(10).skip(page * 10)
             .then(messages => messages.map(message => {
                 message.content = message.content.replaceAll("&", "&amp;")
                     .replaceAll("<", "&lt;").replaceAll(">", "&gt;")
