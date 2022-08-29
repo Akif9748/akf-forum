@@ -17,22 +17,10 @@ document.getElementById("send")?.addEventListener("submit", async e => {
 /**
  * OTHER FUNCTIONS
  */
-
-window.delete_thread = async function (id) {
-    const response = await request("/api/threads/" + id + "/delete");
-    if (response.deleted) {
-        alert("Thread deleted");
-        location.reload();
-    }
-
-}
-window.undelete_thread = async function (id) {
-    const response = await request("/api/threads/" + id + "/undelete");
-    if (!response.deleted) {
-        alert("Thread undeleted");
-        location.reload();
-    }
-
+window.thread = async function (id, un= "") {
+    await request(`/api/threads/${id}/${un}delete`);
+    alert(`Thread ${un}deleted`);
+    location.reload();
 }
 window.undelete_message = async function (id) {
     const response = await request(`/api/messages/${id}/undelete`);
@@ -53,8 +41,7 @@ window.delete_message = async function (id) {
         <i class='bx bx-trash bx-sm' id="deleted-${id}" style="color: RED;"></i>
         `+ document.getElementById("dots-" + id).innerHTML;
 
-        document.getElementById("dot-" + id).innerHTML = `     
-        <a onclick="undelete_message('${id}');">UNDELETE</a>`;// ADMIN PERM FIX
+        document.getElementById("dot-" + id).innerHTML = `<a onclick="undelete_message('${id}');">UNDELETE</a>`;
     }
 }
 window.react = async function (id, type) {
