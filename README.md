@@ -38,7 +38,9 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 - extra ratelimits
 - better edits
 - IP BAN CLI IN ADMIN PANEL
-
+- about me button not working
+- delete thread for threads area
+- delete admin request, moreover, add it to user/delete 😳
 ### Frontend
 #### User
 | To do | Is done? | Priority |
