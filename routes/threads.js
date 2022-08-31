@@ -36,7 +36,7 @@ app.get("/:id/", async (req, res) => {
                     .replaceAll("\n", "<br>");
                 return await message.get_author();
             })));
-        res.reply("thread", { page, thread, messages, scroll: req.query.scroll || thread.messages[0].id });
+        res.reply("thread", { page, thread, messages, scroll: req.query.scroll || messages[0]?.id });
 
         thread.save();
 
