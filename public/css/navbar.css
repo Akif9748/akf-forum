@@ -24,12 +24,12 @@ a {
 .logo {
     padding: 10px;
     font-size: 28px;
-    color: #4d18e6;
+    color: var(--main);
     font-weight: 900;
 }
 
 .logo>span {
-    color: #606060;
+    color: var(--second);
 }
 
 .buttons {
@@ -39,18 +39,18 @@ a {
 }
 
 .btn-primary {
-    color: #e8e8e8;
-    background-color: #4d18e6;
+    color: var(--btn-clr-1);
+    background-color: var(--main);
     padding: 10px 20px 10px 20px;
     border-radius: 4px;
     font-weight: 700;
     margin: 10px;
     cursor: pointer;
-    border: 2px solid #4d18e6;
+    border: 2px solid var(--main);
 }
 
 .btn-danger {
-    color: #e8e8e8;
+    color: var(--btn-clr-1);
     background-color: #ff0000;
     padding: 0px 10px 0px 10px;
 
@@ -63,26 +63,26 @@ a {
 
 
 .btn-outline-primary {
-    color: #4d18e6;
+    color: var(--main);
     padding: 10px 20px 10px 20px;
 
     border-radius: 4px;
     font-weight: 700;
     margin: 10px;
     cursor: pointer;
-    border: 2px solid #e2e2e2;
+    border: 2px solid var(--borders);
 }
 
 
 
 .btn-primary:hover {
-    color: #4d18e6;
+    color: var(--main);
     background-color: rgba(0, 0, 0, 0);
-    border: 2px solid #4d18e6;
+    border: 2px solid var(--main);
 }
 
 .btn-outline-primary:hover {
-    border: 2px solid #4d18e6;
+    border: 2px solid var(--main);
 }
 
 .btn-danger:hover {
@@ -101,8 +101,9 @@ a {
 .menu-item {
     padding: 10px;
     font-weight: 700;
-    background-color: #606060;
-    color: #ffffff;
+    background-color: var(--second);
+    color: var(--menu-item);
+
     border-radius: 5px;
     width: 100%;
     text-align: center;
@@ -112,7 +113,7 @@ a {
 }
 
 .active-menu {
-    background-color: #4d18e6;
+    background-color: var(--main);
 }
 
 body {
@@ -123,13 +124,13 @@ body {
 
 
 .menu-item:hover {
-    background-color: #4d18e6;
+    background-color: var(--main);
 }
 
 .admin-bar {
     font-size: 15px;
-    color: #ffffff;
-    background: #4d18e6;
+    color: var(--menu-item);
+    background: var(--main);
     text-align: center;
 }
 
@@ -150,7 +151,7 @@ div.avatar {
     justify-content: center;
     font-size: 18px;
     font-weight: 700;
-    color: #4d18e6;
+    color: var(--main);
 }
 
 @media (max-width: 992px) {

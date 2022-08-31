@@ -13,7 +13,7 @@
   
     <div class="content">
         <% if (user) { %>
-            <h2 style="color: #4d18e6;"><div class="box-username">Welcome, <%= user.name %>
+            <h2 style="color: var(--main);"><div class="box-username">Welcome, <%= user.name %>
                         <div class="avatar"><img src="<%=user.avatar %>"></div>
 
                     </div>
@@ -24,13 +24,13 @@
             <a href="/login" class="btn-outline-primary">LOGOUT</a>
             <br>
         <% } else { %>
-            <h2 style="color: #4d18e6;">Welcome, Guest!<br>You can press the button to register:
+            <h2 style="color: var(--main);">Welcome, Guest!<br>You can press the button to register:
                 <a href="/register" class="btn-outline-primary">REGISTER</a>
         
             </h2>
          <% } %> 
          
-        <h2 style="color: #606060;">Statistics:</h2>
+        <h2 style="color: var(--second);">Statistics:</h2>
 
         <div class="box">
             <h2 class="box-title">Message count:</h2>

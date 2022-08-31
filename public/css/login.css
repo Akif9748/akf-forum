@@ -1,5 +1,5 @@
 .title {
-  color: #4d18e6;
+  color: var(--main);
   font-weight: 700;
 }
 
@@ -9,8 +9,8 @@ form {
   flex-direction: column;
   max-width: 500px;
   margin: 0 auto;
-  width:100%;
-  padding:8px;
+  width: 100%;
+  padding: 8px;
 }
 
 
@@ -19,8 +19,8 @@ form {
   font-family: inherit;
   display: block;
   font-weight: 600;
-  color: #4c4c4c;
+  color: var(--input-clr);
   width: 100%;
   margin-bottom: 10px;
-  border: 2px solid #d9d9d9;
+  border: 2px solid var(--borders);
 }

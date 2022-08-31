@@ -1,12 +1,12 @@
 .title {
-  color: #4d18e6;
+  color: var(--main);
   font-weight: 700;
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 5px 0 #bebebe;
+  box-shadow: 0 0 5px 0 var(--box-shadow);
   max-width: 900px;
   margin: 0 auto;
   padding: 10px;
@@ -22,10 +22,10 @@
 }
 
 .box-title{
-  color: #4d18e6;
+  color: var(--main);
   font-weight: 300;
 }
 .box-value {
-  color: #606060;
+  color: var(--second);
   font-weight: 300;
 }

@@ -6,7 +6,7 @@
 .threads-box {
   width: 100%;
   padding: 8px;
-  box-shadow: 0 0 5px 0 #cbcbcb;
+  box-shadow: 0 0 5px 0 var(--box-shadow);
   display: flex;
   justify-content: space-between;
   margin: 0px 0px 8px 0px;
@@ -15,7 +15,7 @@
 }
 
 .threads-box:hover {
-  background-color: #e2e2e2;
+  background-color: var(--borders);
 }
 
 .thread-box-title {
