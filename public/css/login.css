@@ -7,8 +7,10 @@ form {
   display: flex;
   align-items: center;
   flex-direction: column;
-  max-width: 1000px;
+  max-width: 500px;
   margin: 0 auto;
+  width:100%;
+  padding:8px;
 }
 
 
@@ -18,7 +20,7 @@ form {
   display: block;
   font-weight: 600;
   color: #4c4c4c;
-  width: 500px;
+  width: 100%;
   margin-bottom: 10px;
   border: 2px solid #d9d9d9;
 }
