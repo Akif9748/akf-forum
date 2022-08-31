@@ -126,6 +126,7 @@ div.avatar {
 .box-username {
     display: flex;
     justify-content: center;
+    align-items:center;
     font-size: 18px;
     font-weight: 700;
     color: #4d18e6;
