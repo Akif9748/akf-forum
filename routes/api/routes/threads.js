@@ -72,6 +72,8 @@ app.delete("/:id/", async (req, res) => {
 
     thread.deleted = true;
     await thread.save();
+    console.log(thread)
+
     await MessageModel.updateMany({ threadID: thread.id }, { deleted: true });
     res.complate(thread);
 

@@ -6,7 +6,7 @@ const { Router } = require("express")
 const app = Router();
 
 app.param("id", async (req, res, next, id) => {
-    req.message = await ThreadModel.get(id);
+    req.message = await MessageModel.get(id);
 
     if (!req.message) return res.error(404, `We don't have any message with id ${id}.`);
 
@@ -34,7 +34,6 @@ app.patch("/:id/", async (req, res) => {
     message.edited = true;
 
     await message.save();
-
     res.complate(message);
 
 })
@@ -101,7 +100,6 @@ app.delete("/:id/", async (req, res) => {
 
     message.deleted = true;
     await message.save();
-
     res.complate(message);
 
 })

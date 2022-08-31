@@ -1,8 +1,8 @@
 import request from "./request.js";
 
-window.edit_t = async function (id) {
+window.edit_thread = async function (id) {
     const title = prompt("Enter new title!");
-    const res = await request(`/api/threads/${id}/edit`, "PATCH", { title });
+    const res = await request(`/api/threads/${id}/`, "PATCH", { title });
     if (res.error) return;
     alert(`Thread updated`);
     document.getElementById("title").innerHTML = title;
@@ -26,7 +26,7 @@ window.undelete_thread = async function (id) {
 window.edit_message = async function (id) {
     const content = prompt("Enter new content!");
     const res = await request(`/api/messages/${id}/`, "PATCH", { content });
-    if (res.error) return;
+    if (res && res.error) return;
 
     alert(`Message updated`);
     document.getElementById("message-" + id).querySelector(".content").innerHTML = content;
@@ -42,7 +42,7 @@ window.undelete_message = async function (id) {
 }
 
 window.delete_message = async function (id) {
-    const response = await request(`/api/messages/${id}/`,"DELETE");
+    const response = await request(`/api/messages/${id}/`, "DELETE");
     if (response.deleted) {
         alert("Message deleted");
         document.getElementById("dots-" + id).innerHTML = `
