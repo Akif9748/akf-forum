@@ -94,8 +94,12 @@
   <% if (user){ %>
 
   <div class="message">
-    <form id="send">
-      <textarea rows="4" cols="100" name="content"></textarea>
+    <form id="send" style="width:100%">
+      <textarea rows="4"  
+        style="
+  width: 100%;
+  margin: 10px;
+  border: 2px solid #e3e3e3;"  name="content"></textarea>
       <input name="threadID" type="hidden" value="<%= thread.id %>"></input>
       <input name="page" type="hidden" value="<%= page %>"></input>
 
