@@ -3,6 +3,8 @@
 <%- include("extra/meta", {title: "Thread list!" }) %>
 
 <body>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
   <link rel="stylesheet" href="/css/threads.css" />
 
 <%- include("extra/navbar") %>
@@ -17,6 +19,7 @@
             <%= thread.title  %>
           </div>
           <div class="box-username">
+              <a class="btn-danger"><i class="fa-solid fa-trash-can"></i></a>
             <%= thread.author.name %>  <div class="avatar"><img src="<%=thread.author.avatar %>"> </div>
           </div>
              

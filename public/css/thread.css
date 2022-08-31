@@ -199,4 +199,8 @@ width: 120px;
   .dots-menu.active{
     display:flex;
   }
+.content{
+  width:50%;
+}
+  
 }
