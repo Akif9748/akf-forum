@@ -30,12 +30,13 @@
   margin-right: 5px;
 }
 
-.message .left .username {
+.message .left .username a {
   color: var(--t-username);
 }
 
 .content {
   width: 70%;
+  color: var(--reaction-hover);
 }
 
 .reactions {

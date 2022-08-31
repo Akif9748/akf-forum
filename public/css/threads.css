@@ -15,13 +15,15 @@
 }
 
 .threads-box:hover {
-  background-color: var(--borders);
+  background-color: var(--box-shadow);
 }
 
 .thread-box-title {
   padding: 10px;
   font-size: 18px;
   font-weight: 700;
+  color: var(--reaction-hover);
+
 }
 
 .thread-box-title>span {

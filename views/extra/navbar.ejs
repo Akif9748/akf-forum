@@ -18,8 +18,18 @@
             </div>
         </a>
         <a id="logout" href="/login" class="btn-primary">Logout</a>
- 
- 
+        <a onclick="invert()" class="btn-outline-primary"><%=(user.theme === "default" ? "black" : "default" ) + " mode" %></a>
+        <script>
+            async function invert() {
+                await fetch('/api/users/<%= user.id %>',{method:'PATCH',
+                    body:JSON.stringify({theme:"<%=user.theme === `default` ? `black` : `default` %>"}),
+            headers: {
+                "Content-Type": "application/json"
+            }
+                })
+               location.reload()
+            }
+        </script>
     <% } else { %>
             
         <a id="login" href="/login" class="btn-primary">Login</a>

@@ -1,12 +1,13 @@
+
 :root {
-    --main: #4d18e6;
+    --main: #ac8fff;
     --btn-clr-1: #e8e8e8;
     --menu-item: #ffffff;
     --borders: #d9d9d9;
-    --input-clr: #414141;
+    --input-clr: #dcdcdc;
     --box-shadow: #c3c3c3;
-    --second: #747474;
-    --reaction-hover: #151515;
-    --t-username: #555;
-    background-color: #ffffff;
+    --second: #9f9f9f;
+    --reaction-hover: #ebebeb;
+    --t-username: rgb(236 236 236);
+    background-color: #000000;
 }
