@@ -49,6 +49,18 @@ a {
     border: 2px solid #4d18e6;
 }
 
+.btn-danger {
+    color: #e8e8e8;
+    background-color: #ff0000;
+    padding: 10px 20px 10px 20px;
+    border-radius: 4px;
+    font-weight: 700;
+    margin: 10px;
+    cursor: pointer;
+    border: 2px solid #ff0000;
+}
+
+      
 .btn-outline-primary {
     color: #4d18e6;
     padding: 10px 20px 10px 20px;
@@ -60,12 +72,7 @@ a {
     border: 2px solid #e2e2e2;
 }
 
-.menu {
-    width: 100%;
-    padding: 20px;
-    display: flex;
-    justify-content: space-around;
-}
+
 
 .btn-primary:hover {
     color: #4d18e6;
@@ -73,6 +80,21 @@ a {
     border: 2px solid #4d18e6;
 }
 
+.btn-outline-primary:hover {
+    border: 2px solid #4d18e6;
+}
+.btn-danger:hover{
+background-color: #d01919;
+border: 2px solid  #d01919;
+}
+
+
+.menu {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+}
 .menu-item {
     padding: 10px;
     font-weight: 700;
@@ -95,10 +117,6 @@ body {
 
 }
 
-
-.btn-outline-primary:hover {
-    border: 2px solid #4d18e6;
-}
 
 
 .menu-item:hover {
@@ -125,8 +143,8 @@ div.avatar {
 
 .box-username {
     display: flex;
+  align-items:center;
     justify-content: center;
-    align-items:center;
     font-size: 18px;
     font-weight: 700;
     color: #4d18e6;
