@@ -46,8 +46,6 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 - extra ratelimits
 - better edits
 - IP BAN fix
-- APIDOCS query
-- app.param for users in API
 - message counts for API
 - ZATEN SİLİNDİ BU KİŞİ & MESAJ
 - delete thread for threads area

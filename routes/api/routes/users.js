@@ -60,7 +60,7 @@ app.patch("/:id/", async (req, res) => {
 
     if (req.user.id !== member.id && !req.user.admin) return res.error(403, "You have not got permission for this.");
     const { avatar, name, about } = req.body;
-    if (!avatar && !name) return res.error(400, "Missing member informations in request body.");
+    if (!avatar && !name&& !about) return res.error(400, "Missing member informations in request body.");
     if (avatar && /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g.test(avatar))
         member.avatar = avatar;
     if (name) {
