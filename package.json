@@ -32,8 +32,6 @@
     "express-ip-block": "^0.1.2",
     "express-rate-limit": "^6.5.1",
     "express-session": "^1.17.2",
-    "i": "^0.3.7",
-    "mongoose": "^6.5.1",
-    "npm": "^8.18.0"
+    "mongoose": "^6.5.1"
   }
 }
