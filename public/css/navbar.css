@@ -51,14 +51,14 @@ a {
 
 .btn-danger {
     color: var(--btn-clr-1);
-    background-color: #ff0000;
+    background-color: var(--important);
     padding: 0px 10px 0px 10px;
 
     border-radius: 4px;
     font-weight: 700;
     margin: 10px;
     cursor: pointer;
-    border: 2px solid #ff0000;
+    border: 2px solid var(--important);
 }
 
 
@@ -86,8 +86,8 @@ a {
 }
 
 .btn-danger:hover {
-    background-color: #d01919;
-    border: 2px solid #d01919;
+    background-color: var(--important);
+    border: 2px solid var(--important);
 }
 
 

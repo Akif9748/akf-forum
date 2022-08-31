@@ -140,7 +140,7 @@
 }
 
 .dots-menu a:hover:nth-child(1) {
-  color: #e70000
+  color: var(--important);
 }
 
 .dots-menu a:hover:nth-child(2) {

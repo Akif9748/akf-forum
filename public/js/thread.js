@@ -46,7 +46,7 @@ window.delete_message = async function (id) {
     if (response.deleted) {
         alert("Message deleted");
         document.getElementById("dots-" + id).innerHTML = `
-        <i class='bx bx-trash bx-sm' id="deleted-${id}" style="color: RED;"></i>
+        <i class='bx bx-trash bx-sm' id="deleted-${id}" style="color: var(--important)"></i>
         `+ document.getElementById("dots-" + id).innerHTML;
         document.getElementById("dot-" + id).innerHTML = `<a onclick="undelete_message('${id}');">UNDELETE</a>`;
     }

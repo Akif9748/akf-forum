@@ -23,7 +23,7 @@
 }
 
 .user-box-title>span {
-  color: #ff0000;
+  color: var(--important);
 }
 
 .user-box-img {

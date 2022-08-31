@@ -56,7 +56,7 @@
 
       <div class="dots" id="dots-<%=message.id %>" onclick="dots('<%=message.id %>')">
         <% if (message.deleted){ %>
-        <i class='bx bx-trash bx-sm' id="deleted-<%=message.id %>" style="color: RED;"></i>
+        <i class='bx bx-trash bx-sm' id="deleted-<%=message.id %>" style="color: var(--important);"></i>
         <% } %>
         <% if (message.edited){ %>
         <i class='bx bx-pencil bx-sm' id="edited-<%=message.id %>" style="color: GREEN;"></i>
