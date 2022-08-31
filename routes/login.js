@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 app.get("/", (req, res) => res.reply("login", { redirect: req.query.redirect, user: null }));
 
 app.post("/", async (req, res) => {
-    req.session.userid = null;
+    req.session.userID = null;
 
     const { username = null, password = null } = req.body;
 
@@ -18,7 +18,7 @@ app.post("/", async (req, res) => {
             const member = await UserModel.findOne({ name: username });
             if (!member || member.deleted) return res.error(403, 'Incorrect Username and/or Password!')
 
-            req.session.userid = user.id;
+            req.session.userID = user.id;
 
             res.redirect(req.query.redirect || '/');
         } else

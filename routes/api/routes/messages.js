@@ -5,43 +5,47 @@ const { Router } = require("express")
 
 const app = Router();
 
+app.param("id", async (req, res, next, id) => {
+    req.message = await ThreadModel.get(id);
+
+    if (!req.message) return res.error(404, `We don't have any message with id ${id}.`);
+
+    if(req.message.deleted && !req.user?.admin)
+        return res.error(404, `You do not have permissions to view this message with id ${id}.`)
+           
+    next();
+});
+
 
 app.get("/:id", async (req, res) => {
-
-    const message = await MessageModel.get(req.params.id);
-
-    if (!message || (message.deleted && req.user && !req.user.admin)) return res.error(404, `We don't have any message with id ${req.params.id}.`);
-
-    res.complate(message.toObject({ virtuals: true }));
+    
+    res.complate(message);
 
 })
 app.patch("/:id/", async (req, res) => {
+    
 
-    const message = await MessageModel.get(req.params.id);
+    const { message, user } = req;
 
-    if (!message || (message.deleted && req.user && !req.user.admin)) return res.error(404, `We don't have any message with id ${req.params.id}.`);
-
-    if (req.user.id !== message.authorID && !req.user.admin) return res.error(403, "You have not got permission for this.");
+    if (user.id !== message.authorID && !user.admin) return res.error(403, "You have not got permission for this.");
     const { content = null } = req.body;
     if (!content) return res.error(400, "Missing message content in request body.");
     message.content = content;
-    message.edited=true; 
+    message.edited = true;
 
     await message.save();
 
-    res.complate(message.toObject({ virtuals: true }));
+    res.complate(message);
 
 })
 
 app.post("/", rateLimit({
     windowMs: 60_000, max: 1, standardHeaders: true, legacyHeaders: false,
     handler: (request, response, next, options) =>
-        !request.user.admin ?
-            response.error(options.statusCode, "You are begin ratelimited")
-            : next()
+        !request.user.admin ? response.error(options.statusCode, "You are begin ratelimited") : next()
 }), async (req, res) => {
 
-    const { threadID = null, content = null } = req.body;
+    const { threadID, content } = req.body;
     if (!content) return res.error(400, "Missing message content in request body.");
 
     const thread = await ThreadModel.get(threadID);
@@ -52,13 +56,13 @@ app.post("/", rateLimit({
     await message.save();
     await thread.push(message.id).save();
 
-    res.complate(message.toObject({ virtuals: true }));
+    res.complate(message);
 
 })
 app.post("/:id/react/:type", async (req, res) => {
+    
 
-    const message = await MessageModel.get(req.params.id);
-    if (!message) return error(res, 404, `We don't have any message with id ${req.params.id}.`);
+    const { message } = req;
 
     if (req.params.type == "like") {
         if (message.react.like.includes(req.user.id))
@@ -78,43 +82,41 @@ app.post("/:id/react/:type", async (req, res) => {
             message.react.like.pull(req.user.id);
         }
 
-    } else {
+    } else
         return res.error(400, `We don't have any react type with name ${req.params.type}.`);
-    }
 
     await message.save();
 
-    res.complate(message.toObject({ virtuals: true }));
+    res.complate(message);
 
 });
 
 app.delete("/:id/", async (req, res) => {
-    const message = await MessageModel.get(req.params.id);
-    if (!message || (message.deleted && req.user && !req.user.admin))
-        return res.error(404, `We don't have any message with id ${req.params.id}.`);
-    const user = req.user;
+    
+
+    const { message, user } = req;
+
     if (user.id != message.authorID && !user.admin)
         return res.error(403, "You have not got permission for this.");
+
     message.deleted = true;
     await message.save();
 
-    res.complate(message.toObject({ virtuals: true }));
+    res.complate(message);
 
 })
 
 app.post("/:id/undelete", async (req, res) => {
-    if (!req.user.admin) return res.error(403, "You have not got permission for this.");
+    
 
-    const message = await MessageModel.get(req.params.id);
-
-    if (!message) return res.error(404, `We don't have any message with id ${req.params.id}.`);
+    const { message } = req;
 
     if (!message.deleted) return res.error(404, "This message is not deleted, first, delete it.");
 
     message.deleted = false;
     await message.save();
 
-    res.complate(message.toObject({ virtuals: true }));
+    res.complate(message);
 
 })
 

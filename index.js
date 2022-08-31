@@ -1,18 +1,19 @@
-const { def_theme } = require("./config.json"),
+const { UserModel, BanModel } = require("./models"),
+    { def_theme } = require("./config.json"),
     ipBlock = require('express-ip-block'),
     session = require('express-session'),
-    { UserModel, BanModel } = require("./models"),
     bodyParser = require('body-parser'),
     port = process.env.PORT || 3000,
     mongoose = require("mongoose"),
     express = require('express'),
     fs = require("fs"),
     app = express();
+
 app.ips = [];
 
 require("dotenv").config();
 mongoose.connect(process.env.MONGO_DB_URL,
-    async () => console.log("Connected to mongoDB with", app.ips = await BanModel.find({}).select("ip"), "banned IPs"));
+    async () => console.log("Database is connected with", (app.ips = await BanModel.find({})).length, "banned IPs"));
 
 app.set("view engine", "ejs");
 
@@ -20,7 +21,7 @@ app.use(session({ secret: 'secret', resave: true, saveUninitialized: true }),
     bodyParser.urlencoded({ extended: true }),
     express.static("public"), express.json(), ipBlock(app.ips),
     async (req, res, next) => {
-        req.user = await UserModel.get(req.session.userid);
+        req.user = await UserModel.get(req.session.userID);
         res.reply = (page, options = {}, status = 200) => res.status(status)
             .render(page, { user: req.user, theme: req.user?.theme || def_theme, ...options });
 

@@ -14,7 +14,6 @@ const schema = new mongoose.Schema({
 
 });
 
-
 schema.methods.takeId = async function () {
     this.id = String(await model.count() || 0);
     return this;

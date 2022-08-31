@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
-const UserModel = require("./User");
+const cache = require("./cache")
 const MessageModel = require("./Message");
 const schema = new mongoose.Schema({
     id: { type: String, unique: true },
 
-    author: UserModel.schema,
+    authorID: String,
+    author: Object,
 
     title: String,
     time: { type: Date, default: Date.now },
@@ -16,17 +17,19 @@ const schema = new mongoose.Schema({
 
 });
 
-schema.virtual('authorID').get(function () { return this.author?.id; });
+
+schema.methods.get_author = cache.getAuthor;
+
 schema.methods.messageCount = async function (admin = false) {
     const query = { threadID: this.id }; 
     if (!admin) query.deleted = false;
     return await MessageModel.count(query) || 0;
 };
+
 schema.methods.push = function (messageID) {
     this.messages.push(messageID);
     return this;
 }
-
 
 schema.methods.takeId = async function () {
     this.id = await model.count() || 0;
@@ -39,6 +42,9 @@ schema.methods.getLink = function (id = this.id) {
 
 const model = mongoose.model('thread', schema);
 
-model.get = id => model.findOne({ id });
+model.get = async id => {
+    const thread = await model.findOne({ id })
+    return await thread.get_author();   
+};
 
 module.exports = model;

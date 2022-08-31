@@ -6,8 +6,8 @@ const { ThreadModel, MessageModel } = require("../models")
 
 app.get("/", async (req, res) => {
 
-    const threads = await ThreadModel.find(req.user?.admin ? {} : { deleted: false })//.limit(10);
-
+    let threads = await ThreadModel.find(req.user?.admin ? {} : { deleted: false })//.limit(10);
+    threads = await Promise.all(threads.map(thread => thread.get_author()));
     return res.reply("threads", { threads });
 });
 
@@ -18,7 +18,7 @@ app.get("/:id/", async (req, res) => {
 
     const { user, params: { id } } = req
 
-    let page = Number(req.query.page || 0);
+    const page = Number(req.query.page || 0);
 
     const thread = await ThreadModel.get(id)
     thread.count = await thread.messageCount(user?.admin);
@@ -28,15 +28,14 @@ app.get("/:id/", async (req, res) => {
         const query = { threadID: id };
         if (!user || !user.admin) query.deleted = false;
 
-        const messages = await MessageModel.find(query).sort({ time: 1 }).limit(10).skip(page * 10)
-            .then(messages => messages.map(message => {
+        const messages = await Promise.all(await MessageModel.find(query).sort({ time: 1 }).limit(10).skip(page * 10)
+            .then(messages => messages.map(async message => {
                 message.content = message.content.replaceAll("&", "&amp;")
                     .replaceAll("<", "&lt;").replaceAll(">", "&gt;")
                     .replaceAll("\"", "&quot;").replaceAll("'", "&#39;")
                     .replaceAll("\n", "<br>");
-                return message.toObject({ virtuals: true });
-            }))
-
+                return await message.get_author();
+            })));
         res.reply("thread", { page, thread, messages, scroll: req.query.scroll || thread.messages[0].id });
 
         thread.save();

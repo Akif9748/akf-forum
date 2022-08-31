@@ -1,28 +1,36 @@
-const { UserModel } = require("../../../models");
+const { UserModel, SecretModel } = require("../../../models");
 const { Router } = require("express")
 
 const app = Router();
 
+app.param("id", async (req, res, next, id) => {
+    req.member = await UserModel.get(id);
+
+    if (!req.member) return res.error(404, `We don't have any user with id ${id}.`);
+
+    if (req.member.deleted && !req.user?.admin)
+        return res.error(404, `You do not have permissions to view this user with id ${id}.`);
+
+    next();
+});
+
 app.get("/:id", async (req, res) => {
 
-    const { id = null } = req.params;
-
-    const member = await UserModel.get(id);
-    if (!member || (member.deleted && !req.user.admin)) return res.error(404, `We don't have any user with id ${id}.`);
-
+    if (req.member.not()) return;
     res.complate(member);
 
 });
 
 app.delete("/:id/", async (req, res) => {
-    const user = req.user;
+    const { user, member } = req;
+    if (req.member.not()) return;
+
     if (!user.admin)
         return res.error(403, "You have not got permission for this.");
 
     const { id = null } = req.params;
-    const member = await UserModel.get(id);
 
-    if (!member || member.deleted) return res.error(404, `We don't have any user with id ${id}.`);
+    if (member.deleted) return res.error(404, `This user is with id ${id} already deleted.`);
 
     member.deleted = true;
     await member.save();
@@ -32,7 +40,7 @@ app.delete("/:id/", async (req, res) => {
 app.post("/:id/undelete/", async (req, res) => {
     if (!req.user.admin) return res.error(403, "You have not got permission for this.");
 
-    const member = await UserModel.get(req.params.id);
+    const { user, member } = req;
 
     if (!member) return res.error(404, `We don't have any user with id ${req.params.id}.`);
 
@@ -48,16 +56,17 @@ app.post("/:id/undelete/", async (req, res) => {
 
 app.patch("/:id/", async (req, res) => {
 
-    const member = await UserModel.get(req.params.id);
-
-    if (!member || (member.deleted && !req.user.admin)) return res.error(404, `We don't have any message with id ${req.params.id}.`);
+    const { user, member } = req;
 
     if (req.user.id !== member.id && !req.user.admin) return res.error(403, "You have not got permission for this.");
     const { avatar, name, about } = req.body;
     if (!avatar && !name) return res.error(400, "Missing member informations in request body.");
     if (avatar && /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g.test(avatar))
         member.avatar = avatar;
-    if (name) member.name = name;
+    if (name) {
+        await SecretModel.findOneAndUpdate({ name: member.name }, { name });
+        member.name = name;
+    }
 
     if (about) member.about = about;
     member.edited = true;

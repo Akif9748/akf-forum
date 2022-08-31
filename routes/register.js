@@ -11,7 +11,7 @@ app.post("/", rateLimit({
     windowMs: 24 * 60 * 60_000, max: 10, standardHeaders: true, legacyHeaders: false,
     handler: (_r, response, _n, options) => response.error(options.statusCode, "You are begin ratelimited")
 }), async (req, res) => {
-    req.session.userid = null;
+    req.session.userID = null;
 
 
     let { username = null, password: body_pass = null, avatar, about } = req.body;
@@ -33,7 +33,7 @@ app.post("/", rateLimit({
     const salt = await bcrypt.genSalt(10);
     const password = await bcrypt.hash(body_pass, salt);
     await SecretModel.create({ username, password, id: user2.id })
-    req.session.userid = user2.id;
+    req.session.userID = user2.id;
 
     res.redirect('/');
 

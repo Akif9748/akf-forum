@@ -2,22 +2,20 @@ const { MessageModel, ThreadModel } = require("../../../models");
 const { Router } = require("express")
 
 const app = Router();
+app.param("id", async (req, res, next, id) => {
+    req.thread = await ThreadModel.get(id);
 
-app.get("/:id", async (req, res) => {
+    if (!req.thread) return res.error(404, `We don't have any thread with id ${id}.`);
 
-    const { id } = req.params;
+    if (req.thread.deleted && !req.user?.admin)
+        return res.error(404, `You do not have permissions to view this thread with id ${id}.`)
 
-    const thread = await ThreadModel.get(id);
-    if (thread && (req.user?.admin || !thread.deleted))
-        res.complate(thread.toObject({ virtuals: true }));
-    else
-        return res.error(404, `We don't have any thread with id ${id}.`);
-
-
+    next();
 });
 
-app.get("/:id/messages/", async (req, res) => {
+app.get("/:id", async (req, res) => res.complate(req.thread));
 
+app.get("/:id/messages/", async (req, res) => {
 
     const { id } = req.params;
     const limit = Number(req.query.limit);
@@ -34,68 +32,62 @@ app.get("/:id/messages/", async (req, res) => {
 
     if (!messages.length) return res.error(404, "We don't have any messages in this with your query thread.");
 
-    res.complate(messages.map(x => x.toObject({ virtuals: true })));
+    res.complate(messages);
 
 })
 
 app.post("/", async (req, res) => {
 
-    const { title = null, content = null } = req.body;
+    const { title, content } = req.body;
 
     if (!content || !title) return res.error(400, "Missing content/title in request body.");
 
-    const user = req.user;
+    const { user } = req;
     const thread = await new ThreadModel({ title, author: user }).takeId()
     const message = await new MessageModel({ content, author: user, threadID: thread.id }).takeId()
     await thread.push(message.id).save();
     await message.save();
 
-    res.complate(thread.toObject({ virtuals: true }));
+    res.complate(thread);
 
 });
 app.patch("/:id/", async (req, res) => {
 
-    const thread = await ThreadModel.get(req.params.id);
+    const { user, thread } = req;
 
-    if (!thread || (thread.deleted && req.user && !req.user.admin)) return res.error(404, `We don't have any message with id ${req.params.id}.`);
-
-    if (req.user.id !== thread.authorID && !req.user.admin) return res.error(403, "You have not got permission for this.");
-    const { title = null } = req.body;
+    if (user.id !== thread.authorID && !user.admin) return res.error(403, "You have not got permission for this.");
+    const { title } = req.body;
     if (!title) return res.error(400, "Missing thread title in request body.");
     thread.title = title;
     await thread.save();
 
-    res.complate(thread.toObject({ virtuals: true }));
+    res.complate(thread);
 
 })
 app.delete("/:id/", async (req, res) => {
-    const thread = await ThreadModel.get(req.params.id);
-    if (!thread || thread.deleted) return res.error(404, `We don't have any thread with id ${req.params.id}.`);
-    const user = req.user;
+
+    const { user, thread } = req;
     if (user.id != thread.authorID && !user.admin)
         return res.error(403, "You have not got permission for this.");
 
     thread.deleted = true;
     await thread.save();
 
-    res.complate(thread.toObject({ virtuals: true }));
+    res.complate(thread);
 
 })
 app.post("/:id/undelete", async (req, res) => {
-    if (!req.user.admin) return res.error(403, "You have not got permission for this.");
 
-    const thread = await ThreadModel.get(req.params.id);
+    const { thread } = req;
 
-    if (!thread )  return res.error(404, `We don't have any thread with id ${req.params.id}.`);
-   
     if (!thread.deleted) return res.error(404, "This thread is not deleted, first, delete it.");
 
     thread.deleted = false;
-    thread.edited=true; 
+    thread.edited = true;
 
     await thread.save();
 
-    res.complate(thread.toObject({ virtuals: true }));
+    res.complate(thread);
 
 })
 module.exports = app;
