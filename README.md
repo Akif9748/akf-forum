@@ -33,9 +33,9 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 | ----- | -------- | -------- |
 | Profile Message | 🔴 | LOW |
 | from form to AJAX | 🟢 | HIGH |
-| auto-scroll  | 🟡 | LOW |
+| auto-scroll | 🟡 | LOW |
 | Page support, support message limit correct | 🟢 | MEDIUM |
-| Multi-theme support, black theme | 🟡 | LOW |
+| Multi-theme support, black theme | 🟢 | LOW |
 | Search | 🔴 | MEDIUM |
 | Footer | 🟢 | LOW |
 
@@ -48,7 +48,7 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 - IP BAN fix, user -> ips []
 - message counts for API
 - ZATEN SİLİNDİ BU KİŞİ & MESAJ
-- delete admin request, moreover, add it to user patch delete 😳
+- delete admin request, moreover, add it to user patch delete 😳, better theme patch
 
 ### API
 | To do | Is done? 
