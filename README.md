@@ -50,6 +50,9 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 - app.param for users in API
 - message counts for API
 - ZATEN SİLİNDİ BU KİŞİ & MESAJ
+- about me button not working
+- delete thread for threads area
+- delete admin request, moreover, add it to user patch delete 😳
 
 ### API
 | To do | Is done? 
