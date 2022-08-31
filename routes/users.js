@@ -16,8 +16,8 @@ app.get("/:id", async (req, res) => {
 
     if (member && (user?.admin || !member.deleted)) {
 
-        const message = await MessageModel.count({ "author.id": id });
-        const thread = await ThreadModel.count({ "author.id": id });
+        const message = await MessageModel.count({ authorID: id });
+        const thread = await ThreadModel.count({ authorID: id });
         member.about = member.about.replaceAll("&", "&amp;")
             .replaceAll("<", "&lt;").replaceAll(">", "&gt;")
             .replaceAll("\"", "&quot;").replaceAll("'", "&#39;")

@@ -45,12 +45,10 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 - page for threads - users 
 - extra ratelimits
 - better edits
-- IP BAN fix
+- IP BAN fix, user -> ips []
 - message counts for API
 - ZATEN SİLİNDİ BU KİŞİ & MESAJ
-- delete thread for threads area
 - delete admin request, moreover, add it to user patch delete 😳
-- user -> ips []
 
 ### API
 | To do | Is done? 

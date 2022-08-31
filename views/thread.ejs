@@ -41,7 +41,7 @@
     <div class="message" id="message-<%= message.id %>">
       <div class="left">
         <img src="<%= message.author.avatar || '/images/guest.png' %>"/>
-        <div class="username"><a href="/users/<%=message.author.id %>"><%=message.author.name %></a></div>
+        <div class="username"><a href="/users/<%=message.authorID %>"><%=message.author.name %></a></div>
         <div class="date">
           <%= new Date(message.time).toLocaleDateString() %> 
         </div>
@@ -52,7 +52,7 @@
 
       <div class="content"><%- message.content %></div>
       <% if(user){ %>
-      <% if(user.id === message.author.id || user.admin){ %>
+      <% if(user.id === message.authorID || user.admin){ %>
 
       <div class="dots" id="dots-<%=message.id %>" onclick="dots('<%=message.id %>')">
         <% if (message.deleted){ %>
