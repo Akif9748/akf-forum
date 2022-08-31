@@ -49,7 +49,7 @@ app.post("/:id/undelete/", async (req, res) => {
     member.deleted = false;
     await member.save();
 
-    res.complate(member.toObject({ virtuals: true }));
+    res.complate(member);
 
 })
 
@@ -74,7 +74,7 @@ app.patch("/:id/", async (req, res) => {
 
     await member.save();
 
-    res.complate(member.toObject({ virtuals: true }));
+    res.complate(member);
 
 })
 

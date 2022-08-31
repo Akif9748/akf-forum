@@ -37,8 +37,8 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 | Page support, support message limit correct | 🟢 | MEDIUM |
 | Multi-theme support, black theme | 🟡 | LOW |
 | Search | 🔴 | MEDIUM |
-| Footer | 🔴 | LOW |
-- If thread deleted, not show its messages in API. ?
+| Footer | 🟢 | LOW |
+
 - Profile photos will store in database
 - replacer function global
 - author name of thread
@@ -50,9 +50,9 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 - app.param for users in API
 - message counts for API
 - ZATEN SİLİNDİ BU KİŞİ & MESAJ
-- about me button not working
 - delete thread for threads area
 - delete admin request, moreover, add it to user patch delete 😳
+- user -> ips []
 
 ### API
 | To do | Is done? 

@@ -76,7 +76,7 @@
             body.name = prompt("Enter new username!");
           else if (e.target.id == "edit_avatar") 
             body.avatar = prompt("Enter new avatar URL!");
-          else if (e.target.id == "edit_avatar") 
+          else if (e.target.id == "edit_about") 
             body.about = prompt("Enter new about text!");
           else return;
           const res = await request(`/api/users/<%= member.id %>`, "PATCH", body);

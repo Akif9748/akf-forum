@@ -72,7 +72,7 @@ app.delete("/:id/", async (req, res) => {
 
     thread.deleted = true;
     await thread.save();
-
+    await MessageModel.updateMany({ threadID: thread.id }, { deleted: true });
     res.complate(thread);
 
 })
@@ -86,6 +86,7 @@ app.post("/:id/undelete", async (req, res) => {
     thread.edited = true;
 
     await thread.save();
+    await MessageModel.updateMany({ threadID: thread.id }, { deleted: false });
 
     res.complate(thread);
 
