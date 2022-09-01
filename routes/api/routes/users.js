@@ -1,5 +1,6 @@
 const { UserModel, SecretModel } = require("../../../models");
-const { Router } = require("express")
+const { Router } = require("express");
+const { URLRegex } = require("../../../lib");
 
 const app = Router();
 
@@ -58,19 +59,19 @@ app.patch("/:id/", async (req, res) => {
 
     if (admin?.length && !req.user.admin) return res.error(403, "You have not got permission for edit 'admin' information, or bad request.");
 
-    if (avatar && /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g.test(avatar))
+    if (avatar && URLRegex.test(avatar))
         member.avatar = avatar;
 
     if (name) {
-        await SecretModel.findOneAndUpdate({ name: member.name }, { name });
+        await SecretModel.updateOne({ id: member.id }, { username: name });
         member.name = name;
     }
 
     if (about) member.about = about;
-    if (theme) 
+    if (theme)
         member.theme = member.theme === "default" ? "black" : "default";
-    
-    if(typeof admin === "boolean" || ["false","true"].includes(admin)) member.admin = admin;
+
+    if (typeof admin === "boolean" || ["false", "true"].includes(admin)) member.admin = admin;
     member.edited = true;
 
     await member.save();

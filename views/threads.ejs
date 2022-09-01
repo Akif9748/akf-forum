@@ -3,9 +3,10 @@
 <%- include("extra/meta", {title: "Thread list!" }) %>
 
 <body>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
   <link rel="stylesheet" href="/css/threads.css" />
+  <link rel="stylesheet" href="/css/pages.css" />
 
   <%- include("extra/navbar") %>
 
@@ -20,7 +21,7 @@
         </div>
         <div class="box-username">
           <% if (user && !thread.deleted){ %>
-          <a class="btn-danger" onclick="fetch('/api/threads/<%= thread.id %>/',{method:'DELETE'})"><i class="fa-solid fa-trash-can"></i></a>
+          <a class="btn-danger" onclick="fetch('/api/threads/<%= thread.id %>/',{method:'DELETE'})"><i class="bx bx-trash bx-sm"></i></a>
           <% } %>
           <%= thread.author.name %> <div class="avatar"><img src="<%=thread.author.avatar %>"> </div>
 
@@ -32,5 +33,24 @@
     <% }); %>
 
   </div>
+  <div class="pagination">
+    <div class="back">
+      <% if (page > 0){ %>
+      <a href="/threads?page=<%= page-1 %>" class='bx bxs-chevron-left'></a>
+      <% } %>
+    </div>
 
+    <div class="numbers">
+      <% for(let i=0; i < pages; i++){ %>
+      <a class="number <%= i==page?'active':'' %>" href="/threads?page=<%= i %>"><%= i+1 %></a>
+      <% } %>
+    </div>
+
+    <div class="after">
+      <% if (pages-1 > page) { %>
+      <a href="/threads?page=<%= page +1 %>" class='bx bxs-chevron-right'></a>
+      <% } %>
+    </div>
+
+  </div>
 </body>

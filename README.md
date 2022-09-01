@@ -38,12 +38,10 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 | Profile Message | 🔴 | LOW |
 | Search | 🔴 | MEDIUM |
 | Footer | 🟡 | LOW |
+| Better Auth | 🔴 | MEDIUM |
+| Local pfp store | 🔴 | MEDIUM |
+| IPs of users will add SecretModel | 🔴 | MEDIUM |
 
-- Better Auth
-- Profile photos will store in a folder
-- replacer function global
-- page for threads - users 
-- IPs of users will add SecretModel
 - message counts for API
 - better theme patch UserModel
 - ajax, delete update thread dom

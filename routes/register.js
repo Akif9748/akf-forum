@@ -2,7 +2,7 @@ const { UserModel, SecretModel } = require("../models");
 const { Router } = require("express")
 const bcrypt = require("bcrypt");
 const rateLimit = require('express-rate-limit')
-
+const {URLRegex} = require("../lib")
 const app = Router();
 
 app.get("/", (req, res) => res.reply("register", { user: null }));
@@ -22,7 +22,7 @@ app.post("/", rateLimit({
 
 
     const user2 = new UserModel({ name: req.body.username })
-    if (avatar && /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g.test(avatar)) user2.avatar = avatar;
+    if (avatar && URLRegex.test(avatar)) user2.avatar = avatar;
 
     if (about) user2.about = about;
 

@@ -1,14 +1,15 @@
 const { Router } = require("express");
 const app = Router();
-
+const {clearContent} = require("../lib");
 const { ThreadModel, MessageModel } = require("../models")
 
-
 app.get("/", async (req, res) => {
-
-    let threads = await ThreadModel.find(req.user?.admin ? {} : { deleted: false })//.limit(10);
+    const page = Number(req.query.page) || 0;
+    const query = req.user?.admin ? {} : { deleted: false };
+    let threads = await ThreadModel.find(query).limit(10).skip(page * 10);
     threads = await Promise.all(threads.map(thread => thread.get_author()));
-    return res.reply("threads", { threads });
+
+    return res.reply("threads", { threads, page, pages: Math.ceil(await ThreadModel.count(query) / 10) });
 });
 
 
@@ -30,10 +31,7 @@ app.get("/:id/", async (req, res) => {
 
         const messages = await Promise.all(await MessageModel.find(query).sort({ time: 1 }).limit(10).skip(page * 10)
             .then(messages => messages.map(async message => {
-                message.content = message.content.replaceAll("&", "&amp;")
-                    .replaceAll("<", "&lt;").replaceAll(">", "&gt;")
-                    .replaceAll("\"", "&quot;").replaceAll("'", "&#39;")
-                    .replaceAll("\n", "<br>");
+                message.content =clearContent( message.content)
                 return await message.get_author();
             })));
         res.reply("thread", { page, thread, messages, scroll: req.query.scroll || messages[0]?.id });

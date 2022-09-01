@@ -5,8 +5,10 @@
 
 
 <body>
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="/css/users.css" />
-
+  <link rel="stylesheet" href="/css/pages.css" />
+  
   <%- include("extra/navbar") %>
 
   <div class="users">
@@ -20,6 +22,26 @@
       </div>
     </div>
     <% }); %>
+
+  </div>
+  <div class="pagination">
+    <div class="back">
+      <% if (page > 0){ %>
+      <a href="/users?page=<%= page-1 %>" class='bx bxs-chevron-left'></a>
+      <% } %>
+    </div>
+
+    <div class="numbers">
+      <% for(let i=0; i < pages; i++){ %>
+      <a class="number <%= i==page?'active':'' %>" href="/users?page=<%= i %>"><%= i+1 %></a>
+      <% } %>
+    </div>
+
+    <div class="after">
+      <% if (pages-1 > page) { %>
+      <a href="/users?page=<%= page +1 %>" class='bx bxs-chevron-right'></a>
+      <% } %>
+    </div>
 
   </div>
 </body>

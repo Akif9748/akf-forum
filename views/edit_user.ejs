@@ -7,13 +7,17 @@
 <body style="text-align: center;">
   <link rel="stylesheet" href="/css/login.css" />
   <link rel="stylesheet" href="/css/user.css" />
-
+  <style>
+    .see {
+      color: var(--reaction-hover)
+    }
+  </style>
   <%- include("extra/navbar") %>
 
-  <h1 class="title">Edit <a href="/users/<%= member.id %>"><%= member.name %></a></h1>
+  <h1 class="title">Edit <a class="see" href="/users/<%= member.id %>"><%= member.name %></a></h1>
 
   <div class="content">
-    <form id="form">
+    <form id="form" class="see">
       <input type="text" name="name" placeholder="<%=member.name%>" class="input">
       <input type="url" name="avatar" placeholder="<%=member.avatar%>" class="input">
       <textarea class="input" name="about" rows="4" name="content" placeholder="<%=member.about%>"></textarea>
@@ -41,8 +45,6 @@
       if (res) alert(`User is updated!`);
       location.reload();
     });
-
-   
   </script>
 
 
