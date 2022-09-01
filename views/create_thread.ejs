@@ -3,8 +3,6 @@
 
 <%- include("extra/meta", {title: "Create thread!" }) %>
 
-
-  
 <body style="text-align: center;">
   <link rel="stylesheet" href="/css/create_thread.css" />
 
@@ -15,37 +13,35 @@
     <h2 class="title" style="align-self: baseline;">Title:</h2>
     <input name="title" class="input"></input>
 
- 
+
     <h2 class="title" style="align-self: baseline;">Content:</h2>
     <textarea rows="4" cols="50" name="content" class="input"></textarea>
 
-   
-    <button class="btn-primary"  style="width:100%" type="submit">Create Thread!</button>
-</form>
+
+    <button class="btn-primary" style="width:100%" type="submit">Create Thread!</button>
+  </form>
 
 
-<script type="module">
-
+  <script type="module">
     import request from "../../js/request.js";
 
     document.addEventListener("submit", async e => {
-        e.preventDefault();
-        const form = e.target;
-        const data = new FormData(form);
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
 
-        const response = await request("/api/threads/", "POST", { 
-            title:  data.get("title"), content: data.get("content")
-        });
-  
+      const response = await request("/api/threads/", "POST", {
+        title: data.get("title"),
+        content: data.get("content")
+      });
 
-        if (response) 
-            window.location.href = "/threads/" + response.id;
-        
+
+      if (response)
+        window.location.href = "/threads/" + response.id;
+
 
     });
-
-
-</script>
+  </script>
 </body>
 
 </html>

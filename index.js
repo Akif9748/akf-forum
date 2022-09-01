@@ -8,6 +8,7 @@ const { UserModel, BanModel } = require("./models"),
     express = require('express'),
     fs = require("fs"),
     app = express();
+const rateLimit = require('express-rate-limit')
 
 app.ips = [];
 
@@ -17,10 +18,11 @@ mongoose.connect(process.env.MONGO_DB_URL,
 
 app.set("view engine", "ejs");
 
-app.use(session({ secret: 'secret', resave: true, saveUninitialized: true }),
-    bodyParser.urlencoded({ extended: true }),
+app.use(
+    session({ secret: 'secret', resave: true, saveUninitialized: true }),
     express.static("public"), express.json(), ipBlock(app.ips),
     async (req, res, next) => {
+        req.headers["x-forwarded-for"]
         req.user = await UserModel.get(req.session.userID);
         res.reply = (page, options = {}, status = 200) => res.status(status)
             .render(page, { user: req.user, theme: req.user?.theme || def_theme, ...options });
@@ -32,7 +34,10 @@ app.use(session({ secret: 'secret', resave: true, saveUninitialized: true }),
             return res.error(403, "Your account has been deleted.");
         }
         next();
-    }
+    }, rateLimit({
+        windowMs: 60_000, max: 10,
+        handler: (req, res, _n, opts) => !req.user.admin ? res.error(opts.statusCode, "You are begin ratelimited") : next()
+    }), bodyParser.urlencoded({ extended: true })
 );
 
 for (const file of fs.readdirSync("./routes"))

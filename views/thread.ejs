@@ -16,73 +16,74 @@
   <div style="text-align:center;padding:8px">
     <div class="title" id="title"><%= thread.title %></div>
     <div class="date">
-      <%= new Date(thread.time).toLocaleString() %> • Views: <%= thread.views %> <%= "• "+(thread.edited  ? "Edited" : "Not edited")%>
+      <%= new Date(thread.time).toLocaleString() %> • Views: <%= thread.views %>%>
     </div>
-
+    <div class="date">
+      <a style="color: var(--reaction-hover);" href="/users/<%= thread.author.id %>"><%= thread.author.name %></a> <%= "• "+(thread.edited  ? "Edited" : "Not edited")%>
+    </div>
   </div>
   <div style="text-align:center;padding:8px">
-   <!-- THREAD AUTHOR AND PROFILE PHOTO -->
-   
-   <% if (user && !thread.deleted){ %>
+    <!-- THREAD AUTHOR AND PROFILE PHOTO -->
 
-    <a onclick="delete_thread('<%= thread.id %>')" class="btn-outline-primary" >DELETE</a>
-    <a onclick="edit_thread('<%= thread.id %>')" class="btn-outline-primary" >EDIT</a>
+    <% if (user && !thread.deleted){ %>
+
+    <a onclick="delete_thread('<%= thread.id %>')" class="btn-outline-primary">DELETE</a>
+    <a onclick="edit_thread('<%= thread.id %>')" class="btn-outline-primary">EDIT</a>
     <% } else if (thread.deleted) { %>
     <h3 style="display:inline;">This thread has been deleted</h3>
-    <a onclick="undelete_thread('<%= thread.id %>')" class="btn-primary" >UNDELETE</a>
-    
+    <a onclick="undelete_thread('<%= thread.id %>')" class="btn-primary">UNDELETE</a>
+
     <% }; %>
   </div>
 
-  <div id="messages" value="<%= thread.id %>">
+  <div id="messages">
 
     <% messages.filter(Boolean).forEach(message=>{ %>
 
     <div class="message" id="message-<%= message.id %>">
       <div class="left">
-        <img src="<%= message.author.avatar || '/images/guest.png' %>"/>
+        <img src="<%= message.author.avatar || '/images/guest.png' %>" />
         <div class="username"><a href="/users/<%=message.authorID %>"><%=message.author.name %></a></div>
         <div class="date">
-          <%= new Date(message.time).toLocaleDateString() %> 
+          <%= new Date(message.time).toLocaleDateString() %>
         </div>
         <div class="date">
-          <%= new Date(message.time).toLocaleTimeString() %> 
+          <%= new Date(message.time).toLocaleTimeString() %>
         </div>
-      </div>  
+      </div>
 
       <div class="content"><%- message.content %></div>
       <% if(user){ %>
       <% if(user.id === message.authorID || user.admin){ %>
 
-      <div class="dots" id="dots-<%=message.id %>" onclick="dots('<%=message.id %>')">
+      <div class="dots" onclick="dots('<%=message.id %>')">
         <% if (message.deleted){ %>
-        <i class='bx bx-trash bx-sm' id="deleted-<%=message.id %>" style="color: var(--important);"></i>
+        <i class='bx bx-trash bx-sm' id="deleted" style="color: var(--important);"></i>
         <% } %>
         <% if (message.edited){ %>
-        <i class='bx bx-pencil bx-sm' id="edited-<%=message.id %>" style="color: GREEN;"></i>
+        <i class='bx bx-pencil bx-sm' id="edited" style="color: GREEN;"></i>
         <% } %>
-        <i class='bx bx-dots-horizontal-rounded' ></i>
+        <i class='bx bx-dots-horizontal-rounded'></i>
       </div>
 
-      <div class="dots-menu" id="dot-<%=message.id %>">
-      <% if (!message.deleted){ %>
+      <div class="dots-menu">
+        <% if (!message.deleted){ %>
         <a onclick="delete_message('<%=message.id %>');">Delete</a>
         <a onclick="edit_message('<%=message.id %>');">Edit</a>
-      <% }else { %>
+        <% }else { %>
         <a onclick="undelete_message('<%=message.id %>');">Undelete</a>
-      <% } %>
+        <% } %>
       </div>
       <% } %>
 
-  
       <div class="reactions">
         <div>
-          <i onclick='react("<%= message.id %>","like");' class='bx bx-like'></i> 
-          <div id="like-<%= message.id %>"><%=message.react.like.length %></div>
+          <i onclick='react("<%= message.id %>","like");' class='bx bx-like'></i>
+          <div id="like"><%=message.react.like.length %></div>
         </div>
         <div>
-          <i onclick='react("<%= message.id %>","dislike");' class='bx bx-dislike'></i> 
-          <div id="dislike-<%= message.id %>"><%=message.react.dislike.length %></div>
+          <i onclick='react("<%= message.id %>","dislike");' class='bx bx-dislike'></i>
+          <div id="dislike"><%=message.react.dislike.length %></div>
         </div>
       </div>
       <% }; %>
@@ -93,48 +94,46 @@
   </div>
   <% if (user){ %>
 
-  <div class="message">
+  <div class="message" id="send-div">
     <form id="send" style="width:100%">
-      <textarea rows="4"  
-        style="
-        font-family:inherit;
-  width: 100%;
-  margin: 10px;
-  border: 2px solid #e3e3e3;"  name="content"></textarea>
+      <textarea rows="4" name="content"></textarea>
       <input name="threadID" type="hidden" value="<%= thread.id %>"></input>
       <input name="page" type="hidden" value="<%= page %>"></input>
-
-      <script type="module">
-        import request from "../../js/request.js";
-
-        document.getElementById("send").addEventListener("submit", async e => {
-
-        e.preventDefault();
-    
-        const data = new FormData(e.target);
-
-        request("/api/messages", "POST", { threadID: "<%= thread.id %>", content: data.get("content") })
-          .then(res => {
-            let tp = Number("<%= thread.pages %>")
-            let tm = Number("<%= thread.count %>") 
-            if (tp*10===tm) tp++;
-            if (res) location.href = `/threads/${data.get("threadID")}?page=${tp-1}`;
-
-          });
-        });
-      </script>
       <button class="btn-primary">Send!</button>
-    
+
     </form>
+
   </div>
+  <script type="module">
+    import request from "../../js/request.js";
+
+    document.getElementById("send").addEventListener("submit", async e => {
+
+      e.preventDefault();
+
+      const data = new FormData(e.target);
+
+      const res = await request("/api/messages", "POST", {
+        threadID: "<%= thread.id %>",
+        content: data.get("content")
+      })
+
+      let tp = Number("<%= thread.pages %>")
+      let tm = Number("<%= thread.count %>")
+      if (tp * 10 === tm) tp++;
+      if (res) location.href = `/threads/${data.get("threadID")}?page=${tp-1}`;
+
+
+    });
+  </script>
   <% }%>
   <div class="pagination">
     <div class="back">
       <% if (page > 0){ %>
       <a href="<%= thread.getLink() %>?page=<%= page-1 %>" class='bx bxs-chevron-left'></a>
-      <% } %>  
+      <% } %>
     </div>
-    
+
     <div class="numbers">
       <% for(let i=0; i < thread.pages; i++){ %>
       <a class="number <%= i==page?'active':'' %>" href="<%= thread.getLink() %>?page=<%= i %>"><%= i+1 %></a>
@@ -146,13 +145,14 @@
       <a href="<%= thread.getLink() %>?page=<%= page +1 %>" class='bx bxs-chevron-right'></a>
       <% } %>
     </div>
- 
+
   </div>
 
   <script>
-    document.getElementById("message-<%= scroll  %>").scrollIntoView();
+    document.getElementById("message-<%= scroll %>").scrollIntoView();
+
     function dots(id) {
-      document.getElementById('dot-'+id).classList.toggle('active')
+      document.getElementById('message-' + id).querySelector(".dots-menu").classList.toggle('active')
     }
   </script>
 

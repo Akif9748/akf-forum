@@ -10,20 +10,20 @@ app.param("id", async (req, res, next, id) => {
 
     if (!req.message) return res.error(404, `We don't have any message with id ${id}.`);
 
-    if(req.message.deleted && !req.user?.admin)
+    if (req.message.deleted && !req.user?.admin)
         return res.error(404, `You do not have permissions to view this message with id ${id}.`)
-           
+
     next();
 });
 
 
 app.get("/:id", async (req, res) => {
-    
+
     res.complate(message);
 
 })
 app.patch("/:id/", async (req, res) => {
-    
+
 
     const { message, user } = req;
 
@@ -59,7 +59,7 @@ app.post("/", rateLimit({
 
 })
 app.post("/:id/react/:type", async (req, res) => {
-    
+
 
     const { message } = req;
 
@@ -91,12 +91,13 @@ app.post("/:id/react/:type", async (req, res) => {
 });
 
 app.delete("/:id/", async (req, res) => {
-    
+
 
     const { message, user } = req;
 
     if (user.id != message.authorID && !user.admin)
         return res.error(403, "You have not got permission for this.");
+    if (message.deleted) return res.error(403, "This message is already deleted.");
 
     message.deleted = true;
     await message.save();
@@ -105,7 +106,7 @@ app.delete("/:id/", async (req, res) => {
 })
 
 app.post("/:id/undelete", async (req, res) => {
-    
+
 
     const { message } = req;
 

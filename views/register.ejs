@@ -5,26 +5,24 @@
 
 
 <body style="text-align: center;">
-    <link rel="stylesheet" href="/css/login.css" />
+  <link rel="stylesheet" href="/css/login.css" />
 
-    <%- include("extra/navbar") %>
+  <%- include("extra/navbar") %>
 
-    <h1 class="title">Register</h1>
+  <h1 class="title">Register</h1>
 
-    <form action="/register" method="post">
+  <form action="/register" method="post">
 
-      
-        <input type="text" name="username" placeholder="Username"  class="input" required>
 
-        <input type="password" name="password" placeholder="Password" class="input" required>
-        <input type="text" name="about" placeholder="About you... Not required" class="input">
+    <input type="text" name="username" placeholder="Username" class="input" required>
 
-        <input type="text" name="avatar" placeholder="Avatar URL (not required)" class="input">
+    <input type="password" name="password" placeholder="Password" class="input" required>
+    <input type="url" name="avatar" placeholder="Avatar URL (not required)" class="input">
+    <textarea class="input" name="about" rows="4" placeholder="About you... Not required"></textarea>
+    <input type="submit" class="btn-primary" style="width:100%;" value="Register">
+  </form>
 
-        <input type="submit" class="btn-primary" style="width:100%;" value="Register">
-    </form>
 
- 
 </body>
 
 </html>

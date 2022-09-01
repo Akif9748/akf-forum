@@ -6,18 +6,47 @@
 
 <body>
   <link rel="stylesheet" href="/css/user.css" />
-
+  <%if (user) {%>
+  <script type="module">
+    import request from "../../js/request.js";
+    document.addEventListener("click", async e => {
+      if (e.target.id == "delete") {
+        const response = await request("/api/users/<%= member.id %>", "DELETE");
+        if (!response.deleted) return
+        alert("User is deleted!");
+        location.reload()
+      } else if (e.target.id == "undelete") {
+        const response = await request("/api/users/<%= member.id %>/undelete");
+        if (response.deleted) return;
+        alert("User is undeleted successfully!");
+        location.reload()
+      }
+    });
+  </script>
+  <% }; %>
   <%- include("extra/navbar") %>
 
   <div class="content">
+
+    <% if (user?.admin || user?.id === member.id) { %>
+    <a class="btn-outline-primary" href="<%= member.getLink() %>/edit">Edit user!</a>
+    <% } %>
+
+    <% if (member.deleted) {%>
+    <h1>This user has been deleted!</h1>
+    <a id="undelete" class="btn-primary">Undelete user! </a>
+    <% } else if (user?.admin){ %>
+    <a id="delete" class="btn-outline-primary">Delete user! </a>
+    <% }; %>
+
+
     <div class="box" style="justify-content:center;">
-    <img style="width:100px;height:100px;border-radius:50%;" src="<%=member.avatar %>">
+      <img style="width:100px;height:100px;border-radius:50%;" src="<%=member.avatar %>">
     </div>
     <div class="box">
       <h2 class="box-title">Name:</h2>
       <h2 class="box-value"><%= member.name %></h2>
     </div>
-
     <div class="box">
       <h2 class="box-title">Created at:</h2>
       <h2 class="box-value"><%= new Date(member.time).toLocaleString() %></h2>
@@ -26,9 +55,8 @@
       <h2 class="box-title">Is admin?</h2>
       <h2 class="box-value"><%= member.admin ? "Yes" : "No" %></h2>
     </div>
-
     <div class="box">
-      <h2 class="box-title"> Message:</h2>
+      <h2 class="box-title">Message:</h2>
       <h2 class="box-value"><%= counts.message %></h2>
     </div>
     <div class="box">
@@ -41,71 +69,6 @@
     <p class="box-value">
       <%= member.about %>
     </p>
-
-    <% if (user?.admin && !member.deleted) {%>
-    <a class="btn-outline-primary" id="edit_name">Change name of the user!</a>
-    <a class="btn-outline-primary" id="edit_avatar">Change avatar of the user!</a>
-    <a class="btn-outline-primary" id="edit_about">Change about of the user!</a>
-    <a class="btn-outline-primary" id="admin">Give admin permissions!</a>
-    <a class="btn-outline-primary" id="delete">Delete user!</a>
-
-    <script type="module">
-
-      import request from "../../js/request.js";
-      document.addEventListener("click", async e => {
-        if (e.target.id == "admin") {
-
-          const response = await request("/api/users/<%= member.id %>/admin");
-
-          if (response.admin)
-            return alert("Making admin of " + response.name + " is success!");
-
-        } else if (e.target.id == "delete") {
-
-          const response = await request("/api/users/<%= member.id %>","DELETE");
- 
-          if (!response.deleted) return
-          alert("User is deleted!");
-          location.reload()
-
-        } else {
-
-          const body = {};
-
-          if (e.target.id == "edit_name") 
-            body.name = prompt("Enter new username!");
-          else if (e.target.id == "edit_avatar") 
-            body.avatar = prompt("Enter new avatar URL!");
-          else if (e.target.id == "edit_about") 
-            body.about = prompt("Enter new about text!");
-          else return;
-          const res = await request(`/api/users/<%= member.id %>`, "PATCH", body);
-
-          if (res.error) return;
-          alert(`User updated!`);
-          location.reload();
-        }
-
-      });
-
-    </script>
-    <% }; %>
-    <% if (member.deleted) {%>
-    <h1>This user has been deleted!</h1>
-    <a onclick="undelete();" class="btn-primary"  >Undelete user! </a>
-  
-    <script type="module">
-      import request from "../../js/request.js";
-      window.undelete= async function undelete(params) {
-            
-      const response = await request("/api/users/<%= member.id %>/undelete");
-     
-      if (response.deleted) return;
-        alert("User is undeleted successfully!");
-        location.reload()
-      }
-    </script>
-    <% }; %>
 
   </div>
 </body>

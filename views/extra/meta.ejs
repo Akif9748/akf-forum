@@ -1,9 +1,13 @@
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= title || "Akf-forum" %> </title>
-    <meta name="description" content="Akf-forum!">
-    <meta name="author" content="Akif9748">
-    <link rel="icon" type="image/x-icon" href="/images/favicon.jpg">
-    <link rel="stylesheet" href="/css/themes/<%= theme %>.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title || "Akf-forum" %> </title>
+  <meta name="description" content="Akf-forum!">
+  <meta name="author" content="Akif9748">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.jpg">
+  <link rel="stylesheet" href="/css/themes/<%= theme %>.css" />
+  <% if (theme === "black") { %>
+    <meta name="theme-color" content="#000000" />
+  <% } %>
+
 </head>

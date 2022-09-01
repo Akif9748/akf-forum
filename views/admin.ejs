@@ -12,66 +12,68 @@
       border-collapse: collapse;
       width: 100%;
     }
-    
-    td, th {
+
+    td,
+    th {
       border: 1px solid #dddddd;
       text-align: left;
       padding: 8px;
       color: var(--reaction-hover);
     }
-    
+
     tr:nth-child(even) {
       background-color: #dddddd;
     }
-    </style>
+  </style>
 
   <div>
     <h1 style="color: var(--main);">Welcome to the admin panel of the forum, <%= user.name %>!</h1>
-    
+
     <a class="btn-primary" onclick="ban();">IP BAN</a>
     <a class="btn-outline-primary" onclick="unban();">REMOVE IP BAN</a>
-   
+
     <h2 style="color: var(--second);">Banned users:</h2>
 
-     <table >
-       <tr>
-         <th>IP</th>
-         <th>Reason</th>
-         <th>AuthorID</th>
-       </tr>
-       <% for (const ban of bans) { %>
-         <tr>
-           <td><%=ban.ip%></td>
-           <td><%=ban.reason%></td>
-           <td><%=ban.authorID%></td>
-         </tr>
-       <% } %>  
-     </table>
-   
-    
-     <script type="module">
-       import request from "../../js/request.js";
-             
-       window.unban = async function () {
-         const ip = prompt("Enter ip to unban");
-         const response = await request("/api/bans/"+ip,"DELETE");
-         if(response)
-           alert("IP unbanned!");
-         else
-           alert("IP is not unbanned!");
-         location.reload();
-       }
-       window.ban = async function () {
-         const ip = prompt("Enter ip to ban");
-         const response = await request("/api/bans/"+ip);
-         if(response)
-           alert("IP banned!");
-         else
-           alert("IP is not banned!");
-         location.reload();
-       }
-     </script>
+    <table>
+      <tr>
+        <th>IP</th>
+        <th>Reason</th>
+        <th>AuthorID</th>
+      </tr>
+      <% for (const ban of bans) { %>
+      <tr>
+        <td><%=ban.ip%></td>
+        <td><%=ban.reason%></td>
+        <td><%=ban.authorID%></td>
+      </tr>
+      <% } %>
+    </table>
+
+
+    <script type="module">
+      import request from "../../js/request.js";
+
+      window.unban = async function() {
+        const ip = prompt("Enter ip to unban");
+        const response = await request("/api/bans/" + ip, "DELETE");
+        if (response)
+          alert("IP unbanned!");
+        else
+          alert("IP is not unbanned!");
+        location.reload();
+      }
+      window.ban = async function() {
+        const ip = prompt("Enter ip to ban");
+        const response = await request("/api/bans/" + ip);
+        if (response)
+          alert("IP banned!");
+        else
+          alert("IP is not banned!");
+        location.reload();
+      }
+    </script>
   </div>
- 
-</body> 
+
+</body>
+
 </html>

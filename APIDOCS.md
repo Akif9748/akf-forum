@@ -25,7 +25,6 @@ But in front end, the API will works with session.
 - DELETE `/api/users/:id/` for delete user.
 - PATCH `/api/users/:id/` for edit user.
 - POST `/api/users/:id/undelete` for undelete user.
-- POST `/api/users/:id/admin` for give admin permissions for a user.
 
 - GET `/api/threads/:id` for fetch thread.
 - DELETE `/api/threads/:id/` for delete thread.

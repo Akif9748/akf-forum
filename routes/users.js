@@ -9,6 +9,17 @@ app.get("/", async ({ user }, res) => {
 
 });
 
+app.get("/:id/edit", async (req, res) => {
+    if(!req.user || (!req.user.admin&&req.params.id !== req.user.id)) return res.error(403, "You have not got permission for this.");
+    const member = await UserModel.get(req.params.id);
+
+    if (member && (req.user?.admin || !member.deleted))
+        res.reply("edit_user", { member })
+    else
+        res.error(404, `We don't have any user with id ${req.params.id}.`);
+
+});
+
 app.get("/:id", async (req, res) => {
     const user = req.user
     const { id } = req.params;

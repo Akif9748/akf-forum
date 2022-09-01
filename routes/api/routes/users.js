@@ -14,16 +14,10 @@ app.param("id", async (req, res, next, id) => {
     next();
 });
 
-app.get("/:id", async (req, res) => {
-
-    if (req.member.not()) return;
-    res.complate(member);
-
-});
+app.get("/:id", async (req, res) => res.complate(req.member));
 
 app.delete("/:id/", async (req, res) => {
     const { user, member } = req;
-    if (req.member.not()) return;
 
     if (!user.admin)
         return res.error(403, "You have not got permission for this.");
@@ -55,22 +49,28 @@ app.post("/:id/undelete/", async (req, res) => {
 
 
 app.patch("/:id/", async (req, res) => {
-
     const { user, member } = req;
 
-    if (req.user.id !== member.id && !req.user.admin) return res.error(403, "You have not got permission for this.");
-    const { avatar, name, about, theme } = req.body;
-    if (!avatar && !name && !about && !theme) return res.error(400, "Missing member informations in request body.");
+    if (req.user.id !== member.id && !user.admin) return res.error(403, "You have not got permission for this.");
+    if (!Object.values(req.body).some(Boolean)) return res.error(400, "Missing member informations in request body.");
+
+    const { avatar, name, about, theme, admin } = req.body;
+
+    if (admin?.length && !req.user.admin) return res.error(403, "You have not got permission for edit 'admin' information, or bad request.");
+
     if (avatar && /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g.test(avatar))
         member.avatar = avatar;
+
     if (name) {
         await SecretModel.findOneAndUpdate({ name: member.name }, { name });
         member.name = name;
     }
 
     if (about) member.about = about;
-    if (theme) member.theme = member.theme === "default" ? "black" : "default";
-    member.theme = theme;
+    if (theme) 
+        member.theme = member.theme === "default" ? "black" : "default";
+    
+    if(typeof admin === "boolean" || ["false","true"].includes(admin)) member.admin = admin;
     member.edited = true;
 
     await member.save();
@@ -79,22 +79,4 @@ app.patch("/:id/", async (req, res) => {
 
 })
 
-app.post("/:id/admin/", async (req, res) => {
-
-    const user = req.user;
-
-    if (!user.admin) return res.error(403, "You have not got permission for this.");
-    const user2 = await UserModel.get(req.params.id);
-
-    if (!user2)
-        return res.error(404, `We don't have any user with id ${id}.`);
-
-
-    user2.admin = true;
-    await user2.save()
-
-
-    res.complate(user2);
-
-});
 module.exports = app;

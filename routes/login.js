@@ -28,9 +28,6 @@ app.post("/", async (req, res) => {
     } else
         res.error(400, "You forgot entering some values")
 
-
-
-})
-
+});
 
 module.exports = app;

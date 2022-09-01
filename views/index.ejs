@@ -4,58 +4,58 @@
 <%- include("extra/meta", {title: "Welcome to the Akf-forum!" }) %>
 
 
-<body >
-    <link rel="stylesheet" href="/css/user.css" />
+<body>
+  <link rel="stylesheet" href="/css/user.css" />
 
   <%- include("extra/navbar") %>
 
 
-  
-    <div class="content">
-        <% if (user) { %>
-            <h2 style="color: var(--main);"><div class="box-username">Welcome, <%= user.name %>
-                        <div class="avatar"><img src="<%=user.avatar %>"></div>
 
-                    </div>
-                    You can log out of the site here:
+  <div class="content">
+    <% if (user) { %>
+    <h2 style="color: var(--main);">
+      <div class="box-username">Welcome, <%= user.name %>
+        <div class="avatar"><img src="<%=user.avatar %>"></div>
 
-            </h2>
-           
-            <a href="/login" class="btn-outline-primary">LOGOUT</a>
-            <br>
-        <% } else { %>
-            <h2 style="color: var(--main);">Welcome, Guest!<br>You can press the button to register:
-                <a href="/register" class="btn-outline-primary">REGISTER</a>
-        
-            </h2>
-         <% } %> 
-         
-        <h2 style="color: var(--second);">Statistics:</h2>
+      </div>
+      You can log out of the site here:
 
-        <div class="box">
-            <h2 class="box-title">Message count:</h2>
-            <h2 class="box-value"><%= messages %></h2>
-        </div>
-   
-        <div class="box">
-          <h2 class="box-title">User count: </h2>
-          <h2 class="box-value"><%= users %> </h2>
-        </div>
-        
-        <div class="box">              
-          <h2 class="box-title">Thread count:</h2>
-          <h2 class="box-value"><%= threads %></h2>
-        </div>
-    
-        <div class="box">    
-            <h2 class="box-title">Memory usage:</h2>
-            <h2 class="box-value"><%= mem.toFixed(2); %> MB</h2>
-        </div>
-     
-    </div> 
-    <%- include("extra/footer") %>
+    </h2>
+
+    <a href="/login" class="btn-outline-primary">LOGOUT</a>
+    <br>
+    <% } else { %>
+    <h2 style="color: var(--main);">Welcome, Guest!<br>You can press the button to register:
+      <a href="/register" class="btn-outline-primary">REGISTER</a>
+
+    </h2>
+    <% } %>
+
+    <h2 style="color: var(--second);">Statistics:</h2>
+
+    <div class="box">
+      <h2 class="box-title">Message count:</h2>
+      <h2 class="box-value"><%= messages %></h2>
+    </div>
+
+    <div class="box">
+      <h2 class="box-title">User count: </h2>
+      <h2 class="box-value"><%= users %> </h2>
+    </div>
+
+    <div class="box">
+      <h2 class="box-title">Thread count:</h2>
+      <h2 class="box-value"><%= threads %></h2>
+    </div>
+
+    <div class="box">
+      <h2 class="box-title">Memory usage:</h2>
+      <h2 class="box-value"><%= mem.toFixed(2); %> MB</h2>
+    </div>
+
+  </div>
+  <%- include("extra/footer") %>
 
 </body>
 
 </html>
-

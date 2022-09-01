@@ -13,7 +13,7 @@ Run `node util/reset` to **reset the database**, and run `node util/admin` for g
 Edit `config.json` for default themes of users...
 
 ## API
-Akf-forum has got an API for AJAX, other clients etc. And, you can learn about API in `util/APIDOCS.md`.
+Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn about API in `util/APIDOCS.md`.
 
 ## Credits
 * [Akif9748](https://github.com/Akif9748) - Project mainteiner, main developer, made **old** frontend
@@ -32,23 +32,17 @@ Akf-forum has got an API for AJAX, other clients etc. And, you can learn about A
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
 | Profile Message | 🔴 | LOW |
-| from form to AJAX | 🟢 | HIGH |
-| auto-scroll | 🟡 | LOW |
-| Page support, support message limit correct | 🟢 | MEDIUM |
-| Multi-theme support, black theme | 🟢 | LOW |
 | Search | 🔴 | MEDIUM |
-| Footer | 🟢 | LOW |
+| Footer | 🟡 | LOW |
 
-- Profile photos will store in database
+- Better Auth
+- Profile photos will store in a folder
 - replacer function global
-- author name of thread
 - page for threads - users 
-- extra ratelimits
-- better edits
-- IP BAN fix, user -> ips []
+- IPs of users will add SecretModel
 - message counts for API
-- ZATEN SİLİNDİ BU KİŞİ & MESAJ
-- delete admin request, moreover, add it to user patch delete 😳, better theme patch
+- better theme patch UserModel
+- ajax, delete update thread dom
 
 ### API
 | To do | Is done? 
