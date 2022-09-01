@@ -16,6 +16,10 @@ But in front end, the API will works with session.
 ## How to request?
 
 ### Request types:
+- GET `/api/search/users?q=query` find users.
+- GET `/api/search/threads?q=query&authorID=not_required` find threads.
+- GET `/api/search/messages?q=query&authorID=not_required` find messages.
+
 - GET `/api/bans/` fetch all bans.
 - GET `/api/bans/:id` fetch a ban.
 - DELETE `/api/bans/:id` for unban an IP adress.
