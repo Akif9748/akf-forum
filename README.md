@@ -21,11 +21,15 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 * [Camroku](https://github.com/Camroku) - Made **old** stylesheets
 
 ## Screenshot
-### Old frontend
-![akf-forum](https://user-images.githubusercontent.com/70021050/160255959-ef216cba-1348-4d4b-9347-fe67e21348e7.png)
-### New frontend
-![new-akf-forum](https://user-images.githubusercontent.com/70021050/186941146-f9a8fbf8-9b2b-4028-afc8-81cff559d9fb.png)
 
+### Thread Page w/Black Theme
+![black-theme](https://user-images.githubusercontent.com/70021050/187899782-2ff010aa-0d39-4fc2-b00c-19bcf1623c8a.png)
+### Threads Page w/Default Theme
+![light-theme](https://user-images.githubusercontent.com/70021050/186941146-f9a8fbf8-9b2b-4028-afc8-81cff559d9fb.png)
+<details>
+  <summary><b>Mobile view</b></summary>
+  <img src="https://user-images.githubusercontent.com/70021050/187901065-fd75ef85-56e3-42ce-8b34-cb8d799a6517.png"></img>
+</details>
 
 ## Roadmap
 ### TO-DO:
