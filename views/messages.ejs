@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("extra/meta", {title:"Message search!" }) %>
+
+
+<body style="text-align: center;">
+  <%- include("extra/navbar") %>
+  <link rel="stylesheet" href="/css/messages.css" />
+
+  <div id="messages">
+
+    <% messages.filter(Boolean).forEach(message=>{ %>
+
+    <div class="message" id="message-<%= message.id %>">
+      <div class="left">
+        <img src="<%= message.author.avatar || '/images/guest.png' %>" />
+        <div class="username"><a href="/users/<%=message.authorID %>"><%=message.author.name %></a></div>
+        <div class="date">
+          <%= new Date(message.time).toLocaleDateString() %>
+        </div>
+        <div class="date">
+          <%= new Date(message.time).toLocaleTimeString() %>
+        </div>
+      </div>
+      <div class="content"><%- message.content %></div>
+    </div>
+
+    <% }); %>
+  </div>
+</body>
+
+</html>

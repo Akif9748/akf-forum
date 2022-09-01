@@ -20,7 +20,7 @@
     <a id="logout" href="/login" class="btn-primary">Logout</a>
     <a onclick="invert()" class="btn-outline-primary"><%=(user.theme === "default" ? "black" : "default" ) + " mode" %></a>
     <script>
-    async function invert() {
+      async function invert() {
         await fetch('/api/users/<%= user.id %>', {
           method: 'PATCH',
           body: JSON.stringify({
@@ -31,7 +31,7 @@
           }
         })
         location.reload()
-    }
+      }
     </script>
     <% } else { %>
 
@@ -45,15 +45,17 @@
   </div>
 </div>
 <div class="menu">
+  <a href="/threads/create/" class="menu-item">Create Thread</a>
   <a href="/threads" class="menu-item">Threads</a>
   <a href="/users" class="menu-item">Users</a>
   <a href="/search" class="menu-item">Search</a>
-  <a href="/threads/create/" class="menu-item">Create Thread</a>
   <script>
     const menuItems = document.getElementsByClassName("menu-item");
 
     for (let i = 0; i < menuItems.length; i++)
-      if (menuItems[i].getAttribute("href") == window.location.pathname)
+      if (window.location.pathname.includes(menuItems[i].getAttribute("href"))) {
         menuItems[i].classList.add("active-menu");
+        break;
+      }
   </script>
 </div>

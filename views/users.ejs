@@ -24,6 +24,7 @@
     <% }); %>
 
   </div>
+  <% if(typeof page === "number"){ %>
   <div class="pagination">
     <div class="back">
       <% if (page > 0){ %>
@@ -44,4 +45,6 @@
     </div>
 
   </div>
+  <% } %>
+
 </body>

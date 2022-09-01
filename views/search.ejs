@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("extra/meta", {title: "Search page!" }) %>
+
+
+<body style="text-align: center;">
+  <%- include("extra/navbar") %>
+  <link rel="stylesheet" href="/css/search.css" />
+
+  <div id="search">
+    <form action="/search/users" method="GET">
+      <input type="text" name="q" placeholder="Search for users" />
+      <input type="submit" value="Search" />
+    </form>
+  </div>
+
+  <div id="search">
+    <form action="/search/messages" method="GET">
+      <input type="text" name="q" placeholder="Search for messages" />
+      <input type="text" name="authorID" placeholder="(Not Required) Author id" />
+      <input type="submit" value="Search" />
+    </form>
+  </div>
+
+  <div id="search">
+    <form action="/search/threads" method="GET">
+      <input type="text" name="q" placeholder="Search for threads" />
+      <input type="text" name="authorID" placeholder="(Not Required) Author id" />
+      <input type="submit" value="Search" />
+    </form>
+  </div>
+</body>
+
+</html>

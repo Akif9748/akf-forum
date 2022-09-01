@@ -31,31 +31,17 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
   <img src="https://user-images.githubusercontent.com/70021050/187901065-fd75ef85-56e3-42ce-8b34-cb8d799a6517.png"></img>
 </details>
 
-## Roadmap
-### TO-DO:
+## TO-DO list
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
-| Profile Message | 🔴 | LOW |
-| Search | 🔴 | MEDIUM |
+| Search & message a | 🟡 | MEDIUM |
 | Footer | 🟡 | LOW |
-| Better Auth | 🔴 | MEDIUM |
 | Local pfp store | 🔴 | MEDIUM |
 | IPs of users will add SecretModel | 🔴 | MEDIUM |
-
-- message counts for API
-- better theme patch UserModel
-- ajax, delete update thread dom
-
-### API
-| To do | Is done? 
-| ----- | -------- 
-| RATELIMITS | 🟢 
-| Get a lots of message & thread & user | 🔴 
-| Create message & thread & user | 🟢 
-| Get message & thread & user | 🟢 
-| Delete message & thread & user | 🟢 
-| Undelete message & thread & user | 🟢 
-| Edit message & thread & user | 🟢 
+| better theme patch UserModel | 🟡 | VERY LOW |
+| Category | ⚪ | MEDIUM |
+| Profile Message | 🔴 | LOW |
+| Better Auth | 🔴 | MEDIUM |
 
 ## Major Version History
 - V4: Caching
