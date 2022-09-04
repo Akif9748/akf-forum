@@ -10,6 +10,7 @@ app.get("/users", async (req, res) => {
     const users = await UserModel.find({ name: { $regex: req.query.q, $options: "i" } }).limit(10);
     res.reply("users", { users, page: null });
 });
+
 app.get("/messages", async (req, res) => {
     if (!Object.values(req.query).length) return res.error(400, "Missing query parameters in request body.");
     const query = {};
@@ -18,6 +19,7 @@ app.get("/messages", async (req, res) => {
     const messages = await MessageModel.find(query).limit(10);
     res.reply("messages",{messages});
 });
+
 app.get("/threads", async (req, res) => {
     if (!Object.values(req.query).length) return res.error(400, "Missing query parameters in request body.");
     const query = {};

@@ -10,23 +10,19 @@ app.post("/", async (req, res) => {
 
     const { username = null, password = null } = req.body;
 
-    if (username && password) {
-        const user = await SecretModel.findOne({ username });
-        if (user) {
+    if (!username || !password)
+        return res.error(400, "You forgot entering some values")
 
-            if (!await bcrypt.compare(password, user.password)) return res.error(403, 'Incorrect Password!')
-            const member = await UserModel.findOne({ name: username });
-            if (!member || member.deleted) return res.error(403, 'Incorrect Username and/or Password!')
+    const user = await SecretModel.findOne({ username });
+    if (!user) return res.error(403, 'Incorrect Username and/or Password!');
 
-            req.session.userID = user.id;
+    if (!await bcrypt.compare(password, user.password)) return res.error(403, 'Incorrect Password!')
+    const member = await UserModel.findOne({ name: username });
+    if (!member || member.deleted) return res.error(403, 'Incorrect Username and/or Password!')
 
-            res.redirect(req.query.redirect || '/');
-        } else
-            res.error(403, 'Incorrect Username and/or Password!')
+    req.session.userID = user.id;
 
-
-    } else
-        res.error(400, "You forgot entering some values")
+    res.redirect(req.query.redirect || '/');
 
 });
 
