@@ -36,7 +36,7 @@ app.use(
         next();
     }, rateLimit({
         windowMs: 60_000, max: 10,
-        handler: (req, res, next, opts) => !req.user.admin ? res.error(opts.statusCode, "You are begin ratelimited") : next()
+        handler: (req, res, next, opts) => !req.user?.admin ? res.error(opts.statusCode, "You are begin ratelimited") : next()
     }), bodyParser.urlencoded({ extended: true })
 );
 
