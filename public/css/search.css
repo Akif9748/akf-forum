@@ -1,3 +1,27 @@
-.search {
-    padding: 10px;
+.title {
+  color: var(--main);
+  font-weight: 700;
+}
+
+form {
+display: flex;
+align-items: center;
+flex-direction: column;
+max-width: 500px;
+margin: 20px auto;
+width: 100%;
+padding: 10px;
+box-shadow: 0 0 5px 0 #b0b0b0;
+}
+
+
+.input {
+  padding: 8px 10px;
+  font-family: inherit;
+  display: block;
+  font-weight: 600;
+  color: var(--input-clr);
+  width: 100%;
+  margin-bottom: 10px;
+  border: 2px solid var(--borders);
 }
