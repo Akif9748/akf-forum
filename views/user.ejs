@@ -5,7 +5,12 @@
 
 
 <body>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+    <link rel="stylesheet" href="/css/login.css" />
   <link rel="stylesheet" href="/css/user.css" />
+    <link rel="stylesheet" href="/css/modal.css" />
+
   <%if (user) {%>
   <script type="module">
     import request from "../../js/request.js";
@@ -26,10 +31,21 @@
   <% }; %>
   <%- include("extra/navbar") %>
 
+<!--
+
+data-modal-open="#deneme"   bu elemente tıklanıldığında
+    modal yükletir
+
+
+
+
+    -->
+
+    
   <div class="content">
 
     <% if (user?.admin || user?.id === member.id) { %>
-    <a class="btn-outline-primary" href="<%= member.getLink() %>/edit">Edit user!</a>
+    <a class="btn-outline-primary" data-modal-open="#user-edit" style="align-self:baseline;">Edit user!</a>
     <% } %>
 
     <% if (member.deleted) {%>
@@ -41,20 +57,34 @@
 
 
     <div class="box" style="justify-content:center;">
-      <img style="width:100px;height:100px;border-radius:50%;" src="<%=member.avatar %>">
+      <img style="width:150px;height:150px;border-radius:50%;" src="<%=member.avatar %>">
     </div>
+  <h2 class="box-value" style="align-self: center;">Admin</h2>
+
+       <div class="box-value" style="
+margin: 10px auto;
+box-shadow: 0 0 5px 0 var(--second);
+padding: 10px;
+width: 100%;
+max-width: 800px;
+text-align: center;
+border-radius: 5px;
+background: none;
+color: black;">
+      <%= member.about %>
+    </div>
+      
     <div class="box">
       <h2 class="box-title">Name:</h2>
       <h2 class="box-value"><%= member.name %></h2>
     </div>
+
+      
     <div class="box">
       <h2 class="box-title">Created at:</h2>
       <h2 class="box-value"><%= new Date(member.time).toLocaleString() %></h2>
     </div>
-    <div class="box">
-      <h2 class="box-title">Is admin?</h2>
-      <h2 class="box-value"><%= member.admin ? "Yes" : "No" %></h2>
-    </div>
+
     <div class="box">
       <h2 class="box-title">Message:</h2>
       <h2 class="box-value"><%= counts.message %></h2>
@@ -63,14 +93,40 @@
       <h2 class="box-title">Thread:</h2>
       <h2 class="box-value"><%= counts.thread %></h2>
     </div>
-    <div class="box">
-      <h2 class="box-title">About:</h2>
+
+
+  <div class="modal" id="user-edit">
+  <div class="modal-content">
+    <div class="modal-close">
+      <i class="fa-solid fa-square-xmark"></i>
     </div>
-    <p class="box-value">
-      <%= member.about %>
-    </p>
+ <h1 class="title" style="text-align:center;">Edit <a class="see" href="/users/<%= member.id %>"><%= member.name %></a></h1>
+  <div class="content">
+    <form id="form" class="see" style="box-shadow:none">
+      <input type="text" name="name" placeholder="<%=member.name%>" class="input">
+      <input type="url" name="avatar" placeholder="<%=member.avatar%>" class="input">
+      <textarea class="input" name="about" rows="4" name="content" placeholder="<%=member.about%>"></textarea>
+      <% if (user.admin){ %>
+      Is Admin? <input id='admin' type='checkbox' value='true' name='admin' <%=member.admin ? "checked": ""%>>
+      <input id='adminHidden' type='hidden' value='false' name='admin'>
+      <% } %>
+
+      <button class="btn-primary" style="width:100%;">Update User!</button>
+    </form>
 
   </div>
+
+  </div>
+ </div>
+
+      
+
+  </div>
+
+  <script src="../js/modal.js"></script>
+
+        
+        
 </body>
 
 </html>
