@@ -22,10 +22,17 @@
 }
 
 .box-title{
-  color: var(--main);
-  font-weight: 300;
+  font-weight: 400;
 }
 .box-value {
-  color: var(--second);
-  font-weight: 300;
+font-weight: 300;
+background-color: var(--main);
+color: white;
+font-size: 14px;
+padding: 4px;
+border-radius: 5px;
+min-width: 50px;
+text-align: center;
 }
+
+
