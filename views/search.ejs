@@ -10,26 +10,28 @@
 
   <div id="search">
     <form action="/search/users" method="GET">
-      <input type="text" name="q" placeholder="Search for users" />
-      <input type="submit" value="Search" />
+      <input type="text" class="input" name="q" placeholder="Search for users" />
+      <input type="submit" class="btn-primary" value="Search" />
     </form>
   </div>
 
   <div id="search">
     <form action="/search/messages" method="GET">
-      <input type="text" name="q" placeholder="Search for messages" />
-      <input type="text" name="authorID" placeholder="(Not Required) Author id" />
-      <input type="submit" value="Search" />
+      <input type="text" class="input" name="q" placeholder="Search for messages" />
+      <input type="text" class="input"  name="authorID" placeholder="(Not Required) Author id" />
+      <input type="submit" value="Search" class="btn-primary"  />
     </form>
   </div>
 
   <div id="search">
     <form action="/search/threads" method="GET">
-      <input type="text" name="q" placeholder="Search for threads" />
-      <input type="text" name="authorID" placeholder="(Not Required) Author id" />
-      <input type="submit" value="Search" />
+      <input type="text" class="input"  name="q" placeholder="Search for threads" />
+      <input type="text" class="input"  name="authorID" placeholder="(Not Required) Author id" />
+      <input type="submit" value="Search"  class="btn-primary" />
     </form>
   </div>
+      <%- include("extra/footer") %>
+
 </body>
 
 </html>
