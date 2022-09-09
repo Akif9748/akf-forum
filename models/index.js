@@ -1,7 +1,8 @@
-const UserModel = require("./User"),
+const CategoryModel = require("./Category"),
     MessageModel = require("./Message"),
     ThreadModel = require("./Thread"),
     SecretModel = require("./Secret"),
-    BanModel = require("./Ban");
+    UserModel = require("./User"),
+    BanModel = require("./Ban"); 
 
-module.exports = { UserModel, MessageModel, ThreadModel, SecretModel, BanModel };
+module.exports = { CategoryModel, MessageModel, ThreadModel, SecretModel, UserModel, BanModel };

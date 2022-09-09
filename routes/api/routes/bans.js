@@ -4,7 +4,7 @@ const { Router } = require("express")
 const app = Router();
 
 app.use((req, res, next) => {
-    if (!req.user || !req.user.admin) return res.error(403, "You have not got permission for this.");
+    if (!req.user.admin) return res.error(403, "You have not got permission for this.");
     next();
 });
 

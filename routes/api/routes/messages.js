@@ -17,11 +17,8 @@ app.param("id", async (req, res, next, id) => {
 });
 
 
-app.get("/:id", async (req, res) => {
+app.get("/:id", async (req, res) => res.complate(req.message));
 
-    res.complate(message);
-
-})
 app.patch("/:id/", async (req, res) => {
 
 

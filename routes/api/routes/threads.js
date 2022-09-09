@@ -73,7 +73,6 @@ app.delete("/:id/", async (req, res) => {
     if (thread.deleted) return res.error(403, "This thread is already deleted.");
     thread.deleted = true;
     await thread.save();
-    console.log(thread)
 
     await MessageModel.updateMany({ threadID: thread.id }, { deleted: true });
     res.complate(thread);

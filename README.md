@@ -41,6 +41,10 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 | Better Auth | 🔴 | MEDIUM |
 - Fix footer, theme
 - Navbar manuel select
+- Version info to footer
+- upload other photos, model for it
+- black theme is broken
+
 ## Major Version History
 - V4: Caching
 - V3: New Theme

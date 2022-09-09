@@ -16,19 +16,31 @@ But in front end, the API will works with session.
 ## How to request?
 
 ### Request types:
-- GET `/api/search/users?q=query` find users.
-- GET `/api/search/threads?q=query&authorID=not_required` find threads.
-- GET `/api/search/messages?q=query&authorID=not_required` find messages.
-
 - GET `/api/bans/` fetch all bans.
 - GET `/api/bans/:id` fetch a ban.
 - DELETE `/api/bans/:id` for unban an IP adress.
 - POST `/api/bans?reason=flood` for ban an IP adress.
 
-- GET `/api/users/:id` for fetch user.
-- DELETE `/api/users/:id/` for delete user.
-- PATCH `/api/users/:id/` for edit user.
-- PUT `/api/users/:id/` for add profile photo to user.
+
+- GET `/api/categories/` fetch all categories.
+- GET `/api/categories/:id` fetch a category
+- PATCH `/api/categories/:id` for update a category.
+- DELETE `/api/categories/:id` for delete a category.
+- POST `/api/categories` for create a category.
+
+
+- GET `/api/messages/:id` for fetch message.
+- DELETE `/api/messages/:id/` for delete message.
+- PATCH `/api/messages/:id/` for edit message.
+- POST `/api/messages/:id/undelete` for undelete message.
+- POST `/api/messages/:id/react/:type` for react to a message.
+- POST `/api/messages` for create message.
+
+
+- GET `/api/search/users?q=query` find users.
+- GET `/api/search/threads?q=query&authorID=not_required` find threads.
+- GET `/api/search/messages?q=query&authorID=not_required` find messages.
+
 
 - GET `/api/threads/:id` for fetch thread.
 - DELETE `/api/threads/:id/` for delete thread.
@@ -37,12 +49,11 @@ But in front end, the API will works with session.
 - GET `/api/threads/:id/messages?skip=0&limit=10` for fetch messages in thread.
 - POST `/api/threads` for create thread.
 
-- GET `/api/messages/:id` for fetch message.
-- DELETE `/api/messages/:id/` for delete message.
-- PATCH `/api/messages/:id/` for edit message.
-- POST `/api/messages/:id/undelete` for undelete message.
-- POST `/api/messages/:id/react/:type` for react to a message.
-- POST `/api/messages` for create message.
+
+- GET `/api/users/:id` for fetch user.
+- DELETE `/api/users/:id/` for delete user.
+- PATCH `/api/users/:id/` for edit user.
+- PUT `/api/users/:id/` for add profile photo to user.
 
 ### Example request:
 GET ```/api/messages/0```

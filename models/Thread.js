@@ -4,6 +4,7 @@ const MessageModel = require("./Message");
 const schema = new mongoose.Schema({
     id: { type: String, unique: true },
 
+    categoryID: String,
     authorID: String,
     author: Object,
 
@@ -19,7 +20,9 @@ const schema = new mongoose.Schema({
 
 
 schema.methods.get_author = cache.getAuthor;
-
+schema.methods.get_category = () => async function () {
+    return await require("./Category").findOne({ id: this.categoryID }) || {id: this.categoryID, name: "Unknown"} ;
+}
 schema.methods.messageCount = async function (admin = false) {
     const query = { threadID: this.id }; 
     if (!admin) query.deleted = false;

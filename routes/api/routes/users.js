@@ -43,9 +43,9 @@ app.post("/:id/undelete/", async (req, res) => {
     if (!member.deleted) return res.error(404, "This user is not deleted, first, delete it.");
 
     member.deleted = false;
-    await member.save();
+    ;
 
-    res.complate(member);
+    res.complate(await member.save());
 
 })
 
@@ -74,9 +74,7 @@ app.patch("/:id/", async (req, res) => {
     if (deleted === false) member.deleted = false;
     member.edited = true;
 
-    await member.save();
-
-    res.complate(member);
+    res.complate(await member.save());
 
 })
 const storage = multer.diskStorage({
