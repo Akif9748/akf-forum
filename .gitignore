@@ -1,8 +1,12 @@
 # Dependency directories
 node_modules/
 
-# env
+# Environment variables
 .env
 
 # Test files
 test.js
+
+# avatars folder
+public/images/avatars/*
+!public/images/avatars/default.jpg

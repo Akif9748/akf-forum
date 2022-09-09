@@ -32,15 +32,15 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 ## TO-DO list
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
+| Local pfp store | 🟢 | MEDIUM |
 | Page support for search | 🟡 | LOW |
-| Local pfp store | 🔴 | MEDIUM |
 | IPs of users will add SecretModel | 🔴 | MEDIUM |
 | Category | ⚪ | MEDIUM |
 | Profile Message | 🔴 | LOW |
 | Last seen, last seen info | 🔴 | LOW |
 | Better Auth | 🔴 | MEDIUM |
 - Fix footer, theme
-
+- Navbar manuel select
 ## Major Version History
 - V4: Caching
 - V3: New Theme

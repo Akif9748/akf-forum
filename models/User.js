@@ -4,7 +4,7 @@ const schema = new mongoose.Schema({
     id: { type: String },
 
     name: String,
-    avatar: { type: String, default: "/images/guest.png" },
+    avatar: { type: String, default: "/images/avatars/default.jpg" },
     time: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
     edited: { type: Boolean, default: false },

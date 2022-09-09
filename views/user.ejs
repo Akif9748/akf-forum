@@ -14,6 +14,7 @@
   <div class="content">
 
     <% if (user?.admin || user?.id === member.id) { %>
+    <a href="/users/<%=member.id%>/avatar" class="btn-outline-primary">Upload avatar</a>
     <link rel="stylesheet" href="/css/modal.css" />
 
     <a class="btn-outline-primary" id="toogle">Edit user!</a>

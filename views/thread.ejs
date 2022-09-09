@@ -42,7 +42,7 @@
 
     <div class="message" id="message-<%= message.id %>">
       <div class="left">
-        <img src="<%= message.author.avatar || '/images/guest.png' %>" />
+        <img src="<%= message.author.avatar %>" />
         <div class="username"><a href="/users/<%=message.authorID %>"><%=message.author.name %></a></div>
         <div class="date">
           <%= new Date(message.time).toLocaleDateString() %>

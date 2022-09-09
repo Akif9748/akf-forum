@@ -1,6 +1,7 @@
 const { UserModel, SecretModel } = require("../../../models");
 const { Router } = require("express");
 const { URLRegex } = require("../../../lib");
+const multer = require("multer");
 
 const app = Router();
 
@@ -48,7 +49,6 @@ app.post("/:id/undelete/", async (req, res) => {
 
 })
 
-
 app.patch("/:id/", async (req, res) => {
     const { user, member } = req;
 
@@ -79,5 +79,26 @@ app.patch("/:id/", async (req, res) => {
     res.complate(member);
 
 })
+const storage = multer.diskStorage({
+    destination: function (_req, _file, cb) {
+        cb(null, './public/images/avatars')
+    },
+    filename: function (req, _file, cb) {
+        cb(null, req.member.id + ".jpg")
+    }
+})
+
+const upload = multer({ storage })
+
+app.put("/:id/", upload.single('avatar'), async (req, res) => {
+    const { member } = req;
+
+    if (req.user.id !== member.id && !req.user.admin) return res.error(403, "You have not got permission for this.");
+
+    if (!req.file) return res.error(400, "Missing avatar in request body.");
+    member.avatar = req.file.destination.slice("./public".length) + "/" + req.file.filename;
+    res.complate(await member.save());
+});
+
 
 module.exports = app;

@@ -28,6 +28,7 @@ But in front end, the API will works with session.
 - GET `/api/users/:id` for fetch user.
 - DELETE `/api/users/:id/` for delete user.
 - PATCH `/api/users/:id/` for edit user.
+- PUT `/api/users/:id/` for add profile photo to user.
 
 - GET `/api/threads/:id` for fetch thread.
 - DELETE `/api/threads/:id/` for delete thread.

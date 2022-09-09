@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const app = Router();
-const {clearContent} = require("../lib");
+const { clearContent } = require("../lib");
 
 const { UserModel, MessageModel, ThreadModel } = require("../models");
 
@@ -11,17 +11,15 @@ app.get("/", async (req, res) => {
     return res.reply("users", { users, page, pages: Math.ceil(await UserModel.count(query) / 10) });
 });
 
-app.get("/:id/edit", async (req, res) => {
+app.get("/:id/avatar", async (req, res) => {
     if (!req.user || (!req.user.admin && req.params.id !== req.user.id)) return res.error(403, "You have not got permission for this.");
     const member = await UserModel.get(req.params.id);
 
     if (member && (req.user?.admin || !member.deleted))
-        res.reply("edit_user", { member })
+        res.reply("avatar_upload", { member })
     else
         res.error(404, `We don't have any user with id ${req.params.id}.`);
-
-});
-
+})
 app.get("/:id", async (req, res) => {
     const user = req.user
     const { id } = req.params;
@@ -31,7 +29,7 @@ app.get("/:id", async (req, res) => {
 
         const message = await MessageModel.count({ authorID: id });
         const thread = await ThreadModel.count({ authorID: id });
-        member.about = clearContent( member.about)
+        member.about = clearContent(member.about)
         res.reply("user", { member, counts: { message, thread } })
     }
     else res.error(404, `We don't have any user with id ${id}.`);

@@ -7,24 +7,11 @@ const { def_theme, forum_name, desp } = require("./config.json"),
     port = process.env.PORT || 3000,
     mongoose = require("mongoose"),
     express = require('express'),
-    //  multer = require("multer"),
     fs = require("fs"),
     app = express();
 
 app.ips = [];
-//Upload file
-/*
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "public/data");
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, file.fieldname + "-" + uniqueSuffix + ".png");
-  },
-});
-const upload = multer({ storage: storage });
-app.post("/stats", upload.single("uploaded_file"),*/
+
 require("dotenv").config();
 mongoose.connect(process.env.MONGO_DB_URL,
     async () => console.log("Database is connected with", (app.ips = await BanModel.find({})).length, "banned IPs"));

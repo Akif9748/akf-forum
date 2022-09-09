@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("extra/meta", {title: "Avatar Upload Panel!" }) %>
+
+<body style="text-align: center;">
+  <%- include("extra/navbar") %>
+  <h1>Upload avatar for <%= member.name %></h1>
+  <form>
+    <input type="file" name="avatar" /><br>
+    <input class="btn-primary" type="submit" value="Upload" />
+  </form>
+
+  <script>
+    const form = document.querySelector('form');
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+
+      const res = await fetch('/api/users/<%= member.id %>/', {
+        method: 'PUT',
+        body: new FormData(form)
+      })
+      if (res.error) return alert(res.error);
+      alert('Success!');
+      location.href = "/users/<%= member.id %>"
+    });
+  </script>
+</body>
+
+</html>
