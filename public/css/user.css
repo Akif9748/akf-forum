@@ -10,6 +10,7 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 10px;
+  color: var(--anti);
 }
 
 .box {

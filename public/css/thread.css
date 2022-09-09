@@ -36,7 +36,7 @@
 
 .content {
   width: 70%;
-  color: var(--reaction-hover);
+  color: var(--anti);
 }
 
 .reactions {
@@ -59,7 +59,7 @@
 }
 
 .reactions div:hover {
-  color: var(--reaction-hover);
+  color: var(--anti);
 
 }
 

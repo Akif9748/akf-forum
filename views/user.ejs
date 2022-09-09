@@ -11,7 +11,7 @@
   <%- include("extra/navbar") %>
 
 
-  <div class="content">
+  <div class="content" >
 
     <% if (user?.admin || user?.id === member.id) { %>
     <a href="/users/<%=member.id%>/avatar" class="btn-outline-primary">Upload avatar</a>
@@ -102,7 +102,8 @@ max-width: 800px;
 text-align: center;
 border-radius: 5px;
 background: none;
-color: black;">
+color: var(--anti);
+">
       <%= member.about %>
     </div>
 

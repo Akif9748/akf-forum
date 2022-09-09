@@ -21,7 +21,7 @@
       <%= new Date(thread.time).toLocaleString() %> • Views: <%= thread.views %>%>
     </div>
     <div class="date">
-      <a style="color: var(--reaction-hover);" href="/users/<%= thread.author.id %>"><%= thread.author.name %></a> <%= "• "+(thread.edited  ? "Edited" : "Not edited")%>
+      <a style="color: var(--anti);" href="/users/<%= thread.author.id %>"><%= thread.author.name %></a> <%= "• "+(thread.edited  ? "Edited" : "Not edited")%>
     </div>
   </div>
   <div style="text-align:center;padding:8px">
