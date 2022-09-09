@@ -16,6 +16,9 @@ But in front end, the API will works with session.
 ## How to request?
 
 ### Request types:
+- GET `/api/me` to get your account.
+
+
 - GET `/api/bans/` fetch all bans.
 - GET `/api/bans/:id` fetch a ban.
 - DELETE `/api/bans/:id` for unban an IP adress.

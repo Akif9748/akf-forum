@@ -33,7 +33,7 @@ app.use(async (req, res, next) => {
     next();
 });
 
-app.post("/me", (req, res) => res.complate(req.user))
+app.get("/me", (req, res) => res.complate(req.user))
 
 for (const file of fs.readdirSync("./routes/api/routes")) 
     app.use("/" + file.replace(".js", ""), require(`./routes/${file}`));

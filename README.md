@@ -13,6 +13,8 @@ Edit `config.json` for default themes of users, and forum name...
 ## API
 Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn about API in `APIDOCS.md`.
 
+**And you can use [offical API wrapper](https://github.com/Akif9748/akf-forum-api).**
+
 ## Credits
 * [Akif9748](https://github.com/Akif9748) - Project mainteiner, main developer, made **old** frontend
 * [Tokmak](https://github.com/tokmak0) - Made **new** frontend
