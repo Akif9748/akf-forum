@@ -38,12 +38,14 @@ app.get("/:id/messages/", async (req, res) => {
 
 app.post("/", async (req, res) => {
 
-    const { title, content } = req.body;
-return console.log(req.body)
+    const { title, content, category } = req.body;
+
     if (!content || !title) return res.error(400, "Missing content/title in request body.");
 
     const { user } = req;
     const thread = await new ThreadModel({ title, author: user }).takeId()
+    if (category)
+        thread.categoryID = category;
     const message = await new MessageModel({ content, author: user, threadID: thread.id }).takeId()
     await thread.push(message.id).save();
     await message.save();

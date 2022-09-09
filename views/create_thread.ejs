@@ -14,9 +14,11 @@
     <input name="title" class="input"></input>
     <h2 class="title" style="align-self: baseline;">Content:</h2>
     <textarea rows="4" cols="50" name="content" class="input"></textarea>
+    <h2 class="title" style="align-self: baseline;">Category:</h2>
+
     <select name="category">
       <% for (const category of categories) { %>
-      <option name="<%= category.id %>" value="<%= category.name %>"><%= category.name %></option>
+      <option value="<%= category.id %>"><%= category.name %></option>
       <% } %>
     </select>
 
@@ -35,7 +37,7 @@
       const response = await request("/api/threads/", "POST", {
         title: data.get("title"),
         content: data.get("content"),
-        categord: data.get("category")
+        category: data.get("category")
       });
 
 
