@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("extra/meta", {title: "Create Category!" }) %>
+
+<body>
+  <link rel="stylesheet" href="/css/create_thread.css" />
+
+  <%- include("extra/navbar") %>
+
+  <form>
+    <h2 class="title" style="align-self: baseline;">Name:</h2>
+    <input name="name" class="input"></input>
+    <h2 class="title" style="align-self: baseline;">Description:</h2>
+    <textarea rows="4" cols="50" name="desp" class="input"></textarea>
+    <button class="btn-primary" style="width:100%" type="submit">Create Category!</button>
+  </form>
+
+
+  <script type="module">
+    import request from "../../js/request.js";
+
+    document.addEventListener("submit", async e => {
+      e.preventDefault();
+      const data = new FormData(e.target);
+
+      const response = await request("/api/categories/", "POST", {
+        name: data.get("name"),
+        desp: data.get("desp")
+      });
+
+      if (response)
+        window.location.href = "/categories/" + response.id;
+
+
+    });
+  </script>
+
+</body>

@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const app = Router();
 const { clearContent } = require("../lib");
-const { ThreadModel, MessageModel } = require("../models")
+const { ThreadModel, MessageModel, CategoryModel } = require("../models")
 
 app.get("/", async (req, res) => {
     const page = Number(req.query.page) || 0;
@@ -9,11 +9,11 @@ app.get("/", async (req, res) => {
     let threads = await ThreadModel.find(query).limit(10).skip(page * 10);
     threads = await Promise.all(threads.map(thread => thread.get_author()));
 
-    return res.reply("threads", { threads, page, pages: Math.ceil(await ThreadModel.count(query) / 10) });
+    return res.reply("threads", { threads, page, title: "Threads", desp: threads.length + " thread listed", pages: Math.ceil(await ThreadModel.count(query) / 10) });
 });
 
 
-app.get("/create/", (req, res) => res.reply("create_thread"));
+app.get("/create/", async (req, res) => res.reply("create_thread", { categories: await CategoryModel.find() }));
 
 app.get("/:id/", async (req, res) => {
 

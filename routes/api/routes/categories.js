@@ -40,8 +40,8 @@ app.post("/", async (req, res) => {
     if (!name) return res.error(400, "You have to give a name for the category.");
 
     if (await CategoryModel.exists({ name })) return res.error(400, "This category is already opened.");
-
-    res.complate(await CategoryModel.create({ name, desp, authorID: req.user.id }).then(c => c.takeId()));
+    const category = await new CategoryModel({ name, desp, authorID: req.user.id }).takeId();
+    res.complate(await category.save());
 
 });
 

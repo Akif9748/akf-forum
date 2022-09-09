@@ -11,6 +11,11 @@ schema.methods.takeId = async function () {
     this.id = String(await model.count() || 0);
     return this;
 }
+
+schema.methods.getLink = function (id = this.id) {
+    return "/categories/" + this.id;
+}
+
 const model = mongoose.model('category', schema);
 
 module.exports = model;

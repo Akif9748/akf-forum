@@ -22,8 +22,7 @@ app.use(
     session({ secret: 'secret', resave: true, saveUninitialized: true }),
     express.static("public"), express.json(), ipBlock(app.ips),
     async (req, res, next) => {
-        if (req.session.userID)
-            req.user = await UserModel.findOneAndUpdate({ id: req.session.userID }, { lastSeen: Date.now() });
+        req.user = req.session.userID ? await UserModel.findOneAndUpdate({ id: req.session.userID }, { lastSeen: Date.now() }) : null;
 
         res.reply = (page, options = {}, status = 200) => res.status(status)
             .render(page, { user: req.user, theme: req.user?.theme || def_theme, forum_name, desp, ...options });

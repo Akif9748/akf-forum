@@ -42,8 +42,7 @@ app.get("/threads", async (req, res) => {
     if (req.query.authorID) query.authorID = req.query.authorID;
     const threads = await ThreadModel.find(query, null, req.so)
     res.reply("threads", {
-        threads,
-        page: null, page: req.page,
+        threads, page: req.page, title: "Threads with query " + req.query.q,
         pages: Math.ceil(await ThreadModel.count(query) / 10)
     });
 });

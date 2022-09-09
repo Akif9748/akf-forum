@@ -9,23 +9,20 @@
   <link rel="stylesheet" href="/css/pages.css" />
 
   <%- include("extra/navbar") %>
-  <h1><%= title || "Threads" %></h1>
-  <h2><%= desp %></h2>
   <div class="threads">
-
-    <% threads.forEach(thread=>{ %>
-    <a href="<%= thread.getLink() %>" class="">
+    <%if(user?.admin) {%>
+    <a href="/categories/create" class="btn-primary">Create Category</a>
+    <% }; %>
+    <% categories.forEach(category=>{ %>
+    <a href="<%= category.getLink() %>" >
       <div class="threads-box">
         <div class="thread-box-title">
-          <% if (thread.deleted) { %> <span>[DELETED]</span><% } %>
-          <%= thread.title  %>
+          <%= category.name  %>
         </div>
-        <div class="box-username">
-          <% if (user?.admin && !thread.deleted){ %>
-          <a class="btn-danger" onclick="fetch('/api/threads/<%= thread.id %>/',{method:'DELETE'})"><i class="bx bx-trash bx-sm"></i></a>
-          <% } %>
-          <%= thread.author.name %> <div class="avatar"><img src="<%=thread.author.avatar %>"> </div>
-
+        
+        <div class="box-username">    <%if(user?.admin) {%>
+          <a class="btn-danger" onclick="fetch('/api/categories/<%= category.id %>/',{method:'DELETE'})"><i class="bx bx-trash bx-sm"></i></a>
+          <% }; %><%= category.desp %> 
         </div>
 
       </div>
