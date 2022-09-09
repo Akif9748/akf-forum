@@ -37,6 +37,7 @@ But in front end, the API will works with session.
 - POST `/api/messages` for create message.
 
 
+**use ?limit&skip for skip and limit**
 - GET `/api/search/users?q=query` find users.
 - GET `/api/search/threads?q=query&authorID=not_required` find threads.
 - GET `/api/search/messages?q=query&authorID=not_required` find messages.

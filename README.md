@@ -32,14 +32,13 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 ## TO-DO list
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
-| Category | 🟡 | MEDIUM |
-| Page support for search | 🟡 | LOW |
-| IPs of users will add SecretModel | 🔴 | MEDIUM |
-| Profile Message | 🔴 | LOW |
-| Last seen, last seen info | 🔴 | LOW |
-| Better Auth | 🔴 | MEDIUM |
-- Fix footer, theme
-- Navbar manuel select
+| Category | 🟢 | MEDIUM |
+| Page support for search | 🟢 | LOW |
+| Profile Message | 🟡 | LOW |
+| Last seen, last seen info | 🟢 | LOW |
+| IPs of users will add SecretModel | ⚪ | MEDIUM |
+| Better Auth | ⚪ | MEDIUM |
+- Fix footer, theme, sonra
 - Version info to footer
 - upload other photos, model for it
 
