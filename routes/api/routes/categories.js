@@ -20,12 +20,12 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/:id", async (req, res) => {
-    const {category} = req;
+    const { category } = req;
     res.complate(category);
 });
 
 app.patch("/:id", async (req, res) => {
-    const {category} = req;
+    const { category } = req;
     if (req.body.name) category.name = req.body.name;
     if (req.body.desp) category.name = req.body.name;
     res.complate(await category.save());
@@ -36,7 +36,7 @@ app.delete("/:id", async (req, res) => {
 });
 
 app.post("/", async (req, res) => {
-    const {name,desp} = req.body;
+    const { name, desp } = req.body;
     if (!name) return res.error(400, "You have to give a name for the category.");
 
     if (await CategoryModel.exists({ name })) return res.error(400, "This category is already opened.");

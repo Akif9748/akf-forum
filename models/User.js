@@ -10,7 +10,9 @@ const schema = new mongoose.Schema({
     edited: { type: Boolean, default: false },
     about: { type: String, default: "" },
     admin: { type: Boolean, default: false },
-    theme: { type: String, default: def_theme }
+    theme: { type: String, default: def_theme },
+    lastSeen: { type: Date, default: Date.now,select:false },
+    hideLastSeen: { type: Boolean, default: false }
 
 });
 
@@ -25,6 +27,6 @@ schema.methods.getLink = function (id = this.id) {
 
 const model = mongoose.model('user', schema);
 
-model.get = id => model.findOne({ id });
+model.get = (id,select) => model.findOne({ id }).select(select);
 
 module.exports = model;

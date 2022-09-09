@@ -22,8 +22,9 @@ app.use(
     session({ secret: 'secret', resave: true, saveUninitialized: true }),
     express.static("public"), express.json(), ipBlock(app.ips),
     async (req, res, next) => {
-        req.headers["x-forwarded-for"];
-        req.user = await UserModel.get(req.session.userID);
+        if (req.session.userID)
+            req.user = await UserModel.findOneAndUpdate({ id: req.session.userID }, { lastSeen: Date.now() });
+
         res.reply = (page, options = {}, status = 200) => res.status(status)
             .render(page, { user: req.user, theme: req.user?.theme || def_theme, forum_name, desp, ...options });
 

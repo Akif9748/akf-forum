@@ -6,10 +6,10 @@ const multer = require("multer");
 const app = Router();
 
 app.param("id", async (req, res, next, id) => {
-    req.member = await UserModel.get(id);
+    req.member = await UserModel.get(id, req.user.admin ? "+lastSeen": "");
 
     if (!req.member) return res.error(404, `We don't have any user with id ${id}.`);
-
+    
     if (req.member.deleted && !req.user?.admin)
         return res.error(404, `You do not have permissions to view this user with id ${id}.`);
 

@@ -23,7 +23,7 @@ app.get("/:id/avatar", async (req, res) => {
 app.get("/:id", async (req, res) => {
     const user = req.user
     const { id } = req.params;
-    const member = await UserModel.get(id);
+    const member = await UserModel.get(id,"+lastSeen");
 
     if (member && (user?.admin || !member.deleted)) {
 
