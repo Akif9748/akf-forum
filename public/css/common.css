@@ -6,6 +6,7 @@
 
 body {
     margin: 0;
+    font-family: Poppins;
 }
 
 a {
@@ -116,13 +117,6 @@ a {
     background-color: var(--main);
 }
 
-body {
-    font-family: Poppins;
-
-}
-
-
-
 .menu-item:hover {
     background-color: var(--main);
 }
@@ -186,4 +180,33 @@ div.avatar {
         width: 100%;
         text-align: center;
     }
+}
+
+
+/*
+FOOTER
+*/
+
+select {
+    background: #ebebeb;
+    border: white;
+    padding: 8px 20px;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+select option {
+    font-family: inherit;
+    width: 290px;
+}
+
+.footer {
+    width: 100%;
+    margin-top: 10px;
+    background-color: var(--main);
+    padding: 10px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

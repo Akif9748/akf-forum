@@ -1,13 +1,13 @@
-const { UserModel, BanModel } = require("./models"),
+const { def_theme, forum_name, desp } = require("./config.json"),
+    { UserModel, BanModel } = require("./models"),
     rateLimit = require('express-rate-limit'),
-    { def_theme } = require("./config.json"),
     ipBlock = require('express-ip-block'),
     session = require('express-session'),
     bodyParser = require('body-parser'),
     port = process.env.PORT || 3000,
     mongoose = require("mongoose"),
     express = require('express'),
-   // multer = require("multer"),
+    //  multer = require("multer"),
     fs = require("fs"),
     app = express();
 
@@ -38,7 +38,7 @@ app.use(
         req.headers["x-forwarded-for"];
         req.user = await UserModel.get(req.session.userID);
         res.reply = (page, options = {}, status = 200) => res.status(status)
-            .render(page, { user: req.user, theme: req.user?.theme || def_theme, ...options });
+            .render(page, { user: req.user, theme: req.user?.theme || def_theme, forum_name, desp, ...options });
 
         res.error = (type, error) => res.reply("error", { type, error }, type);
 
@@ -48,7 +48,7 @@ app.use(
         }
         next();
     }, rateLimit({
-        windowMs: 60_000, max: 10,
+        windowMs: 60_000, max: 20,
         handler: (req, res, next, opts) => !req.user?.admin ? res.error(opts.statusCode, "You are begin ratelimited") : next()
     }), bodyParser.urlencoded({ extended: true })
 );
@@ -58,4 +58,4 @@ for (const file of fs.readdirSync("./routes"))
 
 app.all("*", (req, res) => res.error(404, "We have not got this page."));
 
-app.listen(port, () => console.log("akf-forum on port:", port));
+app.listen(port, () => console.log(forum_name + "-forum on port:", port));

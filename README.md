@@ -1,6 +1,4 @@
 # akf-forum
-<img src="https://raw.githubusercontent.com/Akif9748/akf-forum/main/public/images/logo.jpg" align="right" width="300px" />
-
 A Node.js based forum software.
 
 ## Installation
@@ -10,7 +8,7 @@ A Node.js based forum software.
 
 ### Extra
 Run `node util/reset` to **reset the database**, and run `node util/admin` for give admin perms to first member.
-Edit `config.json` for default themes of users...
+Edit `config.json` for default themes of users, and forum name...
 
 ## API
 Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn about API in `APIDOCS.md`.
@@ -35,14 +33,14 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
 | Page support for search | 🟡 | LOW |
-| Footer | 🟢 | LOW |
 | Local pfp store | 🔴 | MEDIUM |
 | IPs of users will add SecretModel | 🔴 | MEDIUM |
 | Category | ⚪ | MEDIUM |
 | Profile Message | 🔴 | LOW |
 | Last seen, last seen info | 🔴 | LOW |
 | Better Auth | 🔴 | MEDIUM |
-- Add theme selection to footer, and, and, and fix footer, add navbar css to footer and import common css in meta
+- Fix footer, theme
+
 ## Major Version History
 - V4: Caching
 - V3: New Theme
