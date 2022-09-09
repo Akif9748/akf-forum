@@ -39,7 +39,6 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 | IPs of users will add SecretModel | ⚪ | MEDIUM |
 | Better Auth | ⚪ | MEDIUM |
 - Fix footer, theme, sonra
-- Version info to footer
 - upload other photos, model for it
 
 ## Major Version History

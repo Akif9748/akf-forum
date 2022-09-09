@@ -20,7 +20,7 @@
           <%= thread.title  %>
         </div>
         <div class="box-username">
-          <% if (user && !thread.deleted){ %>
+          <% if (user?.admin && !thread.deleted){ %>
           <a class="btn-danger" onclick="fetch('/api/threads/<%= thread.id %>/',{method:'DELETE'})"><i class="bx bx-trash bx-sm"></i></a>
           <% } %>
           <%= thread.author.name %> <div class="avatar"><img src="<%=thread.author.avatar %>"> </div>
