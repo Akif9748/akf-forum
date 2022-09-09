@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const app = Router();
-const {clearContent} = require("../lib");
+const { clearContent } = require("../lib");
 const { ThreadModel, MessageModel } = require("../models")
 
 app.get("/", async (req, res) => {
@@ -22,16 +22,16 @@ app.get("/:id/", async (req, res) => {
     const page = Number(req.query.page || 0);
 
     const thread = await ThreadModel.get(id)
-    thread.count = await thread.messageCount(user?.admin);
-    thread.pages = Math.ceil(thread.count / 10);
     if (thread && (user?.admin || !thread.deleted)) {
+        thread.count = await thread.messageCount(user?.admin);
+        thread.pages = Math.ceil(thread.count / 10);
         thread.views++;
         const query = { threadID: id };
         if (!user || !user.admin) query.deleted = false;
 
         const messages = await Promise.all(await MessageModel.find(query).sort({ time: 1 }).limit(10).skip(page * 10)
             .then(messages => messages.map(async message => {
-                message.content =clearContent( message.content)
+                message.content = clearContent(message.content)
                 return await message.get_author();
             })));
         res.reply("thread", { page, thread, messages, scroll: req.query.scroll || messages[0]?.id });
