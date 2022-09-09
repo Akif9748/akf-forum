@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="/css/navbar.css" />
 
 <% if (user?.admin){ %>
 <div class="admin-bar">
@@ -23,13 +22,11 @@
       async function invert() {
         await fetch('/api/users/<%= user.id %>', {
           method: 'PATCH',
-          body: JSON.stringify({
-            theme: "<%=user.theme === `default` ? `black` : `default` %>"
-          }),
+          body: JSON.stringify({ theme: "<%=user.theme === `default` ? `black` : `default` %>" }),
           headers: {
             "Content-Type": "application/json"
           }
-        })
+        });
         location.reload()
       }
     </script>

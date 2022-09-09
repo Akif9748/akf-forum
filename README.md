@@ -13,7 +13,7 @@ Run `node util/reset` to **reset the database**, and run `node util/admin` for g
 Edit `config.json` for default themes of users...
 
 ## API
-Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn about API in `util/APIDOCS.md`.
+Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn about API in `APIDOCS.md`.
 
 ## Credits
 * [Akif9748](https://github.com/Akif9748) - Project mainteiner, main developer, made **old** frontend
@@ -34,15 +34,15 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 ## TO-DO list
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
-| Search & message a | 🟡 | MEDIUM |
-| Footer | 🟡 | LOW |
+| Page support for search | 🟡 | LOW |
+| Footer | 🟢 | LOW |
 | Local pfp store | 🔴 | MEDIUM |
 | IPs of users will add SecretModel | 🔴 | MEDIUM |
-| better theme patch UserModel | 🟡 | VERY LOW |
 | Category | ⚪ | MEDIUM |
 | Profile Message | 🔴 | LOW |
+| Last seen, last seen info | 🔴 | LOW |
 | Better Auth | 🔴 | MEDIUM |
-
+- Add theme selection to footer, and, and, and fix footer, add navbar css to footer and import common css in meta
 ## Major Version History
 - V4: Caching
 - V3: New Theme

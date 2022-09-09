@@ -55,9 +55,9 @@ app.patch("/:id/", async (req, res) => {
     if (req.user.id !== member.id && !user.admin) return res.error(403, "You have not got permission for this.");
     if (!Object.values(req.body).some(Boolean)) return res.error(400, "Missing member informations in request body.");
 
-    const { avatar, name, about, theme, admin } = req.body;
+    const { avatar, name, about, theme, admin, deleted } = req.body;
 
-    if (admin?.length && !req.user.admin) return res.error(403, "You have not got permission for edit 'admin' information, or bad request.");
+    if ((admin?.length || "deleted" in req.body) && !req.user.admin) return res.error(403, "You have not got permission for edit 'admin' and 'deleted' information, or bad request.");
 
     if (avatar && URLRegex.test(avatar))
         member.avatar = avatar;
@@ -68,10 +68,10 @@ app.patch("/:id/", async (req, res) => {
     }
 
     if (about) member.about = about;
-    if (theme)
-        member.theme = member.theme === "default" ? "black" : "default";
+    if (theme || ["default", "black"].includes(theme)) member.theme = theme;
 
     if (typeof admin === "boolean" || ["false", "true"].includes(admin)) member.admin = admin;
+    if (deleted === false) member.deleted = false;
     member.edited = true;
 
     await member.save();

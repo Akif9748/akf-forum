@@ -40,7 +40,7 @@
 
       const object = {};
       new FormData(e.target).forEach((value, key) => object[key] = value);
-      console.log(object)
+
       const res = await request("/api/users/<%=member.id%>", "PATCH", object);
       if (res) alert(`User is updated!`);
       location.reload();
