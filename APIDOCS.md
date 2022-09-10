@@ -20,8 +20,8 @@ But in front end, the API will works with session.
 
 
 - GET `/api/bans/` fetch all bans.
-- GET `/api/bans/:id` fetch a ban.
-- DELETE `/api/bans/:id` for unban an IP adress.
+- GET `/api/bans/:ip` fetch a ban.
+- DELETE `/api/bans/:ip` for unban an IP adress.
 - POST `/api/bans?reason=flood` for ban an IP adress.
 
 

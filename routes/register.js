@@ -11,7 +11,8 @@ app.post("/", rateLimit({
     windowMs: 24 * 60 * 60_000, max: 5, standardHeaders: true, legacyHeaders: false,
     handler: (_r, response, _n, options) => response.error(options.statusCode, "You are begin ratelimited")
 }), async (req, res) => {
-    req.session.destroy()
+
+    req.session.userID=null;
 
     let { username = null, password: body_pass = null, avatar, about } = req.body;
 
