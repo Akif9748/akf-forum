@@ -11,15 +11,15 @@
   <%- include("extra/navbar") %>
   <div class="threads">
     <% categories.forEach(category=>{ %>
-    <a href="<%= category.getLink() %>" >
+    <a href="<%= category.getLink() %>">
       <div class="threads-box">
         <div class="thread-box-title">
           <%= category.name  %>
         </div>
-        
-        <div class="box-username">    <%if(user?.admin) {%>
+
+        <div class="box-username"> <%if(user?.admin) {%>
           <a class="btn-danger" onclick="fetch('/api/categories/<%= category.id %>/',{method:'DELETE'})"><i class="bx bx-trash bx-sm"></i></a>
-          <% }; %><%= category.desp %> 
+          <% }; %><%= category.desp %>
         </div>
 
       </div>
@@ -51,5 +51,8 @@
 
   </div>
   <% } %>
+  <%- include("extra/footer") %>
 
 </body>
+
+</html>

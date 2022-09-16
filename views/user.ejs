@@ -110,7 +110,7 @@ color: var(--anti);
     <script>
       const converter = new showdown.Converter();
       const about = document.getElementById("about")
-      about.innerHTML=converter.makeHtml(about.innerText);
+      about.innerHTML = converter.makeHtml(about.innerText);
     </script>
 
     <div class="box">
@@ -136,7 +136,8 @@ color: var(--anti);
       <h2 class="box-value"><%= counts.thread %></h2>
     </div>
   </div>
+  <%- include("extra/footer") %>
+
 </body>
-<%- include("extra/footer") %>
 
 </html>

@@ -15,7 +15,7 @@
 
 
   <div style="text-align:center;padding:8px">
-  <a href="/categories/<%= thread.categoryID %>" class="title" id="title"><%= thread.title %></a>
+    <a href="/categories/<%= thread.categoryID %>" class="title" id="title"><%= thread.title %></a>
     <div class="date">
       <%= new Date(thread.time).toLocaleString() %> • Views: <%= thread.views %>
     </div>
@@ -159,6 +159,7 @@
     </div>
 
   </div>
+  <%- include("extra/footer") %>
 
 </body>
 

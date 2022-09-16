@@ -44,6 +44,7 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - categories page is need a update.
 - preview for send messages in markdown format. 
 - desp => description
+- admin, view ips on user page.
 
 ## Major Version History
 - V4: Caching
