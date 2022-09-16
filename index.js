@@ -1,7 +1,6 @@
 const { urlencoded: BP } = require('body-parser'),
     { mw: IP } = require('request-ip'),
     RL = require('express-rate-limit'),
-    BAN = require('express-ip-block'),
     SES = require('express-session');
 
 const
@@ -21,13 +20,14 @@ mongoose.connect(process.env.MONGO_DB_URL,
 
 app.set("view engine", "ejs");
 
-app.use(express.static("public"), express.json(), IP(), BAN(app.ips),
+app.use(express.static("public"), express.json(), IP(), 
     SES({ secret: 'secret', resave: true, saveUninitialized: true }),
     async (req, res, next) => {
+        if (app.ips.includes(req.clientIp)) return res.status(403).send("You are banned from this forum.");
+
         req.user = req.session.userID ? await UserModel.findOneAndUpdate({ id: req.session.userID }, {
             lastSeen: Date.now(), $addToSet: { ips: req.clientIp }
         }) : null;
-
         res.reply = (page, options = {}, status = 200) => res.status(status)
             .render(page, { user: req.user, theme: req.user?.theme || def_theme, forum_name, description, ...options });
 
