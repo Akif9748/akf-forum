@@ -5,10 +5,10 @@ const multer = require("multer");
 const app = Router();
 
 app.param("id", async (req, res, next, id) => {
-    req.member = await UserModel.get(id, req.user.admin ? "+lastSeen": "");
+    req.member = await UserModel.get(id, req.user.admin ? "+lastSeen" : "");
 
     if (!req.member) return res.error(404, `We don't have any user with id ${id}.`);
-    
+
     if (req.member.deleted && !req.user?.admin)
         return res.error(404, `You do not have permissions to view this user with id ${id}.`);
 
@@ -58,12 +58,18 @@ app.patch("/:id/", async (req, res) => {
 
     if ((admin?.length || "deleted" in req.body) && !req.user.admin) return res.error(403, "You have not got permission for edit 'admin' and 'deleted' information, or bad request.");
 
+
     if (name) {
+
+        if (name.length < 3 || name.length > 25) return res.error(400, "Username must be between 3 - 25 characters");
         await SecretModel.updateOne({ id: member.id }, { username: name });
         member.name = name;
     }
 
-    if (about) member.about = about;
+    if (about) {
+        if (about.length > 256) return res.error(400, "About must be under 256 characters");
+        member.about = about;
+    }
     if (theme || ["default", "black"].includes(theme)) member.theme = theme;
 
     if (typeof admin === "boolean" || ["false", "true"].includes(admin)) member.admin = admin;

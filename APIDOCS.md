@@ -13,6 +13,12 @@ You need this headers for send request to API:
 ```
 But in front end, the API will works with session.
 
+## Limits:
+- 3 - 25 char for username, password and category name
+- 256 char for user about and desp of category
+- 5 - 128 char for thread titles.
+- 5 - 1024 char for messages.
+
 ## How to request?
 
 ### Request types:

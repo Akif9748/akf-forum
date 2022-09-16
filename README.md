@@ -43,7 +43,6 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - upload other photos, model for it
 - categories page is need a update.
 - preview for send messages in markdown format. 
-- Limits for thread title, message content, username, user about
 - desp => description
 
 ## Major Version History

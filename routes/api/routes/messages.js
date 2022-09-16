@@ -27,6 +27,8 @@ app.patch("/:id/", async (req, res) => {
     if (user.id !== message.authorID && !user.admin) return res.error(403, "You have not got permission for this.");
     const { content = null } = req.body;
     if (!content) return res.error(400, "Missing message content in request body.");
+    if (content.length < 5 || content.length > 1024) return res.error(400, "content must be between 5 - 1024 characters");
+
     message.content = content;
     message.edited = true;
 
@@ -43,6 +45,7 @@ app.post("/", rateLimit({
 
     const { threadID, content } = req.body;
     if (!content) return res.error(400, "Missing message content in request body.");
+    if (content.length < 5 || content.length > 1024) return res.error(400, "content must be between 5 - 1024 characters");
 
     const thread = await ThreadModel.get(threadID);
 

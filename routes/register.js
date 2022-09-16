@@ -11,18 +11,24 @@ app.post("/", rateLimit({
     handler: (_r, response, _n, options) => response.error(options.statusCode, "You are begin ratelimited")
 }), async (req, res) => {
 
-    req.session.userID=null;
+    req.session.userID = null;
 
     let { username = null, password: body_pass = null, about } = req.body;
 
-    if (!username || !body_pass) return res.error(res, 400, "You forgot entering some values");
+    if (!username || !body_pass) return res.error(400, "You forgot entering some values");
+    if (username.length < 3 || username.length > 25) return res.error(400, "Username must be between 3 - 25 characters");
+    if (body_pass.length < 3 || body_pass.length > 25) return res.error(400, "Password must be between 3 - 25 characters");
+
     const user = await SecretModel.findOne({ username });
 
-    if (user) return res.error(res, 400, `We have got an user named ${username}!`)
+    if (user) return res.error(400, `We have got an user named ${username}!`)
 
-    const user2 = new UserModel({ name: req.body.username })
+    const user2 = new UserModel({ name: username })
 
-    if (about) user2.about = about;
+    if (about) {
+        if (about.length > 256) return res.error(400, "about must be under 256 characters");
+        user2.about = about;
+    }
 
     await user2.takeId()
     await user2.save();

@@ -8,7 +8,7 @@ const schema = new mongoose.Schema({
     authorID: String,
     author: Object,
 
-    title: String,
+    title: { type: String, maxlength: 128 },
     time: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
     edited: { type: Boolean, default: false },
@@ -21,10 +21,10 @@ const schema = new mongoose.Schema({
 
 schema.methods.get_author = cache.getAuthor;
 schema.methods.get_category = () => async function () {
-    return await require("./Category").findOne({ id: this.categoryID }) || {id: this.categoryID, name: "Unknown"} ;
+    return await require("./Category").findOne({ id: this.categoryID }) || { id: this.categoryID, name: "Unknown" };
 }
 schema.methods.messageCount = async function (admin = false) {
-    const query = { threadID: this.id }; 
+    const query = { threadID: this.id };
     if (!admin) query.deleted = false;
     return await MessageModel.count(query) || 0;
 };
@@ -47,7 +47,7 @@ const model = mongoose.model('thread', schema);
 
 model.get = async id => {
     const thread = await model.findOne({ id })
-    return await thread.get_author();   
+    return await thread.get_author();
 };
 
 module.exports = model;

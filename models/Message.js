@@ -5,7 +5,7 @@ const schema = new mongoose.Schema({
     author: Object,
     threadID: String,
     authorID: String,
-    content: String,
+    content: { type: String, maxlength: 1024 },
     time: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
     edited: { type: Boolean, default: false },
@@ -30,7 +30,7 @@ const model = mongoose.model('message', schema);
 
 model.get = async id => {
     const message = await model.findOne({ id })
-    return await message.get_author();   
+    return await message.get_author();
 };
 
 module.exports = model;
