@@ -11,9 +11,9 @@ const schema = new mongoose.Schema({
     about: { type: String, default: "" },
     admin: { type: Boolean, default: false },
     theme: { type: String, default: def_theme },
-    lastSeen: { type: Date, default: Date.now,select:false },
-    hideLastSeen: { type: Boolean, default: false }
-
+    lastSeen: { type: Date, default: Date.now, select: false },
+    hideLastSeen: { type: Boolean, default: false },
+    ips: { type: [String], select: false }
 });
 
 schema.methods.takeId = async function () {
@@ -27,6 +27,6 @@ schema.methods.getLink = function (id = this.id) {
 
 const model = mongoose.model('user', schema);
 
-model.get = (id,select) => model.findOne({ id }).select(select);
+model.get = (id, select) => model.findOne({ id }).select(select);
 
 module.exports = model;

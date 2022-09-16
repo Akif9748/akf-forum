@@ -4,6 +4,7 @@ const { def_theme, forum_name, desp } = require("./config.json"),
     ipBlock = require('express-ip-block'),
     session = require('express-session'),
     bodyParser = require('body-parser'),
+    requestIp = require('request-ip'),
     port = process.env.PORT || 3000,
     mongoose = require("mongoose"),
     express = require('express'),
@@ -20,10 +21,12 @@ app.set("view engine", "ejs");
 
 app.use(
     session({ secret: 'secret', resave: true, saveUninitialized: true }),
-    express.static("public"), express.json(), ipBlock(app.ips),
+    express.static("public"), express.json(), ipBlock(app.ips), requestIp.mw(),
     async (req, res, next) => {
-        req.user = req.session.userID ? await UserModel.findOneAndUpdate({ id: req.session.userID }, { lastSeen: Date.now() }) : null;
-
+        req.user = req.session.userID ? await UserModel.findOneAndUpdate({ id: req.session.userID }, {
+            lastSeen: Date.now(), $addToSet: { ips: req.clientIp }
+        }) : null;
+        
         res.reply = (page, options = {}, status = 200) => res.status(status)
             .render(page, { user: req.user, theme: req.user?.theme || def_theme, forum_name, desp, ...options });
 
@@ -45,4 +48,4 @@ for (const file of fs.readdirSync("./routes"))
 
 app.all("*", (req, res) => res.error(404, "We have not got this page."));
 
-app.listen(port, () => console.log(forum_name + "-forum on port:", port));
+app.listen(port, () => console.log(`${forum_name}-forum on port:`, port));
