@@ -10,9 +10,6 @@
 
   <%- include("extra/navbar") %>
   <div class="threads">
-    <%if(user?.admin) {%>
-    <a href="/categories/create" class="btn-primary">Create Category</a>
-    <% }; %>
     <% categories.forEach(category=>{ %>
     <a href="<%= category.getLink() %>" >
       <div class="threads-box">

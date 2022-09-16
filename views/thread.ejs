@@ -98,7 +98,6 @@
       const content = message.querySelector(".content");
       content.innerHTML = converter.makeHtml(content.rawText = content.innerHTML);
     }
-    document.getElementById("message-<%= scroll %>").scrollIntoView();
 
     function dots(id) {
       document.getElementById('message-' + id).querySelector(".dots-menu").classList.toggle('active')

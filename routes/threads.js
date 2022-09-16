@@ -31,7 +31,7 @@ app.get("/:id/", async (req, res) => {
         const messages = await Promise.all(await MessageModel.find(query).sort({ time: 1 }).limit(10).skip(page * 10)
             .then(messages => messages.map(message => message.get_author())));
 
-        res.reply("thread", { page, thread, messages, scroll: req.query.scroll || messages[0]?.id });
+        res.reply("thread", { page, thread, messages });
 
         thread.save();
 
