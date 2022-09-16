@@ -6,7 +6,10 @@
 
 body {
     margin: 0;
-    font-family: Poppins;
+    font-family: Poppins; 
+    min-height: 400px;
+    margin-bottom: 100px;
+    clear: both;
 }
 
 a {
@@ -202,11 +205,12 @@ select option {
 
 .footer {
     width: 100%;
-    margin-top: 10px;
     background-color: var(--main);
     padding: 10px;
+    bottom: 0;
     color: white;
     display: flex;
+    position: fixed;
     justify-content: space-between;
     align-items: center;
 }
