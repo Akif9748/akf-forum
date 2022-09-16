@@ -15,9 +15,9 @@
 
 
   <div style="text-align:center;padding:8px">
-    <div class="title" id="title"><%= thread.title %></div>
+  <a href="/categories/<%= thread.categoryID %>" class="title" id="title"><%= thread.title %></a>
     <div class="date">
-      <%= new Date(thread.time).toLocaleString() %> • Views: <%= thread.views %>%>
+      <%= new Date(thread.time).toLocaleString() %> • Views: <%= thread.views %>
     </div>
     <div class="date">
       <a style="color: var(--anti);" href="/users/<%= thread.author.id %>"><%= thread.author.name %></a> <%= "• "+(thread.edited  ? "Edited" : "Not edited")%>

@@ -8,7 +8,7 @@ app.get("/", async (req, res) => {
     let threads = await ThreadModel.find(query).limit(10).skip(page * 10);
     threads = await Promise.all(threads.map(thread => thread.get_author()));
 
-    return res.reply("threads", { threads, page, title: "Threads", desp: threads.length + " thread listed", pages: Math.ceil(await ThreadModel.count(query) / 10) });
+    return res.reply("threads", { threads, page, title: "Threads", desp: threads.length + " threads are listed", pages: Math.ceil(await ThreadModel.count(query) / 10) });
 });
 
 
