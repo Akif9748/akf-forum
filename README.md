@@ -34,17 +34,13 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 ## TO-DO list
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
-| Profile Message | 🟡 | LOW |
-| IPs of users will add UserModel with select- | 🟢 | MEDIUM |
+| Profile Message | ⚪ | LOW |
 | Better Auth | ⚪ | MEDIUM |
-
-- mod role, permissions
-- Fix footer's location.
-- upload other photos, model for it
-- categories page is need a update.
+| mod role, permissions | ⚪ | MEDIUM |
+| upload other photos, model for it | ⚪ | MEDIUM |
+| categories page is need a update | ⚪ | LOW |
 - preview for send messages in markdown format. 
 - desp => description
-- admin, view ips on user page.
 
 ## Major Version History
 - V4: Caching

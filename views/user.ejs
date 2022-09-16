@@ -94,6 +94,15 @@
     <h2 class="box-value" style="align-self: center;">Admin</h2>
     <% } %>
 
+    <% if (user?.admin) {%>
+    <h3 style="text-align: center;"> IPS:</h3>
+    <select>
+      <% for(const ip of member.ips) { %>
+      <option><%= ip %></option>
+      <% } %>
+    </select>
+    <% } %>
+
     <div class="box-value" id="about" style="
 margin: 10px auto;
 box-shadow: 0 0 5px 0 var(--second);
