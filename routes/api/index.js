@@ -1,8 +1,8 @@
-const { Router, request, response } = require("express")
+const { Router, request, response } = require("express");
 const app = Router();
-const fs =require("fs")
+const fs = require("fs");
 const bcrypt = require("bcrypt");
-const { SecretModel, UserModel } = require("../../models")
+const { SecretModel, UserModel } = require("../../models");
 
 /**
  * Auth checker
@@ -35,9 +35,9 @@ app.use(async (req, res, next) => {
 
 app.get("/me", (req, res) => res.complate(req.user))
 
-for (const file of fs.readdirSync("./routes/api/routes")) 
+for (const file of fs.readdirSync("./routes/api/routes"))
     app.use("/" + file.replace(".js", ""), require(`./routes/${file}`));
-    
+
 app.all("*", (req, res) => res.error(400, "Bad request"));
 
 module.exports = app;

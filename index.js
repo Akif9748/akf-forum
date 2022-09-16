@@ -1,10 +1,12 @@
-const { def_theme, forum_name, desp } = require("./config.json"),
+const { urlencoded: BP } = require('body-parser'),
+    { mw: IP } = require('request-ip'),
+    RL = require('express-rate-limit'),
+    BAN = require('express-ip-block'),
+    SES = require('express-session');
+
+const
+    { def_theme, forum_name, description } = require("./config.json"),
     { UserModel, BanModel } = require("./models"),
-    rateLimit = require('express-rate-limit'),
-    ipBlock = require('express-ip-block'),
-    session = require('express-session'),
-    bodyParser = require('body-parser'),
-    requestIp = require('request-ip'),
     port = process.env.PORT || 3000,
     mongoose = require("mongoose"),
     express = require('express'),
@@ -19,16 +21,15 @@ mongoose.connect(process.env.MONGO_DB_URL,
 
 app.set("view engine", "ejs");
 
-app.use(
-    session({ secret: 'secret', resave: true, saveUninitialized: true }),
-    express.static("public"), express.json(), ipBlock(app.ips), requestIp.mw(),
+app.use(express.static("public"), express.json(), IP(), BAN(app.ips),
+    SES({ secret: 'secret', resave: true, saveUninitialized: true }),
     async (req, res, next) => {
         req.user = req.session.userID ? await UserModel.findOneAndUpdate({ id: req.session.userID }, {
             lastSeen: Date.now(), $addToSet: { ips: req.clientIp }
         }) : null;
-        
+
         res.reply = (page, options = {}, status = 200) => res.status(status)
-            .render(page, { user: req.user, theme: req.user?.theme || def_theme, forum_name, desp, ...options });
+            .render(page, { user: req.user, theme: req.user?.theme || def_theme, forum_name, description, ...options });
 
         res.error = (type, error) => res.reply("error", { type, error }, type);
 
@@ -37,10 +38,10 @@ app.use(
             return res.error(403, "Your account has been deleted.");
         }
         next();
-    }, rateLimit({
+    }, RL({
         windowMs: 60_000, max: 20,
         handler: (req, res, next, opts) => !req.user?.admin ? res.error(opts.statusCode, "You are begin ratelimited") : next()
-    }), bodyParser.urlencoded({ extended: true })
+    }), BP({ extended: true })
 );
 
 for (const file of fs.readdirSync("./routes"))
