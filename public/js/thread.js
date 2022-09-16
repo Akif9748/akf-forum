@@ -33,13 +33,13 @@ window.send_edit = async function (id) {
     const res = await request(`/api/messages/${id}/`, "PATCH", { content });
     if (res.error) return;
     alert(`Message updated`);
-    message.querySelector(".content").innerHTML = res.content;
+    message.querySelector(".content").innerHTML = converter.makeHtml(res.content);
 }
 window.edit_message = async function (id) {
     const content = document.getElementById(`message-${id}`).querySelector(".content");
 
     content.innerHTML = `
-    <textarea rows="4" cols="40" id="content">${content.innerHTML}</textarea>
+    <textarea rows="4" cols="40" id="content">${content.rawText}</textarea>
     <button onclick="send_edit(${id});" class="btn-primary">Edit!</button>`;
 
 }

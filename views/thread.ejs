@@ -6,14 +6,13 @@
 
 <body>
   <%- include("extra/navbar") %>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+
   <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
   <link rel="stylesheet" href="/css/thread.css" />
   <link rel="stylesheet" href="/css/pages.css" />
 
-  <% if (user){ %>
-  <script type="module" src="/js/thread.js"></script>
-  <% }; %>
 
   <div style="text-align:center;padding:8px">
     <div class="title" id="title"><%= thread.title %></div>
@@ -52,7 +51,7 @@
         </div>
       </div>
 
-      <div class="content"><%- message.content %></div>
+      <div class="content"><%= message.content %></div>
       <% if(user){ %>
       <% if(user.id === message.authorID || user.admin){ %>
 
@@ -92,7 +91,22 @@
 
     <% }); %>
   </div>
+
+  <script>
+    const converter = new showdown.Converter();
+    for (const message of document.querySelectorAll(".message")) {
+      const content = message.querySelector(".content");
+      content.innerHTML = converter.makeHtml(content.rawText = content.innerHTML);
+    }
+    document.getElementById("message-<%= scroll %>").scrollIntoView();
+
+    function dots(id) {
+      document.getElementById('message-' + id).querySelector(".dots-menu").classList.toggle('active')
+    }
+  </script>
+
   <% if (user){ %>
+  <script type="module" src="/js/thread.js"></script>
 
   <div class="message" id="send-div">
     <form id="send" style="width:100%">
@@ -121,7 +135,7 @@
       let tp = Number("<%= thread.pages %>")
       let tm = Number("<%= thread.count %>")
       if (tp * 10 === tm) tp++;
-      if (res) location.href = `/threads/${data.get("threadID")}?page=${tp-1}`;
+      if (res) location.href = `/threads/<%= thread.id %>?page=${tp-1}`;
 
 
     });
@@ -147,14 +161,6 @@
     </div>
 
   </div>
-
-  <script>
-    document.getElementById("message-<%= scroll %>").scrollIntoView();
-
-    function dots(id) {
-      document.getElementById('message-' + id).querySelector(".dots-menu").classList.toggle('active')
-    }
-  </script>
 
 </body>
 
