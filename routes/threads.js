@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const app = Router();
-const { clearContent } = require("../lib");
 const { ThreadModel, MessageModel, CategoryModel } = require("../models")
 
 app.get("/", async (req, res) => {

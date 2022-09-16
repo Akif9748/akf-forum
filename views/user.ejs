@@ -6,12 +6,13 @@
 
 <body>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
 
   <link rel="stylesheet" href="/css/user.css" />
   <%- include("extra/navbar") %>
 
 
-  <div class="content" >
+  <div class="content">
 
     <% if (user?.admin || user?.id === member.id) { %>
     <a href="/users/<%=member.id%>/avatar" class="btn-outline-primary">Upload avatar</a>
@@ -28,7 +29,7 @@
         <div class="content">
           <form id="form" class="see" style="box-shadow:none">
             <input type="text" name="name" placeholder="<%=member.name%>" class="input">
-            <input type="url" name="avatar" placeholder="<%=member.avatar%>" class="input">
+
             <textarea class="input" name="about" rows="4" cols="60" name="content" placeholder="<%=member.about%>"></textarea>
             <% if (user?.admin){ %>
             Is Admin? <input id='admin' type='checkbox' value='true' name='admin' <%=member.admin ? "checked": ""%>>
@@ -93,7 +94,7 @@
     <h2 class="box-value" style="align-self: center;">Admin</h2>
     <% } %>
 
-    <div class="box-value" style="
+    <div class="box-value" id="about" style="
 margin: 10px auto;
 box-shadow: 0 0 5px 0 var(--second);
 padding: 10px;
@@ -106,6 +107,11 @@ color: var(--anti);
 ">
       <%= member.about %>
     </div>
+    <script>
+      const converter = new showdown.Converter();
+      const about = document.getElementById("about")
+      about.innerHTML=converter.makeHtml(about.innerText);
+    </script>
 
     <div class="box">
       <h2 class="box-title">Name:</h2>
