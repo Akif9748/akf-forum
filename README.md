@@ -42,7 +42,7 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - upload other photos, model for it
 - category system bloat.
 - replace not found errors with no perm
-- prewiev for send messages in markdown format. Markdown in user about
+- prewiev for send messages in markdown format. Markdown in user about, deprecate clean content
 ## Major Version History
 - V4: Caching
 - V3: New Theme

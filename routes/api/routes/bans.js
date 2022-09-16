@@ -22,7 +22,10 @@ app.get("/:ip", async (req, res) => {
 app.post("/:ip", async (req, res) => {
 
     if (await BanModel.exists({ ip: req.params.ip })) return res.error(400, "This ip is already banned.");
-    res.complate(await BanModel.create({ ip: req.params.ip, reason: req.query.reason || "No reason given", authorID: req.user.id }));
+    const ban = await BanModel.create({ ip: req.params.ip, reason: req.query.reason || "No reason given", authorID: req.user.id });
+    req.app.ips.push(req.params.ip);
+    res.complate(ban);
+
 
 });
 
