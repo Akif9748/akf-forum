@@ -35,14 +35,17 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 | To do | Is done? | Priority |
 | ----- | -------- | -------- |
 | Profile Message | 🟡 | LOW |
-| IPs of users will add UserModel with select- | ⚪ | MEDIUM |
+| IPs of users will add UserModel with select- | 🟢 | MEDIUM |
 | Better Auth | ⚪ | MEDIUM |
+
 - mod role, permissions
 - Fix footer, theme, category pages
 - upload other photos, model for it
 - category system bloat.
 - replace not found errors with no perm
-- prewiev for send messages in markdown format. Markdown in user about, deprecate clean content
+- preview for send messages in markdown format. 
+- Limits for thread title, message content, username, user about
+
 ## Major Version History
 - V4: Caching
 - V3: New Theme
