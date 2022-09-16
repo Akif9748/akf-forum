@@ -1,10 +1,24 @@
 <div class="footer">
-  <select>    
-    <option value="default">Default theme</option>
-    <option value="black">Black theme</option>
-  </select>
+  <% if (user){ %>
+  <a onclick="invert()" class="btn-primary" style="color:white;"><%=(user.theme === "default" ? "black" : "default" ) + " theme!" %></a>
+  <script>
+    async function invert() {
+      await fetch('/api/users/<%= user.id %>', {
+        method: 'PATCH',
+        body: JSON.stringify({
+          theme: "<%= user.theme === `default` ? `black` : `default` %>"
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      location.reload()
+    }
+  </script>
+  <% } %>
+
   <a href="https://github.com/Akif9748/akf-forum" style="color: white;"> This website is powered by
-    <span style="color: #ffbf00;">akf-forum </span> </a>
+    <span style="color: #ffbf00;">akf-forum</span> </a>
   <div>
 
     <span style="color:white">Coders</span> <br>
