@@ -41,6 +41,9 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 | categories page is need a update | ⚪ | LOW |
 - preview for send messages in markdown format. 
 - desp => description
+- char limits in config.json
+- select -id for api
+- summary (∆) for ips of users in user page
 
 ## Major Version History
 - V4: Caching
