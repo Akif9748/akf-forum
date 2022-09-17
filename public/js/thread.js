@@ -1,5 +1,6 @@
 import request from "./request.js";
 
+let editing;
 // THREAD:
 
 window.edit_thread = async function (id) {
@@ -28,7 +29,7 @@ window.undelete_thread = async function (id) {
 // MESSAGES:
 window.send_edit = async function (id) {
     const message = document.getElementById(`message-${id}`);
-    const content = message.querySelector("#content").value;
+    const content = editing.value();
 
     const res = await request(`/api/messages/${id}/`, "PATCH", { content });
     if (res.error) return;
@@ -36,12 +37,21 @@ window.send_edit = async function (id) {
     message.querySelector(".content").innerHTML = converter.makeHtml(res.content);
 }
 window.edit_message = async function (id) {
-    const content = document.getElementById(`message-${id}`).querySelector(".content");
+    const message = document.getElementById(`message-${id}`)
+
+    const content = message.querySelector(".content");
 
     content.innerHTML = `
-    <textarea rows="4" cols="40" id="content">${content.rawText}</textarea>
+    <textarea rows="4" cols="40" id="content"></textarea>
     <button onclick="send_edit(${id});" class="btn-primary">Edit!</button>`;
-
+    const cnt = message.querySelector("#content");
+    editing = new SimpleMDE({
+        element: cnt,
+        spellChecker: false,
+        height: "200px",
+        previewRender: t => converter.makeHtml(t)
+    });
+    editing.value(content.rawText)
 }
 window.undelete_message = async function (id) {
     const response = await request(`/api/messages/${id}/undelete`);

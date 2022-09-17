@@ -46,9 +46,9 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 | mod role, permissions | ⚪ | 
 | upload other photos, model for it | ⚪ | 
 | categories page is need a update, thread count in category | ⚪ | 
-| preview for send messages in markdown format | ⚪ |
+| preview for send messages in markdown format | 💚 |
 | DC auth will store code for taking tokens, and create secret model setting | ⚪ |
-- max lengths for html :/
+
 ## Major Version History
 - V4: Caching
 - V3: New Theme

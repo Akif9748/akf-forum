@@ -21,3 +21,9 @@ form {
   margin-bottom: 10px;
   border: 2px solid var(--borders);
 }
+
+.CodeMirror{
+  
+  width: 422.5px;
+
+}

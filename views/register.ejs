@@ -8,8 +8,9 @@
   <link rel="stylesheet" href="/css/login.css" />
 
   <%- include("extra/navbar") %>
+  <% if(discord) { %>
   <a href="<%=discord%>" class="btn-outline-primary">Login with discord</a>
-
+  <% } %>
   <h1 class="title">Register</h1>
 
 

@@ -13,7 +13,7 @@
 
 
   <div class="content">
-    <% if (!member.discordID && user?.id === member.id) { %>
+    <% if (!member.discordID && discord && user?.id === member.id) { %>
     <a href="<%=discord%>" class="btn-outline-primary">Login with discord</a>
     <% } %>
     <% if (user?.admin || user?.id === member.id) { %>

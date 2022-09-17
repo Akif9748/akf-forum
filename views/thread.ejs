@@ -7,6 +7,8 @@
 <body>
   <%- include("extra/navbar") %>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
   <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
@@ -108,34 +110,42 @@
   <script type="module" src="/js/thread.js"></script>
 
   <div class="message" id="send-div">
-    <form id="send" style="width:100%">
-      <textarea rows="4" name="content" required></textarea>
-      <input name="threadID" type="hidden" value="<%= thread.id %>"></input>
+
+    <form id="send" style="width:100%">    
+      <textarea rows="4" id="textarea"></textarea>
       <input name="page" type="hidden" value="<%= page %>"></input>
       <button class="btn-primary">Send!</button>
     </form>
 
   </div>
   <script type="module">
+    const textarea = document.getElementById("textarea");
+    const simplemde = new SimpleMDE({
+      autosave: {
+        enabled: true,
+        uniqueId: "thread-<%= thread.id %>",
+        delay: 1000,
+      },
+      element: textarea,
+      spellChecker: false,
+      previewRender: t=> converter.makeHtml(t)
+      
+    });
+
     import request from "../../js/request.js";
 
     document.getElementById("send").addEventListener("submit", async e => {
 
       e.preventDefault();
-
-      const data = new FormData(e.target);
-
       const res = await request("/api/messages", "POST", {
         threadID: "<%= thread.id %>",
-        content: data.get("content")
+        content: simplemde.value()
       })
-
+      simplemde.clearAutosavedValue(); 
       let tp = Number("<%= thread.pages %>")
       let tm = Number("<%= thread.count %>")
       if (tp * 10 === tm) tp++;
       if (res) location.href = `/threads/<%= thread.id %>?page=${tp-1}`;
-
-
     });
   </script>
   <% }%>

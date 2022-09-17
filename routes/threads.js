@@ -5,7 +5,7 @@ const { ThreadModel, MessageModel, CategoryModel } = require("../models")
 app.get("/", async (req, res) => {
     const page = Number(req.query.page) || 0;
     const query = req.user?.admin ? {} : { deleted: false };
-    let threads = await ThreadModel.find(query).limit(10).skip(page * 10);
+    let threads = await ThreadModel.find(query).limit(10).skip(page * 10).sort({ time: -1 });
     threads = await Promise.all(threads.map(thread => thread.get_author()));
 
     return res.reply("threads", { threads, page, title: "Threads", desp: threads.length + " threads are listed", pages: Math.ceil(await ThreadModel.count(query) / 10) });
