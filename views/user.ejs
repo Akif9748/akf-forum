@@ -30,9 +30,9 @@
         <h1 class="title" style="text-align:center;">Edit <a class="see" href="/users/<%= member.id %>"><%= member.name %></a></h1>
         <div class="content">
           <form id="form" class="see" style="box-shadow:none">
-            <input type="text" name="name" minlength="3" maxlength="25" placeholder="<%=member.name%>" class="input" required>
+            <input type="text" name="name" maxlength="25" placeholder="<%=member.name%>" class="input" >
 
-            <textarea class="input" name="about" maxlength="256" required rows="4" cols="60" name="content" placeholder="<%=member.about%>"></textarea>
+            <textarea class="input" name="about" maxlength="256" rows="4" cols="60" name="content" placeholder="<%=member.about%>"></textarea>
             <% if (user?.admin){ %>
             Is Admin? <input id='admin' type='checkbox' value='true' name='admin' <%=member.admin ? "checked": ""%>>
             <input id='adminHidden' type='hidden' value='false' name='admin'>

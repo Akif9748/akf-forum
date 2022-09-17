@@ -42,6 +42,9 @@ app.use(express.static("public"), express.json(), IP(),
     }, BP({ extended: true })
 );
 
+if (discord_auth)
+    app.set("discord_auth", `https://discord.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT}&redirect_uri=${host}%2Fdiscord_auth%2Fhash&response_type=token&scope=identify`);
+
 if (RLS.enabled)
     app.use(RL({ ...RLS, handler: (req, res, next, opts) => !req.user?.admin ? res.error(opts.statusCode, "You are begin ratelimited") : next() }));
 
@@ -50,9 +53,4 @@ for (const file of fs.readdirSync("./routes"))
 
 app.all("*", (req, res) => res.error(404, "We have not got this page."));
 
-const server = app.listen(port, () => console.log(`${forum_name}-forum on port:`, port));
-
-if (discord_auth) {
-    const { address } = server.address();
-    app.set("discord_auth", `https://discord.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT}&redirect_uri=${host}%2Fdiscord_auth%2Fhash&response_type=token&scope=identify`);
-}
+app.listen(port, () => console.log(`${forum_name}-forum on port:`, port));
