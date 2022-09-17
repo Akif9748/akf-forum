@@ -48,8 +48,7 @@ window.edit_message = async function (id) {
     editing = new SimpleMDE({
         element: cnt,
         spellChecker: false,
-        height: "200px",
-        previewRender: t => converter.makeHtml(t)
+        height: "200px"
     });
     editing.value(content.rawText)
 }
