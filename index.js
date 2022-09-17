@@ -4,7 +4,7 @@ const { urlencoded: BP } = require('body-parser'),
     SES = require('express-session');
 
 const
-    { def_theme, forum_name, description } = require("./config.json"),
+    { def_theme, forum_name, description, limits, global_ratelimit: RLS } = require("./config.json"),
     { UserModel, BanModel } = require("./models"),
     port = process.env.PORT || 3000,
     mongoose = require("mongoose"),
@@ -19,8 +19,9 @@ mongoose.connect(process.env.MONGO_DB_URL,
     async () => console.log("Database is connected with", (app.ips = await BanModel.find({})).length, "banned IPs"));
 
 app.set("view engine", "ejs");
+app.set("limits", limits);
 
-app.use(express.static("public"), express.json(), IP(), 
+app.use(express.static("public"), express.json(), IP(),
     SES({ secret: 'secret', resave: true, saveUninitialized: true }),
     async (req, res, next) => {
         if (app.ips.includes(req.clientIp)) return res.status(403).send("You are banned from this forum.");
@@ -38,11 +39,11 @@ app.use(express.static("public"), express.json(), IP(),
             return res.error(403, "Your account has been deleted.");
         }
         next();
-    }, RL({
-        windowMs: 60_000, max: 20,
-        handler: (req, res, next, opts) => !req.user?.admin ? res.error(opts.statusCode, "You are begin ratelimited") : next()
-    }), BP({ extended: true })
+    }, BP({ extended: true })
 );
+
+if (RLS.enabled)
+    app.use(RL({ ...RLS, handler: (req, res, next, opts) => !req.user?.admin ? res.error(opts.statusCode, "You are begin ratelimited") : next() }));
 
 for (const file of fs.readdirSync("./routes"))
     app.use("/" + file.replace(".js", ""), require(`./routes/${file}`));

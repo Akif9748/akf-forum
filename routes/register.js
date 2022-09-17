@@ -16,8 +16,9 @@ app.post("/", rateLimit({
     let { username, password: body_pass, about } = req.body;
 
     if (!username || !body_pass) return res.error(400, "You forgot entering some values");
-    if (username.length < 3 || username.length > 25) return res.error(400, "Username must be between 3 - 25 characters");
-    if (body_pass.length < 3 || body_pass.length > 25) return res.error(400, "Password must be between 3 - 25 characters");
+    const {names} = req.app.get("limits");
+    if (username.length < 3 || names > 25) return res.error(400, "Username must be between 3 - 25 characters");
+    if (body_pass.length < 3 || names > 25) return res.error(400, "Password must be between 3 - 25 characters");
 
     const user = await SecretModel.findOne({ username });
 

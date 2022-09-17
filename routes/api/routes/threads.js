@@ -41,8 +41,10 @@ app.post("/", async (req, res) => {
     const { title, content, category } = req.body;
 
     if (!content || !title) return res.error(400, "Missing content/title in request body.");
-    if (title.length < 5 || title.length > 128) return res.error(400, "title must be between 5 - 128 characters");
-    if (content.length < 5 || content.length > 1024) return res.error(400, "content must be between 5 - 1024 characters");
+    const limits = req.app.get("limits");
+
+    if (title.length < 5 || title.length > limits.title) return res.error(400, "title must be between 5 - 128 characters");
+    if (content.length < 5 || content.length > limits.message) return res.error(400, "content must be between 5 - 1024 characters");
     const { user } = req;
     const thread = await new ThreadModel({ title, author: user }).takeId()
     if (category)
@@ -61,7 +63,9 @@ app.patch("/:id/", async (req, res) => {
     if (user.id !== thread.authorID && !user.admin) return res.error(403, "You have not got permission for this.");
     const { title } = req.body;
     if (!title) return res.error(400, "Missing thread title in request body.");
-    if (title.length < 5 || title.length > 128) return res.error(400, "title must be between 5 - 128 characters");
+    const limits = req.app.get("limits");
+
+    if (title.length < 5 || title.length > limits.title) return res.error(400, "title must be between 5 - 128 characters");
 
     thread.title = title;
     await thread.save();

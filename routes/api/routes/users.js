@@ -42,7 +42,6 @@ app.post("/:id/undelete/", async (req, res) => {
     if (!member.deleted) return res.error(404, "This user is not deleted, first, delete it.");
 
     member.deleted = false;
-    ;
 
     res.complate(await member.save());
 
@@ -57,17 +56,17 @@ app.patch("/:id/", async (req, res) => {
     const { name, about, theme, admin, deleted } = req.body;
 
     if ((admin?.length || "deleted" in req.body) && !req.user.admin) return res.error(403, "You have not got permission for edit 'admin' and 'deleted' information, or bad request.");
-
+    const { names, desp } = req.app.get("limits");
 
     if (name) {
 
-        if (name.length < 3 || name.length > 25) return res.error(400, "Username must be between 3 - 25 characters");
+        if (name.length < 3 || names > 25) return res.error(400, "Username must be between 3 - 25 characters");
         await SecretModel.updateOne({ id: member.id }, { username: name });
         member.name = name;
     }
 
     if (about) {
-        if (about.length > 256) return res.error(400, "About must be under 256 characters");
+        if (about.length > desp) return res.error(400, "About must be under 256 characters");
         member.about = about;
     }
     if (theme || ["default", "black"].includes(theme)) member.theme = theme;
