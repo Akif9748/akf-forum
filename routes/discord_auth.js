@@ -3,6 +3,9 @@ const { UserModel } = require("../models");
 const fetch = require("node-fetch");
 const app = Router();
 
+app.use(async (req, res, next) => 
+    req.app.get("discord_auth") ? next() : res.error(404,"Discord auth is disabled")
+)
 app.get("/hash", (req, res) => res.send('<script>location.href=location.href.replace("#","?").replace("discord_auth/hash","discord_auth");</script>'))
 
 app.get("/", async (req, res) => {
@@ -33,7 +36,7 @@ app.get("/", async (req, res) => {
             req.session.userID = forum.id;
             return res.redirect("/");
         }
-        
+
         let name = discord.username + discord.discriminator;
         while (await UserModel.findOne({ name }))
             name += Math.floor(Math.random() * 2);
