@@ -5,4 +5,4 @@ mongoose.connect(process.env.MONGO_DB_URL, () => console.log("Database is connec
 
 const Models = require("../models");
 
-Object.values(Models).forEach(model => model.deleteMany({}).then(console.log));
+Object.values(Models).forEach(model => model.collection.drop().then(console.log));

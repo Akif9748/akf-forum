@@ -7,7 +7,7 @@ A Node.js based forum software.
 - Run `npm start` for run it. 
 
 ### Extra
-Run `node util/reset` to **reset the database**, and run `node util/admin` for give admin perms to first member.
+Run `node util/reset` to **reset the database** for duplicate key errors, and run `node util/admin` for give admin perms to first member.
 Edit `config.json` for default themes of users, and forum name...
 
 ## API
@@ -44,6 +44,7 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - char limits in config.json
 - select -id for api
 - summary (∆) for ips of users in user page
+- admin list in admin panel.
 
 ## Major Version History
 - V4: Caching
