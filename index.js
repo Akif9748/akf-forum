@@ -54,5 +54,5 @@ const server = app.listen(port, () => console.log(`${forum_name}-forum on port:`
 
 if (discord_auth) {
     const { address } = server.address();
-    app.set("discord_auth", `https://discord.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT}&redirect_uri=http%3A%2F%2F${host}%2Fdiscord_auth%2Fhash&response_type=token&scope=identify`);
+    app.set("discord_auth", `https://discord.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT}&redirect_uri=${host}%2Fdiscord_auth%2Fhash&response_type=token&scope=identify`);
 }
