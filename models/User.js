@@ -1,14 +1,14 @@
 const mongoose = require("mongoose")
-const { def_theme } = require("../config.json");
+const { def_theme, limits } = require("../config.json");
 const schema = new mongoose.Schema({
     id: { type: String, unique: true },
     discordID: { type: String, unique: true },
-    name: { type: String, maxlength: 25 },
+    name: { type: String, maxlength: limits.names },
     avatar: { type: String, default: "/images/avatars/default.jpg" },
     time: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
     edited: { type: Boolean, default: false },
-    about: { type: String, default: "", maxlength: 256 },
+    about: { type: String, default: "", maxlength: limits.desp },
     admin: { type: Boolean, default: false },
     theme: { type: String, default: def_theme },
     lastSeen: { type: Date, default: Date.now, select: false },

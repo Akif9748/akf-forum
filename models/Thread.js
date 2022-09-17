@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const cache = require("./cache")
 const MessageModel = require("./Message");
+const { limits } = require("../config.json");
+
 const schema = new mongoose.Schema({
     id: { type: String, unique: true },
 
@@ -8,7 +10,7 @@ const schema = new mongoose.Schema({
     authorID: String,
     author: Object,
 
-    title: { type: String, maxlength: 128 },
+    title: { type: String, maxlength: limits.title },
     time: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
     edited: { type: Boolean, default: false },
