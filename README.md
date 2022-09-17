@@ -32,15 +32,14 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 </details>
 
 ## TO-DO list
-| To do | Is done? | Priority |
-| ----- | -------- | -------- |
-| Profile Message | ⚪ | LOW |
-| Better Auth | ⚪ | MEDIUM |
-| mod role, permissions | ⚪ | MEDIUM |
-| upload other photos, model for it | ⚪ | MEDIUM |
-| categories page is need a update | ⚪ | LOW |
-- preview for send messages in markdown format. 
-- admin list in admin panel.
+| To do | Is done? | 
+| ----- | -------- | 
+| Profile Message | ⚪ | 
+| Better Auth | ⚪ | 
+| mod role, permissions | ⚪ | 
+| upload other photos, model for it | ⚪ | 
+| categories page is need a update | ⚪ | 
+| preview for send messages in markdown format | ⚪ |
 
 ## Major Version History
 - V4: Caching
