@@ -27,7 +27,7 @@ app.get("/:id", async (req, res) => {
 
         const message = await MessageModel.count({ authorID: id });
         const thread = await ThreadModel.count({ authorID: id });
-        res.reply("user", { member, counts: { message, thread } })
+        res.reply("user", { member, counts: { message, thread}, discord: req.app.get("discord_auth")  })
     }
     else res.error(404, `We don't have any user with id ${id}.`);
 

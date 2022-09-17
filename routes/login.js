@@ -3,7 +3,7 @@ const { Router } = require("express");
 const app = Router();
 const bcrypt = require("bcrypt");
 
-app.get("/", (req, res) => res.reply("login", { redirect: req.query.redirect, user: null }));
+app.get("/", (req, res) => res.reply("login", { redirect: req.query.redirect, user: null, discord: req.app.get("discord_auth") }));
 
 app.post("/", async (req, res) => {
     req.session.userID = null;

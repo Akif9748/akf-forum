@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const rateLimit = require('express-rate-limit');
 const app = Router();
 
-app.get("/", (req, res) => res.reply("register", { user: null }));
+app.get("/", (req, res) => res.reply("register", { user: null, discord: req.app.get("discord_auth") }));
 
 app.post("/", rateLimit({
     windowMs: 24 * 60 * 60_000, max: 5, standardHeaders: true, legacyHeaders: false,

@@ -13,7 +13,9 @@
 
 
   <div class="content">
-
+    <% if (!member.discordID && user?.id === member.id) { %>
+    <a href="<%=discord%>" class="btn-outline-primary">Login with discord</a>
+    <% } %>
     <% if (user?.admin || user?.id === member.id) { %>
     <a href="/users/<%=member.id%>/avatar" class="btn-outline-primary">Upload avatar</a>
     <link rel="stylesheet" href="/css/modal.css" />

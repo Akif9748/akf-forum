@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 const { def_theme } = require("../config.json");
 const schema = new mongoose.Schema({
     id: { type: String, unique: true },
+    discordID: { type: String, unique: true },
     name: { type: String, maxlength: 25 },
     avatar: { type: String, default: "/images/avatars/default.jpg" },
     time: { type: Date, default: Date.now },

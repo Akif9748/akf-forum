@@ -4,7 +4,7 @@ const { urlencoded: BP } = require('body-parser'),
     SES = require('express-session');
 
 const
-    { def_theme, forum_name, description, limits, global_ratelimit: RLS } = require("./config.json"),
+    { def_theme, forum_name, description, limits, global_ratelimit: RLS, discord_auth } = require("./config.json"),
     { UserModel, BanModel } = require("./models"),
     port = process.env.PORT || 3000,
     mongoose = require("mongoose"),
@@ -50,4 +50,10 @@ for (const file of fs.readdirSync("./routes"))
 
 app.all("*", (req, res) => res.error(404, "We have not got this page."));
 
-app.listen(port, () => console.log(`${forum_name}-forum on port:`, port));
+const server = app.listen(port, () => console.log(`${forum_name}-forum on port:`, port));
+
+if (discord_auth) {
+    const { address } = server.address();
+    console.log(`https://discord.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT}&redirect_uri=http%3A%2F%2F${address == '::' ? 'localhost:' + port : address}%2Fdiscord_auth%2Fhash&response_type=token&scope=identify`)
+    app.set("discord_auth", `https://discord.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT}&redirect_uri=http%3A%2F%2F${address == '::' ? 'localhost:' + port : address}%2Fdiscord_auth%2Fhash&response_type=token&scope=identify`);
+}

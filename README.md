@@ -4,11 +4,18 @@ A Node.js based forum software.
 ## Installation
 - Clone or download this repo.
 - Run `npm i` to install **dependencies**.
+- Enter your database credentials in `.env`.
 - Run `npm start` for run it. 
 
 ### Extra
 Run `node util/reset` to **reset the database** for duplicate key errors, and run `node util/admin` for give admin perms to first member.
-Edit `config.json` for default themes of users, and forum name...
+Edit `config.json` for default themes (`black` or `default`) of users, and forum name, meta description, character limits, discord auth enabler, global ratelimit.
+
+### DISCORD AUTH: 
+`discord_auth: true` in config.json.
+Enter application id to `.env`.
+Create a redirect url in discord developer portal:
+`https://forum_url.com/discord_auth/hash`
 
 ## API
 Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn about API in `APIDOCS.md`.
@@ -35,11 +42,12 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 | To do | Is done? | 
 | ----- | -------- | 
 | Profile Message | ⚪ | 
-| Better Auth | ⚪ | 
+| Better Auth for API way | ⚪ | 
 | mod role, permissions | ⚪ | 
 | upload other photos, model for it | ⚪ | 
-| categories page is need a update | ⚪ | 
+| categories page is need a update, thread count in category | ⚪ | 
 | preview for send messages in markdown format | ⚪ |
+| DC auth will store code for taking tokens, and create secret model setting | ⚪ |
 
 ## Major Version History
 - V4: Caching

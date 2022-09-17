@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="/css/login.css" />
 
   <%- include("extra/navbar") %>
+  <a href="<%=discord%>" class="btn-outline-primary">Login with discord</a>
 
   <h1 class="title">Register</h1>
+
 
   <form action="/register" method="post">
     <input type="text" name="username" maxlength="25" placeholder="Username" class="input" required>
