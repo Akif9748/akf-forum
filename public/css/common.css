@@ -206,7 +206,6 @@ select option {
 .footer {
     width: 100%;
     background-color: var(--main);
-    padding: 10px;
     bottom: 0;
     color: white;
     display: flex;

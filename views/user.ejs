@@ -84,7 +84,17 @@
     <% } else if (user?.admin){ %>
     <a id="delete" class="btn-outline-primary">Delete user! </a>
     <% } %>
-
+    <% if (user?.admin) {%>
+      <details>
+        <summary class="btn-outline-primary">IP adresses of user:</summary>
+        <select>
+          <% for(const ip of member.ips) { %>
+          <option><%= ip %></option>
+          <% } %>
+        </select>
+      </details>
+  
+    <% } %>
 
     <div class="box" style="justify-content:center;">
       <img style="width:150px;height:150px;border-radius:50%;" src="<%=member.avatar %>">
@@ -94,14 +104,6 @@
     <h2 class="box-value" style="align-self: center;">Admin</h2>
     <% } %>
 
-    <% if (user?.admin) {%>
-    <h3 style="text-align: center;"> IPS:</h3>
-    <select>
-      <% for(const ip of member.ips) { %>
-      <option><%= ip %></option>
-      <% } %>
-    </select>
-    <% } %>
 
     <div class="box-value" id="about" style="
 margin: 10px auto;
