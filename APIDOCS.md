@@ -1,6 +1,4 @@
 # API documentation of Akf-forum
-<img src="https://raw.githubusercontent.com/Akif9748/akf-forum/main/public/images/logo.jpg" align="right" width="300px" />
-
 Akf-forum has got an API for AJAX, other clients etc. 
 
 ## Authorization
@@ -19,51 +17,53 @@ But in front end, the API will works with session.
 - 5 - 128 char for thread titles.
 - 5 - 1024 char for messages.
 
-## How to request?
+You can change them in config.json.
 
+## How to request?
 ### Request types:
+#### `/api/me`
 - GET `/api/me` to get your account.
 
+#### `/api/bans`
+- GET `/` fetch all bans.
+- GET `/:ip` fetch a ban.
+- DELETE `/:ip` for unban an IP adress.
+- POST `/?reason=flood` for ban an IP adress.
 
-- GET `/api/bans/` fetch all bans.
-- GET `/api/bans/:ip` fetch a ban.
-- DELETE `/api/bans/:ip` for unban an IP adress.
-- POST `/api/bans?reason=flood` for ban an IP adress.
+#### `/api/categories`
+- GET `/` fetch all categories.
+- GET `/:id` fetch a category
+- PATCH `/:id` for update a category.
+- DELETE `/:id` for delete a category.
+- POST `/` for create a category.
 
-
-- GET `/api/categories/` fetch all categories.
-- GET `/api/categories/:id` fetch a category
-- PATCH `/api/categories/:id` for update a category.
-- DELETE `/api/categories/:id` for delete a category.
-- POST `/api/categories` for create a category.
-
-
-- GET `/api/messages/:id` for fetch message.
-- DELETE `/api/messages/:id/` for delete message.
-- PATCH `/api/messages/:id/` for edit message.
-- POST `/api/messages/:id/undelete` for undelete message.
-- POST `/api/messages/:id/react/:type` for react to a message.
-- POST `/api/messages` for create message.
-
-
-**use ?limit&skip for skip and limit**
-- GET `/api/search/users?q=query` find users.
-- GET `/api/search/threads?q=query&authorID=not_required` find threads.
-- GET `/api/search/messages?q=query&authorID=not_required` find messages.
+#### `/api/messages`
+- GET `/:id` for fetch message.
+- DELETE `/:id` for delete message.
+- PATCH `/:id` for edit message.
+- POST `/:id/undelete` for undelete message.
+- POST `/:id/react/:type` for react to a message.
+- POST `/` for create message.
 
 
-- GET `/api/threads/:id` for fetch thread.
-- DELETE `/api/threads/:id/` for delete thread.
-- PATCH `/api/threads/:id/` for edit thread.
-- POST `/api/threads/:id/undelete` for undelete thread.
-- GET `/api/threads/:id/messages?skip=0&limit=10` for fetch messages in thread.
-- POST `/api/threads` for create thread.
+#### `/api/search` use `?limit=&skip=` for skip and limit
+- GET `/users?q=query` find users.
+- GET `/threads?q=query&authorID=not_required` find threads.
+- GET `/messages?q=query&authorID=not_required` find messages.
 
+#### `/api/threads`
+- GET `/:id` for fetch thread.
+- DELETE `/:id` for delete thread.
+- PATCH `/:id` for edit thread.
+- POST `/:id/undelete` for undelete thread.
+- GET `/:id/messages?skip=0&limit=10` for fetch messages in thread.
+- POST `/` for create thread.
 
-- GET `/api/users/:id` for fetch user.
-- DELETE `/api/users/:id/` for delete user.
-- PATCH `/api/users/:id/` for edit user.
-- PUT `/api/users/:id/` for add profile photo to user.
+#### `/api/users`
+- GET `/:id` for fetch user.
+- DELETE `/:id` for delete user.
+- PATCH `/:id` for edit user.
+- PUT `/:id` for add profile photo to user.
 
 ### Example request:
 GET ```/api/messages/0```
