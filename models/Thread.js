@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const cache = require("./cache")
 const MessageModel = require("./Message");
-const { limits } = require("../config.json");
-
+const { limits, defaultThreadState } = require("../config.json");
+const { threadEnum } = require("../lib");
 const schema = new mongoose.Schema({
     id: { type: String, unique: true },
 
@@ -14,9 +14,8 @@ const schema = new mongoose.Schema({
     oldTitles: [String],
 
     time: { type: Date, default: Date.now },
-    deleted: { type: Boolean, default: false },
     edited: { type: Boolean, default: false },
-
+    state: { type: String, default: defaultThreadState, enum: threadEnum },
     messages: [String],
     views: { type: Number, default: 0 }
 
@@ -24,7 +23,7 @@ const schema = new mongoose.Schema({
 
 
 schema.methods.get_author = cache.getAuthor;
-schema.methods.get_category = () => async function () {
+schema.methods.get_category = async function () {
     return await require("./Category").findOne({ id: this.categoryID }) || { id: this.categoryID, name: "Unknown" };
 }
 schema.methods.messageCount = async function (admin = false) {

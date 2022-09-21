@@ -19,10 +19,7 @@ app.get("/", async (req, res) => {
     res.complate(categories);
 });
 
-app.get("/:id", async (req, res) => {
-    const { category } = req;
-    res.complate(category);
-});
+app.get("/:id", async (req, res) => res.complate(req.category));
 
 app.patch("/:id", async (req, res) => {
     const { category } = req;
@@ -31,9 +28,7 @@ app.patch("/:id", async (req, res) => {
     res.complate(await category.save());
 });
 
-app.delete("/:id", async (req, res) => {
-    res.complate(await CategoryModel.deleteOne({ id: req.params.id }));
-});
+app.delete("/:id", async (req, res) => res.complate(await CategoryModel.deleteOne({ id: req.params.id })));
 
 app.post("/", async (req, res) => {
     const { name, desp } = req.body;

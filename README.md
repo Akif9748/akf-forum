@@ -53,7 +53,7 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - email auth.
 - thread.state =="approval" for threads.
 - old contents / titles add to forum interface
-
+- limits 
 ## Major Version History
 - V4: Caching
 - V3: New Theme

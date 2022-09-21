@@ -7,7 +7,6 @@ const
     express = require('express'),
     fs = require("fs"),
     app = express(),
-    { urlencoded: BP } = require('body-parser'),
     { mw: IP } = require('request-ip'),
     { RL } = require('./lib'),
     SES = require('express-session'),
@@ -23,7 +22,7 @@ app.ips = [];
 app.set("view engine", "ejs");
 app.set("limits", limits);
 
-app.use(express.static("public"), express.json(), IP(), BP({ extended: true }),
+app.use(express.static("public"), express.json(), express.urlencoded({extended:true}), IP(),
     SES({ secret: process.env.SECRET, store: MS.create({ clientPromise: DB, stringify: false }), resave: true, saveUninitialized: true }),
     async (req, res, next) => {
         if (app.ips.includes(req.clientIp)) return res.status(403).send("You are banned from this forum.");
@@ -47,7 +46,7 @@ app.use(express.static("public"), express.json(), IP(), BP({ extended: true }),
 if (discord_auth)
     app.set("discord_auth", `https://discord.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT}&redirect_uri=${host}%2Fdiscord_auth%2Fhash&response_type=token&scope=identify`);
 
-if (RLS.enabled) app.use(RL(RSL.windowMs, RLS.max));
+if (RLS.enabled) app.use(RL(RLS.windowMs, RLS.max));
 
 for (const file of fs.readdirSync("./routes"))
     app.use("/" + file.replace(".js", ""), require(`./routes/${file}`));

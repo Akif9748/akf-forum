@@ -60,13 +60,13 @@ app.patch("/:id/", async (req, res) => {
 
     if (name) {
 
-        if (name.length < 3 || names > 25) return res.error(400, "Username must be between 3 - 25 characters");
+        if (name.length < 3 || names > 25) return res.error(400, `Username must be between 3 - ${names} characters`);
         await SecretModel.updateOne({ id: member.id }, { username: name });
         member.name = name;
     }
 
     if (about) {
-        if (about.length > desp) return res.error(400, "About must be under 256 characters");
+        if (about.length > desp) return res.error(400, `About must be under ${desp} characters`);
         member.about = about;
     }
     if (theme || ["default", "black"].includes(theme)) member.theme = theme;

@@ -28,7 +28,7 @@ app.patch("/:id/", async (req, res) => {
     if (!content) return res.error(400, "Missing message content in request body.");
 
     const limits = req.app.get("limits");
-    if (content.length < 5 || content.length > limits.message) return res.error(400, "content must be between 5 - 1024 characters");
+    if (content.length < 5 || content.length > limits.message) return res.error(400, `content must be between 5 - ${limits.message} characters`);
 
     message.content = content;
 
@@ -48,7 +48,7 @@ app.post("/", RL(), async (req, res) => {
     if (!content) return res.error(400, "Missing message content in request body.");
     const limits = req.app.get("limits");
 
-    if (content.length < 5 || content.length > limits.message) return res.error(400, "content must be between 5 - 1024 characters");
+    if (content.length < 5 || content.length > limits.message) return res.error(400, `content must be between ${limits.message} characters`);
 
     const thread = await ThreadModel.get(threadID);
 

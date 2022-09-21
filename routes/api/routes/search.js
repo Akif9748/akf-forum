@@ -28,7 +28,9 @@ app.get("/messages", async (req, res) => {
 });
 app.get("/threads", async (req, res) => {
     if (!Object.values(req.query).length) return res.error(400, "Missing query parameters in request body.");
-    const query = { ...req.sq };
+    const query = {};
+    if (!req.user.admin) query.state = "OPEN";
+
     if (req.query.q) query.title = { $regex: req.query.q, $options: "i" };
     if (req.query.authorID) query.authorID = req.query.authorID;
     const results = await ThreadModel.find(query, null, req.so)

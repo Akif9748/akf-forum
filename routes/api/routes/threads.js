@@ -1,6 +1,6 @@
 const { MessageModel, ThreadModel } = require("../../../models");
 const { Router } = require("express")
-const { RL } = require('../../../lib');
+const { RL, threadEnum } = require('../../../lib');
 
 const app = Router();
 app.param("id", async (req, res, next, id) => {
@@ -8,7 +8,7 @@ app.param("id", async (req, res, next, id) => {
 
     if (!req.thread) return res.error(404, `We don't have any thread with id ${id}.`);
 
-    if (req.thread.deleted && !req.user?.admin)
+    if (req.thread.state !== "OPEN" && !req.user?.admin)
         return res.error(404, `You do not have permissions to view this thread with id ${id}.`)
 
     next();
@@ -44,8 +44,8 @@ app.post("/", RL(5 * 60_000, 1), async (req, res) => {
     if (!content || !title) return res.error(400, "Missing content/title in request body.");
     const limits = req.app.get("limits");
 
-    if (title.length < 5 || title.length > limits.title) return res.error(400, "title must be between 5 - 128 characters");
-    if (content.length < 5 || content.length > limits.message) return res.error(400, "content must be between 5 - 1024 characters");
+    if (title.length < 5 || title.length > limits.title) return res.error(400, `title must be between 5 - ${limits.title} characters`);
+    if (content.length < 5 || content.length > limits.message) return res.error(400, `content must be between 5 - ${limits.message} characters`);
     const { user } = req;
     const thread = await new ThreadModel({ title, author: user }).takeId()
     if (category)
@@ -57,21 +57,36 @@ app.post("/", RL(5 * 60_000, 1), async (req, res) => {
     res.complate(thread);
 
 });
-app.patch("/:id/", async (req, res) => {
 
+app.patch("/:id/", async (req, res) => {
     const { user, thread } = req;
 
     if (user.id !== thread.authorID && !user.admin) return res.error(403, "You have not got permission for this.");
-    const { title } = req.body;
-    if (!title) return res.error(400, "Missing thread title in request body.");
-    const limits = req.app.get("limits");
+    if (!Object.values(req.body).some(Boolean)) return res.error(400, "Missing thread informations for update in request body.");
 
-    if (title.length < 5 || title.length > limits.title) return res.error(400, "title must be between 5 - 128 characters");
 
-    thread.title = title;
-    
-    if (!thread.oldTitles.includes(title))
-        thread.oldTitles.push(title);
+    const { title, state } = req.body;
+
+    if (title) {
+        const limits = req.app.get("limits");
+
+        if (title.length < 5 || title.length > limits.title) return res.error(400, `title must be between 5 - ${limits.title} characters`);
+        if (thread.oldTitles.at(-1) == title) return res.error(400, "You can't use the same title as the previous one.");
+
+        thread.oldTitles.push(thread.title = title);
+    }
+
+
+    if (state) {
+        if (!user.admin)
+            return res.error(403, "You have not got permission for change state.");
+
+        if (thread.state === state) return res.error(400, "You can't change thread state to same state.");
+        if (!threadEnum.includes(state)) return res.error(400, "Invalid thread state.");
+        if (thread.state === "DELETED")
+            await MessageModel.updateMany({ threadID: thread.id }, { deleted: false });
+        thread.state = state;
+    }
 
     await thread.save();
 
@@ -84,27 +99,13 @@ app.delete("/:id/", async (req, res) => {
     if (user.id != thread.authorID && !user.admin)
         return res.error(403, "You have not got permission for this.");
 
-    if (thread.deleted) return res.error(403, "This thread is already deleted.");
-    thread.deleted = true;
+    if (thread.state == "DELETED") return res.error(403, "This thread is already deleted.");
+    thread.state = "DELETED";
     await thread.save();
 
     await MessageModel.updateMany({ threadID: thread.id }, { deleted: true });
     res.complate(thread);
 
 })
-app.post("/:id/undelete", async (req, res) => {
 
-    const { thread } = req;
-
-    if (!thread.deleted) return res.error(404, "This thread is not deleted, first, delete it.");
-
-    thread.deleted = false;
-    thread.edited = true;
-
-    await thread.save();
-    await MessageModel.updateMany({ threadID: thread.id }, { deleted: false });
-
-    res.complate(thread);
-
-})
 module.exports = app;

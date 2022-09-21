@@ -19,7 +19,7 @@ window.delete_thread = async function (id) {
 }
 
 window.undelete_thread = async function (id) {
-    const res = await request(`/api/threads/${id}/undelete`);
+    const res = await request(`/api/threads/${id}/`, "PATCH", { state: "OPEN" });
     if (res.error) return;
     alert(`Thread undeleted`);
     location.reload();

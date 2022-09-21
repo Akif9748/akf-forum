@@ -55,7 +55,6 @@ You can change them in config.json.
 - GET `/:id` for fetch thread.
 - DELETE `/:id` for delete thread.
 - PATCH `/:id` for edit thread.
-- POST `/:id/undelete` for undelete thread.
 - GET `/:id/messages?skip=0&limit=10` for fetch messages in thread.
 - POST `/` for create thread.
 
