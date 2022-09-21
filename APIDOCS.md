@@ -2,13 +2,13 @@
 Akf-forum has got an API for AJAX, other clients etc. 
 
 ## Authorization
-You need this headers for send request to API:
+You need this header for send request to API:
 ```json
 {
-    "username": "testUser", 
-    "password": "testPassword"
+    "authorization": "Basic <base64 encoded username:password>"
 }
 ```
+
 But in front end, the API will works with session.
 
 ## Default Limits:

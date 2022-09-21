@@ -16,7 +16,9 @@ app.use(async (req, res, next) => {
     res.complate = result => res.status(200).json(result);
 
     if (req.user) return next();
-    const { username = null, password = null } = req.headers;
+    const authHeader = req.headers.authorization;
+    if (!authHeader) return res.error(401, "No authorization header");
+    const [username, password] = Buffer.from(authHeader.split(' ')[1], "base64").toString().split(":");
 
     if (!username || !password)
         return res.error(401, "Authorise headers are missing")
