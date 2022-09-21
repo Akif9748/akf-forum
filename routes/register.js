@@ -1,22 +1,19 @@
 const { UserModel, SecretModel } = require("../models");
 const { Router } = require("express")
 const bcrypt = require("bcrypt");
-const rateLimit = require('express-rate-limit');
+const { RL } = require('../lib');
 const app = Router();
 
 app.get("/", (req, res) => res.reply("register", { user: null, discord: req.app.get("discord_auth") }));
 
-app.post("/", rateLimit({
-    windowMs: 24 * 60 * 60_000, max: 5, standardHeaders: true, legacyHeaders: false,
-    handler: (_r, response, _n, options) => response.error(options.statusCode, "You are begin ratelimited")
-}), async (req, res) => {
+app.post("/", RL(24 * 60 * 60_000, 5), async (req, res) => {
 
     req.session.userID = null;
 
     let { username, password: body_pass, about } = req.body;
 
     if (!username || !body_pass) return res.error(400, "You forgot entering some values");
-    const {names} = req.app.get("limits");
+    const { names } = req.app.get("limits");
     if (username.length < 3 || names > 25) return res.error(400, "Username must be between 3 - 25 characters");
     if (body_pass.length < 3 || names > 25) return res.error(400, "Password must be between 3 - 25 characters");
 

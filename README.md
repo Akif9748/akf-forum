@@ -41,7 +41,7 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 ## TO-DO list
 | To do | Is done? | 
 | ----- | -------- | 
-| Profile Message | ⚪ | 
+| Profile Message or DM | ⚪ | 
 | Better Auth for API way | 🟢 | 
 | mod role, permissions | ⚪ | 
 | upload other photos, model for it | ⚪ | 
@@ -50,7 +50,10 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 | DC auth will store code for taking tokens, and create secret model setting | ⚪ |
 - IF a person liked a message, view.
 - Disable last seen button.
- 
+- email auth.
+- thread.state =="approval" for threads.
+- old contents / titles add to forum interface
+
 ## Major Version History
 - V4: Caching
 - V3: New Theme

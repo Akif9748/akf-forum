@@ -9,7 +9,7 @@ const
     app = express(),
     { urlencoded: BP } = require('body-parser'),
     { mw: IP } = require('request-ip'),
-    RL = require('express-rate-limit'),
+    { RL } = require('./lib'),
     SES = require('express-session'),
     MS = require("connect-mongo"),
     DB = mongoose.connect(process.env.MONGO_DB_URL)
@@ -47,8 +47,7 @@ app.use(express.static("public"), express.json(), IP(), BP({ extended: true }),
 if (discord_auth)
     app.set("discord_auth", `https://discord.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT}&redirect_uri=${host}%2Fdiscord_auth%2Fhash&response_type=token&scope=identify`);
 
-if (RLS.enabled)
-    app.use(RL({ ...RLS, handler: (req, res, next, opts) => !req.user?.admin ? res.error(opts.statusCode, "You are begin ratelimited") : next() }));
+if (RLS.enabled) app.use(RL(RSL.windowMs, RLS.max));
 
 for (const file of fs.readdirSync("./routes"))
     app.use("/" + file.replace(".js", ""), require(`./routes/${file}`));

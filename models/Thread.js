@@ -11,6 +11,8 @@ const schema = new mongoose.Schema({
     author: Object,
 
     title: { type: String, maxlength: limits.title },
+    oldTitles: [String],
+
     time: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
     edited: { type: Boolean, default: false },

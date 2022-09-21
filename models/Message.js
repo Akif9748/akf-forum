@@ -8,7 +8,7 @@ const schema = new mongoose.Schema({
     threadID: String,
     authorID: String,
     content: { type: String, maxlength: limits.message },
-    oldContents: [{ type: String, maxlength: limits.message }],
+    oldContents: [String],
     time: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
     edited: { type: Boolean, default: false },

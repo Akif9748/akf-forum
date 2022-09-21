@@ -1,6 +1,5 @@
 const { MessageModel, ThreadModel } = require("../../../models");
-const rateLimit = require('express-rate-limit')
-
+const { RL } = require('../../../lib');
 const { Router } = require("express")
 
 const app = Router();
@@ -27,11 +26,15 @@ app.patch("/:id/", async (req, res) => {
     if (user.id !== message.authorID && !user.admin) return res.error(403, "You have not got permission for this.");
     const { content = null } = req.body;
     if (!content) return res.error(400, "Missing message content in request body.");
-    
+
     const limits = req.app.get("limits");
     if (content.length < 5 || content.length > limits.message) return res.error(400, "content must be between 5 - 1024 characters");
 
     message.content = content;
+
+    if (!message.oldContents.includes(content))
+        message.oldContents.push(content);
+
     message.edited = true;
 
     await message.save();
@@ -39,11 +42,7 @@ app.patch("/:id/", async (req, res) => {
 
 })
 
-app.post("/", rateLimit({
-    windowMs: 60_000, max: 1, standardHeaders: true, legacyHeaders: false,
-    handler: (request, response, next, options) =>
-        !request.user.admin ? response.error(options.statusCode, "You are begin ratelimited") : next()
-}), async (req, res) => {
+app.post("/", RL(), async (req, res) => {
 
     const { threadID, content } = req.body;
     if (!content) return res.error(400, "Missing message content in request body.");

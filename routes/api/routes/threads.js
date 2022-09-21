@@ -1,5 +1,6 @@
 const { MessageModel, ThreadModel } = require("../../../models");
 const { Router } = require("express")
+const { RL } = require('../../../lib');
 
 const app = Router();
 app.param("id", async (req, res, next, id) => {
@@ -36,7 +37,7 @@ app.get("/:id/messages/", async (req, res) => {
 
 })
 
-app.post("/", async (req, res) => {
+app.post("/", RL(5 * 60_000, 1), async (req, res) => {
 
     const { title, content, category } = req.body;
 
@@ -68,6 +69,10 @@ app.patch("/:id/", async (req, res) => {
     if (title.length < 5 || title.length > limits.title) return res.error(400, "title must be between 5 - 128 characters");
 
     thread.title = title;
+    
+    if (!thread.oldTitles.includes(title))
+        thread.oldTitles.push(title);
+
     await thread.save();
 
     res.complate(thread);
