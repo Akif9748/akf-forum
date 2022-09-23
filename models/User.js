@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const { def_theme, limits } = require("../config.json");
 const schema = new mongoose.Schema({
     id: { type: String, unique: true },
-    discordID: { type: String, unique: true },
+    discordID: { type: String },
     name: { type: String, maxlength: limits.names },
     avatar: { type: String, default: "/images/avatars/default.jpg" },
     time: { type: Date, default: Date.now },
@@ -13,7 +13,8 @@ const schema = new mongoose.Schema({
     theme: { type: String, default: def_theme },
     lastSeen: { type: Date, default: Date.now, select: false },
     hideLastSeen: { type: Boolean, default: false },
-    ips: { type: [String], select: false }
+    ips: { type: [String], default: [], select: false },
+    password: { type: String, select: false }
 });
 
 schema.methods.takeId = async function () {

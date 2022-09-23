@@ -13,7 +13,7 @@
         "max": 25,
         "windowMs": 60000
     },
-    "discord_auth": false,
+    "discord_auth": "",
     "defaultThreadState": "OPEN",
     "host": "https://akf-forum.glitch.me"
 }

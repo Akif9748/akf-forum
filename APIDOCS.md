@@ -41,10 +41,8 @@ You can change them in config.json.
 - GET `/:id` for fetch message.
 - DELETE `/:id` for delete message.
 - PATCH `/:id` for edit message.
-- POST `/:id/undelete` for undelete message.
 - POST `/:id/react/:type` for react to a message.
 - POST `/` for create message.
-
 
 #### `/api/search` use `?limit=&skip=` for skip and limit
 - GET `/users?q=query` find users.
@@ -63,6 +61,7 @@ You can change them in config.json.
 - DELETE `/:id` for delete user.
 - PATCH `/:id` for edit user.
 - PUT `/:id` for add profile photo to user.
+- POST `/:id/ban` for ban all ips of user.
 
 ### Example request:
 GET ```/api/messages/0```

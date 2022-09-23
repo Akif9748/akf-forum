@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("extra/meta", {title: "Setup the Akf-forum!" }) %>
+
+
+<body style="text-align: center;">
+  <%- include("extra/navbar") %>
+    <link rel="stylesheet" href="/css/setup.css">
+  <h1 style="color: var(--main);">Setup</h1>
+  <h2 style="color: var(--second);">There is default settings for akf-forum, you not need to edit them, but you can! And, the first registered user will be admin.</h2>
+  <form method="POST">
+    Default theme:
+    <input type="text" name="def_theme" value="default" required>
+    Forum name:
+    <input type="text" name="forum_name" value="akf" required>
+    Forum description:
+    <input type="text" name="description" value="Akf-forum!" required>
+    Default state for new threads, change with "APPROVAL" for approval system:
+    <input type="text" name="defaultThreadState" value="OPEN" required>
+    Domain of the forum, defaulty setted:
+    <input type="text" name="host" id="domain" value="Akf-forum!" required>
+    <hr>
+    (Optional) Discord app ID for Discord login:
+    <input type="text" name="discord_auth">
+    
+    <input type="submit" class="btn-primary" value="Setup">
+  </form>
+  <script>
+    document.getElementById("domain").value = location.origin;
+  </script>
+</body>
+
+</html>

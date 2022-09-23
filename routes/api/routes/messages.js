@@ -18,17 +18,34 @@ app.param("id", async (req, res, next, id) => {
 
 app.get("/:id", async (req, res) => res.complate(req.message));
 
+app.delete("/:id/", async (req, res) => {
+
+
+    const { message, user } = req;
+
+    if (user.id != message.authorID && !user.admin)
+        return res.error(403, "You have not got permission for this.");
+    if (message.deleted) return res.error(403, "This message is already deleted.");
+
+    message.deleted = true;
+    await message.save()
+    res.complate(message);
+
+});
+
 app.patch("/:id/", async (req, res) => {
 
 
     const { message, user } = req;
 
     if (user.id !== message.authorID && !user.admin) return res.error(403, "You have not got permission for this.");
-    const { content = null } = req.body;
-    if (!content) return res.error(400, "Missing message content in request body.");
+    if (!Object.values(req.body).some(Boolean)) return res.error(400, "Missing message informations for update in request body.");
+    const { content, deleted } = req.body;
 
     const limits = req.app.get("limits");
     if (content.length < 5 || content.length > limits.message) return res.error(400, `content must be between 5 - ${limits.message} characters`);
+
+    if (deleted === false) message.deleted = false;
 
     message.content = content;
 
@@ -92,34 +109,5 @@ app.post("/:id/react/:type", async (req, res) => {
     res.complate(message);
 
 });
-
-app.delete("/:id/", async (req, res) => {
-
-
-    const { message, user } = req;
-
-    if (user.id != message.authorID && !user.admin)
-        return res.error(403, "You have not got permission for this.");
-    if (message.deleted) return res.error(403, "This message is already deleted.");
-
-    message.deleted = true;
-    await message.save();
-    res.complate(message);
-
-})
-
-app.post("/:id/undelete", async (req, res) => {
-
-
-    const { message } = req;
-
-    if (!message.deleted) return res.error(404, "This message is not deleted, first, delete it.");
-
-    message.deleted = false;
-    await message.save();
-
-    res.complate(message);
-
-})
 
 module.exports = app;

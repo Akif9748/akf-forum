@@ -78,11 +78,15 @@
       <% } %>
 
       <div class="reactions">
-        <div>
+        <div <% if (message.react.like.includes(user?.id)) { %>
+          style="color: var(--main)"
+        <% } %> >
           <i onclick='react("<%= message.id %>","like");' class='bx bx-like'></i>
           <div id="like"><%=message.react.like.length %></div>
         </div>
-        <div>
+        <div <% if (message.react.dislike.includes(user?.id)) { %>
+          style="color: var(--main)"
+        <% } %>>
           <i onclick='react("<%= message.id %>","dislike");' class='bx bx-dislike'></i>
           <div id="dislike"><%=message.react.dislike.length %></div>
         </div>

@@ -53,7 +53,7 @@ window.edit_message = async function (id) {
     editing.value(content.rawText)
 }
 window.undelete_message = async function (id) {
-    const response = await request(`/api/messages/${id}/undelete`);
+    const response = await request(`/api/messages/${id}/`, "PATCH", { deleted: false });
     if (response.deleted) return;
     const message = document.getElementById("message-" + id);
 

@@ -6,14 +6,14 @@ A Node.js based forum software.
 - Run `npm i` to install **dependencies**.
 - Enter your database credentials in `.env`.
 - Run `npm start` for run it. 
+- Go /setup page for setup your forum.
 
-### Extra
+### Extra (If you are not use `setup` page)
 Run `node util/reset` to **reset the database** for duplicate key errors, and run `node util/admin` for give admin perms to first member.
 Edit `config.json` for default themes (`black` or `default`) of users, and forum name, meta description, character limits, discord auth enabler, global ratelimit.
 
 ### DISCORD AUTH: 
-`discord_auth: true` in config.json.
-Enter application id to `.env`.
+`"discord_auth": "your_app_id"` in config.json.
 Create a redirect url in discord developer portal:
 `https://forum_url.com/discord_auth/hash`
 
@@ -39,21 +39,20 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 </details>
 
 ## TO-DO list
-| To do | Is done? | 
-| ----- | -------- | 
-| Profile Message or DM | ⚪ | 
-| Better Auth for API way | 🟢 | 
-| mod role, permissions | ⚪ | 
-| upload other photos, model for it | ⚪ | 
-| categories page is need a update, thread count in category | ⚪ | 
-| preview for send messages in markdown format | 🟢 |
-| DC auth will store code for taking tokens, and create secret model setting | ⚪ |
-- IF a person liked a message, view.
-- Disable last seen button.
+- Profile Message or DM 
+- mod role, permissions  
+- upload other photos, model for it  
+- categories page is need a update, thread count in category  
+- DC auth will store code for taking tokens, and create secret model setting 
+- Disable last seen button for web.
 - email auth.
-- thread.state =="approval" for threads.
 - old contents / titles add to forum interface
-- limits 
+- add ban button to user profile.
+- change password.
+- add approval threads page.
+- who liked a message for web.
+- edit config from web admin panel.
+
 ## Major Version History
 - V4: Caching
 - V3: New Theme

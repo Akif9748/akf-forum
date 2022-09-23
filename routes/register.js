@@ -1,4 +1,4 @@
-const { UserModel, SecretModel } = require("../models");
+const { UserModel } = require("../models");
 const { Router } = require("express")
 const bcrypt = require("bcrypt");
 const { RL } = require('../lib');
@@ -10,37 +10,31 @@ app.post("/", RL(24 * 60 * 60_000, 5), async (req, res) => {
 
     req.session.userID = null;
 
-    let { username, password: body_pass, about } = req.body;
+    let { name, password, about } = req.body;
 
-    if (!username || !body_pass) return res.error(400, "You forgot entering some values");
+    if (!name || !password) return res.error(400, "You forgot entering some values");
     const { names } = req.app.get("limits");
-    if (username.length < 3 || names > 25) return res.error(400, "Username must be between 3 - 25 characters");
-    if (body_pass.length < 3 || names > 25) return res.error(400, "Password must be between 3 - 25 characters");
+    if (name.length < 3 || names > 25) return res.error(400, "Name must be between 3 - 25 characters");
+    if (password.length < 3 || names > 25) return res.error(400, "Password must be between 3 - 25 characters");
 
-    const user = await SecretModel.findOne({ username });
-
-    if (user) return res.error(400, `We have got an user named ${username}!`)
-
-    const user2 = new UserModel({ name: username })
+    if (await UserModel.exists({ name })) return res.error(400, `We have got an user named ${name}!`)
+    const user = new UserModel({ name });
 
     if (about) {
         if (about.length > 256) return res.error(400, "about must be under 256 characters");
-        user2.about = about;
+        user.about = about;
     }
 
-    await user2.takeId()
-    await user2.save();
+    await user.takeId()
+    if (user.id === "0") user.admin = true;
 
-    const salt = await bcrypt.genSalt(10);
-    const password = await bcrypt.hash(body_pass, salt);
-    await SecretModel.create({ username, password, id: user2.id })
-    req.session.userID = user2.id;
+    user.password = await bcrypt.hash(password, await bcrypt.genSalt(10));
+    await user.save();
+
+    req.session.userID = user.id;
 
     res.redirect('/');
 
-
-
-})
-
+});
 
 module.exports = app;

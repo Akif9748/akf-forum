@@ -58,7 +58,7 @@
           alert("User is deleted!");
           location.reload()
         } else if (e.target.id == "undelete") {
-          const response = await request("/api/users/<%= member.id %>/undelete");
+          const response = await request("/api/users/<%= member.id %>/", "PATCH", { deleted: false });
           if (response.deleted) return;
           alert("User is undeleted successfully!");
           location.reload()

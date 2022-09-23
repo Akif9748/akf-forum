@@ -6,4 +6,5 @@ const schema = new mongoose.Schema({
     authorID: { type: String }
 });
 
-module.exports = mongoose.model('ban', schema);
+const model = mongoose.model('ban', schema);
+module.exports = model;

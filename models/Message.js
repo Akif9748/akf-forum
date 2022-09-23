@@ -13,8 +13,8 @@ const schema = new mongoose.Schema({
     deleted: { type: Boolean, default: false },
     edited: { type: Boolean, default: false },
     react: {
-        like: [Number],
-        dislike: [Number]
+        like: [String],
+        dislike: [String]
     }
 })
 
