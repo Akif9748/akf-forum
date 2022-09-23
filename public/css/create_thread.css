@@ -22,8 +22,6 @@ form {
   border: 2px solid var(--borders);
 }
 
-.CodeMirror{
-  
-  width: 422.5px;
-
+.CodeMirror {
+  width: 100%;
 }
