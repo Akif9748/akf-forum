@@ -99,7 +99,7 @@ app.delete("/:id/", async (req, res) => {
     if (user.id != thread.authorID && !user.admin)
         return res.error(403, "You have not got permission for this.");
 
-    if (thread.state == "DELETED") return res.error(403, "This thread is already deleted.");
+    if (thread.state == "DELETED") return res.error(404, "This thread is already deleted.");
     thread.state = "DELETED";
     await thread.save();
 

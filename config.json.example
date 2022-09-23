@@ -15,5 +15,6 @@
     },
     "discord_auth": "",
     "defaultThreadState": "OPEN",
+    "email_auth": false,
     "host": "https://akf-forum.glitch.me"
 }

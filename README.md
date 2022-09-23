@@ -16,7 +16,13 @@ Edit `config.json` for default themes (`black` or `default`) of users, and forum
 `"discord_auth": "your_app_id"` in config.json.
 Add your app secret to `.env` as `DISCORD_SECRET`.
 Create a redirect url in discord developer portal:
-`https://forum_url.com/discord_auth/hash`
+`https://forum_url.com/auth/discord`
+
+### EMAIL AUTH:
+You can configure it. Just edit `config.json` and `.env` files.
+`"email_auth": true` in config.json.
+Add your email credentials to `.env` as `EMAIL_USER` and `EMAIL_PASS`.
+Add your email domain to `.env` as `EMAIL_SERVICE`.
 
 ## API
 Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn about API in `APIDOCS.md`.
@@ -45,14 +51,14 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - upload other photos, model for it  
 - categories page is need a update, thread count in category  
 - Disable last seen button for web.
-- email auth.
 - old contents / titles add to forum interface
 - add ban button to user profile.
 - change password.
 - add approval threads page.
 - who liked a message for web.
 - edit config from web admin panel.
-
+- user.state for ban, delete, etc.
+- Add a feature list to README.md
 ## Major Version History
 - V4: Caching
 - V3: New Theme

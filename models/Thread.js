@@ -12,13 +12,12 @@ const schema = new mongoose.Schema({
 
     title: { type: String, maxlength: limits.title },
     oldTitles: [String],
-
+    
     time: { type: Date, default: Date.now },
     edited: { type: Boolean, default: false },
     state: { type: String, default: defaultThreadState, enum: threadEnum },
     messages: [String],
     views: { type: Number, default: 0 }
-
 });
 
 

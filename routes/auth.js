@@ -2,7 +2,7 @@ const { Router } = require("express")
 const { UserModel } = require("../models");
 const fetch = require("node-fetch");
 const app = Router();
-const { host, discord_auth } = require("../config.json")
+const { host, discord_auth, email_auth } = require("../config.json")
 
 app.get("/discord", async (req, res) => {
     const client_id = discord_auth;
@@ -22,7 +22,7 @@ app.get("/discord", async (req, res) => {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-        }); 
+        });
 
         if (!response.ok) return res.error(500, "Bad request to discord");
 
@@ -39,7 +39,7 @@ app.get("/discord", async (req, res) => {
                 return res.error(403, "Your forum account is already linked to a discord account.");
 
             if (forum)
-                return res.error(403, "This discord account is already linked to a forum account.");
+                return res.error(409, "This discord account is already linked to a forum account.");
 
             req.user.discordID = discord.id;
             req.user.discord_code = code;
@@ -75,7 +75,7 @@ app.get("/discord", async (req, res) => {
 });
 
 app.delete("/discord", async (req, res) => {
-    if (!req.user) return res.error(403, "You are not logged in");
+    if (!req.user) return res.error(401, "You are not logged in");
     if (!req.user.discordID) return res.error(403, "You don't have a discord account linked to your forum account.");
     req.user.discordID = undefined;
     req.user.discord_code = undefined;
@@ -83,5 +83,16 @@ app.delete("/discord", async (req, res) => {
     res.send("Your discord account has been unlinked from your forum account.");
 });
 
+app.get("/email", async (req, res) => {
+    if (!email_auth) return res.error(404, "Email auth is disabled");
+    if (!req.user) return res.error(401, "You are not logged in");
+    if (req.user.email) return res.error(403, "You already have an email linked to your account.");
+    const { code } = req.query;
+    if (!code) return res.error(400, "No code provided");
+    if (code !== req.user.email_code) return res.error(403, "Invalid code");
+    req.user.approved = true;
+    await req.user.save();
+    res.send("Your email has been linked to your forum account.");
+});
 
 module.exports = app;

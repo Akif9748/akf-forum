@@ -1,10 +1,10 @@
 const { UserModel } = require("../models");
 const { Router } = require("express")
 const bcrypt = require("bcrypt");
-const { RL } = require('../lib');
+const { RL, transporter, emailRegEx } = require('../lib');
 const app = Router();
-
-app.get("/", (req, res) => res.reply("register", { user: null, discord: req.app.get("discord_auth") }));
+const { email_auth, forum_name, host } = require("../config.json");
+app.get("/", (req, res) => res.reply("register", { user: null, discord: req.app.get("discord_auth"), mail: email_auth }));
 
 app.post("/", RL(24 * 60 * 60_000, 5), async (req, res) => {
 
@@ -26,9 +26,30 @@ app.post("/", RL(24 * 60 * 60_000, 5), async (req, res) => {
     }
 
     await user.takeId()
-    if (user.id === "0") user.admin = true;
+    if (user.id === "0")
+        user.admin = true;
+    else if (email_auth) {
+        const email = req.body.email;
+        if (!email || !emailRegEx.test(email)) return res.error(400, "E-mail is not valid");
+        if (await UserModel.exists({ email })) return res.error(400, "E-mail is already in use");
+        user.email = email;
+        user.email_code = await bcrypt.hash(`${Date.now()}-${Math.floor(Math.random() * 1e20)}`, 10)
 
-    user.password = await bcrypt.hash(password, await bcrypt.genSalt(10));
+        transporter.sendMail({
+            from: transporter.options.auth.user,
+            to: email,
+            subject: name + ", please verify your email",
+            html: `
+            <h1>Verify your email in ${forum_name}-forum</h1>
+            <a href="${host}/auth/email?code=${user.email_code}">Click here to verify your email</a>
+            `
+        }, (err, info) => {
+            if (err) return res.error(500, "Failed to send email");
+        });
+
+    }
+
+    user.password = await bcrypt.hash(password, 10);
     await user.save();
 
     req.session.userID = user.id;

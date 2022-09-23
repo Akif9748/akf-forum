@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const { def_theme, limits } = require("../config.json");
+const { def_theme, limits, email_auth } = require("../config.json");
 const schema = new mongoose.Schema({
     id: { type: String, unique: true },
     discordID: { type: String },
@@ -15,7 +15,10 @@ const schema = new mongoose.Schema({
     hideLastSeen: { type: Boolean, default: false },
     ips: { type: [String], default: [], select: false },
     password: { type: String, select: false },
-    discord_code: { type: String, select: false }
+    discord_code: { type: String, select: false },
+    approved: { type: Boolean, default: !email_auth },
+    email: { type: String, select: false },
+    email_code: { type: String, select: false },
 });
 
 schema.methods.takeId = async function () {

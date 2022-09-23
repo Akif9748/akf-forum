@@ -22,18 +22,20 @@ app.ips = [];
 app.set("view engine", "ejs");
 app.set("limits", limits);
 
-app.use(express.static("public"), express.json(), express.urlencoded({extended:true}), IP(),
+app.use(express.static("public"), express.json(), express.urlencoded({ extended: true }), IP(),
     SES({ secret: process.env.SECRET, store: MS.create({ clientPromise: DB, stringify: false }), resave: true, saveUninitialized: true }),
     async (req, res, next) => {
         if (app.ips.includes(req.clientIp)) return res.status(403).send("You are banned from this forum.");
 
         req.user = req.session.userID ? await UserModel.findOneAndUpdate({ id: req.session.userID }, {
             lastSeen: Date.now(), $addToSet: { ips: req.clientIp }
-        }): null;
+        }) : null;
         res.reply = (page, options = {}, status = 200) => res.status(status)
             .render(page, { user: req.user, theme: req.user?.theme || def_theme, forum_name, description, ...options });
 
         res.error = (type, error) => res.reply("error", { type, error }, type);
+
+        if (req.user && !req.user.approved && !req.url.startsWith("/auth/email")) return res.error(403, "Your account is not approved yet.");
 
         if (req.user?.deleted) {
             req.session.destroy();

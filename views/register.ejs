@@ -15,6 +15,9 @@
 
 
   <form action="/register" method="post">
+    <% if (mail) { %>
+    <input type="email" name="email" placeholder="Email" class="input" required>
+    <% } %>
     <input type="text" name="name" placeholder="Username" class="input" required>
     <input type="password" name="password" placeholder="Password" class="input" required>
     <textarea class="input" name="about" rows="4" placeholder="About you... You can use markdown"></textarea>

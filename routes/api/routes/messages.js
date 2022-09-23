@@ -25,7 +25,7 @@ app.delete("/:id/", async (req, res) => {
 
     if (user.id != message.authorID && !user.admin)
         return res.error(403, "You have not got permission for this.");
-    if (message.deleted) return res.error(403, "This message is already deleted.");
+    if (message.deleted) return res.error(404, "This message is already deleted.");
 
     message.deleted = true;
     await message.save()
