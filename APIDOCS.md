@@ -67,30 +67,35 @@ You can change them in config.json.
 GET ```/api/messages/0```
 
 #### Example API Output:
-```json
+```js
 {
-    "_id": "63067429bc01da866fad508b",
-    "threadID": "0",
-    "author": {
-        "id": "0",
-        "name": "Akif9748",
-        "avatar": "https://cdn.discordapp.com/avatars/539506680140922890/abd74d10aac094fc8a5ad5c86f29fdb9.png?size=1024",
-        "time": "2022-08-24T18:54:55.666Z",
-        "deleted": false,
-        "admin": false,
-        "_id": "630673ffbc01da866fad507b",
-        "__v": 0
-    },
-    "content": "deneme",
-    "deleted": false,
-    "edited": false,
-    "time": "2022-08-24T18:55:37.744Z",
-    "id": "0",
-    "__v": 0,
     "react": {
-        "like": [0],
-        "dislike": []
+        "like": [],
+        "dislike": ["0"]
     },
-    "authorID": "0"
+    "_id": "6325c216faa938c4cfc43075",
+    "author": {
+        "_id": "632e028ca4ba362ebbb75a43",
+        "name": "Akif9748",
+        "avatar": "/images/avatars/0.jpg",
+        "deleted": false,
+        "edited": true,
+        "about": "# Owner",
+        "admin": true,
+        "theme": "black",
+        "hideLastSeen": false,
+        "time": "2022-09-23T19:01:32.610Z",
+        "id": "0",
+        "__v": 0,
+        "discordID": "539506680140922890"
+    },
+    "threadID": "0",
+    "content": "This is a thread opened via API, yes",
+    "deleted": false,
+    "edited": true,
+    "time": "2022-09-17T12:48:22.378Z",
+    "id": "0",
+    "__v": 4,
+    "oldContents": []
 }
 ```

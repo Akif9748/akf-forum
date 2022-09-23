@@ -14,7 +14,9 @@
 
   <div class="content">
     <% if (!member.discordID && discord && user?.id === member.id) { %>
-    <a href="<%=discord%>" class="btn-outline-primary">Login with discord</a>
+    <a href="<%=discord%>" class="btn-outline-primary">Auth with discord</a>
+    <% } else if(member.discordID && user?.id === member.id) { %>
+      <a class="btn-outline-primary" id="un_discord">Unauth with discord!</a>
     <% } %>
     <% if (user?.admin || user?.id === member.id) { %>
     <a href="/users/<%=member.id%>/avatar" class="btn-outline-primary">Upload avatar</a>
@@ -62,7 +64,12 @@
           if (response.deleted) return;
           alert("User is undeleted successfully!");
           location.reload()
-        } else if (e.target.id == "toogle")
+        } else if (e.target.id == "un_discord") {
+          const response = await fetch("/auth/discord/", {method:"DELETE"});
+          alert(await response.text());
+          location.reload()
+        } 
+        else if (e.target.id == "toogle")
           document.getElementById('user-edit').classList.toggle('no-active')
 
       });

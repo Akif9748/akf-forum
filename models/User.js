@@ -14,7 +14,8 @@ const schema = new mongoose.Schema({
     lastSeen: { type: Date, default: Date.now, select: false },
     hideLastSeen: { type: Boolean, default: false },
     ips: { type: [String], default: [], select: false },
-    password: { type: String, select: false }
+    password: { type: String, select: false },
+    discord_code: { type: String, select: false }
 });
 
 schema.methods.takeId = async function () {

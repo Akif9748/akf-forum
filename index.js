@@ -29,7 +29,7 @@ app.use(express.static("public"), express.json(), express.urlencoded({extended:t
 
         req.user = req.session.userID ? await UserModel.findOneAndUpdate({ id: req.session.userID }, {
             lastSeen: Date.now(), $addToSet: { ips: req.clientIp }
-        }) : null;
+        }): null;
         res.reply = (page, options = {}, status = 200) => res.status(status)
             .render(page, { user: req.user, theme: req.user?.theme || def_theme, forum_name, description, ...options });
 
@@ -44,7 +44,7 @@ app.use(express.static("public"), express.json(), express.urlencoded({extended:t
 );
 
 if (discord_auth)
-    app.set("discord_auth", `https://discord.com/api/oauth2/authorize?client_id=${discord_auth}&redirect_uri=${host}%2Fdiscord_auth%2Fhash&response_type=token&scope=identify`);
+    app.set("discord_auth", `https://discord.com/api/oauth2/authorize?client_id=${discord_auth}&redirect_uri=${host}%2Fauth%2Fdiscord&response_type=code&scope=identify`);
 
 if (RLS.enabled) app.use(RL(RLS.windowMs, RLS.max));
 

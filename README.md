@@ -14,6 +14,7 @@ Edit `config.json` for default themes (`black` or `default`) of users, and forum
 
 ### DISCORD AUTH: 
 `"discord_auth": "your_app_id"` in config.json.
+Add your app secret to `.env` as `DISCORD_SECRET`.
 Create a redirect url in discord developer portal:
 `https://forum_url.com/discord_auth/hash`
 
@@ -43,7 +44,6 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - mod role, permissions  
 - upload other photos, model for it  
 - categories page is need a update, thread count in category  
-- DC auth will store code for taking tokens, and create secret model setting 
 - Disable last seen button for web.
 - email auth.
 - old contents / titles add to forum interface
