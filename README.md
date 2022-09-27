@@ -59,6 +59,8 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - edit config from web admin panel.
 - user.state for ban, delete, etc.
 - Add a feature list to README.md
+- delete admin???
+- MODALS'S CSS & JS
 ## Major Version History
 - V4: Caching
 - V3: New Theme

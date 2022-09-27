@@ -39,7 +39,7 @@ app.patch("/:id/", async (req, res) => {
     const { message, user } = req;
 
     if (user.id !== message.authorID && !user.admin) return res.error(403, "You have not got permission for this.");
-    if (!Object.values(req.body).some(Boolean)) return res.error(400, "Missing message informations for update in request body.");
+    if (!Object.keys(req.body).some(Boolean)) return res.error(400, "Missing message informations for update in request body.");
     const { content, deleted } = req.body;
 
     const limits = req.app.get("limits");

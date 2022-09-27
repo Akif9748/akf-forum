@@ -36,7 +36,7 @@ app.patch("/:id", async (req, res) => {
     const { user, member } = req;
 
     if (req.user.id !== member.id && !user.admin) return res.error(403, "You have not got permission for this.");
-    if (!Object.values(req.body).some(Boolean)) return res.error(400, "Missing member informations in request body.");
+    if (!Object.keys(req.body).some(Boolean)) return res.error(400, "Missing member informations in request body.");
 
     const { name, about, theme, admin, deleted } = req.body;
 

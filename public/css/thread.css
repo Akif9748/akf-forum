@@ -86,8 +86,12 @@
   display: none;
 }
 
-.dots-menu.active {
+.active {
   display: block;
+}
+
+.no-display {
+  display: none;
 }
 
 .dots-menu a {
@@ -105,12 +109,6 @@
 
 }
 
-.send>textarea{
-  font-family:inherit;
-  width: 100%;
-  margin: 10px;
-  border: 2px solid #e3e3e3;
-}
 /* Media Query  */
 
 @media(max-width:980px) {
@@ -170,7 +168,7 @@
     width: 120px;
   }
 
-  .dots-menu.active {
+  .active {
     display: flex;
   }
 

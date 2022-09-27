@@ -35,7 +35,7 @@ app.use(express.static("public"), express.json(), express.urlencoded({ extended:
 
         res.error = (type, error) => res.reply("error", { type, error }, type);
 
-        if (req.user && !req.user.approved && !req.url.startsWith("/auth/email")) return res.error(403, "Your account is not approved yet.");
+        if (req.user && !req.user.approved&& !req.user.admin && !req.url.startsWith("/auth/email")) return res.error(403, "Your account is not approved yet.");
 
         if (req.user?.deleted) {
             req.session.destroy();
