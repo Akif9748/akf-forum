@@ -61,6 +61,9 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - Add a feature list to README.md
 - delete admin???
 - MODALS'S CSS & JS
+- change category name
+- click to user message count to view message W/search
+- add deleted => this.state=="DELETED"
 ## Major Version History
 - V4: Caching
 - V3: New Theme
