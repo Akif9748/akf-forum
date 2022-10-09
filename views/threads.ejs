@@ -17,11 +17,11 @@
     <a href="<%= thread.getLink() %>" class="">
       <div class="threads-box">
         <div class="thread-box-title">
-          <% if (thread.state == "DELETED") { %> <span>[DELETED]</span><% } %>
+          <% if (thread.deleted) { %> <span>[DELETED]</span><% } %>
           <%= thread.title  %>
         </div>
         <div class="box-username">
-          <% if (user?.admin && thread.state !== "DELETED"){ %>
+          <% if (user?.admin && !thread.deleted){ %>
           <a class="btn-danger" onclick="fetch('/api/threads/<%= thread.id %>/',{method:'DELETE'})"><i class="bx bx-trash bx-sm"></i></a>
           <% } %>
           <%= thread.author.name %> <div class="avatar"><img src="<%=thread.author.avatar %>"> </div>

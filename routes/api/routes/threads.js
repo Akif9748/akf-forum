@@ -83,7 +83,7 @@ app.patch("/:id/", async (req, res) => {
 
         if (thread.state === state) return res.error(400, "You can't change thread state to same state.");
         if (!threadEnum.includes(state)) return res.error(400, "Invalid thread state.");
-        if (thread.state === "DELETED")
+        if (thread.deleted)
             await MessageModel.updateMany({ threadID: thread.id }, { deleted: false });
         thread.state = state;
     }
@@ -99,8 +99,8 @@ app.delete("/:id/", async (req, res) => {
     if (user.id != thread.authorID && !user.admin)
         return res.error(403, "You have not got permission for this.");
 
-    if (thread.state == "DELETED") return res.error(404, "This thread is already deleted.");
-    thread.state = "DELETED";
+    if (thread.deleted) return res.error(404, "This thread is already deleted.");
+    thread.deleted= true;
     await thread.save();
 
     await MessageModel.updateMany({ threadID: thread.id }, { deleted: true });
