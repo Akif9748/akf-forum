@@ -15,9 +15,10 @@ app.get("/", (req, res) => {
         res.error(500, e.message);
     }
 });
-app.post("/", (req, res) => {
-    fs.writeFileSync("./config.json", JSON.stringify(req.body, null, 4));
-    require.cache[require.resolve("../config.json")] = require("../../../config.json");
+app.put("/", (req, res) => {
+    const write= req.query.text ? req.body : JSON.stringify(req.body, null, 4)
+    fs.writeFileSync("./config.json",write );
+    require.cache[require.resolve("../../../config.json")] = require("../../../config.json");
     res.complate(require("../../../config.json"));
 });
 

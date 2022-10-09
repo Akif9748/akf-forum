@@ -24,6 +24,10 @@ You can change them in config.json.
 #### `/api/me`
 - GET `/api/me` to get your account.
 
+#### `/api/config`
+- GET `/` to reach config file.
+- PUT `/` to edit config file.
+
 #### `/api/bans`
 - GET `/` fetch all bans.
 - GET `/:ip` fetch a ban.
