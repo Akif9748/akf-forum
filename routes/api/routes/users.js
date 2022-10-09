@@ -38,7 +38,7 @@ app.patch("/:id", async (req, res) => {
     if (req.user.id !== member.id && !user.admin) return res.error(403, "You have not got permission for this.");
     if (!Object.keys(req.body).some(Boolean)) return res.error(400, "Missing member informations in request body.");
 
-    const { name, about, theme, admin, deleted } = req.body;
+    const { name, about, theme, admin, deleted, hideLastSeen } = req.body;
 
     if ((admin?.length || "deleted" in req.body) && !req.user.admin) return res.error(403, "You have not got permission for edit 'admin' and 'deleted' information, or bad request.");
     const { names, desp } = req.app.get("limits");
@@ -56,6 +56,9 @@ app.patch("/:id", async (req, res) => {
 
     if (typeof admin === "boolean" || ["false", "true"].includes(admin)) member.admin = admin;
     if (deleted === false) member.deleted = false;
+
+    if (typeof hideLastSeen === "boolean") member.hideLastSeen = hideLastSeen;
+
     member.edited = true;
 
     res.complate(await member.save());
@@ -67,8 +70,8 @@ app.post("/:id/ban", async (req, res) => {
     const { member } = req;
     for (const ip of member.ips)
         try {
-           await BanModel.create({ ip, reason: `Ban for ${member.name}`, authorID: req.user.id });
-           req.app.ips.push(ip);
+            await BanModel.create({ ip, reason: `Ban for ${member.name}`, authorID: req.user.id });
+            req.app.ips.push(ip);
         } catch {
             continue;
         }

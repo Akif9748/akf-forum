@@ -52,16 +52,15 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - categories page is need a update, thread count in category  
 - Disable last seen button for web.
 - old contents / titles add to forum interface
-- add ban button to user profile.
+- add ban button to user profile.?
 - change password.
 - add approval threads page.
 - who liked a message for web.
 - edit config from web admin panel.
-- user.state for ban, delete, etc.
 - Add a feature list to README.md
 - delete admin???
 - change category name
-
+- theme support++, directly edit html!
 ## Major Version History
 - V4: Caching
 - V3: New Theme
