@@ -22,7 +22,7 @@ const schema = new mongoose.Schema({
 
     time: { type: Date, default: Date.now },
     edited: { type: Boolean, default: false },
-    state: { type: String, default: defaultThreadState, enum: threadEnum },
+    state: { type: String, default: defaultThreadState, enum: threadEnum, uppercase: true },
     messages: [String],
     views: { type: Number, default: 0 }
 });

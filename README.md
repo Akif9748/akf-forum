@@ -20,7 +20,7 @@ Create a redirect url in discord developer portal:
 
 ### EMAIL AUTH:
 You can configure it. Just edit `config.json` and `.env` files.
-`"email_auth": true` in config.json.
+`"email_auth": true, "default_user_state": "APPROVAL"` in config.json.
 Add your email credentials to `.env` as `EMAIL_USER` and `EMAIL_PASS`.
 Add your email domain to `.env` as `EMAIL_SERVICE`.
 
@@ -60,9 +60,7 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - user.state for ban, delete, etc.
 - Add a feature list to README.md
 - delete admin???
-- MODALS'S CSS & JS
 - change category name
-- click to user message count to view message W/search
 
 ## Major Version History
 - V4: Caching

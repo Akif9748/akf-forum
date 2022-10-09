@@ -90,7 +90,7 @@ app.get("/email", async (req, res) => {
     const { code } = req.query;
     if (!code) return res.error(400, "No code provided");
     if (code !== req.user.email_code) return res.error(403, "Invalid code");
-    req.user.approved = true;
+    req.user.state = "ACTIVE";
     await req.user.save();
     res.send("Your email has been linked to your forum account.");
 });

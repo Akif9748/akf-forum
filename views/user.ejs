@@ -16,7 +16,7 @@
     <% if (!member.discordID && discord && user?.id === member.id) { %>
     <a href="<%=discord%>" class="btn-outline-primary">Auth with discord</a>
     <% } else if(member.discordID && user?.id === member.id) { %>
-      <a class="btn-outline-primary" id="un_discord">Unauth with discord!</a>
+    <a class="btn-outline-primary" id="un_discord">Unauth with discord!</a>
     <% } %>
     <% if (user?.admin || user?.id === member.id) { %>
     <a href="/users/<%=member.id%>/avatar" class="btn-outline-primary">Upload avatar</a>
@@ -32,7 +32,7 @@
         <h1 class="title" style="text-align:center;">Edit <a class="see" href="/users/<%= member.id %>"><%= member.name %></a></h1>
         <div class="content">
           <form id="form" class="see" style="box-shadow:none">
-            <input type="text" name="name" placeholder="<%=member.name%>" class="input" >
+            <input type="text" name="name" placeholder="<%=member.name%>" class="input">
 
             <textarea class="input" name="about" rows="4" cols="60" name="content" placeholder="<%=member.about%>"></textarea>
             <% if (user?.admin){ %>
@@ -56,20 +56,23 @@
       document.addEventListener("click", async e => {
         if (e.target.id == "delete") {
           const response = await request("/api/users/<%= member.id %>", "DELETE");
-          if (!response.deleted) return
+          if (response.state !== "DELETED") return
           alert("User is deleted!");
           location.reload()
         } else if (e.target.id == "undelete") {
-          const response = await request("/api/users/<%= member.id %>/", "PATCH", { deleted: false });
-          if (response.deleted) return;
+          const response = await request("/api/users/<%= member.id %>/", "PATCH", {
+            deleted: false
+          });
+          if (response.state == "DELETED") return;
           alert("User is undeleted successfully!");
           location.reload()
         } else if (e.target.id == "un_discord") {
-          const response = await fetch("/auth/discord/", {method:"DELETE"});
+          const response = await fetch("/auth/discord/", {
+            method: "DELETE"
+          });
           alert(await response.text());
           location.reload()
-        } 
-        else if (e.target.id == "toogle")
+        } else if (e.target.id == "toogle")
           document.getElementById('user-edit').classList.toggle('no-active')
 
       });
@@ -94,15 +97,15 @@
     <a id="delete" class="btn-outline-primary">Delete user! </a>
     <% } %>
     <% if (user?.admin) {%>
-      <details>
-        <summary class="btn-outline-primary">IP adresses of user:</summary>
-        <select>
-          <% for(const ip of member.ips) { %>
-          <option><%= ip %></option>
-          <% } %>
-        </select>
-      </details>
-  
+    <details>
+      <summary class="btn-outline-primary">IP adresses of user:</summary>
+      <select>
+        <% for(const ip of member.ips) { %>
+        <option><%= ip %></option>
+        <% } %>
+      </select>
+    </details>
+
     <% } %>
 
     <div class="box" style="justify-content:center;">

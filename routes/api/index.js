@@ -20,7 +20,7 @@ app.use(async (req, res, next) => {
     const user = await UserModel.findOne({ name });
 
     if (!user || user.deleted) return res.error(401, `We don't have any user with name ${name}.`)
-    if (!user.approved) return res.error(401, "Your account is not approved yet.");
+    if (!user.active) return res.error(401, "Your account is not approved yet.");
 
     if (!await bcrypt.compare(password, user.password)) return res.error(401, 'Incorrect Password!');
 
