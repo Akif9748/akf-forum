@@ -28,13 +28,13 @@
   </div>
 
   <div style="text-align:center;padding:8px">
-    <% if ((user.id === thread.authorID || user.admin ) && thread.state !== "DELETED"){ %>
+    <% if (user && (user.id === thread.authorID || user.admin ) && thread.state !== "DELETED"){ %>
     <a onclick="delete_thread('<%= thread.id %>')" class="btn-outline-primary">DELETE</a>
     <a onclick="edit_thread('<%= thread.id %>')" class="btn-outline-primary">EDIT</a>
     <% } else if (thread.state == "DELETED") { %>
     <h4 class="title" style="display:inline; font-size: 20px;">This thread has been deleted</h3>
-    <a onclick="undelete_thread('<%= thread.id %>')" class="btn-primary">UNDELETE</a>
-    <% }; %>
+      <a onclick="undelete_thread('<%= thread.id %>')" class="btn-primary">UNDELETE</a>
+      <% }; %>
   </div>
 
   <div id="messages">
