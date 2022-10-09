@@ -1,12 +1,13 @@
 <div class="footer">
   <% if (user){ %>
-  <a onclick="invert()" class="btn-primary" style="color:white;"><%=(user.theme === "default" ? "black" : "default" ) + " theme!" %></a>
+  <a onclick="invert()" class="btn-primary" style="color:white;"><%=(user.theme.color === "default" ? "black" : "default" ) + " theme!" %></a>
   <script>
     async function invert() {
+      return alert("disabled!")
       await fetch('/api/users/<%= user.id %>', {
         method: 'PATCH',
         body: JSON.stringify({
-          theme: "<%= user.theme === `default` ? `black` : `default` %>"
+          theme: {color:"<%= user.theme.color === `default` ? `black` : `default` %>"}
         }),
         headers: {
           "Content-Type": "application/json"

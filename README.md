@@ -54,16 +54,19 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - Add a feature list to README.md
 - delete admin???
 - change category name
-- theme support++, directly edit html!
+- theme support++, directly edit html! patch user support!
+- enchanted theme: not take all of the public! "/css
+
 ### front-end
 - better usermenu for user profile
 - old contents / titles add to forum interface
 - categories page is need a update, thread count in category (?) 
 - add ban button to user profile.?
 - who liked a message for web.
-- edit config from web admin panel.
+- give admin button
 
 ## Major Version History
+- V5: Enchanted theme support
 - V4: Caching
 - V3: New Theme
 - V2: Backend fix, mongoose is fixed. Really big fix.

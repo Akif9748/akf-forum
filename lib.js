@@ -5,7 +5,6 @@ require("dotenv").config();
 module.exports = {
     threadEnum: ["OPEN", "APPROVAL", "DELETED"],
     userEnum: ["ACTIVE", "APPROVAL", "DELETED", "BANNED"],
-    themes: ["default", "black"],
     RL(windowMs = 60_000, max = 1) {
         return RL({
             windowMs, max, standardHeaders: true, legacyHeaders: false,

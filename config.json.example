@@ -1,5 +1,9 @@
 {
-    "def_theme": "default",
+    "def_theme": {
+        "name": "white",
+        "color": "black",
+        "language": "en"
+    },
     "forum_name": "akf",
     "description": "Akf-forum!",
     "limits": {

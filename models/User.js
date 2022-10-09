@@ -11,7 +11,11 @@ const schema = new mongoose.Schema({
     edited: { type: Boolean, default: false },
     about: { type: String, default: "", maxlength: limits.desp },
     admin: { type: Boolean, default: false },
-    theme: { type: String, default: def_theme },
+    theme: {
+        name: { type: String, default: def_theme.name },
+        color: { type: String, default: def_theme.color },
+        language: { type: String, default: def_theme.language }
+    },
     lastSeen: { type: Date, default: Date.now, select: false },
     hideLastSeen: { type: Boolean, default: false },
     ips: { type: [String], default: [], select: false },

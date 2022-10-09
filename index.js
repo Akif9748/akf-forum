@@ -30,8 +30,15 @@ app.use(express.static("public", { maxAge: 86400 * 1000 }), express.json(), expr
         req.user = req.session.userID ? await UserModel.findOneAndUpdate({ id: req.session.userID }, {
             lastSeen: Date.now(), $addToSet: { ips: req.clientIp }
         }) : null;
-        res.reply = (page, options = {}, status = 200) => res.status(status)
-            .render(page, { user: req.user, theme: req.user?.theme || def_theme, forum_name, description, ...options });
+
+        const theme = require(`./themes/${req.user?.theme?.name || def_theme.name}`);
+        res.reply = (page, data = {}, status = 200) =>
+            theme.render(page, { user: req.user, ...data }, {
+                color: req.user?.theme?.color || def_theme.color,
+                lang: req.user?.theme?.language || def_theme.language,
+                forum_name,
+                description
+            }, res.status(status));
 
         res.error = (type, error) => res.reply("error", { type, error }, type);
 
