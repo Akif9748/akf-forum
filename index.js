@@ -22,7 +22,7 @@ app.ips = [];
 app.set("view engine", "ejs");
 app.set("limits", limits);
 
-app.use(express.static("public"), express.json(), express.urlencoded({ extended: true }), IP(),
+app.use(express.static("public", { maxAge: 86400 * 1000 }), express.json(), express.urlencoded({ extended: true }), IP(),
     SES({ secret: process.env.SECRET, store: MS.create({ clientPromise: DB, stringify: false }), resave: true, saveUninitialized: true }),
     async (req, res, next) => {
         if (app.ips.includes(req.clientIp)) return res.status(403).send("You are banned from this forum.");
