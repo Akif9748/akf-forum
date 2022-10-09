@@ -22,18 +22,18 @@
   width: 100%;
 }
 
-.box-title{
+.box-title {
   font-weight: 400;
+  color: var(--anti);
 }
+
 .box-value {
-font-weight: 300;
-background-color: var(--main);
-color: white;
-font-size: 14px;
-padding: 4px;
-border-radius: 5px;
-min-width: 50px;
-text-align: center;
+  font-weight: 300;
+  background-color: var(--main);
+  color: white;
+  font-size: 14px;
+  padding: 4px;
+  border-radius: 5px;
+  min-width: 50px;
+  text-align: center;
 }
-
-

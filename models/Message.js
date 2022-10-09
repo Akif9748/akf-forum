@@ -4,9 +4,16 @@ const { limits } = require("../config.json");
 
 const schema = new mongoose.Schema({
     id: { type: String, unique: true },
-    author: Object,
+    authorID: {
+        type: String, get(v) { return v || this.author?.id }
+    },
+    author: {
+        type: Object, set(v) {
+            this.authorID = v.id;
+            return v;
+        }
+    },
     threadID: String,
-    authorID: String,
     content: { type: String, maxlength: limits.message },
     oldContents: [String],
     time: { type: Date, default: Date.now },

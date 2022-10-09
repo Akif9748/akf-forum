@@ -7,8 +7,15 @@ const schema = new mongoose.Schema({
     id: { type: String, unique: true },
 
     categoryID: String,
-    authorID: String,
-    author: Object,
+    authorID: {
+        type: String, get(v) { return v || this.author?.id }
+    },
+    author: {
+        type: Object, set(v) {
+            this.authorID = v.id;
+            return v;
+        }
+    },
 
     title: { type: String, maxlength: limits.title },
     oldTitles: [String],

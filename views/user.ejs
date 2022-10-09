@@ -148,11 +148,11 @@ color: var(--anti);
     </div>
     <% } %>
     <div class="box">
-      <h2 class="box-title">Message:</h2>
-      <h2 class="box-value"><%= counts.message %></h2>
+      <a href="/search/messages?authorID=<%= member.id %>" class="box-title">Message:</a>
+      <a class="box-value"><%= counts.message %></a>
     </div>
     <div class="box">
-      <h2 class="box-title">Thread:</h2>
+      <a href="/search/threads?authorID=<%= member.id %>" class="box-title">Thread:</a>
       <h2 class="box-value"><%= counts.thread %></h2>
     </div>
   </div>
