@@ -10,7 +10,7 @@ A Node.js based forum software.
 
 ### Extra (If you are not use `setup` page)
 Run `node util/reset` to **reset the database** for duplicate key errors, and run `node util/admin` for give admin perms to first member.
-Edit `config.json` for default themes (`black` or `default`) of users, and forum name, meta description, character limits, discord auth enabler, global ratelimit.
+Edit `config.json` for default theme color (`black` or `white`) of users, and forum name, meta description, character limits, discord auth enabler, global ratelimit.
 
 ### DISCORD AUTH: 
 `"discord_auth": "your_app_id"` in config.json.
@@ -54,8 +54,7 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - Add a feature list to README.md
 - delete admin???
 - change category name
-- theme support++, directly edit html! patch user support!
-- enchanted theme: not take all of the public! "/css
+- enchanted theme: not take all of the public! `"/css`, patch user support!
 
 ### front-end
 - better usermenu for user profile
@@ -63,7 +62,7 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - categories page is need a update, thread count in category (?) 
 - add ban button to user profile.?
 - who liked a message for web.
-- give admin button
+- give admin button, not is admin
 
 ## Major Version History
 - V5: Enchanted theme support
