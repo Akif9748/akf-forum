@@ -55,7 +55,7 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - delete admin???
 - change category name
 - enchanted theme: not take all of the public! `"/css`, patch user support!
-
+- _id
 ### front-end
 - better usermenu for user profile
 - old contents / titles add to forum interface
