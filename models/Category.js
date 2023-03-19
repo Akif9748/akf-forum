@@ -13,7 +13,7 @@ schema.methods.takeId = async function () {
 }
 
 schema.methods.getLink = function (id = this.id) {
-    return "/categories/" + this.id;
+    return "/categories/" + id;
 }
 
 const model = mongoose.model('category', schema);

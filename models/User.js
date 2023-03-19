@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const { def_theme, limits, email_auth, default_user_state } = require("../config.json");
+const { def_theme, limits, default_user_state } = require("../config.json");
 const { userEnum } = require("../lib");
 
 const schema = new mongoose.Schema({
