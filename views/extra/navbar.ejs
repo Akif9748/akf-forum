@@ -1,13 +1,12 @@
 
 <% if (user?.admin){ %>
 <div class="admin-bar">
-  <a href="/admin" class="admin-bar">You are admin, and you can go your page!</a>
+  <a href="/admin" class="admin-bar">Click here to reach admin panel</a>
 </div>
-
 <% } %>
 
 <div class="header">
-  <a class="logo" href="/"><%= forum_name.toUpperCase() %> <span>FORUM</span></a>
+  <a class="logo" href="/"><%= dataset.forum_name.toUpperCase() %> <span>FORUM</span></a>
   <div class="buttons">
 
     <% if (user){ %>

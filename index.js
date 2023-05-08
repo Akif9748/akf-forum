@@ -9,6 +9,7 @@ const
     app = express(),
     { mw: IP } = require('request-ip'),
     { RL } = require('./lib'),
+    { themes } = require("./config.json"),
     SES = require('express-session'),
     MS = require("connect-mongo"),
     DB = mongoose.connect(process.env.MONGO_DB_URL)
@@ -33,10 +34,14 @@ app.use(express.static("public"), express.json(), express.urlencoded({ extended:
 
 
         res.reply = (page, options = {}, status = 200) => res.status(status).render(page, {
+            dataset: {
+                themes,
+                theme: req.user?.theme || def_theme,
+                forum_name, 
+                description
+            },
             user: req.user,
-            theme: req.user?.theme || def_theme,
-            lang: req.user?.theme?.language || def_theme.language,
-            forum_name, description, ...options
+            ...options
         });
 
 

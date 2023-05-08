@@ -55,10 +55,11 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - delete admin???
 - change category name
 - _id
-- add support for transition aroun gravatar
+- add support for transition around gravatar
+- forum setup page++
 
 ### theme to do:
-- theme change
+- add bootstrap for navbar
 - routes/api/routes/users.js check,
 themes/default/extra/footer.ejs check,
 themes/default/extra/meta.ejs check

@@ -16,8 +16,8 @@
     form.addEventListener('submit', async e => {
       e.preventDefault();
 
-      const res = await fetch('/api/users/<%= member.id %>/', {
-        method: 'PUT',
+      const res = await fetch('/api/users/<%= member.id %>/avatar', {
+        method: 'POST',
         body: new FormData(form)
       })
       if (res.error) return alert(res.error);

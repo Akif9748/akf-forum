@@ -1,29 +1,33 @@
 <div class="footer">
   <% if (user){ %>
-  <a onclick="invert()" class="btn-primary" style="color:white;"><%=(user.theme.color === "default" ? "black" : "default" ) + " theme!" %></a>
+  <select id="theme_select">
+    <% for(const theme of dataset.themes){%>
+    <option value="<%= theme %>"><%= theme %> theme</option>
+    <% } %>
+  </select>
   <script>
-    async function invert() {
-      return alert("disabled!")
+    const theme_select = document.getElementById("theme_select");
+    theme_select.querySelector(`option[value=<%= user.theme.name %>]`).selected = true;
+    theme_select.addEventListener("change", async e => {
+      const name = e.target.value;
       await fetch('/api/users/<%= user.id %>', {
         method: 'PATCH',
         body: JSON.stringify({
-          theme: {color:"<%= user.theme.color === `default` ? `black` : `default` %>"}
+          theme: {
+            name
+          }
         }),
         headers: {
           "Content-Type": "application/json"
         }
       });
-      location.reload()
-    }
+      location.reload();
+    });
   </script>
   <% } %>
 
   <a href="https://github.com/Akif9748/akf-forum" style="color: white;"> This website is powered by
-    <span style="color: #ffbf00;">akf-forum</span> </a>
-  <div>
-    <span style="color:white">Coders</span> <br>
-    <div style="text-align:center;">
-      <a href="https://github.com/Akif9748/" style="color: #ffbf00;">Akif</a><br><a href="#" style="color:#ffbf00;">Tokmak</a>
-    </div>
-  </div>
+    <span style="color: #ffbf00;">akf-forum</span>
+  </a>
+ 
 </div>

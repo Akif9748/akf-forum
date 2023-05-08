@@ -10,31 +10,32 @@ app.post("/", RL(24 * 60 * 60_000, 5), async (req, res) => {
 
     req.session.userID = null;
 
-    let { name, password, about } = req.body;
+    let { name, password, about, email } = req.body;
 
-    if (!name || !password) return res.error(400, "You forgot entering some values");
+    if (!name || !password || !email) return res.error(400, "You forgot entering some values");
+    if (!email || !emailRegEx.test(email)) return res.error(400, "E-mail is not valid");
     const { names } = req.app.get("limits");
     if (name.length < 3 || name.length > names) return res.error(400, "Name must be between 3 - 25 characters");
     if (password.length < 3 || password.length > names) return res.error(400, "Password must be between 3 - 25 characters");
 
     if (await UserModel.exists({ name })) return res.error(400, `We have got an user named ${name}!`)
-    const user = new UserModel({ name });
+    if (await UserModel.exists({ email })) return res.error(400, "E-mail is already in use");
 
 
-    user.avatar = getGravatar(name, 128);
+    const user = new UserModel({ name, email });
+    user.avatar = getGravatar(email, 128);
+
     if (about) {
         if (about.length > 256) return res.error(400, "about must be under 256 characters");
         user.about = about;
     }
 
-    await user.takeId()
+    await user.takeId();
+
     if (user.id === "0")
         user.admin = true;
     else if (email_auth) {
-        const email = req.body.email;
-        if (!email || !emailRegEx.test(email)) return res.error(400, "E-mail is not valid");
-        if (await UserModel.exists({ email })) return res.error(400, "E-mail is already in use");
-        user.email = email;
+
         user.email_code = await bcrypt.hash(`${Date.now()}-${Math.floor(Math.random() * 1e20)}`, 10)
 
         transporter.sendMail({
