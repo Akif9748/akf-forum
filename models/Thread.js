@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const cache = require("./cache")
 const MessageModel = require("./Message");
-const { limits, defaultThreadState } = require("../config.json");
+const { limits, default_thread_state } = require("../config.json");
 const { threadEnum } = require("../lib");
 const schema = new mongoose.Schema({
     id: { type: String, unique: true },
@@ -22,7 +22,7 @@ const schema = new mongoose.Schema({
 
     time: { type: Date, default: Date.now },
     edited: { type: Boolean, default: false },
-    state: { type: String, default: defaultThreadState, enum: threadEnum, uppercase: true },
+    state: { type: String, default: default_thread_state, enum: threadEnum, uppercase: true },
     messages: [String],
     views: { type: Number, default: 0 }
 });

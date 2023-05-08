@@ -55,13 +55,14 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - delete admin???
 - change category name
 - _id
-- ADD gavatar support
+- add support for transition aroun gravatar
 
+### theme to do:
+- theme change
 - routes/api/routes/users.js check,
 themes/default/extra/footer.ejs check,
 themes/default/extra/meta.ejs check
-- "defaultThreadState" ??? better case
-
+- add theme support again, but only works with css folder. Put every css file into one file. (themes/default/css/main.css)
 
 ### front-end
 - better usermenu for user profile

@@ -1,7 +1,7 @@
 const { UserModel } = require("../models");
 const { Router } = require("express")
 const bcrypt = require("bcrypt");
-const { RL, transporter, emailRegEx } = require('../lib');
+const { RL, transporter, emailRegEx, getGravatar } = require('../lib');
 const app = Router();
 const { email_auth, forum_name, host } = require("../config.json");
 app.get("/", (req, res) => res.reply("register", { user: null, discord: req.app.get("discord_auth"), mail: email_auth }));
@@ -20,6 +20,8 @@ app.post("/", RL(24 * 60 * 60_000, 5), async (req, res) => {
     if (await UserModel.exists({ name })) return res.error(400, `We have got an user named ${name}!`)
     const user = new UserModel({ name });
 
+
+    user.avatar = getGravatar(name, 128);
     if (about) {
         if (about.length > 256) return res.error(400, "about must be under 256 characters");
         user.about = about;
