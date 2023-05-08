@@ -14,8 +14,8 @@ app.post("/", RL(24 * 60 * 60_000, 5), async (req, res) => {
 
     if (!name || !password) return res.error(400, "You forgot entering some values");
     const { names } = req.app.get("limits");
-    if (name.length < 3 || names > 25) return res.error(400, "Name must be between 3 - 25 characters");
-    if (password.length < 3 || names > 25) return res.error(400, "Password must be between 3 - 25 characters");
+    if (name.length < 3 || name.length > names) return res.error(400, "Name must be between 3 - 25 characters");
+    if (password.length < 3 || password.length > names) return res.error(400, "Password must be between 3 - 25 characters");
 
     if (await UserModel.exists({ name })) return res.error(400, `We have got an user named ${name}!`)
     const user = new UserModel({ name });
@@ -43,7 +43,7 @@ app.post("/", RL(24 * 60 * 60_000, 5), async (req, res) => {
             <h1>Verify your email in ${forum_name}-forum</h1>
             <a href="${host}/auth/email?code=${user.email_code}">Click here to verify your email</a>
             `
-        }, (err, info) => {
+        }, (err) => {
             if (err) return res.error(500, "Failed to send email");
         });
 

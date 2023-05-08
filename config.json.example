@@ -1,7 +1,6 @@
 {
     "def_theme": {
         "name": "white",
-        "color": "black",
         "language": "en"
     },
     "forum_name": "akf",

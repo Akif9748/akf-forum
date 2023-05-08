@@ -22,8 +22,8 @@ app.ips = [];
 app.set("view engine", "ejs");
 app.set("limits", limits);
 
-app.use(express.static("public", { maxAge: 86400 * 1000 }), express.json(), express.urlencoded({ extended: true }), IP(),
-    SES({ secret: process.env.SECRET, store: MS.create({ clientPromise: DB, stringify: false }), resave: true, saveUninitialized: true }),
+app.use(express.static("public"), express.json(), express.urlencoded({ extended: true }), IP(),
+    SES({ secret: process.env.SECRET, store: MS.create({ clientPromise: DB, stringify: false }), resave: false, saveUninitialized: false }),
     async (req, res, next) => {
         if (app.ips.includes(req.clientIp)) return res.status(403).send("You are banned from this forum.");
 
@@ -31,14 +31,14 @@ app.use(express.static("public", { maxAge: 86400 * 1000 }), express.json(), expr
             lastSeen: Date.now(), $addToSet: { ips: req.clientIp }
         }) : null;
 
-        const theme = require(`./themes/${req.user?.theme?.name || def_theme.name}`);
-        res.reply = (page, data = {}, status = 200) =>
-            theme.render(page, { user: req.user, ...data }, {
-                color: req.user?.theme?.color || def_theme.color,
-                lang: req.user?.theme?.language || def_theme.language,
-                forum_name,
-                description
-            }, res.status(status));
+
+        res.reply = (page, options = {}, status = 200) => res.status(status).render(page, {
+            user: req.user,
+            theme: req.user?.theme || def_theme,
+            lang: req.user?.theme?.language || def_theme.language,
+            forum_name, description, ...options
+        });
+
 
         res.error = (type, error) => res.reply("error", { type, error }, type);
 
@@ -61,6 +61,6 @@ if (RLS.enabled) app.use(RL(RLS.windowMs, RLS.max));
 for (const file of fs.readdirSync("./routes"))
     app.use("/" + file.replace(".js", ""), require(`./routes/${file}`));
 
-app.all("*", (req, res) => res.error(404, "We have not got this page."));
+app.all("*", (req, res) => res.error(404, "This page does not exist on this forum."));
 
 app.listen(port, () => console.log(`${forum_name}-forum on port:`, port));

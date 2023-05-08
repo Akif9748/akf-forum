@@ -37,7 +37,7 @@ app.patch("/:id", async (req, res) => {
     if (req.user.id !== member.id && !user.admin) return res.error(403, "You have not got permission for this.");
     if (!Object.keys(req.body).some(Boolean)) return res.error(400, "Missing member informations in request body.");
 
-    const { name, about, theme, admin, deleted, hideLastSeen } = req.body;
+    const { name, about, admin, deleted, hideLastSeen } = req.body;
 
     if ((admin?.length || "deleted" in req.body) && !req.user.admin) return res.error(403, "You have not got permission for edit 'admin' and 'deleted' information, or bad request.");
     const { names, desp } = req.app.get("limits");

@@ -13,7 +13,6 @@ const schema = new mongoose.Schema({
     admin: { type: Boolean, default: false },
     theme: {
         name: { type: String, default: def_theme.name },
-        color: { type: String, default: def_theme.color },
         language: { type: String, default: def_theme.language }
     },
     lastSeen: { type: Date, default: Date.now, select: false },

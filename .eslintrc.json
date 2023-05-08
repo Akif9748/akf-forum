@@ -1,25 +1,27 @@
 {
-    // exclude public folder from linting
-    "ignorePatterns": ["public/"],
-
+    "ignorePatterns": [
+        "test.js"
+    ],
     "env": {
         "node": true,
         "commonjs": true,
         "es2021": true
     },
     "extends": "eslint:recommended",
-    "overrides": [
-        
-    ],
     "parserOptions": {
         "ecmaVersion": "latest"
     },
     "rules": {
-  
-        "linebreak-style": [
-            "error",
-            "windows"
-        ]
-
-    }
+        "no-use-before-define": "error"
+    },
+    "overrides": [
+        {
+            "env": {
+                "browser": true
+            },
+            "files": [
+                "public/js/*"
+            ]
+        }
+    ]
 }

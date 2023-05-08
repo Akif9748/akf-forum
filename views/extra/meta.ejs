@@ -4,9 +4,6 @@
   <title><%= title || forum_name +"-forum" %></title>
   <meta name="description" content="<%= description %>">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/css/themes/<%= color %>.css" />
+  <link rel="stylesheet" href="/css/themes/<%= theme.name %>.css" />
   <link rel="stylesheet" href="/css/common.css" />
-  <% if (color === "black") { %>
-  <meta name="theme-color" content="#000000" />
-  <% } %>
 </head>
