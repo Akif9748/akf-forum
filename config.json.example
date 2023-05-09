@@ -1,6 +1,6 @@
 {
     "def_theme": {
-        "name": "white",
+        "codename": "bootstrap_black",
         "language": "en"
     },
     "forum_name": "akf",
@@ -18,7 +18,7 @@
     },
     "discord_auth": "",
     "default_thread_state": "OPEN",
-    "email_auth": false,
     "default_user_state": "ACTIVE",
+    "email_auth": false,
     "host": "https://akf-forum.glitch.me"
 }

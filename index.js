@@ -6,10 +6,10 @@ const
     mongoose = require("mongoose"),
     express = require('express'),
     fs = require("fs"),
+    { join } = require("path"),
     app = express(),
     { mw: IP } = require('request-ip'),
-    { RL } = require('./lib'),
-    { themes } = require("./config.json"),
+    { RL, themes } = require('./lib'),
     SES = require('express-session'),
     MS = require("connect-mongo"),
     DB = mongoose.connect(process.env.MONGO_DB_URL)
@@ -32,13 +32,15 @@ app.use(express.static("public"), express.json(), express.urlencoded({ extended:
             lastSeen: Date.now(), $addToSet: { ips: req.clientIp }
         }) : null;
 
+        let theme = req.user?.theme || def_theme;
+
+        if (!themes.some(t => t.codename === theme.codename))
+            theme = def_theme;
 
         res.reply = (page, options = {}, status = 200) => res.status(status).render(page, {
             dataset: {
-                themes,
-                theme: req.user?.theme || def_theme,
-                forum_name, 
-                description
+                themes, theme, forum_name, description,
+                getFile: file => join(__dirname, "public", "themes", file),
             },
             user: req.user,
             ...options

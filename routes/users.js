@@ -18,6 +18,7 @@ app.get("/:id/avatar", async (req, res) => {
     else
         res.error(404, `We don't have any user with id ${req.params.id}.`);
 })
+
 app.get("/:id", async (req, res) => {
     const user = req.user
     const { id } = req.params;
@@ -27,10 +28,23 @@ app.get("/:id", async (req, res) => {
 
         const message = await MessageModel.count({ authorID: id });
         const thread = await ThreadModel.count({ authorID: id });
-        res.reply("user", { member, counts: { message, thread}, discord: req.app.get("discord_auth")  })
+        res.reply("user", { member, counts: { message, thread }, discord: req.app.get("discord_auth") })
     }
     else res.error(404, `We don't have any user with id ${id}.`);
 
 });
+
+app.get("/:id/edit", async (req, res) => {
+    const user = req.user
+    const { id } = req.params;
+    const member = await UserModel.get(id);
+    if (!member) return res.error(404, `We don't have any user with id ${id}.`);
+    if (user?.admin || user.id === member.id)
+        return res.reply("edit_user", { member });
+
+    res.error(403, "You have not got permission for this.");
+
+});
+
 
 module.exports = app;

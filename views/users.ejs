@@ -10,15 +10,14 @@
   <link rel="stylesheet" href="/css/pages.css" />
 
   <%- include("extra/navbar") %>
-
   <div class="users">
-    <% users.forEach(user=>{ %>
+    <% users.filter(member=> !member.deleted || user.admin ).forEach(member => { %>
     <div style="display:flex;justify-content:center;">
       <div class="user-box">
-        <img src="<%= user.avatar %>" class="user-box-img">
-        <div class="user-box-title"> <a href="<%= user.getLink() %>">
-            <% if (user.deleted) { %> <span style="color: var(--important);">[DELETED]</span><% } %>
-            <%= user.name %></a></div>
+        <img src="<%= member.avatar %>" class="user-box-img">
+        <div class="user-box-title"> <a href="<%= member.getLink() %>">
+            <% if (member.deleted) { %> <span style="color: var(--important);">[DELETED]</span><% } %>
+            <%= member.name %></a></div>
       </div>
     </div>
     <% }); %>

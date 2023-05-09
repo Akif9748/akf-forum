@@ -12,7 +12,7 @@ const schema = new mongoose.Schema({
     about: { type: String, default: "", maxlength: limits.desp },
     admin: { type: Boolean, default: false },
     theme: {
-        name: { type: String, default: def_theme.name },
+        codename: { type: String, default: def_theme.codename },
         language: { type: String, default: def_theme.language }
     },
     lastSeen: { type: Date, default: Date.now, select: false },

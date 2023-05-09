@@ -1,0 +1,82 @@
+<% if(user?.admin || user?.id === member.id){ %>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#userMenu" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="userMenu">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <% if (!member.discordID && discord && user?.id === member.id) { %>
+        <a href="<%=discord%>" class="btn-outline-primary">Discord auth</a>
+        <% } else if(member.discordID && user?.id === member.id) { %>
+        <a class="btn-primary" id="un_discord">Unauth Discord</a>
+        <% } %>
+        <% if (member.hideLastSeen) {%>
+        <a id="last_unhide" class="btn-primary">Unhide last seen</a>
+        <% } else { %>
+        <a id="last_hide" class="btn-outline-primary">Hide last seen</a>
+        <% } %>
+        <% if (member.deleted) {%>
+        <h1>This user has been deleted!</h1>
+        <a id="undelete" class="btn-primary">Undelete user</a>
+        <% } else if (user?.admin){ %>
+        <a id="delete" class="btn-outline-primary">Delete user</a>
+        <% } %>
+        <a class="btn-outline-primary" href="/users/<%=member.id%>/edit">Edit user</a>
+        <a href="/users/<%=member.id%>/avatar" class="btn-outline-primary">Upload avatar</a>
+      </ul>
+
+      <script type="module">
+        import request from "../../js/request.js";
+
+
+        document.addEventListener("click", async e => {
+          if (e.target.id == "delete") {
+            const response = await request("/api/users/<%= member.id %>", "DELETE");
+            if (response.state !== "DELETED") return
+            alert("User is deleted!");
+            location.reload()
+          } else if (e.target.id == "undelete") {
+            const response = await request("/api/users/<%= member.id %>/", "PATCH", {
+              deleted: false
+            });
+            if (response.state == "DELETED") return;
+            alert("User is undeleted successfully!");
+            location.reload()
+          } else if (e.target.id == "un_discord") {
+            const response = await fetch("/auth/discord/", {
+              method: "DELETE"
+            });
+            alert(await response.text());
+            location.reload()
+          } else if (e.target.id.startsWith("last_")) {
+            let hideLastSeen = e.target.id.replace("last_", "") == "hide" ? true : false;
+            const response = await request("/api/users/<%= member.id %>/", "PATCH", {
+              hideLastSeen
+            });
+            alert(`Last seen is ${!hideLastSeen?"un":""}hided!`);
+            location.reload()
+
+          } else if (e.target.id == "toogle")
+            document.getElementById('user-edit').classList.toggle('no-active')
+
+        });
+      </script>
+
+
+
+    </div>
+  </div>
+
+
+</nav>
+<% if (user.admin) { %>
+<select>
+  <option selected>IP LIST</option>
+  <% for(const ip of member.ips) { %>
+  <option><%= ip %></option>
+  <% } %>
+</select>
+<% } %>
+
+<% } %>

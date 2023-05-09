@@ -1,7 +1,7 @@
 const { UserModel, BanModel } = require("../../../models");
 const { Router } = require("express");
 const multer = require("multer");
-const { themes } = require("../../../config.json")
+const { themes } = require("../../../lib")
 const app = Router();
 
 app.param("id", async (req, res, next, id) => {
@@ -51,7 +51,7 @@ app.patch("/:id", async (req, res) => {
         if (about.length > desp) return res.error(400, `About must be under ${desp} characters`);
         member.about = about;
     }
-    if (theme || themes.some(t => t.name === theme.name).includes(theme))
+    if (theme && themes.some(t => t.codename === theme.codename))
         member.theme = theme;
 
     if (typeof admin === "boolean" || ["false", "true"].includes(admin)) member.admin = admin;

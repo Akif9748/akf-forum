@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
 
 <%- include("extra/meta", {title: thread.title }) %>
 
 
 <body>
   <%- include("extra/navbar") %>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
-  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
   <link rel="stylesheet" href="/css/thread.css" />
   <link rel="stylesheet" href="/css/pages.css" />
@@ -142,6 +143,13 @@
       if (res) location.href = `/threads/<%= thread.id %>?page=${tp-1}`;
     });
   </script>
+<style>
+  .fa {
+    color: var(--main);
+}
+</style>
+
+
   <% }%>
   <div class="pagination">
     <div class="back">

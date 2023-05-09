@@ -80,7 +80,7 @@
   position: absolute;
   top: 50px;
   right: 0;
-  background-color: var(--btn-clr-1);
+  background-color: var(--second);
   width: 100px;
   text-align: center;
   display: none;

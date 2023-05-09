@@ -9,21 +9,16 @@
 
   <%- include("extra/navbar") %>
 
-
-
   <div class="content">
     <% if (user) { %>
     <h2 style="color: var(--main);">
       <div class="box-username">Welcome, <%= user.name %>
         <div class="avatar"><img src="<%=user.avatar %>"></div>
-
       </div>
-      You can log out of the site here:
-
+      Main page will be rewritten soon, so stay tuned!
     </h2>
-
-    <a href="/login" class="btn-outline-primary">LOGOUT</a>
     <br>
+
     <% } else { %>
     <h2 style="color: var(--main);">Welcome, Guest!<br>You can press the button to register:
       <a href="/register" class="btn-outline-primary">REGISTER</a>

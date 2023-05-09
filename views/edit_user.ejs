@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("extra/meta", {title: member.name }) %>
+
+
+<body>
+  <%- include("extra/navbar") %>
+  <h1 class="title" style="text-align:center;">
+    Edit <a href="/users/<%= member.id %>"><%= member.name %></a>
+  </h1>
+
+  <form id="form" style="box-shadow:none">
+    <input type="text" name="name" placeholder="<%=member.name%>" class="input">
+
+    <textarea class="input" name="about" rows="4" cols="60" name="content" placeholder="<%=member.about%>"></textarea>
+    <% if (user?.admin){ %>
+    Is Admin? <input id='admin' type='checkbox' value='true' name='admin' <%=member.admin ? "checked": ""%>>
+    <input id='adminHidden' type='hidden' value='false' name='admin'>
+    <% } %>
+
+    <button class="btn-primary" style="width:100%;">Update User!</button>
+  </form>
+
+  <script type="module">
+    import request from "/js/request.js";
+
+    document.getElementById("form").addEventListener("submit", async e => {
+      e.preventDefault();
+      document.getElementById('adminHidden').disabled = document.getElementById("admin").checked;
+
+      const object = {};
+      new FormData(e.target).forEach((value, key) => object[key] = value);
+
+      const res = await request("/api/users/<%=member.id%>", "PATCH", object);
+      if (res) alert(`User is updated!`);
+      location.reload();
+    });
+  </script>
+    <%- include("extra/footer") %>
+
+</body>
+
+</html>

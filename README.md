@@ -12,6 +12,9 @@ A Node.js based forum software.
 Run `node util/reset` to **reset the database** for duplicate key errors, and run `node util/admin` for give admin perms to first member.
 Edit `config.json` for default theme color (`black` or `white`) of users, and forum name, meta description, character limits, discord auth enabler, global ratelimit.
 
+### How to install theme:
+- Copy your theme to `public/themes` folder.
+
 ### DISCORD AUTH: 
 `"discord_auth": "your_app_id"` in config.json.
 Add your app secret to `.env` as `DISCORD_SECRET`.
@@ -56,22 +59,17 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - change category name
 - _id
 - add support for transition around gravatar
-- forum setup page++
-
-### theme to do:
-- add bootstrap for navbar
-- routes/api/routes/users.js check,
-themes/default/extra/footer.ejs check,
-themes/default/extra/meta.ejs check
-- add theme support again, but only works with css folder. Put every css file into one file. (themes/default/css/main.css)
+- forum setup page rewrite and directly open a router
 
 ### front-end
-- better usermenu for user profile
+- add a css file for CodeMirror in threads / send message ok
 - old contents / titles add to forum interface
 - categories page is need a update, thread count in category (?) 
-- add ban button to user profile.?
-- who liked a message for web.
+- add ban button to user profile
+- who liked a message
 - give admin button, not is admin
+- edit user ++
+- rewrite main page, list new messages
 
 ## Major Version History
 - V4: Caching

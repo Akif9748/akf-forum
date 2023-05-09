@@ -1,0 +1,41 @@
+<footer class="text-center text-white fixed-bottom">
+  <% if (user){ %>
+  <select id="theme_select">
+    <% for(const theme of dataset.themes){%>
+    <option value="<%= theme.codename %>"><%= theme.name %></option>
+    <% } %>
+  </select>
+  <script>
+    const theme_select = document.getElementById("theme_select");
+    theme_select.querySelector(`option[value=<%= user.theme.codename %>]`).selected = true;
+    theme_select.addEventListener("change", async e => {
+      const codename = e.target.value;
+      await fetch('/api/users/<%= user.id %>', {
+        method: 'PATCH',
+        body: JSON.stringify({
+          theme: {
+            codename
+          }
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      const theme = await fetch("/api/themes/" + codename).then(res => res.json());
+      const txt = "Theme changed to:\n" +
+        "Name: " + theme.name + "\n" +
+        "Description: " + theme.description + "\n" +
+        "Author: " + theme.author + "\n";
+
+
+      alert(txt)
+      location.reload();
+    });
+  </script>
+  <% } %>
+
+  <div class="text-center p-3">
+    akf-forum bootstrap theme created by <a class="text-white" href="https://akif9748.github.io/">Akif9748</a>,<br>
+    This website is powered by <a class="text-white" href="https://github.com/Akif9748/akf-forum">akf-forum</a>
+  </div>
+</footer>
