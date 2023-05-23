@@ -13,7 +13,7 @@ app.post("/", RL(24 * 60 * 60_000, 5), async (req, res) => {
     let { name, password, about, email } = req.body;
 
     if (!name || !password || !email) return res.error(400, "You forgot entering some values");
-    if (!email || !emailRegEx.test(email)) return res.error(400, "E-mail is not valid");
+    if (!emailRegEx.test(email)) return res.error(400, "E-mail is not valid");
     const { names } = req.app.get("limits");
     if (name.length < 3 || name.length > names) return res.error(400, "Name must be between 3 - 25 characters");
     if (password.length < 3 || password.length > names) return res.error(400, "Password must be between 3 - 25 characters");

@@ -70,6 +70,7 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - give admin button, not is admin
 - edit user ++
 - rewrite main page, list new messages
+https://medium.com/@minhquocece/how-to-create-an-upload-avatar-feature-like-facebook-by-cropper-js-and-slider-879990fdce82
 
 ## Major Version History
 - V4: Caching

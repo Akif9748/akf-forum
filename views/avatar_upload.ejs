@@ -4,27 +4,109 @@
 <%- include("extra/meta", {title: "Avatar Upload Panel!" }) %>
 
 <body style="text-align: center;">
+  <link rel="stylesheet" href="/css/cropper.css">
+  <style>
+    .container {
+      margin: 20px auto;
+      max-width: 640px;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    .cropper-view-box,
+    .cropper-face {
+      border-radius: 50%;
+    }
+
+    .cropper-view-box {
+      outline: 0;
+      box-shadow: 0 0 0 1px #39f;
+    }
+  </style>
+  <script src="/js/cropper.js"></script>
+
   <%- include("extra/navbar") %>
-  <h1>Upload avatar for <%= member.name %></h1>
-  <form>
-    <input type="file" name="avatar" /><br>
-    <input class="btn-primary" type="submit" value="Upload" />
-  </form>
 
+
+  <div class="container">
+    <h1>Upload avatar for <%= member.name %></h1>
+
+    <input type="file" id="file-input">
+    <img id="image" src="<%= member.avatar %>">
+    <p>
+      <button type="button" id="button">Upload</button>
+    </p>
+    <file id="cropped-image" name="avatar">
+      <form id="form"></form>
+
+  </div>
   <script>
-    const form = document.querySelector('form');
-    form.addEventListener('submit', async e => {
-      e.preventDefault();
+    function b64toBlob(b64Data, contentType = "", sliceSize = 512) {
 
-      const res = await fetch('/api/users/<%= member.id %>/avatar', {
-        method: 'POST',
-        body: new FormData(form)
-      })
-      if (res.error) return alert(res.error);
-      alert('Success!');
-      location.href = "/users/<%= member.id %>"
-    });
+      const byteCharacters = atob(b64Data);
+      const byteArrays = [];
+
+      for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        const byteNumbers = new Array(slice.length);
+        for (let i = 0; i < slice.length; i++)
+          byteNumbers[i] = slice.charCodeAt(i);
+        const byteArray = new Uint8Array(byteNumbers);
+        byteArrays.push(byteArray);
+      }
+      const blob = new Blob(byteArrays, {
+        type: contentType
+      });
+      return blob;
+    }
   </script>
+  <script>
+    const image = document.getElementById('image');
+    const button = document.getElementById('button');
+    const reader = new FileReader();
+
+    document.getElementById("file-input")
+      .addEventListener("change", function() {
+        reader.onload = () => {
+          image.src = reader.result;
+
+          let croppable = false;
+          const cropper = new Cropper(image, {
+            aspectRatio: 1,
+            viewMode: 1,
+            ready: function() {
+              croppable = true;
+            },
+          });
+
+          button.onclick = async () => {
+            if (!croppable) return;
+
+            const croppedCanvas = cropper.getCroppedCanvas();
+            const croppedImage = document.getElementById('cropped-image');
+            const body = new FormData(document.createElement('form'))
+            const block = croppedCanvas.toDataURL().split(";");
+            const contentType = block[0].split(":")[1];
+            const realData = block[1].split(",")[1];
+            body.append('avatar', b64toBlob(realData, contentType));
+
+            const res = await fetch('/api/users/<%= member.id %>/avatar', {
+              method: 'POST',
+              body
+            }).then(res => res.json());
+
+            if (res.error) return alert(res.error);
+            alert('Success!');
+            location.reload();
+          };
+        }
+        reader.readAsDataURL(event.target.files[0]);
+      });
+  </script>
+
   <%- include("extra/footer") %>
 
 </body>

@@ -84,6 +84,7 @@ const storage = multer.diskStorage({
         cb(null, './public/images/avatars')
     },
     filename: function (req, _file, cb) {
+        console.log(_file)
         cb(null, req.member.id + ".jpg")
     }
 })
@@ -91,6 +92,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage })
 
 app.post("/:id/avatar", upload.single('avatar'), async (req, res) => {
+   
     const { member } = req;
 
     if (req.user.id !== member.id && !req.user.admin) return res.error(403, "You have not got permission for this.");
