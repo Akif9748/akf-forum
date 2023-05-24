@@ -4,21 +4,21 @@
 <%- include("extra/meta", {title: "Create thread!" }) %>
 
 <body >
-  <link rel="stylesheet" href="/css/create_thread.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-  <%- include("extra/navbar") %>
 
-  <form>
+  <%- include("extra/navbar") %>
+  <link rel="stylesheet" href="/libs/simplemde/simplemde.min.css">
+  <script src="/libs/simplemde/simplemde.min.js"></script>
+
+  <form class="post">
     <h2 class="title" style="align-self: baseline;">Title:</h2>
     <input name="title" class="input" required></input>
     <h2 class="title" style="align-self: baseline;">Content:</h2>
-    <div  style="width: 100%;">
+    <div style="width: 100%;">
       <textarea id="textarea"></textarea>
     </div>
     <h2 class="title" style="align-self: baseline;">Category:</h2>
 
-    <select name="category">
+    <select name="category" class="input">
       <% for (const category of categories) { %>
       <option value="<%= category.id %>"><%= category.name %></option>
       <% } %>
@@ -26,21 +26,11 @@
 
     <button class="btn-primary" style="width:100%" type="submit">Create Thread!</button>
   </form>
+  <script src="/js/editor.js"></script>
 
 
   <script type="module">
-    const textarea = document.getElementById("textarea");
-    const simplemde = new SimpleMDE({
-      autosave: {
-        enabled: true,
-        uniqueId: "thread-create",
-        delay: 1000,
-      },//    width: 100%;
-
-      element: textarea,
-      spellChecker: false
-      
-    });
+    const simplemde = editor("thread-create");
 
     import request from "../../js/request.js";
 
@@ -55,6 +45,7 @@
         category: data.get("category")
       });
 
+      simplemde.clearAutosavedValue();
 
       if (response)
         window.location.href = "/threads/" + response.id;

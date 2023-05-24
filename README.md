@@ -60,8 +60,11 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - _id
 - add support for transition around gravatar
 - forum setup page rewrite and directly open a router
-
+- login w/ email
+- BETTER SETUP PAGE
 ### front-end
+
+- text alling center body
 - add a css file for CodeMirror in threads / send message ok
 - old contents / titles add to forum interface
 - categories page is need a update, thread count in category (?) 
@@ -70,7 +73,20 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - give admin button, not is admin
 - edit user ++
 - rewrite main page, list new messages
+- thread.js unfuction only listener
+
+
+#### css fix
+- admin page to css file
 https://medium.com/@minhquocece/how-to-create-an-upload-avatar-feature-like-facebook-by-cropper-js-and-slider-879990fdce82
+threads:
+  <style>
+    .fa {
+      color: var(--main);
+    }
+  </style>
+
+
 
 ## Major Version History
 - V4: Caching

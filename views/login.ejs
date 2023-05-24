@@ -4,20 +4,21 @@
 <%- include("extra/meta", {title: "Log in!" }) %>
 
 <body style="text-align: center;">
-  <link rel="stylesheet" href="/css/login.css" />
 
   <%- include("extra/navbar") %>
-  <% if(discord) { %>
-  <a href="<%=discord%>" class="btn-outline-primary">Login with discord</a>
-  <% } %>
+
   <h1 class="title">Login</h1>
 
-  <form action="/login?redirect=<%= redirect !== "/register" ? redirect : "/"  %>" method="post">
+  <form class="login" action="/login?redirect=<%= redirect !== "/register" ? redirect : "/"  %>" method="post">
 
     <input type="text" name="name" placeholder="Username" class="input" required>
     <input type="password" name="password" placeholder="Password" class="input" required>
     <input type="submit" style="width:100%" class="btn-primary" value="Login">
   </form>
+  <% if(discord) { %>
+  <a href="<%=discord%>" class="btn-outline-primary">Auth with discord</a>
+  <% } %>
+  <a href="/register" class="btn-outline-primary">Register</a>
 
   <%- include("extra/footer") %>
 

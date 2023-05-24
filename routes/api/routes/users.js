@@ -80,11 +80,8 @@ app.post("/:id/ban", async (req, res) => {
 });
 
 const storage = multer.diskStorage({
-    destination: function (_req, _file, cb) {
-        cb(null, './public/images/avatars')
-    },
+    destination:'./public/images/avatars',
     filename: function (req, _file, cb) {
-        console.log(_file)
         cb(null, req.member.id + ".jpg")
     }
 })

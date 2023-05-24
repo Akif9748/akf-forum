@@ -44,7 +44,7 @@
     </div>
     <div>
       <% if (user) { %>
-      <a  class="navbar-brand" href="<%=user.getLink()%>"> <%=  user.name %>
+      <a class="navbar-brand" href="<%=user.getLink()%>"> <%=  user.name %>
         <img style="border-radius: 50%;" width="32" src="<%=user.avatar %>">
       </a>
 
@@ -56,17 +56,15 @@
       <% } %>
     </div>
   </div>
+  <script>
+    const menuItems = document.getElementsByClassName("nav-link");
 
-
-
-    <script>
-        const menuItems = document.getElementsByClassName("nav-link");
+    for (let i = 0; i < menuItems.length; i++) 
+      if (window.location.pathname.includes(menuItems[i].getAttribute("href"))) {
+        menuItems[i].classList.add("active");
+        break;
+      }
     
-        for (let i = 0; i < menuItems.length; i++){console.log(menuItems[i].getAttribute("href"))
-          if (window.location.pathname.includes(menuItems[i].getAttribute("href"))) {
-            menuItems[i].classList.add("active");
-            //break;
-          }}
-      </script>
+  </script>
 
 </nav>

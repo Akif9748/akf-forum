@@ -6,22 +6,24 @@
 
 <body style="text-align: center;">
   <%- include("extra/navbar") %>
-    <link rel="stylesheet" href="/css/setup.css">
+
   <h1 style="color: var(--main);">Setup</h1>
   <h2 style="color: var(--second);">There is default settings for akf-forum, you not need to edit them, but you can! And, the first registered user will be admin.</h2>
-  <form method="POST">
+  <form class="search" method="POST">
 
     Forum name:
-    <input type="text" name="forum_name" value="akf" required>
+    <input class="input" type="text" name="forum_name" value="akf" required>
     Forum description:
-    <input type="text" name="description" value="Akf-forum!" required>
+    <input class="input" type="text" name="description" value="Akf-forum!" required>
     Default state for new threads, change with "APPROVAL" for approval system:
-    <input type="text" name="default_thread_state" value="OPEN" required>
+    <input class="input" type="text" name="default_thread_state" value="OPEN" required>
+    Default state for new users, change with "APPROVAL" for approval system:
+    <input class="input" type="text" name="default_thread_state" value="ACTIVE" required>
     Domain of the forum, defaulty setted:
-    <input type="text" name="host" id="domain" value="Akf-forum!" required>
+    <input class="input" type="text" name="host" id="domain" value="Akf-forum!" required>
     <hr>
     (Optional) Discord app ID for Discord login:
-    <input type="text" name="discord_auth">
+    <input class="input" type="text" name="discord_auth">
     
     <input type="submit" class="btn-primary" value="Setup">
   </form>

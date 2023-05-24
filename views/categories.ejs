@@ -5,9 +5,6 @@
 <body>
   <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
-  <link rel="stylesheet" href="/css/threads.css" />
-  <link rel="stylesheet" href="/css/pages.css" />
-
   <%- include("extra/navbar") %>
   <div class="threads">
     <% categories.forEach(category=>{ %>
@@ -33,19 +30,19 @@
   <div class="pagination">
     <div class="back">
       <% if (page > 0){ %>
-      <a href="/threads?page=<%= page-1 %>" class='bx bxs-chevron-left'></a>
+      <a href="/categories?page=<%= page-1 %>" class='bx bxs-chevron-left'></a>
       <% } %>
     </div>
 
     <div class="numbers">
       <% for(let i=0; i < pages; i++){ %>
-      <a class="number <%= i==page?'active':'' %>" href="/threads?page=<%= i %>"><%= i+1 %></a>
+      <a class="number <%= i==page?'active':'' %>" href="/categories?page=<%= i %>"><%= i+1 %></a>
       <% } %>
     </div>
 
     <div class="after">
       <% if (pages-1 > page) { %>
-      <a href="/threads?page=<%= page +1 %>" class='bx bxs-chevron-right'></a>
+      <a href="/categories?page=<%= page +1 %>" class='bx bxs-chevron-right'></a>
       <% } %>
     </div>
 

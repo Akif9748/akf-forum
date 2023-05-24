@@ -9,7 +9,7 @@
 
   <%- include("extra/navbar") %>
 
-  <div class="content">
+  <div class="usercontent">
     <% if (user) { %>
     <h2 style="color: var(--main);">
       <div class="box-username">Welcome, <%= user.name %>
@@ -28,24 +28,24 @@
 
     <h2 style="color: var(--second);">Statistics:</h2>
 
-    <div class="box">
-      <h2 class="box-title">Message count:</h2>
-      <h2 class="box-value"><%= messages %></h2>
+    <div class="userbox">
+      <h2 class="userbox-title">Message count:</h2>
+      <h2 class="userbox-value"><%= messages %></h2>
     </div>
 
-    <div class="box">
-      <h2 class="box-title">User count: </h2>
-      <h2 class="box-value"><%= users %> </h2>
+    <div class="userbox">
+      <h2 class="userbox-title">User count: </h2>
+      <h2 class="userbox-value"><%= users %> </h2>
     </div>
 
-    <div class="box">
-      <h2 class="box-title">Thread count:</h2>
-      <h2 class="box-value"><%= threads %></h2>
+    <div class="userbox">
+      <h2 class="userbox-title">Thread count:</h2>
+      <h2 class="userbox-value"><%= threads %></h2>
     </div>
 
-    <div class="box">
-      <h2 class="box-title">Memory usage:</h2>
-      <h2 class="box-value"><%= mem.toFixed(2); %> MB</h2>
+    <div class="userbox">
+      <h2 class="userbox-title">Memory usage:</h2>
+      <h2 class="userbox-value"><%= mem.toFixed(2); %> MB</h2>
     </div>
 
   </div>

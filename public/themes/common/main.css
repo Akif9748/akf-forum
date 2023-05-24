@@ -1,33 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-
-
-:root {
-    --alair: #736FE9;
-    --main: #736FE9;
-    --btn-clr-1: #e8e8e8;
-    --menu-item: #ffffff;
-    --borders: #d9d9d9;
-    --input-clr: #dcdcdc;
-    --box-shadow: #c3c3c3;
-    --second: #9f9f9f;
-    --anti: #ebebeb;
-    --t-username: rgb(236 236 236);
-    --background-color: #000000;
-
-}
-
-
-
-/***********************************
-
-START OF OLD THEME
-
-***********************************/
-
-
-
-
 * {
     box-sizing: border-box;
 }
@@ -71,9 +43,8 @@ a {
 }
 
 .btn-primary {
-    color: #fafafa;
-    background-color: var(--alair);
-    border-color: var(--alair);
+    color: var(--btn-clr-1);
+    background-color: var(--main);
     padding: 10px 20px 10px 20px;
     border-radius: 4px;
     font-weight: 700;
@@ -81,15 +52,6 @@ a {
     cursor: pointer;
     border: 2px solid var(--main);
 }
-
-.btn-primary:hover {
-    color: var(--alair);
-    background-color: rgba(0, 0, 0, 0);
-    border: 2px solid var(--alair);
-}
-
-
-
 
 .btn-danger {
     color: var(--btn-clr-1);
@@ -105,9 +67,7 @@ a {
 
 
 .btn-outline-primary {
-
-
-    color: var(--alair);
+    color: var(--main);
     padding: 10px 20px 10px 20px;
 
     border-radius: 4px;
@@ -117,10 +77,16 @@ a {
     border: 2px solid var(--borders);
 }
 
+
+
+.btn-primary:hover {
+    color: var(--main);
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid var(--main);
+}
+
 .btn-outline-primary:hover {
-    color: var(--btn-clr-1);
-    background-color: var(--alair);
-    border: 2px solid var(--alair);
+    border: 2px solid var(--main);
 }
 
 .btn-danger:hover {
@@ -185,6 +151,11 @@ div.avatar {
     color: var(--main);
 }
 
+.CodeMirror {
+    color: var(--input-clr);
+    background-color: var(--bs-body-bg);
+}
+
 .title {
     color: var(--main);
 }
@@ -240,58 +211,33 @@ form.post {
 }
 
 
+/*
+FOOTER
+*/
 
-/***********************************
-
-START OF BOOTSTRAP THEME
-
-***********************************/
-
-.a:hover {
-    color: var(--alair);
+select {
+    background: #ebebeb;
+    border: white;
+    padding: 8px 20px;
+    font-size: 16px;
+    font-family: inherit;
 }
 
-.CodeMirror {
-    color: var(--input-clr);
-    background-color: var(--bs-body-bg);
+select option {
+    font-family: inherit;
+    width: 290px;
 }
 
-
-footer {
-    background-color: #000000;
-    font-size: small;
+.footer {
+    width: 100%;
+    background-color: var(--main);
+    bottom: 0;
+    color: white;
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
 }
-
-body {
-    min-height: 400px;
-    background-size: cover;
-    clear: both;
-}
-
-a {
-    color: var(--alair);
-}
-
-.alair-trans {
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-.alair-cl {
-    width: 50%;
-}
-
-@media screen and (max-width: 768px) {
-    .alair-cl {
-        width: 90%;
-    }
-}
-
-.container-sm {
-    margin-top: 25px;
-    margin-bottom: 125px;
-}
-
 
 /***********************************
 PAGINATION
@@ -381,6 +327,7 @@ Threads
     }
 }
 
+
 /*****
 LOGIN / REGISTER
 ******/
@@ -395,7 +342,7 @@ form.login {
 }
 
 /********
-MESSAGE
+MESSAGES
 ********/
 .message .date {
     color: var(--second);
@@ -498,7 +445,6 @@ SEARCH
     box-shadow: 0 0 5px 0 #b0b0b0;
 }
 
-
 /****************************************
 USERS
 *****************************************/
@@ -551,6 +497,8 @@ USERS
         margin-bottom: 10px;
     }
 }
+
+
 
 /************************************
   THREAD

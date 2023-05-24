@@ -3,20 +3,25 @@
 <%- include("extra/meta", {title: "Create Category!" }) %>
 
 <body>
-  <link rel="stylesheet" href="/css/create_thread.css" />
-
   <%- include("extra/navbar") %>
+  <link rel="stylesheet" href="/libs/simplemde/simplemde.min.css">
+  <script src="/libs/simplemde/simplemde.min.js"></script>
 
-  <form>
+  <form class="post">
     <h2 class="title" style="align-self: baseline;">Name:</h2>
     <input name="name" class="input" required ></input>
     <h2 class="title" style="align-self: baseline;">Description:</h2>
-    <textarea rows="4" cols="50" name="desp" class="input" required></textarea>
+    <div style="width: 100%;">
+      <textarea id="textarea"></textarea>
+    </div>
     <button class="btn-primary" style="width:100%" type="submit">Create Category!</button>
   </form>
+  <script src="/js/editor.js"></script>
 
 
   <script type="module">
+    const simplemde = editor("category-create");
+  
     import request from "../../js/request.js";
 
     document.addEventListener("submit", async e => {
@@ -25,8 +30,10 @@
 
       const response = await request("/api/categories/", "POST", {
         name: data.get("name"),
-        desp: data.get("desp")
+        desp: simplemde.value()
       });
+      
+      simplemde.clearAutosavedValue();
 
       if (response)
         window.location.href = "/categories/" + response.id;
