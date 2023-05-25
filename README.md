@@ -59,10 +59,8 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - change category name
 - _id
 - add support for transition around gravatar
-- forum setup page rewrite and directly open a router
-- login w/ email
 - BETTER SETUP PAGE
-
+- add used open source libraries to README.md
 ### front-end
 - text alling center body
 - add a css file for CodeMirror in threads / send message ok
