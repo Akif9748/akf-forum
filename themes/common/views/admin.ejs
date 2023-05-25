@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include(dataset.getFile(dataset.theme.codename +"/views/extra/meta"), {title: "Admin Panel!" }) %>
+
+
+<body style="text-align: center;">
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/navbar")) %>
+
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      color: var(--anti);
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+
+  <div>
+    <h1 style="color: var(--main);">Welcome to the admin panel of the forum, <%= user.name %>!</h1>
+
+    <a class="btn-primary" onclick="ban();">IP BAN</a>
+    <a class="btn-outline-primary" onclick="unban();">REMOVE IP BAN</a>
+    <a href="/categories/create" class="btn-primary">Create Category</a>
+    <a href="/admin/config" class="btn-primary">Edit config</a>
+
+    <h2 style="color: var(--second);">Banned users:</h2>
+
+    <table>
+      <tr>
+        <th>IP</th>
+        <th>Reason</th>
+        <th>AuthorID</th>
+      </tr>
+      <% for (const ban of bans) { %>
+      <tr>
+        <td><%=ban.ip%></td>
+        <td><%=ban.reason%></td>
+        <td><%=ban.authorID%></td>
+      </tr>
+      <% } %>
+    </table>
+
+    <div>
+      <h2 style="color: var(--second);">Admins:</h2>
+      <ul>
+        <% for (const admin of admins) { %>
+        <li> <a style="color: var(--anti);" href="<%= admin.getLink() %>"><%= admin.name %></a> </li>
+        <% } %>
+      </ul>
+    </div>
+
+    <script type="module">
+      import request from "../../js/request.js";
+
+      window.unban = async function() {
+        const ip = prompt("Enter ip to unban");
+        const response = await request("/api/bans/" + ip, "DELETE");
+        if (response)
+          alert("IP unbanned!");
+        else
+          alert("IP is not unbanned!");
+        location.reload();
+      }
+      window.ban = async function() {
+        const ip = prompt("Enter ip to ban");
+        const response = await request("/api/bans/" + ip);
+        if (response)
+          alert("IP banned!");
+        else
+          alert("IP is not banned!");
+        location.reload();
+      }
+    </script>
+  </div>
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/footer")) %>
+
+</body>
+
+</html>

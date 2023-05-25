@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include(dataset.getFile(dataset.theme.codename +"/views/extra/meta"), {title: thread.title }) %>
+
+
+<body>
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/navbar")) %>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="/libs/simplemde/simplemde.min.css">
+  <script src="/libs/simplemde/simplemde.min.js"></script>
+
+  <div style="text-align:center;padding:8px">
+    <a href="/categories/<%= thread.categoryID %>" class="title" id="title"><%= thread.title %></a>
+    <div class="date">
+      <%= new Date(thread.time).toLocaleString() %> • Views: <%= thread.views %>
+    </div>
+    <div class="date">
+      <a style="color: var(--anti);" href="/users/<%= thread.author.id %>"><%= thread.author.name %></a> <%= "• "+(thread.edited  ? "Edited" : "Not edited")%>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;padding:8px">
+    <% if (user && (user.id === thread.authorID || user.admin ) && !thread.deleted){ %>
+    <a onclick="delete_thread('<%= thread.id %>')" class="btn-outline-primary">DELETE</a>
+    <a onclick="edit_thread('<%= thread.id %>')" class="btn-outline-primary">EDIT</a>
+    <% } else if (thread.deleted) { %>
+    <h4 class="title" style="display:inline; font-size: 20px;">This thread has been deleted</h3>
+      <a onclick="undelete_thread('<%= thread.id %>')" class="btn-primary">UNDELETE</a>
+      <% }; %>
+  </div>
+
+  <div id="messages">
+
+    <% messages.filter(Boolean).forEach(message=>{ %>
+
+    <div class="message" id="message-<%= message.id %>">
+      <div class="left">
+        <img src="<%= message.author.avatar %>" />
+        <div class="username"><a href="/users/<%=message.author.id %>"><%=message.author.name %></a></div>
+        <div class="date">
+          <%= new Date(message.time).toLocaleDateString() %>
+        </div>
+        <div class="date">
+          <%= new Date(message.time).toLocaleTimeString() %>
+        </div>
+      </div>
+
+      <div class="content"><%= message.content %></div>
+      <% if(user){ %>
+      <% if(user.id === message.authorID || user.admin){ %>
+
+      <div class="dots" modal="#modal-<%=message.id %>">
+        <% if (message.deleted){ %>
+        <i class='bx bx-trash bx-sm' id="deleted" style="color: var(--important);"></i>
+        <% } %>
+        <% if (message.edited){ %>
+        <i class='bx bx-pencil bx-sm' id="edited" style="color: GREEN;"></i>
+        <% } %>
+        <i class='bx bx-dots-horizontal-rounded'></i>
+      </div>
+
+      <div class="dots-menu" id="modal-<%=message.id %>">
+        <% if (!message.deleted){ %>
+        <a onclick="delete_message('<%=message.id %>');">Delete</a>
+        <a onclick="edit_message('<%=message.id %>');">Edit</a>
+        <% }else { %>
+        <a onclick="undelete_message('<%=message.id %>');">Undelete</a>
+        <% } %>
+      </div>
+      <% } %>
+
+      <div class="reactions">
+        <div <% if (message.react.like.includes(user?.id)) { %> style="color: var(--main)" <% } %>>
+          <i onclick='react("<%= message.id %>","like");' class='bx bx-like'></i>
+          <div id="like"><%=message.react.like.length %></div>
+        </div>
+        <div <% if (message.react.dislike.includes(user?.id)) { %> style="color: var(--main)" <% } %>>
+          <i onclick='react("<%= message.id %>","dislike");' class='bx bx-dislike'></i>
+          <div id="dislike"><%=message.react.dislike.length %></div>
+        </div>
+      </div>
+      <% }; %>
+
+    </div>
+
+    <% }); %>
+  </div>
+
+  <script>
+    const converter = new showdown.Converter();
+    for (const message of document.querySelectorAll(".message")) {
+      const content = message.querySelector(".content");
+      content.innerHTML = converter.makeHtml(content.rawText = content.innerHTML);
+    }
+  </script>
+  <script src="/js/modal.js"></script>
+  <% if (user){ %>
+  <script type="module" src="/js/thread.js"></script>
+
+  <div class="message" id="send-div">
+
+    <form id="send" style="width:100%">
+      <textarea rows="4" id="textarea"></textarea>
+      <input name="page" type="hidden" value="<%= page %>"></input>
+      <button class="btn-primary">Send!</button>
+    </form>
+
+  </div>
+
+  <script src="/js/editor.js"></script>
+
+  <script type="module">
+    const simplemde = editor("thread-<%= thread.id %>");
+
+    import request from "../../js/request.js";
+
+    document.getElementById("send").addEventListener("submit", async e => {
+
+      e.preventDefault();
+      const res = await request("/api/messages", "POST", {
+        threadID: "<%= thread.id %>",
+        content: simplemde.value()
+      })
+      simplemde.clearAutosavedValue();
+      let tp = Number("<%= thread.pages %>")
+      let tm = Number("<%= thread.count %>")
+      if (tp * 10 === tm) tp++;
+      if (res) location.href = `/threads/<%= thread.id %>?page=${tp-1}`;
+    });
+  </script>
+  <style>
+    .fa {
+      color: var(--main);
+    }
+  </style>
+
+
+  <% }%>
+  <div class="pagination">
+    <div class="back">
+      <% if (page > 0){ %>
+      <a href="<%= thread.getLink() %>?page=<%= page-1 %>" class='bx bxs-chevron-left'></a>
+      <% } %>
+    </div>
+
+    <div class="numbers">
+      <% for(let i=0; i < thread.pages; i++){ %>
+      <a class="number <%= i==page?'active':'' %>" href="<%= thread.getLink() %>?page=<%= i %>"><%= i+1 %></a>
+      <% } %>
+    </div>
+
+    <div class="after">
+      <% if (thread.pages-1 > page) { %>
+      <a href="<%= thread.getLink() %>?page=<%= page +1 %>" class='bx bxs-chevron-right'></a>
+      <% } %>
+    </div>
+
+  </div>
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/footer")) %>
+
+</body>
+
+</html>

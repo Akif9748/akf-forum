@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include(dataset.getFile(dataset.theme.codename +"/views/extra/meta"), {title: "Category list!" }) %>
+
+<body>
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/navbar")) %>
+
+  <div class="threads">
+    <% categories.forEach(category=>{ %>
+    <a href="<%= category.getLink() %>">
+      <div class="threads-box">
+        <div class="thread-box-title">
+          <%= category.name  %>
+        </div>
+
+        <div class="box-username"> <%if(user?.admin) {%>
+          <a class="btn-danger" onclick="fetch('/api/categories/<%= category.id %>/',{method:'DELETE'})"><i class="bx bx-trash bx-sm"></i></a>
+          <% }; %><%= category.desp %>
+        </div>
+
+      </div>
+    </a>
+    <br>
+    <% }); %>
+
+  </div>
+  <% if(typeof page === "number"){ %>
+
+  <div class="pagination">
+    <div class="back">
+      <% if (page > 0){ %>
+      <a href="/categories?page=<%= page-1 %>" class='bx bxs-chevron-left'></a>
+      <% } %>
+    </div>
+
+    <div class="numbers">
+      <% for(let i=0; i < pages; i++){ %>
+      <a class="number <%= i==page?'active':'' %>" href="/categories?page=<%= i %>"><%= i+1 %></a>
+      <% } %>
+    </div>
+
+    <div class="after">
+      <% if (pages-1 > page) { %>
+      <a href="/categories?page=<%= page +1 %>" class='bx bxs-chevron-right'></a>
+      <% } %>
+    </div>
+
+  </div>
+  <% } %>
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/footer")) %>
+
+</body>
+
+</html>

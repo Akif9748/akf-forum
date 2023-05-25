@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include(dataset.getFile(dataset.theme.codename +"/views/extra/meta"), {title: "Welcome to the "+dataset.forum_name+"-forum!" }) %>
+
+
+<body>
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/navbar")) %>
+
+
+  <div class="usercontent">
+    <% if (user) { %>
+    <h2 style="color: var(--main);">
+      <div class="box-username">Welcome, <%= user.name %>
+        <div class="avatar"><img src="<%=user.avatar %>"></div>
+      </div>
+      Main page will be rewritten soon, so stay tuned!
+    </h2>
+    <br>
+
+    <% } else { %>
+    <h2 style="color: var(--main);">Welcome, Guest!<br>You can press the button to register:
+      <a href="/register" class="btn-outline-primary">REGISTER</a>
+
+    </h2>
+    <% } %>
+
+    <h2 style="color: var(--second);">Statistics:</h2>
+
+    <div class="userbox">
+      <h2 class="userbox-title">Message count:</h2>
+      <h2 class="userbox-value"><%= messages %></h2>
+    </div>
+
+    <div class="userbox">
+      <h2 class="userbox-title">User count: </h2>
+      <h2 class="userbox-value"><%= users %> </h2>
+    </div>
+
+    <div class="userbox">
+      <h2 class="userbox-title">Thread count:</h2>
+      <h2 class="userbox-value"><%= threads %></h2>
+    </div>
+
+    <div class="userbox">
+      <h2 class="userbox-title">Category count:</h2>
+      <h2 class="userbox-value"><%= categories %></h2>
+    </div>
+
+  </div>
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/footer")) %>
+
+</body>
+
+</html>

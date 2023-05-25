@@ -23,6 +23,12 @@ app.ips = [];
 app.set("view engine", "ejs");
 app.set("limits", limits);
 
+if (RLS.enabled) app.use(RL(RLS.windowMs, RLS.max));
+
+for (const theme of fs.readdirSync("./themes"))
+    app.use(`/themes/${theme}`, express.static(`./themes/${theme}/public/`));
+
+
 app.use(express.static("public"), express.json(), express.urlencoded({ extended: true }), IP(),
     SES({ secret: process.env.SECRET, store: MS.create({ clientPromise: DB, stringify: false }), resave: false, saveUninitialized: false }),
     async (req, res, next) => {
@@ -37,15 +43,19 @@ app.use(express.static("public"), express.json(), express.urlencoded({ extended:
         if (!themes.some(t => t.codename === theme.codename))
             theme = def_theme;
 
-        res.reply = (page, options = {}, status = 200) => res.status(status).render(page, {
-            dataset: {
-                themes, theme, forum_name, description,
-                getFile: file => join(__dirname, "public", "themes", file),
-            },
-            user: req.user,
-            ...options
-        });
 
+        res.reply = (page, options = {}, status = 200) => {
+            const road = join(__dirname, "themes", theme.codename, "views", `${page}.ejs`);
+            const renderpage = fs.existsSync(road) ? road : join(__dirname, "themes", "common", "views", `${page}.ejs`);
+            return res.status(status).render(renderpage, {
+                dataset: {
+                    themes, theme, forum_name, description,
+                    getFile: file => join(__dirname, "themes", file),
+                },
+                user: req.user,
+                ...options
+            });
+        }
 
         res.error = (type, error) => res.reply("error", { type, error }, type);
 
@@ -63,11 +73,9 @@ app.use(express.static("public"), express.json(), express.urlencoded({ extended:
 if (discord_auth)
     app.set("discord_auth", `https://discord.com/api/oauth2/authorize?client_id=${discord_auth}&redirect_uri=${host}%2Fauth%2Fdiscord&response_type=code&scope=identify`);
 
-if (RLS.enabled) app.use(RL(RLS.windowMs, RLS.max));
-
 for (const file of fs.readdirSync("./routes"))
     app.use("/" + file.replace(".js", ""), require(`./routes/${file}`));
 
 app.all("*", (req, res) => res.error(404, "This page does not exist on this forum."));
 
-app.listen(port, () => console.log(`${forum_name}-forum on port:`, port));
+app.listen(port, () => console.log(`${forum_name} on port:`, port));

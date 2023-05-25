@@ -13,7 +13,8 @@ Run `node util/reset` to **reset the database** for duplicate key errors, and ru
 Edit `config.json` for default theme color (`black` or `white`) of users, and forum name, meta description, character limits, discord auth enabler, global ratelimit.
 
 ### How to install theme:
-- Copy your theme to `public/themes` folder.
+- Copy your theme to `themes` folder.
+Additional note for themes: If a theme has not got any .ejs file, it will use default theme's .ejs files. default theme is in themes folder, named as `common`.
 
 ### DISCORD AUTH: 
 `"discord_auth": "your_app_id"` in config.json.
@@ -61,6 +62,7 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - add support for transition around gravatar
 - BETTER SETUP PAGE
 - add used open source libraries to README.md
+- better folder system
 ### front-end
 - text alling center body
 - add a css file for CodeMirror in threads / send message ok

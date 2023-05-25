@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include(dataset.getFile(dataset.theme.codename +"/views/extra/meta"), {title: "Create thread!" }) %>
+
+<body >
+
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/navbar")) %>
+
+  <link rel="stylesheet" href="/libs/simplemde/simplemde.min.css">
+  <script src="/libs/simplemde/simplemde.min.js"></script>
+
+  <form class="post">
+    <h2 class="title" style="align-self: baseline;">Title:</h2>
+    <input name="title" class="input" required></input>
+    <h2 class="title" style="align-self: baseline;">Content:</h2>
+    <div style="width: 100%;">
+      <textarea id="textarea"></textarea>
+    </div>
+    <h2 class="title" style="align-self: baseline;">Category:</h2>
+
+    <select name="category" class="input">
+      <% for (const category of categories) { %>
+      <option value="<%= category.id %>"><%= category.name %></option>
+      <% } %>
+    </select>
+
+    <button class="btn-primary" style="width:100%" type="submit">Create Thread!</button>
+  </form>
+  <script src="/js/editor.js"></script>
+
+
+  <script type="module">
+    const simplemde = editor("thread-create");
+
+    import request from "../../js/request.js";
+
+    document.addEventListener("submit", async e => {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+
+      const response = await request("/api/threads/", "POST", {
+        title: data.get("title"),
+        content: simplemde.value(),
+        category: data.get("category")
+      });
+
+      simplemde.clearAutosavedValue();
+
+      if (response)
+        window.location.href = "/threads/" + response.id;
+
+
+    });
+  </script>
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/footer")) %>
+
+</body>
+
+</html>

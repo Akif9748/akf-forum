@@ -6,7 +6,7 @@ const { readdirSync } = require('fs');
 
 require("dotenv").config();
 module.exports = {
-    themes: readdirSync("./public/themes").filter(f => f !== "common").map(f => require(`./public/themes/${f}`)),
+    themes: readdirSync("./themes").filter(f => f !== "common").map(f => require(`./themes/${f}`)),
     threadEnum: ["OPEN", "APPROVAL", "DELETED"],
     userEnum: ["ACTIVE", "APPROVAL", "DELETED", "BANNED"],
     RL(windowMs = 60_000, max = 1) {

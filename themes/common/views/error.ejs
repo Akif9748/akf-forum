@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include(dataset.getFile(dataset.theme.codename +"/views/extra/meta"), {title: type+" error!" }) %>
+
+
+<body style="text-align: center;">
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/navbar")) %>
+
+
+  <h1 style="color: var(--main);"><%= type %></h1>
+  <h2 style="color: var(--second);"><%= error %></h2>
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/footer")) %>
+  
+</body>
+
+</html>

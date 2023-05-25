@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include(dataset.getFile(dataset.theme.codename +"/views/extra/meta"), {title: "Log in!" }) %>
+
+<body style="text-align: center;">
+
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/navbar")) %>
+
+
+  <h1 class="title">Login</h1>
+
+  <form class="login" action="/login?redirect=<%= redirect !== "/register" ? redirect : "/"  %>" method="post">
+
+    <input type="text" name="name" placeholder="Email/Username" class="input" required>
+    <input type="password" name="password" placeholder="Password" class="input" required>
+    <input type="submit" style="width:100%" class="btn-primary" value="Login">
+  </form>
+  <% if(discord) { %>
+  <a href="<%=discord%>" class="btn-outline-primary">Auth with discord</a>
+  <% } %>
+  <a href="/register" class="btn-outline-primary">Register</a>
+
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/footer")) %>
+
+</body>
+
+</html>
