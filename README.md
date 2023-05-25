@@ -65,6 +65,7 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - send public to common/public
 - new screenshoots
 - user.ejs for per theme
+
 ### front-end
 - text alling center body
 - add a css file for CodeMirror in threads / send message ok

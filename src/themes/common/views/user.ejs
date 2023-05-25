@@ -24,7 +24,7 @@
         <a class="btn-outline-primary" id="un_discord">Unauth DC!</a>
         <% } %>
         <a href="/users/<%=member.id%>/avatar" class="btn-outline-primary">Upload avatar</a>
-        <a class="btn-outline-primary" id="toogle">Edit user!</a>
+        <a class="btn-outline-primary" href="/users/<%=member.id%>/edit" id="toogle">Edit user!</a>
         <script type="module">
           import request from "/js/request.js";
       
@@ -57,9 +57,7 @@
               alert(`Last seen is ${!hideLastSeen?"un":""}hided!`);
               location.reload()
       
-            } else if (e.target.id == "toogle")
-              document.getElementById('user-edit').classList.toggle('no-active')
-      
+            }
           });
         </script>
       
