@@ -16,7 +16,7 @@
         "max": 25,
         "windowMs": 60000
     },
-    "discord_auth": "",
+    "discord_auth": false,
     "default_thread_state": "OPEN",
     "default_user_state": "ACTIVE",
     "email_auth": false,

@@ -17,8 +17,8 @@ Edit `config.json` for default theme for users, forum name, meta description, ch
 Additional note for themes: If a theme has not got any .ejs file, it will use default theme's .ejs files. default theme is in themes folder, named as `common`.
 
 ### DISCORD AUTH: 
-`"discord_auth": "your_app_id"` in config.json.
-Add your app secret to `.env` as `DISCORD_SECRET`.
+`"discord_auth": true` in config.json.
+Add your app secret and app id to `.env` as `DISCORD_SECRET` and `DISCORD_ID`.
 Create a redirect url in discord developer portal:
 `https://forum_url.com/auth/discord`
 
@@ -64,6 +64,7 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - add used open source libraries to README.md
 - send public to common/public
 - new screenshoots
+- user.ejs for per theme
 ### front-end
 - text alling center body
 - add a css file for CodeMirror in threads / send message ok

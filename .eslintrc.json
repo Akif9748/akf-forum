@@ -20,7 +20,7 @@
                 "browser": true
             },
             "files": [
-                "public/**"
+                "src/public/js/*"
             ]
         }
     ]

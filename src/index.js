@@ -71,7 +71,7 @@ app.use(express.static(join(__dirname, "public")), express.json(), express.urlen
 );
 
 if (discord_auth)
-    app.set("discord_auth", `https://discord.com/api/oauth2/authorize?client_id=${discord_auth}&redirect_uri=${host}%2Fauth%2Fdiscord&response_type=code&scope=identify`);
+    app.set("DISCORD_AUTH_URL", `https://discord.com/api/oauth2/authorize?client_id=${process.env.DISCORD_ID}&redirect_uri=${host}%2Fauth%2Fdiscord&response_type=code&scope=identify`);
 
 for (const file of fs.readdirSync(join(__dirname, "routes")))
     app.use("/" + file.replace(".js", ""), require(`./routes/${file}`));

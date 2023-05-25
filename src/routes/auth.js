@@ -2,10 +2,10 @@ const { Router } = require("express")
 const { UserModel } = require("../models");
 const fetch = require("node-fetch");
 const app = Router();
-const { host, discord_auth, email_auth } = require("../../config.json")
+const { host, email_auth } = require("../../config.json")
 
 app.get("/discord", async (req, res) => {
-    const client_id = discord_auth;
+    const client_id = process.env.DISCORD_ID;
     if (!client_id) return res.error(404, "Discord auth is disabled")
     const { code } = req.query;
     if (!code) return res.error(400, "No code provided");
