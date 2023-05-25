@@ -1,12 +1,12 @@
 const RL = require('express-rate-limit');
 const nodemailer = require("nodemailer");
-const config = require("./config.json");
+const config = require("../config.json");
 const crypto = require("crypto");
 const { readdirSync } = require('fs');
-
+const { join } = require('path');
 require("dotenv").config();
 module.exports = {
-    themes: readdirSync("./themes").filter(f => f !== "common").map(f => require(`./themes/${f}`)),
+    themes: readdirSync(join(__dirname, "themes")).filter(f => f !== "common").map(f => require(`./themes/${f}`)),
     threadEnum: ["OPEN", "APPROVAL", "DELETED"],
     userEnum: ["ACTIVE", "APPROVAL", "DELETED", "BANNED"],
     RL(windowMs = 60_000, max = 1) {

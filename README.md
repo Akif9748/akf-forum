@@ -6,14 +6,14 @@ A Node.js based forum software.
 - Run `npm i` to install **dependencies**.
 - Enter your database credentials in `.env`.
 - Run `npm start` for run it. 
-- Go /setup page for setup your forum.
+- Go `/setup` page for setup your forum.
 
 ### Extra (If you are not use `setup` page)
 Run `node util/reset` to **reset the database** for duplicate key errors, and run `node util/admin` for give admin perms to first member.
-Edit `config.json` for default theme color (`black` or `white`) of users, and forum name, meta description, character limits, discord auth enabler, global ratelimit.
+Edit `config.json` for default theme for users, forum name, meta description, character limits, discord auth enabler, global ratelimit etc.
 
 ### How to install theme:
-- Copy your theme to `themes` folder.
+- Copy your theme to `src/themes` folder.
 Additional note for themes: If a theme has not got any .ejs file, it will use default theme's .ejs files. default theme is in themes folder, named as `common`.
 
 ### DISCORD AUTH: 
@@ -62,7 +62,8 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - add support for transition around gravatar
 - BETTER SETUP PAGE
 - add used open source libraries to README.md
-- better folder system
+- send public to common/public
+- new screenshoots
 ### front-end
 - text alling center body
 - add a css file for CodeMirror in threads / send message ok

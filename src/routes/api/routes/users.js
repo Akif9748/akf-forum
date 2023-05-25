@@ -3,7 +3,7 @@ const { Router } = require("express");
 const multer = require("multer");
 const { themes } = require("../../../lib")
 const app = Router();
-
+const { join } = require("path");
 app.param("id", async (req, res, next, id) => {
     req.member = await UserModel.get(id, req.user.admin ? "+lastSeen +ips" : "");
 
@@ -80,7 +80,7 @@ app.post("/:id/ban", async (req, res) => {
 });
 
 const storage = multer.diskStorage({
-    destination:'./public/images/avatars',
+    destination: join(__dirname, "..", "..", "..", "public", "images", "avatars"),
     filename: function (req, _file, cb) {
         cb(null, req.member.id + ".jpg")
     }
@@ -89,7 +89,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage })
 
 app.post("/:id/avatar", upload.single('avatar'), async (req, res) => {
-   
+
     const { member } = req;
 
     if (req.user.id !== member.id && !req.user.admin) return res.error(403, "You have not got permission for this.");

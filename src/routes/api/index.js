@@ -3,7 +3,7 @@ const app = Router();
 const fs = require("fs");
 const bcrypt = require("bcrypt");
 const { UserModel } = require("../../models");
-
+const{join}=require("path");
 
 app.use(async (req, res, next) => {
     res.error = (status, error) => res.status(status).json({ error });
@@ -31,7 +31,7 @@ app.use(async (req, res, next) => {
 
 app.get("/me", (req, res) => res.complate(req.user))
 
-for (const file of fs.readdirSync("./routes/api/routes"))
+for (const file of fs.readdirSync(join(__dirname, "routes")))
     app.use("/" + file.replace(".js", ""), require(`./routes/${file}`));
 
 app.all("*", (req, res) => res.error(400, "Bad request"));

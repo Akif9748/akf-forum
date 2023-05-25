@@ -3,7 +3,7 @@ const { Router } = require("express")
 const bcrypt = require("bcrypt");
 const { RL, transporter, emailRegEx, getGravatar } = require('../lib');
 const app = Router();
-const { email_auth, forum_name, host } = require("../config.json");
+const { email_auth, forum_name, host } = require("../../config.json");
 app.get("/", (req, res) => res.reply("register", { user: null, discord: req.app.get("discord_auth"), mail: email_auth }));
 
 app.post("/", RL(24 * 60 * 60_000, 5), async (req, res) => {

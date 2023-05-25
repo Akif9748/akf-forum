@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const cache = require("./cache");
-const { limits } = require("../config.json");
+const { limits } = require("../../config.json");
 
 const schema = new mongoose.Schema({
     id: { type: String, unique: true },

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const cache = require("./cache")
 const MessageModel = require("./Message");
-const { limits, default_thread_state } = require("../config.json");
+const { limits, default_thread_state } = require("../../config.json");
 const { threadEnum } = require("../lib");
 const schema = new mongoose.Schema({
     id: { type: String, unique: true },

@@ -3,7 +3,7 @@ require("dotenv").config();
 
 mongoose.connect(process.env.MONGO_DB_URL, () => console.log("Database is connected"));
 
-const { UserModel } = require("../models");
+const { UserModel } = require("../src/models");
 (async () => {
 
   const member = await UserModel.get("0");

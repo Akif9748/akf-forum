@@ -1,6 +1,6 @@
 require("dotenv").config();
 const
-    { def_theme, forum_name, description, limits, global_ratelimit: RLS, discord_auth, host } = require("./config.json"),
+    { def_theme, forum_name, description, limits, global_ratelimit: RLS, discord_auth, host } = require("../config.json"),
     { UserModel, BanModel } = require("./models"),
     port = process.env.PORT || 3000,
     mongoose = require("mongoose"),
@@ -25,11 +25,11 @@ app.set("limits", limits);
 
 if (RLS.enabled) app.use(RL(RLS.windowMs, RLS.max));
 
-for (const theme of fs.readdirSync("./themes"))
-    app.use(`/themes/${theme}`, express.static(`./themes/${theme}/public/`));
+for (const theme of fs.readdirSync(join(__dirname, "themes")))
+    app.use(`/themes/${theme}`, express.static(join(__dirname, "themes", theme, "public")));
 
 
-app.use(express.static("public"), express.json(), express.urlencoded({ extended: true }), IP(),
+app.use(express.static(join(__dirname, "public")), express.json(), express.urlencoded({ extended: true }), IP(),
     SES({ secret: process.env.SECRET, store: MS.create({ clientPromise: DB, stringify: false }), resave: false, saveUninitialized: false }),
     async (req, res, next) => {
         if (app.ips.includes(req.clientIp)) return res.status(403).send("You are banned from this forum.");
@@ -73,7 +73,7 @@ app.use(express.static("public"), express.json(), express.urlencoded({ extended:
 if (discord_auth)
     app.set("discord_auth", `https://discord.com/api/oauth2/authorize?client_id=${discord_auth}&redirect_uri=${host}%2Fauth%2Fdiscord&response_type=code&scope=identify`);
 
-for (const file of fs.readdirSync("./routes"))
+for (const file of fs.readdirSync(join(__dirname, "routes")))
     app.use("/" + file.replace(".js", ""), require(`./routes/${file}`));
 
 app.all("*", (req, res) => res.error(404, "This page does not exist on this forum."));

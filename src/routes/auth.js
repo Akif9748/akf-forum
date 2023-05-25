@@ -2,7 +2,7 @@ const { Router } = require("express")
 const { UserModel } = require("../models");
 const fetch = require("node-fetch");
 const app = Router();
-const { host, discord_auth, email_auth } = require("../config.json")
+const { host, discord_auth, email_auth } = require("../../config.json")
 
 app.get("/discord", async (req, res) => {
     const client_id = discord_auth;

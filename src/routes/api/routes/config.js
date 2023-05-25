@@ -16,10 +16,10 @@ app.get("/", (req, res) => {
     }
 });
 app.put("/", (req, res) => {
-    const write= req.query.text ? req.body : JSON.stringify(req.body, null, 4)
-    fs.writeFileSync("./config.json",write );
-    require.cache[require.resolve("../../../config.json")] = require("../../../config.json");
-    res.complate(require("../../../config.json"));
+    const write = req.query.text ? req.body : JSON.stringify(req.body, null, 4)
+    fs.writeFileSync("./config.json", write);
+    require.cache[require.resolve("../../../../config.json")] = require("../../../../config.json");
+    res.complate(require("../../../../config.json"));
 });
 
 module.exports = app;

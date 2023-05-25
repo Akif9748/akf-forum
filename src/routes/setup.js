@@ -27,7 +27,7 @@ app.post("/", async (req, res) => {
             original[key] = content[key];
 
     fs.writeFileSync("./config.json", JSON.stringify(original, null, 4));
-    require.cache[require.resolve("../config.json")] = require("../config.json");
+    require.cache[require.resolve("../../config.json")] = require("../../config.json");
     res.redirect("/register");
 })
 
