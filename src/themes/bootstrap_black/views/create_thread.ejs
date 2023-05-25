@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include(dataset.getFile(dataset.theme.codename +"/views/extra/meta"), {title: "Create thread!" }) %>
+
+<body>
+
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/navbar")) %>
+
+  <link rel="stylesheet" href="/libs/simplemde/simplemde.min.css">
+  <script src="/libs/simplemde/simplemde.min.js"></script>
+
+
+  <div class="container my-3">
+      <div class="col-12">
+        <h2 class="h4 text-white  bg-info mb-3 p-4 rounded">Create new thread</h2>
+        <form class="mb-3">
+          <div class="form-group">
+            <label for="topic">Title</label>
+            <input type="text" class="form-control" id="title" placeholder="Give your thread a title." required>
+          </div>
+          <div class="form-group">
+            <label for="comment">Comment:</label>
+            <textarea id="textarea"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-check-label">
+              Category:
+            </label>
+
+            <select id="category" class="input">
+              <% for (const category of categories) { %>
+              <option value="<%= category.id %>"><%= category.name %></option>
+              <% } %>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Create</button>
+          <button type="reset" class="btn btn-danger">Reset</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/editor.js"></script>
+
+
+  <script type="module">
+    const simplemde = editor("thread-create");
+
+    import request from "../../js/request.js";
+
+    document.addEventListener("submit", async e => {
+      e.preventDefault();
+      const response = await request("/api/threads/", "POST", {
+        title: document.getElementById("title").value,
+        content: simplemde.value(),
+        category: document.getElementById("category").value
+      });
+      if (response) {
+        simplemde.clearAutosavedValue();
+        window.location.href = "/threads/" + response.id;
+      }
+    });
+  </script>
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/footer")) %>
+
+</body>
+
+</html>

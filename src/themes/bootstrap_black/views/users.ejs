@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include(dataset.getFile(dataset.theme.codename +"/views/extra/meta"), {title: "User list!" }) %>
+
+
+<body>
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/navbar")) %>
+
+  <div class="users">
+    <% users.filter(member=> !member.deleted || user.admin ).forEach(member => { %>
+    <div style="display:flex;justify-content:center;">
+      <div class="user-box">
+        <img src="<%= member.avatar %>" class="user-box-img">
+        <div class="user-box-title"> <a href="<%= member.getLink() %>">
+            <% if (member.deleted) { %> <span style="color: var(--important);">[DELETED]</span><% } %>
+            <%= member.name %></a></div>
+      </div>
+    </div>
+    <% }); %>
+
+  </div>
+  <% if(typeof page === "number"){ %>
+    <div class="mb-3 clearfix">
+      <nav aria-label="Navigate post pages" class="float-lg-right">
+        <ul class="pagination pagination-sm mb-lg-0">
+          <% if (page > 0){ %>
+          <li class="page-item"><a href="/categories?page=<%= page-1 %>" class="page-link">Back</a></li>
+          <% } %>
+          <% for(let i=0; i < pages; i++){ %>
+          <li class="page-item <%= i==page?'active':'' %>"><a href="/categories?page=<%= i %>" class="page-link"><%= i+1 %>
+              <% if (i==page){ %>
+              <span class="sr-only">(current)</span>
+              <% } %>
+            </a></li>
+          <% } %>
+          <% if (pages-1 > page) { %>
+          <li class="page-item"><a href="/categories?page=<%= page+1 %>" class="page-link">Next</a></li>
+          <% } %>
+        </ul>
+      </nav>
+    </div>
+
+    <% } %>
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/footer")) %>
+
+</body>
+
+</html>

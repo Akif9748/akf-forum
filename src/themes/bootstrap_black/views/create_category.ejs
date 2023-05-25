@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include(dataset.getFile(dataset.theme.codename +"/views/extra/meta"), {title: "Create Category!" }) %>
+
+<body>
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/navbar")) %>
+
+  <link rel="stylesheet" href="/libs/simplemde/simplemde.min.css">
+  <script src="/libs/simplemde/simplemde.min.js"></script>
+
+  <div class="container my-3">
+    <div class="col-12">
+      <h2 class="h4 text-white  bg-info mb-3 p-4 rounded">Create new category</h2>
+      <form class="mb-3">
+        <div class="form-group">
+          <label for="topic">Name</label>
+          <input type="text" class="form-control" id="title" placeholder="Give your category a name" required>
+        </div>
+        <div class="form-group">
+          <label for="comment">Description</label>
+          <textarea id="textarea"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="reset" class="btn btn-danger">Reset</button>
+      </form>
+    </div>
+  </div>
+  </div>
+
+
+
+  <script src="/js/editor.js"></script>
+
+
+  <script type="module">
+    const simplemde = editor("category-create");
+
+    import request from "../../js/request.js";
+
+    document.addEventListener("submit", async e => {
+      e.preventDefault();
+      const response = await request("/api/categories/", "POST", {
+        name: document.getElementById("title").value,
+        desp: simplemde.value()
+      });
+
+      simplemde.clearAutosavedValue();
+
+      if (response)
+        window.location.href = "/categories/" + response.id;
+
+
+    });
+  </script>
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/footer")) %>
+
+</body>
+
+</html>

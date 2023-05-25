@@ -23,8 +23,6 @@ app.ips = [];
 app.set("view engine", "ejs");
 app.set("limits", limits);
 
-if (RLS.enabled) app.use(RL(RLS.windowMs, RLS.max));
-
 for (const theme of fs.readdirSync(join(__dirname, "themes")))
     app.use(`/themes/${theme}`, express.static(join(__dirname, "themes", theme, "public")));
 
@@ -69,6 +67,8 @@ app.use(express.static(join(__dirname, "public")), express.json(), express.urlen
         next();
     }
 );
+
+if (RLS.enabled) app.use(RL(RLS.windowMs, RLS.max));
 
 if (discord_auth)
     app.set("DISCORD_AUTH_URL", `https://discord.com/api/oauth2/authorize?client_id=${process.env.DISCORD_ID}&redirect_uri=${host}%2Fauth%2Fdiscord&response_type=code&scope=identify`);

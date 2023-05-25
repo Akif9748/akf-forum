@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include(dataset.getFile(dataset.theme.codename +"/views/extra/meta"), {title: "Admin Panel!" }) %>
+
+
+<body style="text-align: center;">
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/navbar")) %>
+
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+      color: var(--anti);
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+
+  <h2>Welcome to the admin panel of the forum, <%= user.name %>!</h1>
+    <div>
+
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Banned users</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="document.getElementById('exampleModal').style.display = 'none';">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <table>
+                <tr>
+                  <th>IP</th>
+                  <th>Reason</th>
+                  <th>AuthorID</th>
+                </tr>
+                <% for (const ban of bans) { %>
+                <tr>
+                  <td><%=ban.ip%></td>
+                  <td><%=ban.reason%></td>
+                  <td><%=ban.authorID%></td>
+                </tr>
+                <% } %>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <a class="btn-primary" onclick="ban();">IP BAN</a>
+              <a class="btn-outline-primary" onclick="unban();">REMOVE IP BAN</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <button onclick="window.location.href = '/categories/create';" class="btn-primary">Create Category</button>
+      <button onclick="window.location.href = '/admin/config';" class="btn-primary">Edit config</button>
+
+      <button onclick="document.getElementById('exampleModal').style.display = 'block';" class="btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#exampleModal" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        Banned users
+      </button>
+      <div>
+        <table>
+          <tr>
+            <th>Admin list</th>
+          </tr>
+          <% for (const admin of admins) { %>
+          <tr>
+            <td><a style="color: var(--anti);" href="<%= admin.getLink() %>"><%= admin.name %></a></td>
+          </tr>
+          <% } %>
+        </table>
+        <ul>
+
+
+        </ul>
+      </div>
+
+      <script type="module">
+        import request from "../../js/request.js";
+
+        window.unban = async function() {
+          const ip = prompt("Enter ip to unban");
+          if (!ip) return;
+          const response = await request("/api/bans/" + ip, "DELETE");
+          if (response)
+            alert("IP unbanned!");
+          else
+            alert("IP is not unbanned!");
+          location.reload();
+        }
+        window.ban = async function() {
+          const ip = prompt("Enter ip to ban");
+          if (!ip) return;
+
+          const response = await request("/api/bans/" + ip);
+          if (response)
+            alert("IP banned!");
+          else
+            alert("IP is not banned!");
+          location.reload();
+        }
+      </script>
+    </div>
+    <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/footer")) %>
+
+</body>
+
+</html>

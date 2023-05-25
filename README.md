@@ -58,8 +58,11 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - add used open source libraries to README.md
 - send public to common/public
 - user.ejs for per theme
+- categori search title like thread search
 
 ### front-end
+- working reset button
+- better pagination
 - text alling center body
 - add a css file for CodeMirror in threads / send message ok
 - old contents / titles add to forum interface
