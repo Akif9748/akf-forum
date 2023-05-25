@@ -40,14 +40,8 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 
 ## Screenshot
 
-### Thread Page w/Black Theme
-![black-theme](https://user-images.githubusercontent.com/70021050/187899782-2ff010aa-0d39-4fc2-b00c-19bcf1623c8a.png)
-### Threads Page w/Default Theme
-![light-theme](https://user-images.githubusercontent.com/70021050/186941146-f9a8fbf8-9b2b-4028-afc8-81cff559d9fb.png)
-<details>
-  <summary><b>Mobile view</b></summary>
-  <img src="https://user-images.githubusercontent.com/70021050/187901065-fd75ef85-56e3-42ce-8b34-cb8d799a6517.png"></img>
-</details>
+### Thread Page w/Bootstrap theme
+![image](https://github.com/Akif9748/akf-forum/assets/70021050/1ad4ad8e-d000-46a6-834e-7d76cdddda60)
 
 ## TO-DO list
 - Profile Message or DM 
@@ -63,7 +57,6 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - BETTER SETUP PAGE
 - add used open source libraries to README.md
 - send public to common/public
-- new screenshoots
 - user.ejs for per theme
 
 ### front-end
