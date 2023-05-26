@@ -15,8 +15,8 @@
   </h1>
 
   <form id="form" style="box-shadow:none">
-    <input type="text" name="name" placeholder="<%=member.name%>" class="input">
-
+    <input type="text" name="name" placeholder="<%= member.name %>" class="input">
+    <input type="email" name="email" placeholder="<%= member.email %>" class="input">
     <textarea id="textarea" class="input" name="about" rows="4" cols="60" name="content" placeholder="<%=member.about%>"></textarea>
     <% if (user?.admin){ %>
     Is Admin? <input id='admin' type='checkbox' value='true' name='admin' <%=member.admin ? "checked": ""%>>
@@ -40,7 +40,8 @@
       const res = await request("/api/users/<%=member.id%>", "PATCH", {
         name: formdata.get("name"),
         about: simplemde.value(),
-        admin: formdata.get("admin")
+        admin: formdata.get("admin"),
+        email: formdata.get("email")
       });
       simplemde.clearAutosavedValue();
 

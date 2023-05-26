@@ -1,7 +1,7 @@
 const { UserModel, BanModel } = require("../../../models");
 const { Router } = require("express");
 const multer = require("multer");
-const { themes } = require("../../../lib")
+const { themes, emailRegEx } = require("../../../lib")
 const app = Router();
 const { join } = require("path");
 app.param("id", async (req, res, next, id) => {
@@ -37,7 +37,7 @@ app.patch("/:id", async (req, res) => {
     if (req.user.id !== member.id && !user.admin) return res.error(403, "You have not got permission for this.");
     if (!Object.keys(req.body).some(Boolean)) return res.error(400, "Missing member informations in request body.");
 
-    const { name, about, admin, deleted, hideLastSeen, theme } = req.body;
+    const { name, about, admin, deleted, hideLastSeen, theme, email } = req.body;
 
     if ((admin?.length || "deleted" in req.body) && !req.user.admin) return res.error(403, "You have not got permission for edit 'admin' and 'deleted' information, or bad request.");
     const { names, desp } = req.app.get("limits");
@@ -53,6 +53,12 @@ app.patch("/:id", async (req, res) => {
     }
     if (theme && themes.some(t => t.codename === theme.codename))
         member.theme = theme;
+
+    if (email) {
+        if (!emailRegEx.test(email)) return res.error(400, "E-mail is not valid");
+        if (await UserModel.exists({ email })) return res.error(400, "E-mail is already in use");
+        member.email = email;
+    }
 
     if (typeof admin === "boolean" || ["false", "true"].includes(admin)) member.admin = admin;
     if (deleted === false) member.deleted = false;
