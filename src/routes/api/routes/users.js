@@ -63,7 +63,7 @@ app.patch("/:id", async (req, res) => {
     if (typeof admin === "boolean" || ["false", "true"].includes(admin)) member.admin = admin;
     if (deleted === false) member.deleted = false;
 
-    if (typeof hideLastSeen === "boolean") member.hideLastSeen = hideLastSeen;
+    if (typeof hideLastSeen === "boolean" || ["false", "true"].includes(admin)) member.hideLastSeen = hideLastSeen;
 
     member.edited = true;
 

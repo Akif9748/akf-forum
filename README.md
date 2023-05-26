@@ -50,6 +50,7 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - Profile Message or DM 
 - Upload other photos, model for it
 - Edit & download template 
+- Banner
 - Roles & Permissions
 ```
 role: "moderator",
@@ -76,9 +77,8 @@ permissions: ["see_deleted_message"]
 
 #### Fixes:
 - BETTER SETUP PAGE: use setup everytime
-- better user.ejs: https://github.com/mdbootstrap/bootstrap-profiles
 - add threads, messages etc. to extra folder
-- add category to threads
+- add category to thread list page
 - working reset button
 - better pagination
 - text alling center body

@@ -10,152 +10,170 @@
 
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+  <style>
+    .img-div {
+      position: relative;
+      display: inline-block;
+    }
 
-  <div class="usercontent">
+    .img-div:hover:after {
+      content: '';
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      bottom: 0px;
+      width: 100%;
+      background: url('/themes/bootstrap_black/upload.png') center no-repeat;
+      background-size: 50px;
+    }
+
+    .img-div:hover img {
+      opacity: 0.4;
+    }
+  </style>
+
+  <section class="h-100 gradient-custom-2">
+
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-9 col-xl-7">
+          <% if (member.deleted) {%>
+          <h1>This user has been deleted!</h1>
+          <% } %>
+
+          <div class="card">
+            <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
+              <div class="ms-4 mt-5 d-flex flex-column img-div" style="width: 150px;">
+                <img onclick="location.href='/users/<%=member.id%>/avatar'" src="<%=member.avatar %>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+                <% if(user?.admin || user?.id === member.id){ %>
+                <a href="/users/<%=member.id%>/edit" type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
+                  Edit profile
+                </a>
+                <% if (member.deleted) {%>
+                <a id="undelete" class="btn btn-outline-dark">Undelete user</a>
+                <% } else if (user?.admin){ %>
+                <a id="delete" class="btn btn-outline-dark">Delete user</a>
+                <% } %>
+                <% } %>
+
+              </div>
+              <div class="ms-3 miniinfo" style="margin-top: 75px; background: rgba(0,0,0,0.4);">
+                <h5><%= member.name %></h5>
+                <% if (member.admin) { %>
+                <h2 class="userbox-value" style="align-self: center;">Admin</h2>
+                <% } %>
+                <p style="margin-bottom: 0px;">Join: <%= new Date(member.time).toLocaleDateString() %></p>
+                <% if(!member.hideLastSeen || user?.admin) {%>
+                <p>Last Seen: <%= new Date(member.lastSeen).toLocaleString() %></p>
+                <% } %>
+              </div>
+            </div>
+            <div class="p-4 text-black" style="background-color: #f8f9fa;">
+              <div class="d-flex justify-content-end text-center py-1">
+                <a href="/search/messages?authorID=<%= member.id %>">
+                  <p class="mb-1 h5"><%= counts.message %></p>
+                  <p class="small text-muted mb-0">Messages</p>
+                </a>
+                <a class="px-3" href="/search/threads?authorID=<%= member.id %>">
+                  <p class="mb-1 h5"><%= counts.thread %></p>
+                  <p class="small text-muted mb-0">Threads</p>
+                </a>
+              </div>
+            </div>
 
 
-    <% if(user?.admin || user?.id === member.id){ %>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#userMenu" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="userMenu">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <% if (member.about?.length) { %>
+
+            <div class="card-body p-4 text-black">
+              <div class="mb-5">
+                <p class="lead fw-normal mb-1" style="color: aliceblue;">About</p>
+                <div class="p-4" style="background-color: #f8f9fa;">
+                  <p id="about" class="font-italic mb-1"><%= member.about %></p>
+                </div>
+                <script src="/libs/showdown/showdown.min.js"></script>
+                <script>
+                  const converter = new showdown.Converter();
+                  const about = document.getElementById("about")
+                  about.innerHTML = converter.makeHtml(about.innerText);
+                </script>
+              </div>
+              <% } %>
+
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <!--
+                <p class="lead fw-normal mb-0">Recent photos</p>
+                <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
+              -->
                 <% if (!member.discordID && discord && user?.id === member.id) { %>
                 <a href="<%=discord%>" class="btn-outline-primary">Discord auth</a>
                 <% } else if(member.discordID && user?.id === member.id) { %>
                 <a class="btn-primary" id="un_discord">Unauth Discord</a>
                 <% } %>
-                <% if (member.hideLastSeen) {%>
-                <a id="last_unhide" class="btn-primary">Unhide last seen</a>
-                <% } else { %>
-                <a id="last_hide" class="btn-outline-primary">Hide last seen</a>
+                <% if (user.admin) { %>
+                <select>
+                  <option selected>IP LIST</option>
+                  <% for(const ip of member.ips) { %>
+                  <option><%= ip %></option>
+                  <% } %>
+                </select>
                 <% } %>
-                <% if (member.deleted) {%>
-                <h1>This user has been deleted!</h1>
-                <a id="undelete" class="btn-primary">Undelete user</a>
-                <% } else if (user?.admin){ %>
-                <a id="delete" class="btn-outline-primary">Delete user</a>
-                <% } %>
-                <a class="btn-outline-primary" href="/users/<%=member.id%>/edit">Edit user</a>
-                <a href="/users/<%=member.id%>/avatar" class="btn-outline-primary">Upload avatar</a>
-              </ul>
-        
-              <script type="module">
-                import request from "../../js/request.js";
-        
-        
-                document.addEventListener("click", async e => {
-                  if (e.target.id == "delete") {
-                    const response = await request("/api/users/<%= member.id %>", "DELETE");
-                    if (response.state !== "DELETED") return
-                    alert("User is deleted!");
-                    location.reload()
-                  } else if (e.target.id == "undelete") {
-                    const response = await request("/api/users/<%= member.id %>/", "PATCH", {
-                      deleted: false
-                    });
-                    if (response.state == "DELETED") return;
-                    alert("User is undeleted successfully!");
-                    location.reload()
-                  } else if (e.target.id == "un_discord") {
-                    const response = await fetch("/auth/discord/", {
-                      method: "DELETE"
-                    });
-                    alert(await response.text());
-                    location.reload()
-                  } else if (e.target.id.startsWith("last_")) {
-                    let hideLastSeen = e.target.id.replace("last_", "") == "hide" ? true : false;
-                    const response = await request("/api/users/<%= member.id %>/", "PATCH", {
-                      hideLastSeen
-                    });
-                    alert(`Last seen is ${!hideLastSeen?"un":""}hided!`);
-                    location.reload()
-        
-                  } else if (e.target.id == "toogle")
-                    document.getElementById('user-edit').classList.toggle('no-active')
-        
-                });
-              </script>
-        
-        
-        
+
+
+              </div>
             </div>
           </div>
-        
-        
-        </nav>
-        <% if (user.admin) { %>
-        <select>
-          <option selected>IP LIST</option>
-          <% for(const ip of member.ips) { %>
-          <option><%= ip %></option>
-          <% } %>
-        </select>
-        <% } %>
-        
-        <% } %>
-
-
-    <div class="userbox" style="justify-content:center;">
-      <img style="width:150px;height:150px;border-radius:50%;" src="<%=member.avatar %>">
+        </div>
+      </div>
     </div>
+  </section>
 
-    <% if (member.admin) { %>
-    <h2 class="userbox-value" style="align-self: center;">Admin</h2>
+
+
+
+
+  <div class="usercontent">
+    <% if(user?.admin || user?.id === member.id){ %>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+      </ul>
+
+      <script type="module">
+        import request from "../../js/request.js";
+
+
+        document.addEventListener("click", async e => {
+          if (e.target.id == "delete") {
+            const response = await request("/api/users/<%= member.id %>", "DELETE");
+            if (response.state !== "DELETED") return
+            alert("User is deleted!");
+            location.reload()
+          } else if (e.target.id == "undelete") {
+            const response = await request("/api/users/<%= member.id %>/", "PATCH", {
+              deleted: false
+            });
+            if (response.state == "DELETED") return;
+            alert("User is undeleted successfully!");
+            location.reload()
+          } else if (e.target.id == "un_discord") {
+            const response = await fetch("/auth/discord/", {
+              method: "DELETE"
+            });
+            alert(await response.text());
+            location.reload()
+          } else if (e.target.id == "toogle")
+            document.getElementById('user-edit').classList.toggle('no-active')
+
+        });
+      </script>
+    </nav>
+
     <% } %>
 
-    <% if (member.about?.length) { %>
-    <div class="userbox-value" id="about" style="
-margin: 10px auto;
-box-shadow: 0 0 5px 0 var(--second);
-padding: 10px;
-width: 100%;
-max-width: 800px;
-text-align: center;
-border-radius: 5px;
-background: none;
-color: var(--anti);
-">
-      <%= member.about %>
-    </div>
-    <script>
-      const converter = new showdown.Converter();
-      const about = document.getElementById("about")
-      about.innerHTML = converter.makeHtml(about.innerText);
-    </script>
-    <% } %>
 
 
-
-    <div class="userbox">
-      <h2 class="userbox-title">Name:</h2>
-      <h2 class="userbox-value"><%= member.name %></h2>
-    </div>
-    <div class="userbox">
-      <h2 class="userbox-title">Created at:</h2>
-      <h2 class="userbox-value"><%= new Date(member.time).toLocaleString() %></h2>
-    </div>
-    <% if(!member.hideLastSeen || user?.admin) {%>
-    <div class="userbox">
-      <h2 class="userbox-title">Last seen at:</h2>
-      <h2 class="userbox-value"><%= new Date(member.lastSeen).toLocaleString() %></h2>
-    </div>
-    <% } %>
-    <div class="userbox">
-      <h2 class="userbox-title">Message:</h2>
-      <a class="userbox-value" href="/search/messages?authorID=<%= member.id %>">
-        <%= counts.message %>
-      </a>
-    </div>
-    <div class="userbox">
-      <h2 class="userbox-title">Thread:</h2>
-      <a class="userbox-value" href="/search/threads?authorID=<%= member.id %>">
-        <%= counts.thread %>
-      </a>
-    </div>
   </div>
   <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/footer")) %>
 

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include(dataset.getFile(dataset.theme.codename +"/views/extra/meta"), {title: member.name }) %>
+
+
+<body>
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/navbar")) %>
+
+  <link rel="stylesheet" href="/libs/simplemde/simplemde.min.css">
+  <script src="/libs/simplemde/simplemde.min.js"></script>
+
+  <div class="container my-3">
+    <div class="col-12">
+      <h2 class="h4 text-white  bg-info mb-3 p-4 rounded">Edit User</h2>
+      <form id="form" class="mb-3">
+        <input type="text" name="name" placeholder="<%= member.name %>" class="input">
+        <input type="email" name="email" placeholder="<%= member.email %>" class="input">
+        <textarea id="textarea" class="input" name="about" rows="4" cols="60" name="content" placeholder="<%=member.about%>"></textarea>
+        <% if (user?.admin){ %>
+        Is Admin? <input id='admin' type='checkbox' value='true' name='admin' <%=member.admin ? "checked": ""%>>
+        <input id='adminHidden' type='hidden' value='false' name='admin'>
+        <% } %>
+        Hide Last Seen? <input id='last' type='checkbox' value='true' name='hideLastSeen' <%=member.hideLastSeen ? "checked": ""%>>
+        <input id='lastHidden' type='hidden' value='false' name='admin'>
+        <button type="submit" class="btn-primary" style="width:100%;">Update User!</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/editor.js"></script>
+
+  <script type="module">
+    import request from "/js/request.js";
+    const simplemde = editor("user-edit-<%=member.id%>");
+
+    document.getElementById("form").addEventListener("submit", async e => {
+      e.preventDefault();
+      document.getElementById('adminHidden').disabled = document.getElementById("admin").checked;
+      document.getElementById('lastHidden').disabled = document.getElementById("last").checked;
+
+      const formdata = new FormData(e.target)
+      const res = await request("/api/users/<%=member.id%>", "PATCH", {
+        name: formdata.get("name"),
+        about: simplemde.value(),
+        admin: formdata.get("admin"),
+        email: formdata.get("email"),
+        hideLastSeen: formdata.get("hideLastSeen")
+      });
+      simplemde.clearAutosavedValue();
+
+      if (res) alert(`User is updated!`);
+      location.reload();
+    });
+  </script>
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/footer")) %>
+
+</body>
+
+</html>
