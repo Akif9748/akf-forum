@@ -59,7 +59,7 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - send public to common/public
 - user.ejs for per theme
 - categori search title like thread search
-
+- edit template 
 ### front-end
 - working reset button
 - better pagination

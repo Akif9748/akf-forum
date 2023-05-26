@@ -22,34 +22,31 @@
       <div class="col-12 col-xl-9">
         <div class="category">
 
-          <h2 class="h4 text-white  bg-danger mb-0 p-4 rounded-top">Forum category</h2>
+          <h2 class="h4 text-white  bg-danger mb-0 p-4 rounded-top">New messages</h2>
           <table class="table table-striped table-bordered table-responsive">
             <thead class="thead-light">
               <tr>
-                <th scope="col" class="forum-col">Forum</th>
-                <th scope="col">Topics</th>
-                <th scope="col">Posts</th>
-                <th scope="col" class="last-post-col">Last post</th>
+                <th scope="col" class="forum-col">Message</th>
+                <th scope="col">Date</th>
+                <th scope="col" class="last-post-col">Author</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="thread">
+              <% newestMessages.forEach(message => { %>
+              <tr>
                 <td>
-                  <h3 class="h5 mb-0"><a href="#0" class="text-uppercase">Forum name</a></h3>
-                  <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In laoreet pellentesque lorem sed elementum.</p>
+                  <p class="mb-0">
+                    <a href="<%= message.getLink() %>"> <%= message.content.slice(0, 100) %></a>
+                  </p>
                 </td>
                 <td>
-                  <div>5</div>
+                  <div><%= new Date(message.time).toLocaleString() %></div>
                 </td>
                 <td>
-                  <div>18</div>
-                </td>
-                <td>
-                  <h4 class="h6 mb-0 font-weight-bold"><a href="#0">Post name</a></h4>
-                  <div>by <a href="#0">Author name</a></div>
-                  <div>05 Apr 2017, 20:07</div>
+                  <div class="avatar">by <a href="<%= message.getLink() %>"><%= message.author.name %></a><img src="<%=message.author.avatar %>"></div>
                 </td>
               </tr>
+              <% }) %>
             </tbody>
           </table>
         </div>
@@ -62,22 +59,17 @@
                 <div class="card-body">
                   <h2 class="h4 card-title">Members online</h2>
                   <ul class="list-unstyled mb-0">
-                    <li><a href="/users">You</a></li>
-
+                    <li>
+                      <% onlineUsers.forEach(user => { %>
+                      <a href="/users/<%=user.id  %>"><%= user.name %></a>
+                      <% }); %>
+                    </li>
                   </ul>
                 </div>
                 <div class="card-footer">
                   <dl class="row mb-0">
                     <dt class="col-8">Total:</dt>
-                    <dd class="col-4 mb-0">-</dd>
-                  </dl>
-                  <dl class="row mb-0">
-                    <dt class="col-8">Members:</dt>
-                    <dd class="col-4 mb-0">-</dd>
-                  </dl>
-                  <dl class="row mb-0">
-                    <dt class="col-8">Guests:</dt>
-                    <dd class="col-4 mb-0">-</dd>
+                    <dd class="col-4 mb-0"><%= onlineUserCount %></dd>
                   </dl>
                 </div>
               </div>
@@ -85,11 +77,9 @@
             <div class="col-12 col-sm-6 col-xl-12">
               <div class="card">
                 <div class="card-body">
-
                   <h2 class="h4 card-title">Forum statistics</h2>
-                  
                   <dl class="row mb-0">
-                    <dt class="col-8">Total forums:</dt>
+                    <dt class="col-8">Total categories:</dt>
                     <dd class="col-4 mb-0"><%= categories %></dd>
                   </dl>
                   <dl class="row mb-0">
@@ -107,7 +97,7 @@
                 </div>
                 <div class="card-footer">
                   <div>Newest member:</div>
-                  <div><a href="#0"><%= newestMember %></a></div>
+                  <div><a href="/users/<% newestMember.id %>"><%= newestMember.name %></a></div>
                 </div>
               </div>
             </div>
