@@ -44,52 +44,49 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 ![image](https://github.com/Akif9748/akf-forum/assets/70021050/1ad4ad8e-d000-46a6-834e-7d76cdddda60)
 
 ## TO-DO list
+
+### Backend:
+#### Feature:
 - Profile Message or DM 
-- roles & permissions
+- Upload other photos, model for it
+- Edit & download template 
+- Roles & Permissions
 ```
 role: "moderator",
 permissions: ["see_deleted_message"]
 ```
-- rewrite api ways
-- upload other photos, model for it  
-- add approval threads page.
-- Add a feature list to README.md
-- Admin cant delete other admins.
-- change category name
-- add support for trans around gravatar and upload photo
-- BETTER SETUP PAGE
-- add used open source libraries to README.md
+
+#### Fixes:
+- delete -forum from forum name
+- Admin deleting other admins.
 - send public to common/public
-- edit template 
-- download theme
 
+#### ETC:
+- Rewrite apidocs
+- Add a feature list to README.md
+- add used open source libraries to README.md
 
-### front-end
-- add threads, messages etc. to extra
+### Frontend
+#### Features:
+- change category name
+- Add approval threads page.
+- add support for trans around gravatar and upload photo
+- old contents / titles add to forum interface
+- who liked a message
+- add ban button to user profile
+
+#### Fixes:
+- BETTER SETUP PAGE
 - better user.ejs
+- add threads, messages etc. to extra folder
 - add category to threads
 - working reset button
 - better pagination
 - text alling center body
-- old contents / titles add to forum interface
-- add ban button to user profile
-- who liked a message
-- give admin button, not is admin
 - thread.js unfuction only listener
 
-
-#### css fix
-- admin page to css file
-threads:
-  <style>
-    .fa {
-      color: var(--main);
-    }
-  </style>
-
-
-
 ## Major Version History
+- V4: Enchanted Themes
 - V4: Caching
 - V3: New Theme
 - V2: Backend fix, mongoose is fixed. Really big fix.
