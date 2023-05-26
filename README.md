@@ -44,37 +44,38 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 ![image](https://github.com/Akif9748/akf-forum/assets/70021050/1ad4ad8e-d000-46a6-834e-7d76cdddda60)
 
 ## TO-DO list
+- change email & password
 - Profile Message or DM 
-- mod role, permissions  
+- roles & permissions
+```
+role: "moderator",
+permissions: ["see_deleted_message"]
+```
+- rewrite api ways
 - upload other photos, model for it  
-- change password.
 - add approval threads page.
 - Add a feature list to README.md
-- delete admin???
+- Admin cant delete other admins.
 - change category name
-- _id
-- add support for transition around gravatar
+- add support for trans around gravatar and upload photo
 - BETTER SETUP PAGE
 - add used open source libraries to README.md
 - send public to common/public
-- user.ejs for per theme
-- categori search title like thread search
 - edit template 
 - download theme
+
+
 ### front-end
-- add newest threads to main page
+- add threads, messages etc. to extra
+- better user.ejs
 - add category to threads
 - working reset button
 - better pagination
 - text alling center body
-- add a css file for CodeMirror in threads / send message ok
 - old contents / titles add to forum interface
-- categories page is need a update, thread count in category (?) 
 - add ban button to user profile
 - who liked a message
 - give admin button, not is admin
-- edit user ++
-- rewrite main page, list new messages
 - thread.js unfuction only listener
 
 
