@@ -11,5 +11,5 @@ config.json
 test.js
 
 # avatars folder
-public/images/avatars/*
-!public/images/avatars/default.jpg
+src/public/images/avatars/*
+!src/public/images/avatars/default.jpg
