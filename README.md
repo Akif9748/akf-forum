@@ -44,7 +44,6 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 ![image](https://github.com/Akif9748/akf-forum/assets/70021050/1ad4ad8e-d000-46a6-834e-7d76cdddda60)
 
 ## TO-DO list
-- change email & password
 - Profile Message or DM 
 - roles & permissions
 ```
