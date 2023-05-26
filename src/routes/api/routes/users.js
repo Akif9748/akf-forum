@@ -95,7 +95,7 @@ app.post("/:id/avatar", upload.single('avatar'), async (req, res) => {
     if (req.user.id !== member.id && !req.user.admin) return res.error(403, "You have not got permission for this.");
 
     if (!req.file) return res.error(400, "Missing avatar in request body.");
-    member.avatar = req.file.destination.slice("./public".length) + "/" + req.file.filename;
+    member.avatar = "/images/avatars/" + req.file.filename;
     res.complate(await member.save());
 });
 
