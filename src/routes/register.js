@@ -43,7 +43,7 @@ app.post("/", RL(24 * 60 * 60_000, 5), async (req, res) => {
             to: email,
             subject: name + ", please verify your email",
             html: `
-            <h1>Verify your email in ${forum_name}-forum</h1>
+            <h1>Verify your email in ${forum_name}</h1>
             <a href="${host}/auth/email?code=${user.email_code}">Click here to verify your email</a>
             `
         }, (err) => {

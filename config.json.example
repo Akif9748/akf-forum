@@ -3,8 +3,8 @@
         "codename": "bootstrap_black",
         "language": "en"
     },
-    "forum_name": "akf",
-    "description": "Akf-forum!",
+    "forum_name": "akf-forum",
+    "description": "Akf-forum offical site!",
     "limits": {
         "title": 128,
         "message": 1024,

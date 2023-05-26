@@ -57,7 +57,6 @@ permissions: ["see_deleted_message"]
 ```
 
 #### Fixes:
-- delete -forum from forum name
 - Admin deleting other admins.
 - send public to common/public
 
@@ -76,8 +75,8 @@ permissions: ["see_deleted_message"]
 - add ban button to user profile
 
 #### Fixes:
-- BETTER SETUP PAGE
-- better user.ejs
+- BETTER SETUP PAGE: use setup everytime
+- better user.ejs: https://github.com/mdbootstrap/bootstrap-profiles
 - add threads, messages etc. to extra folder
 - add category to threads
 - working reset button
