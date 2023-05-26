@@ -27,17 +27,17 @@
       <nav aria-label="Navigate post pages" class="float-lg-right">
         <ul class="pagination pagination-sm mb-lg-0">
           <% if (page > 0){ %>
-          <li class="page-item"><a href="/categories?page=<%= page-1 %>" class="page-link">Back</a></li>
+          <li class="page-item"><a href="/users?page=<%= page-1 %>" class="page-link">Back</a></li>
           <% } %>
           <% for(let i=0; i < pages; i++){ %>
-          <li class="page-item <%= i==page?'active':'' %>"><a href="/categories?page=<%= i %>" class="page-link"><%= i+1 %>
+          <li class="page-item <%= i==page?'active':'' %>"><a href="/users?page=<%= i %>" class="page-link"><%= i+1 %>
               <% if (i==page){ %>
               <span class="sr-only">(current)</span>
               <% } %>
             </a></li>
           <% } %>
           <% if (pages-1 > page) { %>
-          <li class="page-item"><a href="/categories?page=<%= page+1 %>" class="page-link">Next</a></li>
+          <li class="page-item"><a href="/users?page=<%= page+1 %>" class="page-link">Next</a></li>
           <% } %>
         </ul>
       </nav>
