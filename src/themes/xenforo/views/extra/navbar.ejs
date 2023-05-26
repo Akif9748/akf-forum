@@ -1,0 +1,95 @@
+<header class="p-header" id="header">
+  <div class="p-header-inner">
+    <div class="p-header-content">
+      <a style="font-size: 40px;" href="/"><%= dataset.forum_name.toUpperCase() %><span>-FORUM</span></a>
+    </div>
+  </div>
+</header>
+<div class="p-navSticky p-navSticky--primary" data-xf-init="sticky-header">
+  <nav class="p-nav">
+    <div class="p-nav-inner">
+      <button type="button" class="button--plain p-nav-menuTrigger button" data-xf-click="off-canvas" data-menu=".js-headerOffCanvasMenu" tabindex="0" aria-label="Menü"><span class="button-text">
+          <i aria-hidden="true"></i>
+        </span></button>
+
+      <div class="p-nav-scroller hScroller" data-xf-init="h-scroller" data-auto-scroll=".p-navEl.is-selected">
+        <div class="hScroller-scroll">
+          <ul class="p-nav-list js-offCanvasNavSource">
+            <li>
+              <div class="p-navEl">
+                <a class="p-navEl-link p-navEl-link--splitMenu " href="/threads/create/">Create Thread</a>
+              </div>
+            </li>
+            <li>
+              <div class="p-navEl">
+                <a class="p-navEl-link p-navEl-link--splitMenu " href="/categories">Categories</a>
+              </div>
+            </li>
+            <li>
+              <div class="p-navEl">
+                <a class="p-navEl-link p-navEl-link--splitMenu " href="/threads">Threads</a>
+              </div>
+            </li>
+            <li>
+              <div class="p-navEl">
+                <a class="p-navEl-link p-navEl-link--splitMenu " href="/users">Users</a>
+              </div>
+            </li>
+            <li>
+              <div class="p-navEl">
+                <a class="p-navEl-link p-navEl-link--splitMenu " href="/search">Search</a>
+              </div>
+            </li>
+            <li>
+              <div class="p-navEl">
+                <a class="p-navEl-link p-navEl-link--splitMenu " href="/login">Logout</a>
+              </div>
+            </li>
+            <script>
+              const menuItems = document.getElementsByClassName("p-navEl");
+              for (let i = 0; i < menuItems.length; i++)
+                if (window.location.pathname.includes(menuItems[i].children[0].getAttribute("href"))) {
+                  menuItems[i].classList.add("is-selected");
+                  break;
+                }
+            </script>
+          </ul>
+        </div>
+      </div>
+      <div class="p-nav-opposite">
+        <div class="p-navgroup p-account p-navgroup--member">
+          <a href="<%=user.getLink()%>" class="p-navgroup-link p-navgroup-link--iconic p-navgroup-link--user" data-xf-click="menu" data-xf-key="m" data-menu-pos-ref="< .p-navgroup" title="Akif" aria-expanded="false" aria-haspopup="true">
+            <span class="avatar avatar--xxs" data-user-id="116">
+
+              <img src="<%=user.avatar %>" alt="Akif" class="avatar-u116-s" width="48" height="48" loading="lazy" />
+            </span>
+            <span class="p-navgroup-linkText"><%=user.name  %></span>
+          </a>
+
+        </div>
+        <div class="p-navgroup p-discovery">
+          <a href="/search" class="p-navgroup-link p-navgroup-link--iconic p-navgroup-link--search" data-xf-click="menu" data-xf-key="/" aria-label="Ara" aria-expanded="false" aria-haspopup="true" title="Ara">
+            <i aria-hidden="true"></i>
+            <span class="p-navgroup-linkText">Ara</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+<% if (user?.admin){ %>
+<div class="p-sectionLinks">
+  <div class="p-sectionLinks-inner hScroller" data-xf-init="h-scroller">
+    <div class="hScroller-scroll">
+      <ul class="p-sectionLinks-list">
+        <li>
+          <div class="p-navEl ">
+            <a href="/admin" class="p-navEl-link ">Admin Page</a>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</div>
+<% } %>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html id="XF">
+<%- include("extra/meta", {title: "Welcome to the "+dataset.forum_name+"-forum!" }) %>
+
+<body data-template="forum_list">
+  <div class="p-pageWrapper" id="top">
+
+
+    <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/navbar")) %>
+
+    <div class="p-body">
+      <div class="p-body-inner">
+        <div class="p-body-header">
+          <div class="p-title ">
+            <h1 class="p-title-value"><%=dataset.forum_name%>-forum</h1>
+            <div class="p-title-pageAction">
+              <a href="/threads/create" class="button--cta button button--icon button--icon--write" data-xf-click="overlay" rel="nofollow"><span class="button-text">
+                  Create Thread
+                </span></a>
+            </div>
+          </div>
+        </div>
+        <div class="p-body-main p-body-main--withSidebar ">
+          <div class="p-body-contentCol"></div>
+          <div class="p-body-sidebarCol"></div>
+          <div class="p-body-content">
+            <div class="p-body-pageContent">
+              <div class="block" data-widget-id="24" data-widget-key="new_threads_ust" data-widget-definition="new_threads">
+                <div class="block-container">
+                  <h3 class="block-header">
+                    <a href="/threads" rel="nofollow">New Threads</a>
+                  </h3>
+                  <div class="block-body">
+                    <div class="structItemContainer">
+                      <% newestThreads.forEach(thread => { %>
+
+                      <div class="structItem structItem--thread js-inlineModContainer js-threadListItem-14359" data-author="ercncavs">
+                        <div class="structItem-cell structItem-cell--icon">
+                          <div class="structItem-iconContainer">
+                            <a href="" class="avatar avatar--s" data-xf-init="member-tooltip">
+                              <img src="<%= thread.author.avatar %>" class="avatar-u1804-s" width="48" height="48" loading="lazy" />
+                            </a>
+                          </div>
+                        </div>
+                        <div class="structItem-cell structItem-cell--main" data-xf-init="touch-proxy">
+
+                          <div class="structItem-title">
+                            <a href="<%= thread.getLink() %>" data-tp-primary="on" data-xf-init="preview-tooltip"><%= thread.title  %></a>
+                          </div>
+                          <div class="structItem-minor">
+                            <ul class="structItem-parts">
+                              <li>
+                                <a href="/users/<%= thread.authorID %>" class="username " dir="auto" data-user-id="1804" data-xf-init="member-tooltip">
+                                  <%= thread.author.name %>
+                                </a>
+                              </li>
+                              <li class="structItem-startDate">
+                                <a>
+                                  <time class="u-dt"><%= new Date(thread.time).toLocaleString() %></time>
+                                </a>
+                              </li>
+                              <li><a href="/categories/<%= thread.categoryID %>"><%= thread.categoryID %></a></li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="structItem-cell structItem-cell--meta" title="İlk mesajın ifade puanı: 0">
+                          <dl class="pairs pairs--justified">
+                            <dt>Messages</dt>
+                            <dd><%= thread.messages.length %></dd>
+                          </dl>
+                          <dl class="pairs pairs--justified structItem-minor">
+                            <dt>Views</dt>
+                            <dd><%= thread.views %></dd>
+                          </dl>
+                        </div>
+                      </div>
+                      <% }) %>
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="p-body-sidebar">
+
+            <div class="block" data-widget-section="onlineNow" data-widget-id="6" data-widget-key="forum_overview_members_online" data-widget-definition="members_online">
+              <div class="block-container">
+                <h3 class="block-minorHeader"><a href="/">Online Members</a></h3>
+                <div class="block-body">
+                  <div class="block-row block-row--minor">
+                    <ul class="listInline listInline--comma">
+                      <% onlineUsers.forEach(user => { %>
+                      <li><a href="/users/<%=user.id  %>" class="username " dir="auto" data-user-id="116" data-xf-init="member-tooltip"><%= user.name %></a></li>
+                      <% }); %>
+                    </ul>
+                  </div>
+                </div>
+                <div class="block-footer">
+                  <span class="block-footer-counter">Total: <%= onlineUserCount %>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="block" data-widget-id="9" data-widget-key="forum_overview_forum_statistics" data-widget-definition="forum_statistics">
+              <div class="block-container">
+                <h3 class="block-minorHeader">Forum statistics</h3>
+                <div class="block-body block-row">
+                  <dl class="pairs pairs--justified">
+                    <dt>Total categories</dt>
+                    <dd><%= categories %></dd>
+                  </dl>
+                  <dl class="pairs pairs--justified">
+                    <dt>Total threads</dt>
+                    <dd><%= threads %></dd>
+                  </dl>
+                  <dl class="pairs pairs--justified">
+                    <dt>Total messages</dt>
+                    <dd><%= messages %></dd>
+                  </dl>
+                  <dl class="pairs pairs--justified">
+                    <dt>Total members</dt>
+                    <dd><%= users %></dd>
+                  </dl>
+                  <dl class="pairs pairs--justified">
+                    <dt>Newest member</dt>
+                    <dd><a href="/users/<% newestMember.id %>" class="username " dir="auto" data-xf-init="member-tooltip"><%= newestMember.name %></a></dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/footer")) %>
+
+  </div>
+</body>
+
+</html>
