@@ -86,7 +86,7 @@ permissions: ["see_deleted_message"]
 - thread.js unfuction only listener
 
 ## Major Version History
-- V4: Enchanted Themes
+- V5: Enchanted Themes
 - V4: Caching
 - V3: New Theme
 - V2: Backend fix, mongoose is fixed. Really big fix.
