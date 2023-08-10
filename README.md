@@ -51,6 +51,7 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 - Upload other photos, model for it
 - Edit & download template 
 - Banner
+- Add @me support for ids, <%= member.id %>
 - Roles & Permissions
 ```
 role: "moderator",
