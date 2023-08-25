@@ -5,6 +5,9 @@ const { themes, emailRegEx } = require("../../../lib")
 const app = Router();
 const { join } = require("path");
 app.param("id", async (req, res, next, id) => {
+    if (id === "me")
+        id = req.user.id;
+
     req.member = await UserModel.get(id, req.user.admin ? "+lastSeen +ips" : "");
 
     if (!req.member) return res.error(404, `We don't have any user with id ${id}.`);
