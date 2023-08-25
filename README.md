@@ -44,6 +44,8 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 ![image](https://github.com/Akif9748/akf-forum/assets/70021050/1ad4ad8e-d000-46a6-834e-7d76cdddda60)
 
 ## TO-DO list
+#### Add used modules etc like: cropper: 
+https://github.com/akashgiricse/Online-Forum
 
 ### Backend:
 #### Feature:
@@ -84,6 +86,9 @@ permissions: ["see_deleted_message"]
 - better pagination
 - text alling center body
 - thread.js unfuction only listener
+
+## We used:
+https://github.com/akashgiricse/Online-Forum for bootstrap theme.
 
 ## Major Version History
 - V5: Enchanted Themes
