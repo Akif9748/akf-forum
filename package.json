@@ -1,6 +1,6 @@
 {
   "name": "akf-forum",
-  "version": "5.6.0",
+  "version": "5.6.1",
   "description": "A Node.js based forum software",
   "main": "src/index.js",
   "scripts": {
