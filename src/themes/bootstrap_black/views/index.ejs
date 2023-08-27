@@ -36,30 +36,30 @@
             </thead>
             <tbody>
               <% newestThreads.forEach(thread=>{ %>
-                <tr>
-                  <td>
-                    <h3 class="h6">
-                      <% if (thread.deleted) { %> <span class="badge badge-primary">[DELETED]</span><% } %>
-                      <a href="<%= thread.getLink() %>"><%= thread.title  %></a>
-                    </h3>
-                  </td>
-                  <td>
-                    <div class="avatar">by <a href="/users/<%= thread.authorID %>"><%= thread.author.name %></a><img src="<%=thread.author.avatar %>"></div>
-                    <div><%= new Date(thread.time).toLocaleString() %></div>
-                  </td>
-                  <td>
-                    <div><%= thread.messages.length %> messages</div>
-                    <div><%= thread.views %> views</div>
-                  </td>
-                  <% if (user?.admin){ %>
-                  <td>
-                    <% if (!thread.deleted){ %>
-                    <a class="btn-danger" onclick="fetch('/api/threads/<%= thread.id %>/',{method:'DELETE'})"><i class="bx bx-trash bx-sm"></i></a>
-                    <% } %>
-                  </td>
+              <tr>
+                <td>
+                  <h3 class="h6">
+                    <% if (thread.deleted) { %> <span class="badge badge-primary">[DELETED]</span><% } %>
+                    <a href="<%= thread.getLink() %>"><%= thread.title  %></a>
+                  </h3>
+                </td>
+                <td>
+                  <div class="avatar">by <a href="/users/<%= thread.authorID %>"><%= thread.author.name %></a><img src="<%=thread.author.avatar %>"></div>
+                  <div><%= new Date(thread.time).toLocaleString() %></div>
+                </td>
+                <td>
+                  <div><%= thread.messages.length %> messages</div>
+                  <div><%= thread.views %> views</div>
+                </td>
+                <% if (user?.admin){ %>
+                <td>
+                  <% if (!thread.deleted){ %>
+                  <a class="btn-danger" onclick="fetch('/api/threads/<%= thread.id %>/',{method:'DELETE'})"><i class="bx bx-trash bx-sm"></i></a>
                   <% } %>
-                </tr>
-                <% }); %>
+                </td>
+                <% } %>
+              </tr>
+              <% }); %>
             </tbody>
           </table>
         </div>
@@ -103,18 +103,36 @@
               <div class="card mb-3 mb-sm-0 mb-xl-3">
                 <div class="card-body">
                   <h2 class="h4 card-title">Members online</h2>
+                  <style>
+                    li.d-inline ~ li.d-inline::before {
+                      content: ', ';
+                    }
+                  </style>
                   <ul class="list-unstyled mb-0">
-                    <li>
-                      <% onlineUsers.forEach(user => { %>
-                      <a href="/users/<%=user.id  %>"><%= user.name %></a>
-                      <% }); %>
+                    <% onlineMembers.slice(0, 30).forEach(user => { %>
+                    <li class="d-inline">
+                      <a href="/users/<%=user.id %>"><%= user.name %></a>
                     </li>
+                    <% }); %>
+                    <% if (onlineMemberCount > 30) { %>
+                      <li>
+                        <a href="/users/"><%= onlineMemberCount - 30 %></a> more...
+                      </li>
+                    <% } %>
                   </ul>
                 </div>
                 <div class="card-footer">
                   <dl class="row mb-0">
                     <dt class="col-8">Total:</dt>
-                    <dd class="col-4 mb-0"><%= onlineUserCount %></dd>
+                    <dd class="col-4 mb-0"><%= onlineTotal %></dd>
+                  </dl>
+                  <dl class="row mb-0">
+                    <dt class="col-8">Members:</dt>
+                    <dd class="col-4 mb-0"><%= onlineMemberCount %></dd>
+                  </dl>
+                  <dl class="row mb-0">
+                    <dt class="col-8">Guests:</dt>
+                    <dd class="col-4 mb-0"><%= onlineGuests %></dd>
                   </dl>
                 </div>
               </div>
@@ -142,7 +160,7 @@
                 </div>
                 <div class="card-footer">
                   <div>Newest member:</div>
-                  <div><a href="/users/<% newestMember.id %>"><%= newestMember.name %></a></div>
+                  <div><a href="/users/<%= newestMember.id %>"><%= newestMember.name %></a></div>
                 </div>
               </div>
             </div>

@@ -13,7 +13,7 @@
     },
     "global_ratelimit": {
         "enabled": true,
-        "max": 25,
+        "max": 30,
         "windowMs": 60000
     },
     "discord_auth": false,

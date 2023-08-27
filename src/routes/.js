@@ -1,11 +1,11 @@
-const { UserModel, ThreadModel, MessageModel, CategoryModel } = require("../models")
+const { UserModel, ThreadModel, MessageModel, CategoryModel } = require("../models");
 const { Router } = require("express");
 const app = Router();
 
 app.get("/", async (req, res) => {
 
     const [
-        categories, users, threads, messages, newestMember, newestMessages, newestThreads, onlineUserCount, onlineUsers
+        categories, users, threads, messages, newestMember, newestMessages, newestThreads, onlineMemberCount, onlineMembers
     ] = await Promise.all([
         CategoryModel.count(),
         UserModel.count({ deleted: false }),
@@ -16,13 +16,14 @@ app.get("/", async (req, res) => {
         ThreadModel.find({ state: "OPEN" }).sort({ time: -1 }).limit(10),
         UserModel.count({ deleted: false, lastSeen: { $gt: Date.now() - 1000 * 60 * 5 } }),
         UserModel.find({ deleted: false, hideLastSeen: false, lastSeen: { $gt: Date.now() - 1000 * 60 * 5 } }, "name id")
-    ])
-
+    ]),
+        onlineTotal = req.app.onlines.size,
+        onlineGuests = onlineTotal - onlineMemberCount;
 
     res.reply("index", {
         categories, users, threads, messages,
         newestMember, newestMessages, newestThreads,
-        onlineUserCount, onlineUsers
+        onlineMemberCount, onlineMembers, onlineGuests, onlineTotal
     });
 
 });

@@ -35,6 +35,7 @@ schema.virtual("active").get(function () {
 })
 
 schema.methods.takeId = async function () {
+    // eslint-disable-next-line no-use-before-define
     this.id = String(await model.count() || 0);
     return this;
 }

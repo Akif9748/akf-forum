@@ -53,8 +53,8 @@ app.get("/discord", async (req, res) => {
             return res.redirect("/");
         }
 
-        let name = discord.username + discord.discriminator;
-        while (await UserModel.findOne({ name }))
+        let name = discord.username;
+        while (await UserModel.exists({ name }))
             name += Math.floor(Math.random() * 2);
 
         const user2 = new UserModel({

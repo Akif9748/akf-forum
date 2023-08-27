@@ -44,8 +44,6 @@ Akf-forum has got an API for AJAX (fetch), other clients etc. And, you can learn
 ![image](https://github.com/Akif9748/akf-forum/assets/70021050/1ad4ad8e-d000-46a6-834e-7d76cdddda60)
 
 ## TO-DO list
-#### Add used modules etc like: cropper: 
-https://github.com/akashgiricse/Online-Forum
 
 ### Backend:
 #### Feature:
@@ -62,18 +60,17 @@ permissions: ["see_deleted_message"]
 
 #### Fixes:
 - Admin deleting other admins.
-- send public to common/public
+- disable caching
 
 #### ETC:
 - Rewrite apidocs
 - Add a feature list to README.md
-- add used open source libraries to README.md
 
 ### Frontend
 #### Features:
 - change category name
 - Add approval threads page.
-- add support for trans around gravatar and upload photo
+- add support for switch around gravatar and upload photo
 - old contents / titles add to forum interface
 - who liked a message
 - add ban button to user profile
@@ -87,9 +84,10 @@ permissions: ["see_deleted_message"]
 - text alling center body
 - thread.js unfuction only listener
 
-## We used:
+## Special Thanks:
 https://github.com/akashgiricse/Online-Forum for bootstrap theme.
-
+@Tokmak for old frontend.
+https://fengyuanchen.github.io/cropperjs/examples/crop-a-round-image.html for avatar upload panel.
 ## Major Version History
 - V5: Enchanted Themes
 - V4: Caching

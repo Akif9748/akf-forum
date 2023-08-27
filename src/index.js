@@ -20,6 +20,15 @@ const
 
 app.ips = [];
 
+app.onlines = new Map();
+
+setInterval(() => {
+    const now = Date.now();
+    for (const [ip, lastSeen] of app.onlines.entries())
+        if (now - lastSeen > 1000 * 60 * 5)
+            app.onlines.delete(ip);
+}, 1000 * 60 * 5);
+
 app.set("view engine", "ejs");
 app.set("limits", limits);
 
@@ -31,16 +40,19 @@ app.use(express.static(join(__dirname, "public")), express.json(), express.urlen
     SES({ secret: process.env.SECRET, store: MS.create({ clientPromise: DB, stringify: false }), resave: false, saveUninitialized: false }),
     async (req, res, next) => {
         if (app.ips.includes(req.clientIp)) return res.status(403).send("You are banned from this forum.");
-
+        
+        const lastSeen = Date.now();
+        
         req.user = req.session.userID ? await UserModel.findOneAndUpdate({ id: req.session.userID }, {
-            lastSeen: Date.now(), $addToSet: { ips: req.clientIp }
+            lastSeen, $addToSet: { ips: req.clientIp }
         }) : null;
+
+        app.onlines.set(req.clientIp, lastSeen);        
 
         let theme = req.user?.theme || def_theme;
 
         if (!themes.some(t => t.codename === theme.codename))
             theme = def_theme;
-
 
         res.reply = (page, options = {}, status = 200) => {
             const road = join(__dirname, "themes", theme.codename, "views", `${page}.ejs`);
