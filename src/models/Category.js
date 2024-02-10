@@ -7,8 +7,10 @@ const schema = new mongoose.Schema({
     authorID: { type: String }
 
 });
-schema.methods.takeId = async function () {
-    this.id = String(await model.count() || 0);
+
+schema.methods.takeId = async function () {    
+    // eslint-disable-next-line no-use-before-define
+    this.id = await model.countDocuments() || 0;
     return this;
 }
 

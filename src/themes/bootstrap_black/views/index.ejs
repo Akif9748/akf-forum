@@ -104,7 +104,7 @@
                 <div class="card-body">
                   <h2 class="h4 card-title">Members online</h2>
                   <style>
-                    li.d-inline ~ li.d-inline::before {
+                    li.d-inline~li.d-inline::before {
                       content: ', ';
                     }
                   </style>
@@ -115,9 +115,9 @@
                     </li>
                     <% }); %>
                     <% if (onlineMemberCount > 30) { %>
-                      <li>
-                        <a href="/users/"><%= onlineMemberCount - 30 %></a> more...
-                      </li>
+                    <li>
+                      <a href="/users/"><%= onlineMemberCount - 30 %></a> more...
+                    </li>
                     <% } %>
                   </ul>
                 </div>
@@ -157,11 +157,13 @@
                     <dt class="col-8">Total members:</dt>
                     <dd class="col-4 mb-0"><%= users %></dd>
                   </dl>
-                </div>
+                </div> 
+                <% if(newestMember) {%>
                 <div class="card-footer">
                   <div>Newest member:</div>
                   <div><a href="/users/<%= newestMember.id %>"><%= newestMember.name %></a></div>
                 </div>
+                <% }%>
               </div>
             </div>
           </div>

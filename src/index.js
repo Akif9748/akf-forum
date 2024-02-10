@@ -32,9 +32,8 @@ setInterval(() => {
 app.set("view engine", "ejs");
 app.set("limits", limits);
 
-for (const theme of fs.readdirSync(join(__dirname, "themes")))
-    app.use(`/themes/${theme}`, express.static(join(__dirname, "themes", theme, "public")));
-
+for (const theme of themes)
+    app.use(`/themes/${theme.codename}`, express.static(join(__dirname, "themes", theme.codename, "public")));
 
 app.use(express.static(join(__dirname, "public")), express.json(), express.urlencoded({ extended: true }), IP(),
     SES({ secret: process.env.SECRET, store: MS.create({ clientPromise: DB, stringify: false }), resave: false, saveUninitialized: false }),
@@ -56,7 +55,7 @@ app.use(express.static(join(__dirname, "public")), express.json(), express.urlen
 
         res.reply = (page, options = {}, status = 200) => {
             const road = join(__dirname, "themes", theme.codename, "views", `${page}.ejs`);
-            const renderpage = fs.existsSync(road) ? road : join(__dirname, "themes", "common", "views", `${page}.ejs`);
+            const renderpage = fs.existsSync(road) ? road : join(__dirname, "themes", def_theme, "views", `${page}.ejs`);
             return res.status(status).render(renderpage, {
                 dataset: {
                     themes, theme, forum_name, description,

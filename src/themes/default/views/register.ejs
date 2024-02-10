@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include(dataset.getFile(dataset.theme.codename +"/views/extra/meta"), {title: "Register!" }) %>
+
+
+<body style="text-align: center;">
+
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/navbar")) %>
+
+
+  <h1 class="title">Register</h1>
+
+
+  <form class="login" action="/register" method="post">
+    <input type="email" name="email" placeholder="Email" class="input" required>
+    <input type="text" name="name" placeholder="Username" class="input" required>
+    <input type="password" name="password" placeholder="Password" class="input" required>
+    <textarea class="input" name="about" rows="4" placeholder="About you... You can use markdown"></textarea>
+    <input type="submit" class="btn-primary" style="width:100%;" value="Register">
+  </form>
+  <% if(discord) { %>
+    <a href="<%=discord%>" class="btn-outline-primary">Auth with discord</a>
+    <% } %>
+    <a href="/login" class="btn-outline-primary">Login</a>
+
+
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/footer")) %>
+
+</body>
+
+</html>

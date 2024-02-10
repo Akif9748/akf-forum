@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include(dataset.getFile(dataset.theme.codename +"/views/extra/meta"), {title: "Avatar Upload Panel!" }) %>
+
+<body style="text-align: center;">
+  <link rel="stylesheet" href="/libs/cropper/cropper.css">
+  <style>
+    .container {
+      margin: 20px auto;
+      max-width: 640px;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    .cropper-view-box,
+    .cropper-face {
+      border-radius: 50%;
+    }
+
+    .cropper-view-box {
+      outline: 0;
+      box-shadow: 0 0 0 1px #39f;
+    }
+  </style>
+  <script src="/libs/cropper/cropper.js"></script>
+
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/navbar")) %>
+
+
+
+  <div class="container">
+    <h1>Upload avatar for <%= member.name %></h1>
+
+    <input type="file" id="file-input">
+    <img id="image" src="<%= member.avatar %>">
+    <p>
+      <button type="button" id="button">Upload</button>
+    </p>
+    <file id="cropped-image" name="avatar">
+      <form id="form"></form>
+
+  </div>
+  <script>
+    const MEM_ID="<%= member.id %>";
+  </script>
+  <script src="/js/avatar.js"></script>
+
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/footer")) %>
+
+</body>
+
+</html>

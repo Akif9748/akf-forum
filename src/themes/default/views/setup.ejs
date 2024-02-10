@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include(dataset.getFile(dataset.theme.codename +"/views/extra/meta"), {title: "Setup the Akf-forum!" }) %>
+
+
+<body style="text-align: center;">
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/navbar")) %>
+
+
+  <h1 style="color: var(--main);">Setup</h1>
+  <h2 style="color: var(--second);">There is default settings for akf-forum, you not need to edit them, but you can! And, the first registered user will be admin.</h2>
+  <form class="search" method="POST">
+    Forum name:
+    <input class="input" type="text" name="forum_name" value="akf-forum" required>
+    Forum description:
+    <input class="input" type="text" name="description" value="Akf-forum!" required>
+    Default state for new threads, change with "APPROVAL" for approval system:
+    <input class="input" type="text" name="default_thread_state" value="OPEN" required>
+    Default state for new users, change with "APPROVAL" for approval system:
+    <input class="input" type="text" name="default_user_state" value="ACTIVE" required>
+    Domain of the forum, defaulty setted:
+    <input class="input" type="text" name="host" id="domain" value="Akf-forum!" required>
+   
+    <input type="submit" class="btn-primary" value="Setup">
+  </form>
+  <script>
+    document.getElementById("domain").value = location.origin;
+  </script>
+</body>
+
+</html>

@@ -19,7 +19,7 @@ app.get("/users", async (req, res) => {
     const users = await UserModel.find({ ...req.sq, name: { $regex: req.query.q, $options: "i" } }, null, req.so)
     res.reply("users", {
         users, page: req.page,
-        pages: Math.ceil(await UserModel.count(req.sq) / 10)
+        pages: Math.ceil(await UserModel.countDocuments(req.sq) / 10)
     });
 });
 
@@ -31,7 +31,7 @@ app.get("/messages", async (req, res) => {
     const messages = await MessageModel.find(query, null, req.so)
     res.reply("messages", {
         messages, page: req.page,
-        pages: Math.ceil(await MessageModel.count(query) / 10)
+        pages: Math.ceil(await MessageModel.countDocuments(query) / 10)
     });
 });
 
@@ -45,7 +45,7 @@ app.get("/threads", async (req, res) => {
     const threads = await ThreadModel.find(query, null, req.so)
     res.reply("threads", {
         threads, page: req.page, title: `Threads with query '${req.query.q}'`,
-        pages: Math.ceil(await ThreadModel.count(query) / 10), desp: `${threads.length} threads are listed`
+        pages: Math.ceil(await ThreadModel.countDocuments(query) / 10), desp: `${threads.length} threads are listed`
     });
 });
 

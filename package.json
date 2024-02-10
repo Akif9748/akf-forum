@@ -5,6 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node .",
+    "reset":"node util/reset",
+    "admin":"node util/admin",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,24 +23,23 @@
     "url": "https://github.com/Akif9748/akf-forum/issues"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=18 >=17.5 >=16.15"
   },
   "homepage": "https://akf-forum.glitch.me/",
   "dependencies": {
-    "bcrypt": "^5.1.0",
-    "connect-mongo": "^4.6.0",
-    "dotenv": "^16.0.3",
-    "ejs": "^3.1.6",
+    "bcrypt": "^5.1.1",
+    "connect-mongo": "^5.1.0",
+    "dotenv": "^16.4.2",
+    "ejs": "^3.1.9",
     "express": "^4.18.2",
-    "express-rate-limit": "^6.6.0",
-    "express-session": "^1.17.2",
-    "mongoose": "^6.6.5",
+    "express-rate-limit": "^7.1.5",
+    "express-session": "^1.18.0",
+    "mongoose": "^8.1.1",
     "multer": "^1.4.5-lts.1",
-    "node-fetch": "^2.6.7",
-    "nodemailer": "^6.8.0",
+    "nodemailer": "^6.9.9",
     "request-ip": "^3.3.0"
   },
   "devDependencies": {
-    "eslint": "^8.25.0"
+    "eslint": "^8.56.0"
   }
 }

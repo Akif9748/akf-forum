@@ -47,7 +47,7 @@
                 <img onclick="location.href='/users/<%=member.id%>/avatar'" src="<%=member.avatar %>" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
                 <% if(user?.admin || user?.id === member.id){ %>
                 <a href="/users/<%=member.id%>/edit" type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
-                  Edit profile
+                  Profile Settings
                 </a>
                 <% if (member.deleted) {%>
                 <a id="undelete" class="btn btn-outline-dark">Undelete user</a>
@@ -83,28 +83,29 @@
 
 
 
-            <% if (member.about?.length) { %>
 
             <div class="card-body p-4 text-black">
               <div class="mb-5">
                 <p class="lead fw-normal mb-1" style="color: aliceblue;">About</p>
+                <% if (member.about?.length) { %>
                 <div class="p-4" style="background-color: #f8f9fa;">
                   <p id="about" class="font-italic mb-1"><%= member.about %></p>
                 </div>
                 <script src="/libs/showdown/showdown.min.js"></script>
                 <script>
                   const converter = new showdown.Converter();
-                  const about = document.getElementById("about")
+                  const about = document.getElementById("about");
                   about.innerHTML = converter.makeHtml(about.innerText);
                 </script>
+                <% } %>
               </div>
-              <% } %>
 
               <div class="d-flex justify-content-between align-items-center mb-4">
                 <!--
                 <p class="lead fw-normal mb-0">Recent photos</p>
                 <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
               -->
+
                 <% if (!member.discordID && discord && user?.id === member.id) { %>
                 <a href="<%=discord%>" class="btn-outline-primary">Discord auth</a>
                 <% } else if(member.discordID && user?.id === member.id) { %>
@@ -117,9 +118,8 @@
                   <option><%= ip %></option>
                   <% } %>
                 </select>
+                <a id="ban" class="btn-outline-primary">Ban All IPs</a>
                 <% } %>
-
-
               </div>
             </div>
           </div>
@@ -128,53 +128,38 @@
     </div>
   </section>
 
+  <% if(user?.admin || user?.id === member.id){ %>
+  <script type="module">
+    import request from "../../js/request.js";
 
-
-
-
-  <div class="usercontent">
-    <% if(user?.admin || user?.id === member.id){ %>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-      </ul>
-
-      <script type="module">
-        import request from "../../js/request.js";
-
-
-        document.addEventListener("click", async e => {
-          if (e.target.id == "delete") {
-            const response = await request("/api/users/<%= member.id %>", "DELETE");
-            if (response.state !== "DELETED") return
-            alert("User is deleted!");
-            location.reload()
-          } else if (e.target.id == "undelete") {
-            const response = await request("/api/users/<%= member.id %>/", "PATCH", {
-              deleted: false
-            });
-            if (response.state == "DELETED") return;
-            alert("User is undeleted successfully!");
-            location.reload()
-          } else if (e.target.id == "un_discord") {
-            const response = await fetch("/auth/discord/", {
-              method: "DELETE"
-            });
-            alert(await response.text());
-            location.reload()
-          } else if (e.target.id == "toogle")
-            document.getElementById('user-edit').classList.toggle('no-active')
-
+    document.addEventListener("click", async e => {
+      if (e.target.id == "delete") {
+        const response = await request("/api/users/<%= member.id %>", "DELETE");
+        if (response.state !== "DELETED") return
+        alert("User is deleted!");
+        location.reload()
+      } else if (e.target.id == "undelete") {
+        const response = await request("/api/users/<%= member.id %>/", "PATCH", {
+          deleted: false
         });
-      </script>
-    </nav>
+        if (response.state == "DELETED") return;
+        alert("User is undeleted successfully!");
+        location.reload()
+      } else if (e.target.id == "un_discord") {
+        const response = await fetch("/auth/discord/", {
+          method: "DELETE"
+        });
+        alert(await response.text());
+        location.reload()
+      } else if (e.target.id == "ban") {
+        const response = await fetch("/api/users/<%= member.id %>/ban", { method: "POST" });
+        alert("All IPs of user is banned.");
+      }
+    });
+  </script>
 
-    <% } %>
+  <% } %>
 
-
-
-  </div>
   <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/footer")) %>
 
 </body>

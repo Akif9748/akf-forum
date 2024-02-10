@@ -5,7 +5,7 @@ const { themes, emailRegEx } = require("../../../lib")
 const app = Router();
 const { join } = require("path");
 app.param("id", async (req, res, next, id) => {
-    if (id === "me")
+    if (id === "me") //
         id = req.user.id;
 
     req.member = await UserModel.get(id, req.user.admin ? "+lastSeen +ips" : "");

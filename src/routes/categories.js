@@ -9,7 +9,7 @@ app.get("/", async (req, res) => {
     const categories = await CategoryModel.find({}).limit(10).skip(page * 10).sort({ time: -1 });
     res.reply("categories", {
         categories, page,
-        pages: Math.ceil(await CategoryModel.count({}) / 10)
+        pages: Math.ceil(await CategoryModel.countDocuments({}) / 10)
     });
 });
 
@@ -24,7 +24,7 @@ app.get("/:id", async (req, res) => {
     let threads = await ThreadModel.find(query).limit(10).skip(page * 10).sort({ time: -1 });
     threads = await Promise.all(threads.map(thread => thread.get_author()));
 
-    res.reply("threads", { threads, page, title: `Threads in ${category.name}`, desp: category.desp, pages: Math.ceil(await ThreadModel.count(query) / 10) });
+    res.reply("threads", { threads, page, title: `Threads in ${category.name}`, desp: category.desp, pages: Math.ceil(await ThreadModel.countDocuments(query) / 10) });
 });
 
 module.exports = app;

@@ -43,7 +43,7 @@ schema.methods.get_category = async function () {
 schema.methods.messageCount = async function (admin = false) {
     const query = { threadID: this.id };
     if (!admin) query.deleted = false;
-    return await MessageModel.count(query) || 0;
+    return await MessageModel.countDocuments(query) || 0;
 };
 
 schema.methods.push = function (messageID) {
@@ -51,8 +51,9 @@ schema.methods.push = function (messageID) {
     return this;
 }
 
-schema.methods.takeId = async function () {
-    this.id = await model.count() || 0;
+schema.methods.takeId = async function () {    
+    // eslint-disable-next-line no-use-before-define
+    this.id = await model.countDocuments() || 0;
     return this;
 }
 

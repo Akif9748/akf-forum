@@ -60,7 +60,9 @@ permissions: ["see_deleted_message"]
 
 #### Fixes:
 - Admin deleting other admins.
-- disable caching
+- theme.js, change theme js code to a file.
+- same email discord???? direct err
+- IMPORTANT: add user/member id to file so scripts can access
 
 #### ETC:
 - Rewrite apidocs
@@ -73,21 +75,26 @@ permissions: ["see_deleted_message"]
 - add support for switch around gravatar and upload photo
 - old contents / titles add to forum interface
 - who liked a message
-- add ban button to user profile
 
 #### Fixes:
 - BETTER SETUP PAGE: use setup everytime
-- add threads, messages etc. to extra folder
+- add threads, messages etc. to "extra" folder
 - add category to thread list page
 - working reset button
-- better pagination
 - text alling center body
 - thread.js unfuction only listener
+- show error on modal
+- send delete, ban to user settings (edit user) menu and fix edit user menu
 
 ## Special Thanks:
 https://github.com/akashgiricse/Online-Forum for bootstrap theme.
+
 @Tokmak for old frontend.
+
 https://fengyuanchen.github.io/cropperjs/examples/crop-a-round-image.html for avatar upload panel.
+
+https://github.com/mdbootstrap/bootstrap-profiles for profile page of bootstrap theme.
+
 ## Major Version History
 - V5: Enchanted Themes
 - V4: Caching

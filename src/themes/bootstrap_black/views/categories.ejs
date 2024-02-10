@@ -47,21 +47,23 @@
 
     <% if(typeof page === "number"){ %>
     <div class="mb-3 clearfix">
-      <nav aria-label="Navigate post pages" class="float-lg-right">
-        <ul class="pagination pagination-sm mb-lg-0">
-          <% if (page > 0){ %>
-          <li class="page-item"><a href="/categories?page=<%= page-1 %>" class="page-link">Back</a></li>
-          <% } %>
+      <nav aria-label="Navigate post pages">
+        <ul class="pagination justify-content-center">
+          <li class="page-item <%= page > 0 ?"": "disabled" %>">
+            <a class="page-link" href="/categories?page=<%= page-1 %>" tabindex="-1">Back</a>
+          </li>
           <% for(let i=0; i < pages; i++){ %>
-          <li class="page-item <%= i==page?'active':'' %>"><a href="/categories?page=<%= i %>" class="page-link"><%= i+1 %>
+          <li class="page-item">
+            <a class="page-link <%= i==page?'active':'' %>" href="/categories?page=<%= i %>"><%= i+1 %>
               <% if (i==page){ %>
               <span class="sr-only">(current)</span>
               <% } %>
-            </a></li>
+            </a>
+          </li>
           <% } %>
-          <% if (pages-1 > page) { %>
-          <li class="page-item"><a href="/categories?page=<%= page+1 %>" class="page-link">Next</a></li>
-          <% } %>
+          <li class="page-item <%= pages-1 > page ?"": "disabled" %>">
+            <a class="page-link" href="/categories?page=<%= page+1 %>">Next</a>
+          </li>
         </ul>
       </nav>
     </div>

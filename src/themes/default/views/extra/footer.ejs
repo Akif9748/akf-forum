@@ -4,7 +4,8 @@
       <% for(const theme of dataset.themes){%>
       <option value="<%= theme.codename %>"><%= theme.name %></option>
       <% } %>
-    </select>
+    </select>  <script src="/js/theme.js"></script>
+
     <script>
       const theme_select = document.getElementById("theme_select");
       theme_select.querySelector(`option[value=<%= user.theme.codename %>]`).selected = true;

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include(dataset.getFile(dataset.theme.codename +"/views/extra/meta"), {title: "Change Password!" }) %>
+
+<body style="text-align: center;">
+
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/navbar")) %>
+
+
+  <h1 class="title">Change password</h1>
+
+  <form class="login" action="/security" method="post">
+    <input type="password" name="old_password" placeholder="Old Password" class="input" required>
+    <input type="password" name="password" placeholder="Password" class="input" required>
+    <input type="submit" style="width:100%" class="btn-primary" value="Change it">
+  </form>
+
+  <%- include(dataset.getFile(dataset.theme.codename +"/views/extra/footer")) %>
+
+</body>
+
+</html>

@@ -1,6 +1,5 @@
 const { Router } = require("express")
 const { UserModel } = require("../models");
-const fetch = require("node-fetch");
 const app = Router();
 const { host, email_auth } = require("../../config.json")
 
@@ -17,7 +16,7 @@ app.get("/discord", async (req, res) => {
                 client_secret: process.env.DISCORD_SECRET,
                 grant_type: 'authorization_code',
                 redirect_uri: host + "/auth/discord",
-                scope: 'identify',
+                scope: 'identify+email',
             }).toString(),
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -58,8 +57,9 @@ app.get("/discord", async (req, res) => {
             name += Math.floor(Math.random() * 2);
 
         const user2 = new UserModel({
-            name, discordID: discord.id, discord_code: code,
-            avatar: `https://cdn.discordapp.com/avatars/${discord.id}/${discord.avatar}.png?size=256`
+            name, email: discord.email,
+            discordID: discord.id, discord_code: code,
+            avatar: `https://cdn.discordapp.com/avatars/${discord.id}/${discord.avatar}.png?size=256`,
         });
 
         await user2.takeId();
