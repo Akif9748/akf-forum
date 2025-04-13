@@ -111,7 +111,7 @@
                 <% } else if(member.discordID && user?.id === member.id) { %>
                 <a class="btn-primary" id="un_discord">Unauth Discord</a>
                 <% } %>
-                <% if (user.admin) { %>
+                <% if (user?.admin) { %>
                 <select>
                   <option selected>IP LIST</option>
                   <% for(const ip of member.ips) { %>
